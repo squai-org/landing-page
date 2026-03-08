@@ -308,6 +308,23 @@ members: [
       { name: "Carlos Gómez", role: { en: "Security Analyst", es: "Analista de Seguridad" } },
     ],
   },
+  contactModal: {
+    title: { en: "Let's talk about your challenge", es: "Cuéntanos tu desafío" },
+    description: {
+      en: "Leave us your email and a brief description of the problem you're facing. We'll get back to you within 48 hours.",
+      es: "Déjanos tu correo y una breve descripción del problema que enfrentas. Te responderemos en menos de 48 horas.",
+    },
+    emailLabel: { en: "Email", es: "Correo electrónico" },
+    emailPlaceholder: { en: "you@company.com", es: "tu@empresa.com" },
+    emailRequired: { en: "Email is required", es: "El correo es obligatorio" },
+    emailInvalid: { en: "Please enter a valid email", es: "Ingresa un correo válido" },
+    descriptionLabel: { en: "What problem are you facing?", es: "¿Qué problema enfrentas?" },
+    descriptionPlaceholder: {
+      en: "Tell us briefly about the challenge you'd like help with…",
+      es: "Cuéntanos brevemente el desafío con el que necesitas ayuda…",
+    },
+    submit: { en: "Send", es: "Enviar" },
+  },
   ctaSection: {
     headline: { en: "Ready to meet your squad?", es: "¿Listo para conocer tu squad?" },
     sub: {

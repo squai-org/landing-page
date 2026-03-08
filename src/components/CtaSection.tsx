@@ -2,7 +2,7 @@ import { content, type Lang } from "@/lib/content";
 import { Button } from "@/components/ui/button";
 import AnimatedSection from "./AnimatedSection";
 
-const CtaSection = ({ lang }: { lang: Lang }) => {
+const CtaSection = ({ lang, onOpenContact }: { lang: Lang; onOpenContact: () => void }) => {
   const t = content.ctaSection;
 
   return (
@@ -21,7 +21,7 @@ const CtaSection = ({ lang }: { lang: Lang }) => {
           <p className="text-muted-foreground font-body text-lg lg:text-xl max-w-xl mx-auto mb-10">
             {t.sub[lang]}
           </p>
-          <Button variant="cta" size="lg">
+          <Button variant="cta" size="lg" onClick={onOpenContact}>
             {t.cta[lang]}
           </Button>
         </AnimatedSection>

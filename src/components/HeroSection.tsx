@@ -26,7 +26,7 @@ const word: Variants = {
   },
 };
 
-const HeroSection = ({ lang }: { lang: Lang }) => {
+const HeroSection = ({ lang, onOpenContact }: { lang: Lang; onOpenContact: () => void }) => {
   const t = content.hero;
   const headline = t.headline[lang];
   const words = headline.split(" ");
@@ -73,8 +73,8 @@ const HeroSection = ({ lang }: { lang: Lang }) => {
               transition={{ duration: 0.6, delay: 0.8 }}
               className="flex flex-col sm:flex-row items-center lg:justify-start justify-center gap-4"
             >
-              <Button variant="hero" size="lg" asChild>
-                <a href="#contact">{t.cta1[lang]}</a>
+              <Button variant="hero" size="lg" onClick={onOpenContact}>
+                {t.cta1[lang]}
               </Button>
 
               <Button variant="heroGhost" size="lg" asChild>
