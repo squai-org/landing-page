@@ -94,14 +94,15 @@ const SquadSection = ({ lang }: { lang: Lang }) => {
                   {/* Top: Photo (aspect-[3/4] on mobile/tablet, max-height enforced on xl desktops) */}
                   <div className="w-full aspect-[3/4] xl:max-h-[350px] bg-muted/20 relative flex items-center justify-center overflow-hidden border-b border-[rgba(124,140,255,0.1)]">
                     <img 
-                      src={`/${imgIndex}.JPG`} 
+                      src={`/${imgIndex}.webp`} 
                       alt={`${person.name} - ${person.role[lang]}`} 
                       className="w-full h-full object-cover object-top grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105 absolute inset-0 z-10"
                       loading="lazy"
+                      decoding="async"
                       onError={(e) => {
                         const target = e.currentTarget;
-                        if (target.src.endsWith('.JPG')) {
-                          target.src = `/${imgIndex}.png`;
+                        if (target.src.endsWith('.webp')) {
+                          target.src = `/${imgIndex}.webp`;
                         } else {
                           target.style.display = 'none';
                           target.parentElement?.classList.add('bg-[#1A1E38]');
