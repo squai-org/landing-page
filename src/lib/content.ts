@@ -4,7 +4,7 @@ export const content = {
   nav: {
     links: {
       en: ["Services", "How It Works", "Industries", "Contact"],
-      es: ["Servicios", "Cómo Funciona", "Industrias", "Contacto"],
+      es: ["Servicios", "Cómo funciona", "Industrias", "Contacto"],
     },
     sections: ["services", "how-it-works", "industries", "contact"],
   },
@@ -19,14 +19,14 @@ export const content = {
     },
     sub: {
       en: "We work alongside your team, map how your business actually runs, and bring in AI that fits — not just tools that look good on a slide.",
-      es: "Trabajamos junto a tu equipo, mapeamos cómo funciona tu negocio de verdad e integramos IA que encaja — no solo herramientas que se ven bien en una presentación.",
+      es: "Trabajamos junto a tu equipo, mapeamos cómo funciona tu negocio de verdad e integramos IA que realmente funciona, no solo herramientas que se ven bien en una presentación.",
     },
-    cta1: { en: "Book a Free Discovery Call", es: "Agenda una Llamada Gratuita" },
-    cta2: { en: "See Our Services", es: "Ver Nuestros Servicios" },
+    cta1: { en: "Book a Free Discovery Call", es: "Agenda una llamada gratuita" },
+    cta2: { en: "See Our Services", es: "Ver nuestros servicios" },
   },
   problems: {
     eyebrow: { en: "SOUND FAMILIAR?", es: "¿TE SUENA FAMILIAR?" },
-    title: { en: "You're not the only one stuck here.", es: "No eres el único que está atascado aquí." },
+    title: { en: "You're not the only one stuck here.", es: "No eres el único pasando por esto." },
     items: [
       {
         title: { en: "Everything lives in someone's head", es: "Todo está en la cabeza de alguien" },
@@ -46,7 +46,7 @@ export const content = {
         title: { en: "Big consultants aren't the answer", es: "Las grandes consultoras no son la respuesta" },
         desc: {
           en: "You don't need a six-figure engagement or a 200-slide deck. You need someone who actually gets their hands dirty.",
-          es: "No necesitas un proyecto de seis cifras ni un mazo de 200 diapositivas. Necesitas a alguien que realmente se arremangue.",
+          es: "No necesitas un proyecto de seis cifras ni 200 diapositivas. Necesitas a alguien que trabaje de verdad contigo.",
         },
       },
     ],
@@ -61,7 +61,7 @@ export const content = {
         borderColor: "primary",
         partnership: {
           en: "The smartest first step before changing anything.",
-          es: "El primer paso más inteligente antes de cambiar cualquier cosa.",
+          es: "El primer paso antes de cambiar cualquier cosa.",
         },
         description: {
           en: "Every Squai engagement starts here. We get inside your business, study how your team actually works, find what's slowing you down, and map where AI can make a real difference. Then we sit down together, walk through the findings, and agree on the path forward.",
@@ -75,7 +75,7 @@ export const content = {
             "A live session where we walk through everything together and agree on next steps",
           ],
           es: [
-            "Un análisis profundo de tus operaciones — cómo trabaja tu equipo hoy, dónde está la fricción y qué te está costando tiempo y dinero",
+            "Un análisis profundo de tus operaciones: cómo trabaja tu equipo hoy, dónde están los cuellos de botella y qué te está costando tiempo y dinero",
             "Un mapa de oportunidades de IA con exactamente dónde puede ayudar, según tus herramientas, equipo, presupuesto y madurez",
             "Un reporte escrito con hallazgos claros y recomendaciones priorizadas",
             "Una sesión en vivo donde revisamos todo juntos y definimos los próximos pasos",
@@ -87,7 +87,7 @@ export const content = {
         price: "1,500 USD",
         priceNote: {
           en: "Fixed price. Included in every tier — never skipped, never rushed.",
-          es: "Precio fijo. Incluido en todos los niveles — siempre completo, siempre a tu ritmo.",
+          es: "Precio fijo. Incluido en todos los niveles, sin atajos.",
         },
         squadAssigned: { en: "2 of 6 squad members", es: "2 de 6 miembros del squad" },
         cta: { en: "Start with Squaimap", es: "Empezar con Squaimap" },
@@ -102,7 +102,7 @@ export const content = {
         },
         description: {
           en: "We take the Squaimap findings and get to work. Together we decide which workflows matter most right now — then we document them properly, make them accessible to your whole team, and bring in AI where it makes the most sense for how your business actually runs.",
-          es: "Tomamos los hallazgos del Squaimap y nos ponemos a trabajar. Juntos decidimos qué flujos importan más ahora mismo — los documentamos bien, los hacemos accesibles para todo tu equipo e integramos IA donde tiene más sentido para tu negocio.",
+          es: "Tomamos los hallazgos del Squaimap y nos ponemos a trabajar. Juntos decidimos qué flujos importan más ahora mismo, los documentamos bien, los hacemos accesibles para todo tu equipo e integramos IA donde tiene más sentido para tu negocio.",
         },
         items: {
           en: [
@@ -115,7 +115,7 @@ export const content = {
           ],
           es: [
             "Todo lo del Squaimap",
-            "3 a 5 flujos de trabajo principales completamente mapeados y documentados — lo suficientemente claros para que cualquiera en tu equipo pueda seguirlos",
+            "3 a 5 flujos de trabajo principales completamente mapeados y documentados, lo suficientemente claros para que cualquiera en tu equipo pueda seguirlos",
             "Playbooks operativos entregados en las herramientas que tu equipo ya usa",
             "Implementaciones de IA en tus flujos prioritarios, con alcance definido juntos durante el Squaimap",
             "Una sesión de cierre para que tu equipo sepa manejar todo lo que construimos",
@@ -143,7 +143,7 @@ export const content = {
         },
         description: {
           en: "This is the full build. We go deep across your entire operation — mapping every critical workflow, building a complete playbook your business can run on, and implementing AI wherever it creates real leverage. Then we train your team hands-on so they're fully equipped to operate and grow long after we're gone.",
-          es: "Este es el trabajo completo. Profundizamos en toda tu operación — mapeamos cada flujo crítico, construimos un playbook completo sobre el que tu negocio pueda sostenerse e implementamos IA donde genera verdadero valor. Luego entrenamos a tu equipo de forma práctica para que esté listo para operar y crecer mucho después de que nos hayamos ido.",
+          es: "Este es el trabajo completo. Profundizamos en toda tu operación, mapeamos cada flujo crítico, construimos un playbook completo sobre el que tu negocio pueda sostenerse e implementamos IA donde genera verdadero valor. Luego entrenamos a tu equipo de forma práctica para que esté listo para operar y crecer cuando el proyecto termine.",
         },
         items: {
           en: [
@@ -153,7 +153,7 @@ export const content = {
             "AI implementations across all priority workflows, with scope defined collaboratively during Squaimap",
             "A data integrity review so your decisions are built on reliable, well-connected information",
             "An information security review so your processes and tools handle sensitive data responsibly",
-            "Full team training — hands-on, role-specific, and built for real use",
+            "Full team training — hands-on, process-by-process, and built for real use",
             "2 weeks of post-delivery support",
           ],
           es: [
@@ -163,7 +163,7 @@ export const content = {
             "Implementaciones de IA en todos los flujos prioritarios, con alcance definido de forma colaborativa durante el Squaimap",
             "Una revisión de integridad de datos para que tus decisiones estén basadas en información confiable y bien conectada",
             "Una revisión de seguridad de la información para que tus procesos y herramientas manejen datos sensibles de forma responsable",
-            "Entrenamiento completo del equipo — práctico, específico por rol y diseñado para el uso real",
+            "Entrenamiento completo del equipo, práctico, por proceso y diseñado para el uso real",
             "2 semanas de soporte post-entrega",
           ],
         },
@@ -182,15 +182,15 @@ export const content = {
   },
   howItWorks: {
     eyebrow: { en: "HOW IT WORKS", es: "CÓMO FUNCIONA" },
-    title: { en: "How It Works", es: "Cómo Funciona" },
+    title: { en: "How It Works", es: "Cómo funciona" },
     steps: {
       en: ["Discovery Call", "Proposal in 48hrs", "Kickoff", "Mapping & Building", "Delivery", "Support Period"],
-      es: ["Llamada de Diagnóstico", "Propuesta en 48hrs", "Kickoff", "Mapeo y Construcción", "Entrega", "Período de Soporte"],
+      es: ["Llamada de diagnóstico", "Propuesta en 48hrs", "Kickoff", "Mapeo y construcción", "Entrega", "Período de soporte"],
     },
   },
   industries: {
     eyebrow: { en: "WHO WE SERVE", es: "A QUIÉN SERVIMOS" },
-    title: { en: "Industries We Serve", es: "Industrias que Atendemos" },
+    title: { en: "Industries We Serve", es: "Industrias que atendemos" },
     items: {
       en: ["SaaS & Tech Startups", "E-Learning & Education", "Professional Services", "Digital E-Commerce", "Agencies & Consultancies"],
       es: ["SaaS y Startups Tech", "E-Learning y Educación", "Servicios Profesionales", "E-Commerce Digital", "Agencias y Consultoras"],
@@ -198,17 +198,17 @@ export const content = {
   },
   whySquai: {
     eyebrow: { en: "WHY SQUAI", es: "POR QUÉ SQUAI" },
-    title: { en: "Why Squai", es: "¿Por Qué Squai?" },
+    title: { en: "Why Squai", es: "¿Por qué Squai?" },
     items: [
       {
-        title: { en: "A squad, not a solo consultant", es: "Un equipo, no un consultor solo" },
+        title: { en: "A squad, not a solo consultant", es: "Un equipo, no un solo consultor" },
         desc: {
           en: "Real people with defined roles working inside your business — not a chatbot, not a framework, not a slide deck.",
-          es: "Personas reales con roles definidos trabajando dentro de tu negocio — no un chatbot, no una metodología, no una presentación.",
+          es: "Personas reales con roles definidos trabajando dentro de tu negocio, no un chatbot, no una metodología, no una presentación.",
         },
       },
       {
-        title: { en: "We speak your language — literally", es: "Hablamos tu idioma — literalmente" },
+        title: { en: "We speak your language — literally", es: "Hablamos tu idioma, literalmente" },
         desc: {
           en: "English or Spanish. Notion or Confluence. We meet you where you are and work the way your team works.",
           es: "Inglés o español. Notion o Confluence. Nos adaptamos a donde estás y trabajamos como trabaja tu equipo.",
@@ -222,7 +222,7 @@ export const content = {
         },
       },
       {
-        title: { en: "We build for when we're gone", es: "Construimos pensando en cuando nos vayamos" },
+        title: { en: "We build for when we're gone", es: "Construimos para que no nos necesites para siempre" },
         desc: {
           en: "Everything we build is meant to be owned and run by your team. Our job is done when you don't need us anymore.",
           es: "Todo lo que construimos está pensado para que tu equipo lo maneje por su cuenta. Nuestro trabajo termina cuando ya no nos necesitas.",
@@ -242,8 +242,8 @@ export const content = {
         role: { en: "Operations Strategist", es: "Estratega de Operaciones" },
         specialty: { en: "Strategy & Direction", es: "Estrategia y Dirección" },
         desc: {
-          en: "Diagnoses your business, defines the operational roadmap, and leads the engagement from start to finish.",
-          es: "Diagnostica tu negocio, define la hoja de ruta operativa y lidera el proyecto de principio a fin.",
+          en: "Your main point of contact from day one. Diagnoses your business, designs the operational roadmap, and makes sure every part of the engagement moves in the right direction.",
+          es: "Tu punto de contacto principal desde el primer día. Diagnostica tu negocio, diseña la hoja de ruta operativa y se asegura de que cada parte del proyecto avance en la dirección correcta.",
         },
         tiers: { en: ["Squaimap", "Squailab", "Squaicore"], es: ["Squaimap", "Squailab", "Squaicore"] },
         borderColor: "accent",
@@ -252,8 +252,8 @@ export const content = {
         role: { en: "AI Engineer", es: "Ingeniero de IA" },
         specialty: { en: "Automation Specialist", es: "Especialista en Automatización" },
         desc: {
-          en: "Builds and configures the AI tools, automations, and integrations identified during the engagement. Custom implementations, not off-the-shelf advice.",
-          es: "Construye y configura las herramientas de IA, automatizaciones e integraciones identificadas durante el proyecto. Implementaciones a medida, no consejos genéricos.",
+          en: "Takes the AI opportunities identified in Squaimap and actually builds them. Custom automations, tool integrations, and implementations designed around how your team works — not generic solutions dropped in from outside.",
+          es: "Toma las oportunidades de IA identificadas en el Squaimap y las construye de verdad. Automatizaciones, integraciones y soluciones diseñadas alrededor de cómo trabaja tu equipo, no soluciones genéricas que llegan de afuera.",
         },
         tiers: { en: ["Squailab", "Squaicore"], es: ["Squailab", "Squaicore"] },
         borderColor: "secondary",
@@ -262,8 +262,8 @@ export const content = {
         role: { en: "Business Process Analyst", es: "Analista de Procesos de Negocio" },
         specialty: { en: "Process Design & Strategy", es: "Diseño y Estrategia de Procesos" },
         desc: {
-          en: "Maps your real workflows, identifies bottlenecks, and aligns every process improvement to your actual business goals — not just what looks broken on the surface.",
-          es: "Mapea tus flujos reales, identifica cuellos de botella y alinea cada mejora de proceso con tus objetivos reales de negocio — no solo lo que parece roto en la superficie.",
+          en: "Goes deep into how your team actually works day to day — not how it's supposed to work on paper. Maps the real workflows, finds where things slow down or break, and makes sure every improvement is connected to something that actually matters for your business.",
+          es: "Profundiza en cómo trabaja tu equipo de verdad, día a día, no como se supone que debería funcionar. Mapea los flujos reales, encuentra dónde las cosas se ralentizan o se rompen, y se asegura de que cada mejora esté conectada con algo que realmente importa para tu negocio.",
         },
         tiers: { en: ["Squaimap", "Squailab", "Squaicore"], es: ["Squaimap", "Squailab", "Squaicore"] },
         borderColor: "primary",
@@ -272,8 +272,8 @@ export const content = {
         role: { en: "Knowledge Manager", es: "Gestor de Conocimiento" },
         specialty: { en: "Systems & Knowledge Design", es: "Diseño y Gestión de Conocimiento" },
         desc: {
-          en: "Ensures all workflows, playbooks, and documentation are clear, structured, and accessible in your team's tools — so knowledge lives in systems, not in people's heads.",
-          es: "Garantiza que todos los flujos, playbooks y documentación sean claros, estructurados y accesibles en las herramientas de tu equipo — para que el conocimiento viva en los sistemas, no en la cabeza de las personas.",
+          en: "Makes sure everything we build is actually usable. Turns workflows and processes into clear, structured documentation that lives inside your team's existing tools — so anyone can follow them, not just the people who were in the room.",
+          es: "Se asegura de que todo lo que construimos sea realmente utilizable. Convierte flujos y procesos en documentación clara y estructurada que vive en las herramientas que tu equipo ya usa, para que cualquiera pueda seguirlos, no solo quienes estuvieron en las reuniones.",
         },
         tiers: { en: ["Squailab", "Squaicore"], es: ["Squailab", "Squaicore"] },
         borderColor: "primary",
@@ -282,8 +282,8 @@ export const content = {
         role: { en: "Data Analyst", es: "Analista de Datos" },
         specialty: { en: "Data Integrity & Connections", es: "Integridad y Conexiones de Datos" },
         desc: {
-          en: "Ensures your data flows correctly across your processes and tools. Validates data integrity and identifies where information is incomplete or being misused.",
-          es: "Garantiza que tus datos fluyan correctamente a través de tus procesos y herramientas. Valida la integridad de los datos e identifica dónde la información está incompleta o mal usada.",
+          en: "Checks that the data running through your processes is actually reliable. Finds where information is missing, disconnected, or being used in ways that lead to bad decisions — and fixes it before it becomes a bigger problem.",
+          es: "Verifica que los datos que fluyen por tus procesos sean realmente confiables. Encuentra dónde hay información incompleta, desconectada o mal utilizada, y lo corrige antes de que se convierta en un problema mayor.",
         },
         tiers: { en: ["Squaicore"], es: ["Squaicore"] },
         borderColor: "primary",
@@ -292,8 +292,8 @@ export const content = {
         role: { en: "Information Security Analyst", es: "Analista de Seguridad de la Información" },
         specialty: { en: "Security & Risk Management", es: "Gestión de Seguridad y Riesgos" },
         desc: {
-          en: "Ensures your processes, tools, and documentation follow information security best practices — so your business handles sensitive data responsibly as it grows.",
-          es: "Garantiza que tus procesos, herramientas y documentación sigan las mejores prácticas de seguridad de la información — para que tu negocio maneje datos sensibles de forma responsable a medida que crece.",
+          en: "Reviews how your processes, tools, and documentation handle sensitive information. Makes sure everything we build follows security best practices — so your business is protected as it grows, not exposed.",
+          es: "Revisa cómo tus procesos, herramientas y documentación manejan información sensible. Se asegura de que todo lo que construimos siga las mejores prácticas de seguridad, para que tu negocio esté protegido a medida que crece, no expuesto.",
         },
         tiers: { en: ["Squailab", "Squaicore"], es: ["Squailab", "Squaicore"] },
         borderColor: "primary",
@@ -312,9 +312,9 @@ export const content = {
     headline: { en: "Ready to meet your squad?", es: "¿Listo para conocer tu squad?" },
     sub: {
       en: "A real squad, a free 30-minute call. No commitment, no pressure — just an honest conversation about where you are and where you want to go.",
-      es: "Un equipo real, una llamada gratuita de 30 minutos. Sin compromiso, sin presión — solo una conversación honesta sobre dónde estás y a dónde quieres llegar.",
+      es: "Un equipo real, una llamada gratuita de 30 minutos. Sin compromiso, sin presión, solo una conversación honesta sobre dónde estás y a dónde quieres llegar.",
     },
-    cta: { en: "Book Your Free Call", es: "Agenda tu Llamada Gratis" },
+    cta: { en: "Book Your Free Call", es: "Agenda tu llamada gratis" },
   },
   footer: {
     tagline: {
@@ -323,7 +323,7 @@ export const content = {
     },
     links: {
       en: ["Services", "How It Works", "Contact"],
-      es: ["Servicios", "Cómo Funciona", "Contacto"],
+      es: ["Servicios", "Cómo funciona", "Contacto"],
     },
     sections: ["services", "how-it-works", "contact"],
     copyright: "© 2026 Squai. All rights reserved.",
