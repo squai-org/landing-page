@@ -47,7 +47,7 @@ const ProblemSection = ({ lang }: { lang: Lang }) => {
             {t.title[lang]}
           </h2>
         </AnimatedSection>
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
           {t.items.map((item, i) => {
             const style = cardStyles[i];
             const Icon = style.icon;

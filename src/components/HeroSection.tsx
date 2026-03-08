@@ -88,7 +88,7 @@ const HeroSection = ({ lang }: { lang: Lang }) => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="hidden lg:flex flex-1 items-center justify-center p-0"
+            className="flex flex-1 items-center justify-center p-0 w-full max-w-[300px] sm:max-w-[400px] lg:max-w-none"
           >
             <img src="/illustrations/Creative team-cuate.svg" alt="" className="w-full h-full object-contain" />
           </motion.div>

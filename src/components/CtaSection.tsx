@@ -10,8 +10,8 @@ const CtaSection = ({ lang }: { lang: Lang }) => {
 
       <div className="container mx-auto px-4 text-center relative z-10">
         <AnimatedSection>
-          <div className="w-[36rem] h-[36rem] mx-auto -mb-8 flex items-center justify-center p-0">
-            <img src="/illustrations/completed-cuate.svg" alt="" className="w-full h-full object-contain transform translate-y-10" />
+          <div className="w-full max-w-[300px] sm:max-w-md md:max-w-xl mx-auto -mb-4 sm:-mb-8 flex items-center justify-center p-0">
+            <img src="/illustrations/completed-cuate.svg" alt="" className="w-full h-auto object-contain transform translate-y-6 sm:translate-y-10" />
           </div>
           <h2 className="font-headline font-black text-3xl md:text-5xl lg:text-[56px] mb-6 gradient-wave-text pb-2">
             {t.headline[lang]}

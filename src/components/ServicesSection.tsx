@@ -34,7 +34,7 @@ const ServicesSection = ({ lang }: { lang: Lang }) => {
           {t.title[lang]}
         </motion.h2>
 
-        <div className="grid lg:grid-cols-3 gap-6 max-w-7xl mx-auto items-start">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6 max-w-7xl mx-auto items-start">
           {t.tiers.map((tier, i) => (
             <motion.div
               key={i}

@@ -175,13 +175,14 @@ const WhySquaiSection = ({ lang }: { lang: Lang }) => {
               const Icon = icons[i];
               return (
                 <AnimatedSection key={i} delay={i * 0.1}>
-                  <div className="bg-[#12152A] rounded-2xl overflow-hidden border border-[rgba(124,140,255,0.15)] p-8 flex flex-col">
-                    <div className="w-full h-48 bg-[#E8ECFF] flex items-center justify-center p-2 mb-8 rounded-xl overflow-hidden">
+                  <div className="bg-[#12152A] rounded-2xl overflow-hidden border border-[rgba(124,140,255,0.15)] p-6 md:p-8 flex flex-col">
+                    <div className="w-full h-56 flex items-center justify-center p-2 mb-6 rounded-xl overflow-hidden relative">
                       <img 
                         src={illustrations[i]} 
                         alt="" 
-                        className="w-full h-full object-contain" 
+                        className="w-full h-full object-contain relative z-10" 
                       />
+                      <div className="absolute inset-0 bg-primary/5 rounded-full blur-3xl" />
                     </div>
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-5">
                       <Icon className="text-primary" size={24} />

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import SquaiLogo from "./SquaiLogo";
 import { content, type Lang } from "@/lib/content";
 import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface NavbarProps {
   lang: Lang;
@@ -79,47 +80,72 @@ const Navbar = ({ lang, setLang }: NavbarProps) => {
         </div>
       </div>
 
-       {/* Ultra-minimal mobile menu dropdown */}
-      {open && (
-        <div className="absolute top-full left-0 w-full bg-[#0A0C1A]/95 backdrop-blur-xl border-b border-white/5 md:hidden shadow-2xl">
-          <div className="container mx-auto px-4 py-6 flex flex-col gap-5">
-            {links.map((label, i) => (
-              <a
-                key={i}
-                href={`#${sections[i]}`}
-                onClick={() => setOpen(false)}
-                className="text-foreground hover:text-primary transition-colors font-headline text-2xl font-semibold tracking-tight"
+      {/* Ultra-minimal mobile menu dropdown */}
+      <AnimatePresence>
+        {open && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="absolute top-full left-0 w-full bg-[#0A0C1A]/95 backdrop-blur-xl border-b border-white/5 md:hidden shadow-2xl overflow-hidden"
+          >
+            <div className="container mx-auto px-4 py-8 flex flex-col gap-6">
+              {links.map((label, i) => (
+                <motion.a
+                  key={i}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 + 0.1 }}
+                  href={`#${sections[i]}`}
+                  onClick={() => setOpen(false)}
+                  className="text-foreground hover:text-primary transition-colors font-headline text-3xl font-bold tracking-tight"
+                >
+                  {label}
+                </motion.a>
+              ))}
+              
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="h-px bg-white/10 my-2 w-full" 
+              />
+              
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="flex items-center justify-between"
               >
-                {label}
-              </a>
-            ))}
-            
-            <div className="h-px bg-white/5 my-2 w-full" />
-            
-            <div className="flex items-center gap-4">
-              <span className="text-xs uppercase tracking-widest text-muted-foreground/50 font-bold">Language</span>
-              <div className="flex items-center gap-3 font-body text-sm font-bold">
-                 <button
-                    onClick={() => { setLang("en"); setOpen(false); }}
-                    className={`transition-colors duration-200 ${
-                      lang === "en" ? "text-primary" : "text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    EN
-                 </button>
-                 <button
-                    onClick={() => { setLang("es"); setOpen(false); }}
-                    className={`transition-colors duration-200 ${
-                       lang === "es" ? "text-primary" : "text-muted-foreground hover:text-foreground"
-                    }`}
-                 >
-                    ES
-                 </button>
-              </div>
+                <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-bold">Language</span>
+                <div className="flex items-center gap-4 font-body text-base font-bold bg-white/5 p-1 rounded-full border border-white/10">
+                   <button
+                      onClick={() => { setLang("en"); setOpen(false); }}
+                      className={`px-4 py-1.5 rounded-full transition-all duration-300 ${
+                        lang === "en" 
+                          ? "bg-primary text-primary-foreground shadow-lg" 
+                          : "text-muted-foreground hover:text-foreground"
+                      }`}
+                    >
+                      EN
+                   </button>
+                   <button
+                      onClick={() => { setLang("es"); setOpen(false); }}
+                      className={`px-4 py-1.5 rounded-full transition-all duration-300 ${
+                        lang === "es" 
+                          ? "bg-primary text-primary-foreground shadow-lg" 
+                          : "text-muted-foreground hover:text-foreground"
+                      }`}
+                   >
+                      ES
+                   </button>
+                </div>
+              </motion.div>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

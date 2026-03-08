@@ -25,22 +25,24 @@ const Footer = ({ lang, setLang }: FooterProps) => {
               {t.tagline[lang]}
             </p>
           </div>
-          <div className="flex items-center gap-6">
-            {t.links[lang].map((label, i) => (
-              <a
-                key={i}
-                href={`#${t.sections[i]}`}
-                className="text-muted-foreground hover:text-primary transition-colors duration-200 font-body text-sm"
-              >
-                {label}
-              </a>
-            ))}
-            <div className="flex items-center rounded-full border border-border overflow-hidden">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+            <div className="flex items-center gap-6 flex-wrap">
+              {t.links[lang].map((label, i) => (
+                <a
+                  key={i}
+                  href={`#${t.sections[i]}`}
+                  className="text-muted-foreground hover:text-primary transition-colors duration-200 font-body text-sm"
+                >
+                  {label}
+                </a>
+              ))}
+            </div>
+            <div className="flex items-center rounded-full border border-white/10 bg-white/5 overflow-hidden p-0.5">
               <button
                 onClick={() => setLang("en")}
-                className={`px-2.5 py-1 text-xs font-body font-semibold transition-all duration-200 ${
+                className={`px-3 py-1 text-[10px] font-body font-bold transition-all duration-300 rounded-full ${
                   lang === "en"
-                    ? "bg-primary text-primary-foreground"
+                    ? "bg-primary text-primary-foreground shadow-lg"
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
@@ -48,9 +50,9 @@ const Footer = ({ lang, setLang }: FooterProps) => {
               </button>
               <button
                 onClick={() => setLang("es")}
-                className={`px-2.5 py-1 text-xs font-body font-semibold transition-all duration-200 ${
+                className={`px-3 py-1 text-[10px] font-body font-bold transition-all duration-300 rounded-full ${
                   lang === "es"
-                    ? "bg-primary text-primary-foreground"
+                    ? "bg-primary text-primary-foreground shadow-lg"
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
