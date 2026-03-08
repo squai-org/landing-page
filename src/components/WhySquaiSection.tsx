@@ -91,6 +91,9 @@ const WhySquaiSection = ({ lang }: { lang: Lang }) => {
                 <motion.img
                   key={activeId}
                   src={illustrations[activeIndex]}
+                  alt={t.items[activeIndex]?.title[lang] || ""}
+                  width={600}
+                  height={600}
                   initial={{ opacity: 0, scale: 0.95, filter: "blur(8px)" }}
                   animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
                   exit={{ opacity: 0, scale: 1.05, filter: "blur(8px)" }}
@@ -179,8 +182,12 @@ const WhySquaiSection = ({ lang }: { lang: Lang }) => {
                     <div className="w-full h-56 flex items-center justify-center p-2 mb-6 rounded-xl overflow-hidden relative">
                       <img 
                         src={illustrations[i]} 
-                        alt="" 
-                        className="w-full h-full object-contain relative z-10" 
+                        alt={item.title[lang]}
+                        width="400"
+                        height="320"
+                        className="w-full h-full object-contain relative z-10"
+                        loading="lazy"
+                        decoding="async" 
                       />
                       <div className="absolute inset-0 bg-primary/5 rounded-full blur-3xl" />
                     </div>

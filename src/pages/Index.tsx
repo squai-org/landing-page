@@ -24,6 +24,7 @@ const Index = () => {
       <GradientBackground />
       <div className="relative z-10">
         <Navbar lang={lang} setLang={setLang} />
+        <main>
         <HeroSection lang={lang} onOpenContact={openContact} />
         <ProblemSection lang={lang} />
         <ServicesSection lang={lang} />
@@ -33,6 +34,7 @@ const Index = () => {
         <WhySquaiSection lang={lang} />
         <CtaSection lang={lang} onOpenContact={openContact} />
         <Footer lang={lang} setLang={setLang} />
+        </main>
       </div>
 
       <ContactModal open={contactOpen} onOpenChange={setContactOpen} lang={lang} />

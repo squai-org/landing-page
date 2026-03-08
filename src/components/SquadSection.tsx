@@ -96,6 +96,8 @@ const SquadSection = ({ lang }: { lang: Lang }) => {
                     <img 
                       src={`/${imgIndex}.webp`} 
                       alt={`${person.name} - ${person.role[lang]}`} 
+                      width="400"
+                      height="300"
                       className="w-full h-full object-cover object-top grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105 absolute inset-0 z-10"
                       loading="lazy"
                       decoding="async"
@@ -121,12 +123,12 @@ const SquadSection = ({ lang }: { lang: Lang }) => {
                   <div className={`p-4 sm:p-6 flex-1 flex flex-col border-b-4 ${borderColorMap[member.borderColor]}`}>
                     <div className="flex items-end justify-between mb-2 sm:mb-3 gap-2">
                       <div>
-                        <h4 className="font-headline font-bold text-lg sm:text-xl lg:text-2xl text-foreground mb-0.5 sm:mb-1">
+                        <h3 className="font-headline font-bold text-lg sm:text-xl lg:text-2xl text-foreground mb-0.5 sm:mb-1">
                           {person.name}
-                        </h4>
-                        <h3 className="font-headline font-semibold text-xs sm:text-sm text-primary">
-                          {member.role[lang]}
                         </h3>
+                        <p className="font-headline font-semibold text-xs sm:text-sm text-primary">
+                          {member.role[lang]}
+                        </p>
                       </div>
                     </div>
                     

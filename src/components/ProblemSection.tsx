@@ -59,8 +59,12 @@ const ProblemSection = ({ lang }: { lang: Lang }) => {
                   <div className="w-full h-40 sm:h-48 bg-[#E8ECFF] flex items-center justify-center p-2 border-b border-[rgba(124,140,255,0.1)] relative">
                     <img 
                       src={style.illustration} 
-                      alt={""}
+                      alt={item.title[lang]}
+                      width="400"
+                      height="320"
                       className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                   <div className="p-5 sm:p-8 flex flex-col flex-1">

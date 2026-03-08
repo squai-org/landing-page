@@ -110,7 +110,11 @@ const HowItWorksSection = ({ lang }: { lang: Lang }) => {
                   <img 
                     src={stepIllustrations[i]} 
                     alt={stepNames[lang][i]} 
+                    width="400"
+                    height="320"
                     className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
 

@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@800;900&family=Outfit:wght@300;400;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -69,6 +67,9 @@
 
   /* Animated gradient wave for hero headline */
   .gradient-wave-text {
+    position: relative;
+    display: inline-block;
+    color: transparent;
     background: linear-gradient(
       90deg,
       hsl(233 60% 95%),
@@ -76,10 +77,10 @@
       hsl(43 87% 63%),
       hsl(233 60% 95%)
     );
-    background-size: 200% auto;
-    color: transparent;
+    background-size: 200% 100%;
     background-clip: text;
     -webkit-background-clip: text;
+    will-change: background-position;
     animation: gradientWave 6s linear infinite;
   }
 

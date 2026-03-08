@@ -14,11 +14,14 @@
     -->
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-    <!-- DNS prefetch for external resources -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@800;900&family=Outfit:wght@300;400;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@800;900&family=Outfit:wght@300;400;600;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@800;900&family=Outfit:wght@300;400;600;700&display=swap" /></noscript>
+
+    <!-- Preload hero illustration for LCP -->
+    <link rel="preload" as="image" type="image/svg+xml" href="/illustrations/Creative%20team-cuate.svg" />
 
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/YGktk21auYRi2XgzqQtnZjjqIc12/social-images/social-1772750720767-Squai_logo_(1).webp">
