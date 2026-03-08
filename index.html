@@ -7,8 +7,11 @@
     <meta name="description" content="Squai Software as a Service (SaaS) platform for building processes with AI">
     <meta name="author" content="Squai" />
 
-    <!-- Security meta tags (fallback for CSP header in vercel.json) -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <!--
+      Security headers are delivered via HTTP (not <meta>) so that
+      frame-ancestors, report-uri, and other header-only directives work.
+      See config/security-headers.ts — the single source of truth.
+    -->
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 
     <!-- DNS prefetch for external resources -->
