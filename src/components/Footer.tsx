@@ -15,8 +15,8 @@ const Footer = ({ lang, setLang }: FooterProps) => {
       <div className="h-[3px] gradient-bar" />
 
 
-      <div className="container mx-auto px-4 py-12 relative z-10">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+      <div className="container mx-auto px-5 sm:px-6 py-8 sm:py-12 relative z-10">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 sm:gap-8">
           <div>
             <a href="/" className="hover:opacity-80 transition-opacity">
               <SquaiLogo height={28} />
@@ -61,7 +61,7 @@ const Footer = ({ lang, setLang }: FooterProps) => {
             </div>
           </div>
         </div>
-        <div className="mt-8 pt-6 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-border flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4">
           <p className="text-muted-foreground/60 font-body text-xs">{t.copyright}</p>
           <p className="text-muted-foreground/40 font-body text-xs">
             {lang === "en" ? "Illustrations by " : "Ilustraciones por "} 

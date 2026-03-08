@@ -54,19 +54,19 @@ const SquadSection = ({ lang }: { lang: Lang }) => {
   const t = content.squad;
 
   return (
-    <section id="squad" className="py-16 relative">
+    <section id="squad" className="py-10 sm:py-16 relative">
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-5 sm:px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <h2 className="font-headline font-black text-3xl md:text-5xl lg:text-[56px] text-center mb-4">
+          <h2 className="font-headline font-black text-[1.75rem] sm:text-3xl md:text-5xl lg:text-[56px] text-center mb-3 sm:mb-4 px-2">
             {t.title[lang]}
           </h2>
-          <p className="text-muted-foreground font-body text-lg text-center max-w-2xl mx-auto mb-10">
+          <p className="text-muted-foreground font-body text-base sm:text-lg text-center max-w-2xl mx-auto mb-8 sm:mb-10 px-2">
             {t.sub[lang]}
           </p>
         </motion.div>
@@ -76,7 +76,7 @@ const SquadSection = ({ lang }: { lang: Lang }) => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-60px" }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-6xl mx-auto"
         >
           {t.members.map((member, i) => {
             const person = t.gallery[i];
@@ -91,8 +91,8 @@ const SquadSection = ({ lang }: { lang: Lang }) => {
                 <div
                   className={`bg-[#12152A] rounded-2xl overflow-hidden border border-[rgba(124,140,255,0.15)] hover:border-[rgba(124,140,255,0.4)] flex flex-col h-full shadow-md ${hoverGlowMap[member.borderColor]}`}
                 >
-                  {/* Top: Photo (aspect-[3/4] on mobile/tablet, max-height enforced on xl desktops) */}
-                  <div className="w-full aspect-[3/4] xl:max-h-[350px] bg-muted/20 relative flex items-center justify-center overflow-hidden border-b border-[rgba(124,140,255,0.1)]">
+                  {/* Top: Photo (aspect ratio adaptive for different screens) */}
+                  <div className="w-full aspect-[4/3] sm:aspect-[3/4] xl:max-h-[350px] bg-muted/20 relative flex items-center justify-center overflow-hidden border-b border-[rgba(124,140,255,0.1)]">
                     <img 
                       src={`/${imgIndex}.webp`} 
                       alt={`${person.name} - ${person.role[lang]}`} 
@@ -118,26 +118,26 @@ const SquadSection = ({ lang }: { lang: Lang }) => {
                   </div>
 
                   {/* Bottom: Text Content */}
-                  <div className={`p-6 flex-1 flex flex-col border-b-4 ${borderColorMap[member.borderColor]}`}>
-                    <div className="flex items-end justify-between mb-3 gap-2">
+                  <div className={`p-4 sm:p-6 flex-1 flex flex-col border-b-4 ${borderColorMap[member.borderColor]}`}>
+                    <div className="flex items-end justify-between mb-2 sm:mb-3 gap-2">
                       <div>
-                        <h4 className="font-headline font-bold text-xl lg:text-2xl text-foreground mb-1">
+                        <h4 className="font-headline font-bold text-lg sm:text-xl lg:text-2xl text-foreground mb-0.5 sm:mb-1">
                           {person.name}
                         </h4>
-                        <h3 className="font-headline font-semibold text-sm text-primary">
+                        <h3 className="font-headline font-semibold text-xs sm:text-sm text-primary">
                           {member.role[lang]}
                         </h3>
                       </div>
                     </div>
                     
-                    <p className="font-body font-bold text-xs uppercase tracking-wider text-accent mb-4">
+                    <p className="font-body font-bold text-[10px] sm:text-xs uppercase tracking-wider text-accent mb-3 sm:mb-4">
                       {member.specialty[lang]}
                     </p>
-                    <p className="font-body text-base lg:text-lg text-muted-foreground mb-6 flex-1 leading-relaxed">
+                    <p className="font-body text-sm sm:text-base lg:text-lg text-muted-foreground mb-4 sm:mb-6 flex-1 leading-relaxed">
                       {member.desc[lang]}
                     </p>
                     
-                    <div className="flex flex-wrap gap-2 mt-auto">
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-auto">
                       {member.tiers[lang].map((tier) => (
                         <span
                           key={tier}

@@ -32,20 +32,20 @@ const HeroSection = ({ lang }: { lang: Lang }) => {
   const words = headline.split(" ");
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center pt-20 pb-16">
+    <section className="relative min-h-[100svh] flex flex-col justify-center pt-20 pb-10 sm:pb-16">
 
-      <div className="container mx-auto px-4 relative z-10 max-w-6xl">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+      <div className="container mx-auto px-5 sm:px-6 relative z-10 max-w-6xl">
+        <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-10 lg:gap-16">
           {/* Left: Text */}
           <div className="flex-1 text-center lg:text-left">
             <motion.h1
               variants={container}
               initial="hidden"
               animate="show"
-              className="font-headline font-black text-4xl sm:text-5xl md:text-6xl lg:text-[80px] leading-tight mb-4 gradient-wave-text"
+              className="font-headline font-black text-[2.25rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-[80px] lg:leading-tight mb-4 gradient-wave-text"
             >
               {words.map((wordText, i) => (
-                <motion.span key={i} variants={word} className="inline-block mr-3 mb-2">
+                <motion.span key={i} variants={word} className="inline-block mr-2 sm:mr-3 mb-1 sm:mb-2">
                   {wordText}
                 </motion.span>
               ))}
@@ -55,14 +55,14 @@ const HeroSection = ({ lang }: { lang: Lang }) => {
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="h-1 gradient-bar rounded-full mb-8 origin-left lg:max-w-md"
+              className="h-1 gradient-bar rounded-full mb-6 sm:mb-8 origin-left mx-auto lg:mx-0 max-w-[200px] sm:max-w-xs lg:max-w-md"
             />
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="text-muted-foreground text-xl md:text-2xl max-w-2xl mb-10 font-body font-light lg:mx-0 mx-auto"
+              className="text-muted-foreground text-base sm:text-lg md:text-2xl max-w-2xl mb-8 sm:mb-10 font-body font-light lg:mx-0 mx-auto px-2 sm:px-0"
             >
               {t.sub[lang]}
             </motion.p>
@@ -71,13 +71,13 @@ const HeroSection = ({ lang }: { lang: Lang }) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="flex flex-col sm:flex-row items-center lg:justify-start justify-center gap-4"
+              className="flex flex-col sm:flex-row items-center lg:justify-start justify-center gap-3 sm:gap-4 px-4 sm:px-0"
             >
-              <Button variant="hero" size="lg" asChild>
+              <Button variant="hero" size="lg" asChild className="w-full sm:w-auto">
                 <a href="#contact">{t.cta1[lang]}</a>
               </Button>
 
-              <Button variant="heroGhost" size="lg" asChild>
+              <Button variant="heroGhost" size="lg" asChild className="w-full sm:w-auto">
                 <a href="#services">{t.cta2[lang]}</a>
               </Button>
             </motion.div>
@@ -88,7 +88,7 @@ const HeroSection = ({ lang }: { lang: Lang }) => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="flex flex-1 items-center justify-center p-0 w-full max-w-[300px] sm:max-w-[400px] lg:max-w-none"
+            className="flex flex-1 items-center justify-center p-0 w-full max-w-[240px] sm:max-w-[350px] md:max-w-[400px] lg:max-w-none"
           >
             <img src="/illustrations/Creative team-cuate.svg" alt="" className="w-full h-full object-contain" />
           </motion.div>

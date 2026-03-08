@@ -29,7 +29,7 @@ const Navbar = ({ lang, setLang }: NavbarProps) => {
           : "bg-transparent py-6"
       }`}
     >
-      <div className="container mx-auto flex items-center justify-between px-4 md:px-8">
+      <div className="container mx-auto flex items-center justify-between px-5 sm:px-6 md:px-8">
         <a href="/" className="hover:opacity-80 transition-opacity flex-shrink-0">
           <SquaiLogo height={32} />
         </a>
@@ -90,7 +90,7 @@ const Navbar = ({ lang, setLang }: NavbarProps) => {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="absolute top-full left-0 w-full bg-[#0A0C1A]/95 backdrop-blur-xl border-b border-white/5 md:hidden shadow-2xl overflow-hidden"
           >
-            <div className="container mx-auto px-4 py-8 flex flex-col gap-6">
+            <div className="container mx-auto px-5 sm:px-6 py-6 sm:py-8 flex flex-col gap-5 sm:gap-6">
               {links.map((label, i) => (
                 <motion.a
                   key={i}
@@ -99,7 +99,7 @@ const Navbar = ({ lang, setLang }: NavbarProps) => {
                   transition={{ delay: i * 0.05 + 0.1 }}
                   href={`#${sections[i]}`}
                   onClick={() => setOpen(false)}
-                  className="text-foreground hover:text-primary transition-colors font-headline text-3xl font-bold tracking-tight"
+                  className="text-foreground hover:text-primary transition-colors font-headline text-2xl sm:text-3xl font-bold tracking-tight"
                 >
                   {label}
                 </motion.a>

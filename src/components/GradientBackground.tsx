@@ -1,6 +1,6 @@
 const GradientBackground = () => {
   return (
-    <div className="fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
+    <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
       {/* Base: Depth gradient canvas (#0A0C1A → #7C8CFF at 135°) */}
       <div
         className="absolute inset-0"
@@ -18,8 +18,8 @@ const GradientBackground = () => {
       <div
         className="gradient-orb animate-float-1"
         style={{
-          width: "clamp(600px, 55vw, 1000px)",
-          height: "clamp(600px, 55vw, 1000px)",
+          width: "clamp(300px, 55vw, 1000px)",
+          height: "clamp(300px, 55vw, 1000px)",
           top: "-15%",
           right: "-8%",
           background:
@@ -31,8 +31,8 @@ const GradientBackground = () => {
       <div
         className="gradient-orb animate-float-2"
         style={{
-          width: "clamp(400px, 38vw, 700px)",
-          height: "clamp(400px, 38vw, 700px)",
+          width: "clamp(250px, 38vw, 700px)",
+          height: "clamp(250px, 38vw, 700px)",
           top: "2%",
           right: "15%",
           background:
@@ -48,8 +48,8 @@ const GradientBackground = () => {
       <div
         className="gradient-orb animate-float-3"
         style={{
-          width: "clamp(500px, 45vw, 850px)",
-          height: "clamp(500px, 45vw, 850px)",
+          width: "clamp(280px, 45vw, 850px)",
+          height: "clamp(280px, 45vw, 850px)",
           top: "28%",
           left: "-12%",
           background:
@@ -61,8 +61,8 @@ const GradientBackground = () => {
       <div
         className="gradient-orb animate-float-4"
         style={{
-          width: "clamp(400px, 35vw, 650px)",
-          height: "clamp(400px, 35vw, 650px)",
+          width: "clamp(250px, 35vw, 650px)",
+          height: "clamp(250px, 35vw, 650px)",
           top: "40%",
           right: "-5%",
           background:
@@ -78,8 +78,8 @@ const GradientBackground = () => {
       <div
         className="gradient-orb animate-float-1"
         style={{
-          width: "clamp(350px, 30vw, 550px)",
-          height: "clamp(350px, 30vw, 550px)",
+          width: "clamp(220px, 30vw, 550px)",
+          height: "clamp(220px, 30vw, 550px)",
           bottom: "20%",
           left: "8%",
           background:
@@ -91,8 +91,8 @@ const GradientBackground = () => {
       <div
         className="gradient-orb animate-float-2"
         style={{
-          width: "clamp(400px, 35vw, 650px)",
-          height: "clamp(400px, 35vw, 650px)",
+          width: "clamp(250px, 35vw, 650px)",
+          height: "clamp(250px, 35vw, 650px)",
           bottom: "5%",
           right: "10%",
           background:
@@ -104,8 +104,8 @@ const GradientBackground = () => {
       <div
         className="gradient-orb animate-float-3"
         style={{
-          width: "clamp(500px, 40vw, 750px)",
-          height: "clamp(500px, 40vw, 750px)",
+          width: "clamp(280px, 40vw, 750px)",
+          height: "clamp(280px, 40vw, 750px)",
           bottom: "-10%",
           left: "30%",
           background:
@@ -117,8 +117,8 @@ const GradientBackground = () => {
       <div
         className="gradient-orb animate-float-4"
         style={{
-          width: "clamp(600px, 50vw, 900px)",
-          height: "clamp(400px, 30vw, 600px)",
+          width: "clamp(300px, 50vw, 900px)",
+          height: "clamp(250px, 30vw, 600px)",
           top: "15%",
           left: "20%",
           background:

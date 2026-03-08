@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { content, type Lang } from "@/lib/content";
 import { motion } from "framer-motion";
 
@@ -74,19 +73,19 @@ const HowItWorksSection = ({ lang }: { lang: Lang }) => {
   ];
 
   return (
-    <section id="how-it-works" className="py-16 relative">
-      <div className="container mx-auto px-4 relative z-10">
+    <section id="how-it-works" className="py-10 sm:py-16 relative">
+      <div className="container mx-auto px-5 sm:px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-10"
+          className="text-center mb-8 sm:mb-10"
         >
-          <h2 className="font-headline font-black text-3xl md:text-5xl lg:text-[56px] mb-10">
+          <h2 className="font-headline font-black text-[1.75rem] sm:text-3xl md:text-5xl lg:text-[56px] mb-6 sm:mb-10 px-2">
             {t.title[lang]}
           </h2>
-          <p className="font-body text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+          <p className="font-body text-base sm:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto px-2">
             {lang === "en" 
               ? "A proven, structured approach to scaling your operations inside out." 
               : "Un enfoque estructurado y comprobado para escalar tus operaciones de adentro hacia afuera."}
@@ -94,7 +93,7 @@ const HowItWorksSection = ({ lang }: { lang: Lang }) => {
         </motion.div>
 
         {/* 3x2 Grid for Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 max-w-7xl mx-auto">
           {Array.from({ length: 6 }).map((_, i) => {
             const style = colorStyles[i % colorStyles.length];
             return (
@@ -107,7 +106,7 @@ const HowItWorksSection = ({ lang }: { lang: Lang }) => {
                 className={`bg-[#12152A] rounded-2xl overflow-hidden border border-[rgba(124,140,255,0.15)] hover:border-[rgba(124,140,255,0.4)] flex flex-col h-full shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_25px_-5px_hsl(var(--primary)_/_0.15)] group`}
               >
                 {/* Image Area - Flat Human Illustration */}
-                <div className="w-full h-48 bg-[#E8ECFF] flex items-center justify-center p-2 border-b border-[rgba(124,140,255,0.1)] relative">
+                <div className="w-full h-36 sm:h-48 bg-[#E8ECFF] flex items-center justify-center p-2 border-b border-[rgba(124,140,255,0.1)] relative">
                   <img 
                     src={stepIllustrations[i]} 
                     alt={stepNames[lang][i]} 
@@ -116,17 +115,17 @@ const HowItWorksSection = ({ lang }: { lang: Lang }) => {
                 </div>
 
                 {/* Content Area */}
-                <div className={`flex-1 p-6 lg:p-8 flex flex-col border-b-4 ${style.border}`}>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className={`font-headline font-black text-2xl opacity-50 ${style.text}`}>0{i + 1}</span>
-                    <span className={`w-10 h-10 rounded bg-[#1A1E38] border border-[rgba(124,140,255,0.1)] flex items-center justify-center ${style.text}`}>
+                <div className={`flex-1 p-5 sm:p-6 lg:p-8 flex flex-col border-b-4 ${style.border}`}>
+                  <div className="flex items-center justify-between mb-3 sm:mb-4">
+                    <span className={`font-headline font-black text-xl sm:text-2xl opacity-50 ${style.text}`}>0{i + 1}</span>
+                    <span className={`w-9 h-9 sm:w-10 sm:h-10 rounded bg-[#1A1E38] border border-[rgba(124,140,255,0.1)] flex items-center justify-center ${style.text}`}>
                       {stepIcons[i]}
                     </span>
                   </div>
-                  <h3 className={`mb-3 font-headline font-extrabold text-xl lg:text-2xl text-transparent bg-clip-text bg-gradient-to-r ${style.gradient}`}>
+                  <h3 className={`mb-2 sm:mb-3 font-headline font-extrabold text-lg sm:text-xl lg:text-2xl text-transparent bg-clip-text bg-gradient-to-r ${style.gradient}`}>
                     {stepNames[lang][i]}
                   </h3>
-                  <p className="font-body text-base lg:text-lg text-muted-foreground leading-relaxed">
+                  <p className="font-body text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed">
                     {stepDescriptions[lang][i]}
                   </p>
                 </div>

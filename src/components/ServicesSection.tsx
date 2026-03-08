@@ -21,20 +21,20 @@ const ServicesSection = ({ lang }: { lang: Lang }) => {
   const t = content.services;
 
   return (
-    <section id="services" className="py-16 relative">
+    <section id="services" className="py-10 sm:py-16 relative">
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-5 sm:px-6 relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="font-headline font-black text-3xl md:text-5xl lg:text-[56px] text-center mb-10"
+          className="font-headline font-black text-[1.75rem] sm:text-3xl md:text-5xl lg:text-[56px] text-center mb-8 sm:mb-10 px-2"
         >
           {t.title[lang]}
         </motion.h2>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6 max-w-7xl mx-auto items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-6 max-w-7xl mx-auto items-start">
           {t.tiers.map((tier, i) => (
             <motion.div
               key={i}
@@ -45,7 +45,7 @@ const ServicesSection = ({ lang }: { lang: Lang }) => {
             >
               <div
                 className={`relative bg-[#12152A] rounded-xl border border-[rgba(124,140,255,0.15)] hover:border-[rgba(124,140,255,0.4)] border-t-4 ${borderColors[tier.borderColor]} ${hoverGlows[tier.borderColor]} transition-all duration-200 hover:-translate-y-1 h-full flex flex-col ${
-                  tier.popular ? "lg:scale-[1.03]" : ""
+                  tier.popular ? "md:scale-100 lg:scale-[1.03]" : ""
                 }`}
               >
                 {tier.popular && (
@@ -54,52 +54,52 @@ const ServicesSection = ({ lang }: { lang: Lang }) => {
                   </div>
                 )}
 
-                <div className="p-8 flex flex-col h-full text-center">
-                  <p className="text-primary font-body font-semibold text-[10px] uppercase tracking-[0.2em] mb-4">
+                <div className="p-5 sm:p-8 flex flex-col h-full text-center">
+                  <p className="text-primary font-body font-semibold text-[10px] uppercase tracking-[0.2em] mb-3 sm:mb-4">
                     {tier.label[lang]}
                   </p>
-                  <h3 className="font-headline font-black text-2xl lg:text-3xl mb-4">{tier.name[lang]}</h3>
+                  <h3 className="font-headline font-black text-xl sm:text-2xl lg:text-3xl mb-3 sm:mb-4">{tier.name[lang]}</h3>
 
-                  <div className="mb-6 h-20 flex flex-col justify-center">
+                  <div className="mb-4 sm:mb-6 h-auto sm:h-20 flex flex-col justify-center">
                     <div className="flex items-center justify-center gap-2">
                        {tier.pricePrefix[lang] && (
-                        <p className="font-body font-semibold text-sm text-accent">{tier.pricePrefix[lang]}</p>
+                        <p className="font-body font-semibold text-xs sm:text-sm text-accent">{tier.pricePrefix[lang]}</p>
                        )}
-                       <p className="font-headline font-black text-4xl text-primary">{tier.price}</p>
+                       <p className="font-headline font-black text-3xl sm:text-4xl text-primary">{tier.price}</p>
                     </div>
-                    <p className="font-body font-medium text-xs text-muted-foreground mt-2">{tier.priceNote[lang]}</p>
+                    <p className="font-body font-medium text-[10px] sm:text-xs text-muted-foreground mt-2">{tier.priceNote[lang]}</p>
                   </div>
 
-                  <Button variant="cta" className="w-full mb-8 h-12 text-base font-bold shrink-0" asChild>
+                  <Button variant="cta" className="w-full mb-6 sm:mb-8 h-11 sm:h-12 text-sm sm:text-base font-bold shrink-0" asChild>
                     <a href="#contact">{tier.cta[lang]}</a>
                   </Button>
 
-                  <p className="text-accent font-body font-light text-sm italic leading-relaxed mb-8 px-2 min-h-[60px]">
+                  <p className="text-accent font-body font-light text-xs sm:text-sm italic leading-relaxed mb-6 sm:mb-8 px-1 sm:px-2 min-h-[48px] sm:min-h-[60px]">
                     {tier.partnership[lang]}
                   </p>
 
-                  <div className="w-full h-px bg-white/5 mb-8" />
+                  <div className="w-full h-px bg-white/5 mb-6 sm:mb-8" />
 
                   <div className="flex-1 text-left">
-                    <p className="font-body font-semibold text-xs uppercase tracking-wider text-foreground mb-5">
+                    <p className="font-body font-semibold text-xs uppercase tracking-wider text-foreground mb-4 sm:mb-5">
                       {lang === "en" ? "What you get:" : "Lo que obtienes:"}
                     </p>
-                    <ul className="space-y-4 mb-8">
+                    <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
                       {tier.items[lang].map((item, j) => (
-                        <li key={j} className="flex items-start gap-3 text-muted-foreground font-body text-sm lg:text-base leading-snug">
-                          <Check className="text-primary mt-1 shrink-0" size={16} />
+                        <li key={j} className="flex items-start gap-2 sm:gap-3 text-muted-foreground font-body text-xs sm:text-sm lg:text-base leading-snug">
+                          <Check className="text-primary mt-0.5 sm:mt-1 shrink-0" size={14} />
                           <span>{item}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="pt-6 border-t border-white/5 flex flex-wrap justify-between gap-y-2 mt-auto">
-                    <div className="flex items-center gap-2 text-muted-foreground font-body text-xs">
+                  <div className="pt-4 sm:pt-6 border-t border-white/5 flex flex-col sm:flex-row flex-wrap justify-between gap-y-2 mt-auto">
+                    <div className="flex items-center gap-2 text-muted-foreground font-body text-[10px] sm:text-xs">
                        <Clock size={12} className="text-primary" />
                        {tier.duration[lang]}
                     </div>
-                    <div className="flex items-center gap-2 text-[#666E9A] font-body text-xs italic">
+                    <div className="flex items-center gap-2 text-[#666E9A] font-body text-[10px] sm:text-xs italic">
                        <Users size={12} />
                        {tier.squadAssigned[lang]}
                     </div>
