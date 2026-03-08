@@ -1,73 +1,140 @@
-# Welcome to your Lovable project
+# Squai Landing Page
 
-## Project info
+Welcome to the Squai landing page repository! This is a modern, responsive landing page showcasing Squai's AI implementation services.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+🌐 **[Visit the Live Website](https://heysquai.vercel.app/)** - See the production deployment
 
-## How can I edit this code?
+## 📋 About Squai
 
-There are several ways of editing your application.
+Squai helps teams implement AI strategically by:
+- **Squaimap**: Discovering where AI can make a real impact on your business operations
+- **Squailab**: Building and implementing AI systems that your team will actually use
+- **And more**: Custom solutions tailored to your industry and needs
 
-**Use Lovable**
+This landing page introduces Squai's services across multiple industries and provides information on how to get started.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## 🛠️ Tech Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Framework**: React 18 with TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS with PostCSS
+- **UI Components**: Shadcn/ui powered by Radix UI
+- **Testing**: Vitest
+- **Linting**: ESLint
 
-**Use your preferred IDE**
+## 🚀 Getting Started
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Local Development
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+#### Prerequisites
+- Node.js 16+ and npm installed ([install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating))
+- Git
 
-Follow these steps:
+#### Setup Steps
 
+1. **Clone the repository**
+   ```sh
+   git clone https://github.com/squai-org/landing-page.git
+   cd landing-page
+   ```
+
+2. **Install dependencies**
+   ```sh
+   npm install
+   ```
+
+3. **Start the development server**
+   ```sh
+   npm run dev
+   ```
+   
+   The application will be available at `http://localhost:5173` with hot module reloading enabled for instant preview of changes.
+
+### GitHub Codespaces
+
+For a browser-based development environment:
+
+1. **Navigate to the repository** on GitHub
+2. **Click the "Code" button** (green button) near the top right
+3. **Select the "Codespaces" tab**
+4. **Click "New codespace"** to launch a new environment
+
+Once the codespace loads:
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The dev server will start automatically, and you can access it via the port forwarding notification.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 📦 Available Scripts
 
-**Use GitHub Codespaces**
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server with hot reload |
+| `npm run build` | Build for production |
+| `npm run build:dev` | Build in development mode |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint` | Run ESLint to check code quality |
+| `npm run test` | Run tests once |
+| `npm run test:watch` | Run tests in watch mode |
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 📁 Project Structure
 
-## What technologies are used for this project?
+```
+src/
+├── components/          # React components
+│   ├── ui/             # Shadcn/ui components
+│   ├── HeroSection.tsx
+│   ├── ServicesSection.tsx
+│   ├── IndustriesSection.tsx
+│   └── ...             # Other page sections
+├── pages/              # Page components
+├── hooks/              # Custom React hooks
+├── lib/                # Utilities and constants
+│   └── content.ts      # Multi-language content
+├── styles/             # Global styles
+└── App.tsx             # Main app component
+```
 
-This project is built with:
+## 🌍 Multi-language Support
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+The landing page supports both English (en) and Spanish (es). Content is managed in `src/lib/content.ts`.
 
-## How can I deploy this project?
+## 🧪 Testing
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+Run tests with Vitest:
+```sh
+npm run test        # Single run
+npm run test:watch  # Watch mode
+```
 
-## Can I connect a custom domain to my Lovable project?
+## 📝 Building for Production
 
-Yes, you can!
+Create an optimized production build:
+```sh
+npm run build
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Output files are generated in the `dist/` directory, ready for deployment.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Preview the production build locally:
+```sh
+npm run preview
+```
+
+## 🔧 Contributing
+
+1. Create a feature branch from `main`
+2. Make your changes
+3. Test locally (`npm run dev` and `npm run test`)
+4. Commit and push your changes
+5. Create a pull request
+
+## 📄 License
+
+See LICENSE file for details.
+
+## 📞 Questions?
+
+For issues or questions about this repository, please open a GitHub issue.
