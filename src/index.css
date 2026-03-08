@@ -52,7 +52,8 @@
   }
 
   body {
-    @apply bg-background text-muted-foreground font-body antialiased;
+    @apply bg-background text-muted-foreground font-body antialiased text-base;
+    font-size: 16px;
   }
 
   h1, h2, h3, h4, h5, h6 {

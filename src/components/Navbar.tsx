@@ -40,7 +40,7 @@ const Navbar = ({ lang, setLang }: NavbarProps) => {
             <a
               key={i}
               href={`#${sections[i]}`}
-              className="text-muted-foreground hover:text-foreground transition-colors duration-300 font-body text-[15px] font-medium tracking-wide relative group"
+              className="text-muted-foreground hover:text-foreground transition-colors duration-300 font-body text-[15px] font-medium tracking-wide relative group min-h-[44px] flex items-center"
             >
               {label}
               <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-primary transition-all duration-300 group-hover:w-full"></span>
@@ -53,7 +53,8 @@ const Navbar = ({ lang, setLang }: NavbarProps) => {
           <div className="hidden md:flex items-center gap-2 font-body text-sm font-semibold tracking-wider">
             <button
               onClick={() => setLang("en")}
-              className={`transition-colors duration-200 ${
+              aria-label="Switch to English"
+              className={`min-w-[44px] min-h-[44px] flex items-center justify-center transition-colors duration-200 ${
                 lang === "en" ? "text-foreground" : "text-muted-foreground/50 hover:text-muted-foreground"
               }`}
             >
@@ -62,7 +63,8 @@ const Navbar = ({ lang, setLang }: NavbarProps) => {
             <span className="text-white/10">|</span>
             <button
                onClick={() => setLang("es")}
-               className={`transition-colors duration-200 ${
+               aria-label="Cambiar a Español"
+               className={`min-w-[44px] min-h-[44px] flex items-center justify-center transition-colors duration-200 ${
                  lang === "es" ? "text-foreground" : "text-muted-foreground/50 hover:text-muted-foreground"
                }`}
             >
@@ -72,8 +74,9 @@ const Navbar = ({ lang, setLang }: NavbarProps) => {
 
           {/* Mobile hamburger */}
           <button
-             className="md:hidden text-muted-foreground hover:text-foreground transition-colors"
+             className="md:hidden text-muted-foreground hover:text-foreground transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
              onClick={() => setOpen(!open)}
+             aria-label={open ? 'Close menu' : 'Open menu'}
           >
              {open ? <X size={26} strokeWidth={1.5} /> : <Menu size={26} strokeWidth={1.5} />}
           </button>

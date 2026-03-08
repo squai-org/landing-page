@@ -31,7 +31,7 @@ const Footer = ({ lang, setLang }: FooterProps) => {
                 <a
                   key={i}
                   href={`#${t.sections[i]}`}
-                  className="text-muted-foreground hover:text-primary transition-colors duration-200 font-body text-sm"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-200 font-body text-sm min-h-[44px] inline-flex items-center"
                 >
                   {label}
                 </a>
@@ -40,7 +40,8 @@ const Footer = ({ lang, setLang }: FooterProps) => {
             <div className="flex items-center rounded-full border border-white/10 bg-white/5 overflow-hidden p-0.5">
               <button
                 onClick={() => setLang("en")}
-                className={`px-3 py-1 text-[10px] font-body font-bold transition-all duration-300 rounded-full ${
+                aria-label="Switch to English"
+                className={`px-4 py-2 min-h-[44px] min-w-[44px] text-xs font-body font-bold transition-all duration-300 rounded-full ${
                   lang === "en"
                     ? "bg-primary text-primary-foreground shadow-lg"
                     : "text-muted-foreground hover:text-foreground"
@@ -50,7 +51,8 @@ const Footer = ({ lang, setLang }: FooterProps) => {
               </button>
               <button
                 onClick={() => setLang("es")}
-                className={`px-3 py-1 text-[10px] font-body font-bold transition-all duration-300 rounded-full ${
+                aria-label="Cambiar a Español"
+                className={`px-4 py-2 min-h-[44px] min-w-[44px] text-xs font-body font-bold transition-all duration-300 rounded-full ${
                   lang === "es"
                     ? "bg-primary text-primary-foreground shadow-lg"
                     : "text-muted-foreground hover:text-foreground"
