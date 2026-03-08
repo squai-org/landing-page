@@ -237,68 +237,68 @@ export const content = {
       en: "Every engagement assigns the right people to your specific needs. You always work directly with the people doing the work.",
       es: "Cada proyecto asigna las personas correctas según tus necesidades. Siempre trabajas directamente con quienes hacen el trabajo.",
     },
-    members: [
-      {
-        role: { en: "Operations Strategist", es: "Estratega de Operaciones" },
-        specialty: { en: "Strategy & Direction", es: "Estrategia y Dirección" },
-        desc: {
-          en: "Your main point of contact from day one. Diagnoses your business, designs the operational roadmap, and makes sure every part of the engagement moves in the right direction.",
-          es: "Tu punto de contacto principal desde el primer día. Diagnostica tu negocio, diseña la hoja de ruta operativa y se asegura de que cada parte del proyecto avance en la dirección correcta.",
-        },
-        tiers: { en: ["Squaimap", "Squailab", "Squaicore"], es: ["Squaimap", "Squailab", "Squaicore"] },
-        borderColor: "accent",
-      },
-      {
-        role: { en: "AI Engineer", es: "Ingeniero de IA" },
-        specialty: { en: "Automation Specialist", es: "Especialista en Automatización" },
-        desc: {
-          en: "Takes the AI opportunities identified in Squaimap and actually builds them. Custom automations, tool integrations, and implementations designed around how your team works — not generic solutions dropped in from outside.",
-          es: "Toma las oportunidades de IA identificadas en el Squaimap y las construye de verdad. Automatizaciones, integraciones y soluciones diseñadas alrededor de cómo trabaja tu equipo, no soluciones genéricas que llegan de afuera.",
-        },
-        tiers: { en: ["Squailab", "Squaicore"], es: ["Squailab", "Squaicore"] },
-        borderColor: "secondary",
-      },
-      {
-        role: { en: "Business Process Analyst", es: "Analista de Procesos de Negocio" },
-        specialty: { en: "Process Design & Strategy", es: "Diseño y Estrategia de Procesos" },
-        desc: {
-          en: "Goes deep into how your team actually works day to day — not how it's supposed to work on paper. Maps the real workflows, finds where things slow down or break, and makes sure every improvement is connected to something that actually matters for your business.",
-          es: "Profundiza en cómo trabaja tu equipo de verdad, día a día, no como se supone que debería funcionar. Mapea los flujos reales, encuentra dónde las cosas se ralentizan o se rompen, y se asegura de que cada mejora esté conectada con algo que realmente importa para tu negocio.",
-        },
-        tiers: { en: ["Squaimap", "Squailab", "Squaicore"], es: ["Squaimap", "Squailab", "Squaicore"] },
-        borderColor: "primary",
-      },
-      {
-        role: { en: "Knowledge Manager", es: "Gestor de Conocimiento" },
-        specialty: { en: "Systems & Knowledge Design", es: "Diseño y Gestión de Conocimiento" },
-        desc: {
-          en: "Makes sure everything we build is actually usable. Turns workflows and processes into clear, structured documentation that lives inside your team's existing tools — so anyone can follow them, not just the people who were in the room.",
-          es: "Se asegura de que todo lo que construimos sea realmente utilizable. Convierte flujos y procesos en documentación clara y estructurada que vive en las herramientas que tu equipo ya usa, para que cualquiera pueda seguirlos, no solo quienes estuvieron en las reuniones.",
-        },
-        tiers: { en: ["Squailab", "Squaicore"], es: ["Squailab", "Squaicore"] },
-        borderColor: "primary",
-      },
-      {
-        role: { en: "Data Analyst", es: "Analista de Datos" },
-        specialty: { en: "Data Integrity & Connections", es: "Integridad y Conexiones de Datos" },
-        desc: {
-          en: "Checks that the data running through your processes is actually reliable. Finds where information is missing, disconnected, or being used in ways that lead to bad decisions — and fixes it before it becomes a bigger problem.",
-          es: "Verifica que los datos que fluyen por tus procesos sean realmente confiables. Encuentra dónde hay información incompleta, desconectada o mal utilizada, y lo corrige antes de que se convierta en un problema mayor.",
-        },
-        tiers: { en: ["Squaicore"], es: ["Squaicore"] },
-        borderColor: "primary",
-      },
-      {
-        role: { en: "Information Security Analyst", es: "Analista de Seguridad de la Información" },
-        specialty: { en: "Security & Risk Management", es: "Gestión de Seguridad y Riesgos" },
-        desc: {
-          en: "Reviews how your processes, tools, and documentation handle sensitive information. Makes sure everything we build follows security best practices — so your business is protected as it grows, not exposed.",
-          es: "Revisa cómo tus procesos, herramientas y documentación manejan información sensible. Se asegura de que todo lo que construimos siga las mejores prácticas de seguridad, para que tu negocio esté protegido a medida que crece, no expuesto.",
-        },
-        tiers: { en: ["Squailab", "Squaicore"], es: ["Squailab", "Squaicore"] },
-        borderColor: "primary",
-      },
-    ],
+members: [
+  {
+    role: { en: "Operations Strategist", es: "Estratega de Operaciones" },
+    specialty: { en: "Strategy & Direction", es: "Estrategia y Dirección" },
+    desc: {
+      en: "Your main point of contact from day one. Diagnoses your business, designs the operational roadmap, and keeps the entire engagement on track.",
+      es: "Tu punto de contacto principal desde el primer día. Diagnostica tu negocio, diseña la hoja de ruta operativa y mantiene todo el proyecto en la dirección correcta.",
+    },
+    tiers: { en: ["Squaimap", "Squailab", "Squaicore"], es: ["Squaimap", "Squailab", "Squaicore"] },
+    borderColor: "accent",
+  },
+  {
+    role: { en: "AI Engineer", es: "Ingeniero de IA" },
+    specialty: { en: "Automation Specialist", es: "Especialista en Automatización" },
+    desc: {
+      en: "Builds the AI solutions identified in Squaimap. Custom automations and tool integrations designed around how your team actually works — not generic fixes.",
+      es: "Construye las soluciones de IA identificadas en el Squaimap. Automatizaciones e integraciones diseñadas alrededor de cómo trabaja tu equipo, no soluciones genéricas.",
+    },
+    tiers: { en: ["Squailab", "Squaicore"], es: ["Squailab", "Squaicore"] },
+    borderColor: "secondary",
+  },
+  {
+    role: { en: "Business Process Analyst", es: "Analista de Procesos de Negocio" },
+    specialty: { en: "Process Design & Strategy", es: "Diseño y Estrategia de Procesos" },
+    desc: {
+      en: "Maps how your team actually works day to day — not how it's supposed to on paper. Finds where things slow down or break, and connects every fix to something that matters.",
+      es: "Mapea cómo trabaja tu equipo de verdad, día a día, no como dice el manual. Encuentra dónde las cosas fallan y conecta cada mejora con algo que realmente importa.",
+    },
+    tiers: { en: ["Squaimap", "Squailab", "Squaicore"], es: ["Squaimap", "Squailab", "Squaicore"] },
+    borderColor: "primary",
+  },
+  {
+    role: { en: "Knowledge Manager", es: "Gestor de Conocimiento" },
+    specialty: { en: "Systems & Knowledge Design", es: "Diseño y Gestión de Conocimiento" },
+    desc: {
+      en: "Turns everything we build into clear, structured documentation that lives inside your team's existing tools — so anyone can follow it, not just the people who were in the room.",
+      es: "Convierte todo lo que construimos en documentación clara y estructurada que vive en las herramientas que tu equipo ya usa, para que cualquiera pueda seguirla, no solo quienes estuvieron en las reuniones.",
+    },
+    tiers: { en: ["Squailab", "Squaicore"], es: ["Squailab", "Squaicore"] },
+    borderColor: "primary",
+  },
+  {
+    role: { en: "Data Analyst", es: "Analista de Datos" },
+    specialty: { en: "Data Integrity & Connections", es: "Integridad y Conexiones de Datos" },
+    desc: {
+      en: "Makes sure the data running through your processes is actually reliable. Finds where information is missing, disconnected, or leading to bad decisions — and fixes it.",
+      es: "Se asegura de que los datos que fluyen por tus procesos sean confiables. Encuentra dónde hay información incompleta, desconectada o mal usada, y lo corrige antes de que se convierta en un problema mayor.",
+    },
+    tiers: { en: ["Squaicore"], es: ["Squaicore"] },
+    borderColor: "primary",
+  },
+  {
+    role: { en: "Information Security Analyst", es: "Analista de Seguridad de la Información" },
+    specialty: { en: "Security & Risk Management", es: "Gestión de Seguridad y Riesgos" },
+    desc: {
+      en: "Reviews how your processes, tools, and documentation handle sensitive data. Makes sure everything we build follows security best practices — so your business is protected as it grows.",
+      es: "Revisa cómo tus procesos, herramientas y documentación manejan información sensible. Se asegura de que todo lo que construimos siga las mejores prácticas de seguridad, para que tu negocio esté protegido a medida que crece.",
+    },
+    tiers: { en: ["Squailab", "Squaicore"], es: ["Squailab", "Squaicore"] },
+    borderColor: "primary",
+  },
+],
     gallery: [
       { name: "Laura Villada", role: { en: "Operations Strategist", es: "Estratega de Operaciones" } },
       { name: "Sebastián Rico", role: { en: "AI Engineer", es: "Ingeniero IA" } },
