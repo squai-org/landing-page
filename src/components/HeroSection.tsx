@@ -45,7 +45,7 @@ const HeroSection = ({ lang }: { lang: Lang }) => {
               className="font-headline font-black text-4xl sm:text-5xl md:text-6xl lg:text-[80px] leading-tight mb-4 gradient-wave-text"
             >
               {words.map((wordText, i) => (
-                <motion.span key={i} variants={word} className="inline-block mr-3">
+                <motion.span key={i} variants={word} className="inline-block mr-3 mb-2">
                   {wordText}
                 </motion.span>
               ))}
