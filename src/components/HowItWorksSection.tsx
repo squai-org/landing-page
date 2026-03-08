@@ -81,9 +81,9 @@ const HowItWorksSection = ({ lang }: { lang: Lang }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-10 md:mb-16"
+          className="text-center mb-10"
         >
-          <h2 className="font-headline font-black text-4xl md:text-5xl lg:text-6xl mb-6">
+          <h2 className="font-headline font-black text-3xl md:text-5xl lg:text-[56px] mb-10">
             {t.title[lang]}
           </h2>
           <p className="font-body text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
@@ -104,7 +104,7 @@ const HowItWorksSection = ({ lang }: { lang: Lang }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`bg-[#12152A] rounded-2xl overflow-hidden border border-[rgba(124,140,255,0.15)] hover:border-[rgba(124,140,255,0.4)] flex flex-col h-full shadow-md transition-all duration-300 hover:-translate-y-2 group`}
+                className={`bg-[#12152A] rounded-2xl overflow-hidden border border-[rgba(124,140,255,0.15)] hover:border-[rgba(124,140,255,0.4)] flex flex-col h-full shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_25px_-5px_hsl(var(--primary)_/_0.15)] group`}
               >
                 {/* Image Area - Flat Human Illustration */}
                 <div className="w-full h-48 bg-[#E8ECFF] flex items-center justify-center p-2 border-b border-[rgba(124,140,255,0.1)] relative">

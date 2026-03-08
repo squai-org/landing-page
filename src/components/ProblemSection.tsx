@@ -54,9 +54,9 @@ const ProblemSection = ({ lang }: { lang: Lang }) => {
             
             return (
               <AnimatedSection key={i} delay={i * 0.12}>
-                <div className={`bg-[#12152A] rounded-xl overflow-hidden border border-white/5 transition-all duration-300 hover:-translate-y-1 group h-full flex flex-col ${style.borderClass} ${style.shadowClass}`}>
+                <div className={`bg-[#12152A] rounded-2xl overflow-hidden border border-[rgba(124,140,255,0.15)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_25px_-5px_hsl(233,100%,74%,0.15)] group h-full flex flex-col`}>
                   {/* Illustration */}
-                  <div className="w-full h-44 bg-[#E8ECFF] flex items-center justify-center p-2 border-b border-white/5">
+                  <div className="w-full h-48 bg-[#E8ECFF] flex items-center justify-center p-2 border-b border-[rgba(124,140,255,0.1)] relative">
                     <img 
                       src={style.illustration} 
                       alt={""}
@@ -70,7 +70,7 @@ const ProblemSection = ({ lang }: { lang: Lang }) => {
                   <h3 className={`font-headline font-bold text-xl lg:text-2xl mb-3 text-transparent bg-clip-text bg-gradient-to-r ${style.titleGradient}`}>
                     {item.title[lang]}
                   </h3>
-                  <p className="text-muted-foreground font-body text-lg leading-relaxed group-hover:text-foreground transition-colors">
+                  <p className="text-muted-foreground font-body text-base lg:text-lg leading-relaxed group-hover:text-foreground transition-colors">
                     {item.desc[lang]}
                   </p>
                   </div>

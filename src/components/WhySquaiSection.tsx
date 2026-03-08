@@ -29,7 +29,7 @@ const WhySquaiSection = ({ lang }: { lang: Lang }) => {
               <AnimatedSection key={i} delay={i * 0.1}>
                 <div className="bg-[#12152A] rounded-2xl overflow-hidden border border-[rgba(124,140,255,0.15)] hover:border-[rgba(124,140,255,0.4)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_25px_-5px_hsl(233,100%,74%,0.15)] group h-full flex flex-col">
                   {/* Illustration */}
-                  <div className="w-full h-40 bg-[#E8ECFF] flex items-center justify-center p-2">
+                  <div className="w-full h-48 bg-[#E8ECFF] flex items-center justify-center p-2 border-b border-[rgba(124,140,255,0.1)] relative">
                     <img 
                       src={illustrations[i]} 
                       alt="" 

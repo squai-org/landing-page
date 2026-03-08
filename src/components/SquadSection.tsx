@@ -45,7 +45,7 @@ const cardVariants = {
     filter: "blur(0px)",
     transition: { 
       duration: 0.8, 
-      ease: [0.21, 1.11, 0.81, 0.99] // Custom "premium" bounce-out
+      ease: [0.21, 1.11, 0.81, 0.99] as const // Custom "premium" bounce-out
     } 
   },
 };
@@ -91,8 +91,8 @@ const SquadSection = ({ lang }: { lang: Lang }) => {
                 <div
                   className={`bg-[#12152A] rounded-2xl overflow-hidden border border-[rgba(124,140,255,0.15)] hover:border-[rgba(124,140,255,0.4)] flex flex-col h-full shadow-md ${hoverGlowMap[member.borderColor]}`}
                 >
-                  {/* Top: Photo (aspect-[3/4]) */}
-                  <div className="w-full aspect-[3/4] bg-muted/20 relative flex items-center justify-center overflow-hidden border-b border-[rgba(124,140,255,0.1)]">
+                  {/* Top: Photo (aspect-[3/4] on mobile/tablet, max-height enforced on xl desktops) */}
+                  <div className="w-full aspect-[3/4] xl:max-h-[350px] bg-muted/20 relative flex items-center justify-center overflow-hidden border-b border-[rgba(124,140,255,0.1)]">
                     <img 
                       src={`/${imgIndex}.JPG`} 
                       alt={`${person.name} - ${person.role[lang]}`} 
