@@ -333,6 +333,62 @@ members: [
     },
     cta: { en: "Book Your Free Call", es: "Agenda tu llamada gratis" },
   },
+  privacy: {
+    title: { en: "Privacy Policy", es: "Política de Privacidad" },
+    lastUpdated: { en: "Last updated: March 8, 2026", es: "Última actualización: 8 de marzo de 2026" },
+    backHome: { en: "← Back to home", es: "← Volver al inicio" },
+    sections: [
+      {
+        heading: { en: "Who we are", es: "Quiénes somos" },
+        body: {
+          en: "Squai is responsible for processing the personal data collected through this website. If you have any questions, you can reach us at heysquai@gmail.com.",
+          es: "Squai es responsable del tratamiento de los datos personales recopilados a través de este sitio web. Si tienes alguna pregunta, puedes contactarnos en heysquai@gmail.com.",
+        },
+      },
+      {
+        heading: { en: "What data we collect", es: "Qué datos recopilamos" },
+        body: {
+          en: "When you use our contact form, we collect your name, email address, and the message you write. We do not collect any other personal data.",
+          es: "Cuando usas nuestro formulario de contacto, recopilamos tu nombre, correo electrónico y el mensaje que escribes. No recopilamos ningún otro dato personal.",
+        },
+      },
+      {
+        heading: { en: "Why we collect it", es: "Para qué los usamos" },
+        body: {
+          en: "We use your data solely to respond to your inquiry. We will not use it for marketing, profiling, or any other purpose.",
+          es: "Usamos tus datos únicamente para responder a tu consulta. No los utilizaremos para marketing, perfilado ni ningún otro propósito.",
+        },
+      },
+      {
+        heading: { en: "Third parties", es: "Terceros" },
+        body: {
+          en: "To deliver our response to you, we use Resend as our email-sending service. Your data may be processed by this provider in accordance with their own privacy policy. We do not share your data with anyone else.",
+          es: "Para enviarte nuestra respuesta, utilizamos Resend como servicio de envío de correo. Tus datos pueden ser procesados por este proveedor de acuerdo con su propia política de privacidad. No compartimos tus datos con nadie más.",
+        },
+      },
+      {
+        heading: { en: "How long we keep your data", es: "Cuánto tiempo conservamos tus datos" },
+        body: {
+          en: "We keep your data for up to 1 year after your inquiry. After that period, it is permanently deleted.",
+          es: "Conservamos tus datos hasta 1 año después de tu consulta. Pasado ese plazo, se eliminan de forma permanente.",
+        },
+      },
+      {
+        heading: { en: "Your rights", es: "Tus derechos" },
+        body: {
+          en: "You have the right to access, correct, or delete your personal data at any time. You can also withdraw your consent. These rights apply regardless of where you are located.",
+          es: "Tienes derecho a acceder, corregir o eliminar tus datos personales en cualquier momento. También puedes retirar tu consentimiento. Estos derechos aplican sin importar tu ubicación.",
+        },
+      },
+      {
+        heading: { en: "How to exercise your rights", es: "Cómo ejercer tus derechos" },
+        body: {
+          en: "To exercise any of these rights, send us an email at heysquai@gmail.com. We will respond within 30 days.",
+          es: "Para ejercer cualquiera de estos derechos, envíanos un correo a heysquai@gmail.com. Responderemos en un plazo de 30 días.",
+        },
+      },
+    ],
+  },
   footer: {
     tagline: {
       en: "Your team doesn't need to figure out AI alone.",
