@@ -92,5 +92,9 @@
     "vite": "^5.4.19",
     "vite-plugin-sitemap": "^0.8.2",
     "vitest": "^3.2.4"
+  },
+  "optionalDependencies": {
+    "puppeteer": "^24.38.0",
+    "serve": "^14.2.6"
   }
 }

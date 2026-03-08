@@ -3,9 +3,13 @@
  * Spins up a static server for the Vite build output, visits each route with
  * Puppeteer, and overwrites the HTML files with the fully-rendered markup so
  * that search-engine crawlers receive real content instead of an empty <div>.
+ *
+ * On CI environments (Vercel, GitHub Actions, etc.) where Chrome is not
+ * available, the script exits gracefully — the static index.html already
+ * contains all critical SEO meta tags, structured data, and OG tags.
+ * Run `npm run build` locally to commit prerendered HTML before deploying.
  */
 
-import { launch } from "puppeteer";
 import handler from "serve-handler";
 import http from "node:http";
 import { writeFile, mkdir } from "node:fs/promises";
@@ -34,8 +38,27 @@ function startServer() {
 }
 
 async function prerender() {
+  // Try to import puppeteer — skip gracefully if Chrome is not available (CI)
+  let launch;
+  try {
+    const puppeteer = await import("puppeteer");
+    launch = puppeteer.launch ?? puppeteer.default?.launch;
+  } catch {
+    console.log("[prerender] Puppeteer not available — skipping prerender (CI detected).");
+    console.log("[prerender] Static index.html already contains SEO meta tags.");
+    return;
+  }
+
+  let browser;
+  try {
+    browser = await launch({ headless: true, args: ["--no-sandbox", "--disable-setuid-sandbox"] });
+  } catch (err) {
+    console.log(`[prerender] Could not launch Chrome: ${err.message}`);
+    console.log("[prerender] Skipping prerender — run locally to generate static HTML.");
+    return;
+  }
+
   const server = await startServer();
-  const browser = await launch({ headless: true, args: ["--no-sandbox"] });
 
   for (const route of ROUTES) {
     const url = `http://localhost:${PORT}${route}`;
