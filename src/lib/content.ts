@@ -19,7 +19,7 @@ export const content = {
     },
     sub: {
       en: "We work alongside your team, map how your business actually runs, and bring in AI that fits — not just tools that look good on a slide.",
-      es: "Trabajamos junto a tu equipo, mapeamos cómo funciona tu negocio de verdad e integramos IA que realmente funciona, no solo herramientas que se ven bien en una presentación.",
+      es: "Trabajamos junto a tu equipo, mapeamos cómo funciona tu negocio e integramos IA que realmente funciona, no solo herramientas que se ven bien en una presentación.",
     },
     cta1: { en: "Book a Free Discovery Call", es: "Agenda una llamada gratuita" },
     cta2: { en: "See Our Services", es: "Ver nuestros servicios" },
