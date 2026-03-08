@@ -26,6 +26,7 @@ const ContactModal = ({ open, onOpenChange, lang }: ContactModalProps) => {
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
   const [emailTouched, setEmailTouched] = useState(false);
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   // Reset form state when modal closes
@@ -35,6 +36,7 @@ const ContactModal = ({ open, onOpenChange, lang }: ContactModalProps) => {
         setEmail("");
         setDescription("");
         setEmailTouched(false);
+        setPrivacyAccepted(false);
         setSubmitted(false);
       }, 200);
       return () => clearTimeout(timeout);
@@ -48,7 +50,11 @@ const ContactModal = ({ open, onOpenChange, lang }: ContactModalProps) => {
     return null;
   }, [email, emailTouched, submitted, lang, t]);
 
-  const isValid = email.trim() !== "" && EMAIL_REGEX.test(email.trim());
+  const isValid = email.trim() !== "" && EMAIL_REGEX.test(email.trim()) && privacyAccepted;
+
+  const privacyError = submitted && !privacyAccepted
+    ? (lang === "es" ? "Debes aceptar la política de privacidad" : "You must accept the privacy policy")
+    : null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -128,6 +134,36 @@ const ContactModal = ({ open, onOpenChange, lang }: ContactModalProps) => {
               rows={4}
               className="bg-background/60 border-border/60 font-body placeholder:text-muted-foreground/50 focus-visible:ring-primary/60 resize-none transition-colors"
             />
+          </div>
+
+          {/* Privacy consent */}
+          <div className="space-y-1.5">
+            <label className="flex items-start gap-2.5 cursor-pointer group">
+              <input
+                type="checkbox"
+                checked={privacyAccepted}
+                onChange={(e) => setPrivacyAccepted(e.target.checked)}
+                className="mt-1 h-4 w-4 shrink-0 rounded border-border/60 accent-primary cursor-pointer"
+              />
+              <span className="text-xs font-body text-muted-foreground leading-relaxed select-none">
+                {lang === "es" ? (
+                  <>Acepto la{" "}<a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">política de privacidad</a>. Tus datos se usan únicamente para responder tu consulta.</>
+                ) : (
+                  <>I agree to the{" "}<a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">privacy policy</a>. Your data is used solely to respond to your inquiry.</>
+                )}
+              </span>
+            </label>
+            <div
+              className={`text-xs font-body text-destructive transition-all duration-200 pl-6.5 ${
+                privacyError
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 -translate-y-1 pointer-events-none"
+              }`}
+              role="alert"
+              aria-live="polite"
+            >
+              {privacyError || "\u00A0"}
+            </div>
           </div>
 
           {/* Submit button */}

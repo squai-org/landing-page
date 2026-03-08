@@ -20,7 +20,7 @@ const Index = () => {
   const openContact = useCallback(() => setContactOpen(true), []);
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative overflow-x-clip">
       <GradientBackground />
       <div className="relative z-10">
         <Navbar lang={lang} setLang={setLang} />
