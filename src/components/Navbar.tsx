@@ -22,50 +22,48 @@ const Navbar = ({ lang, setLang }: NavbarProps) => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[rgba(10,12,26,0.85)] backdrop-blur-xl border-b border-primary/20"
-          : "bg-[rgba(10,12,26,0.85)] backdrop-blur-xl border-b border-transparent"
+          ? "bg-[#0A0C1A]/80 backdrop-blur-md border-b border-white/5 py-4"
+          : "bg-transparent py-6"
       }`}
     >
-      <div className="container mx-auto flex items-center justify-between h-16 px-4">
-        <a href="/" className="hover:opacity-80 transition-opacity">
+      <div className="container mx-auto flex items-center justify-between px-4 md:px-8">
+        <a href="/" className="hover:opacity-80 transition-opacity flex-shrink-0">
           <SquaiLogo height={32} />
         </a>
 
-        {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-8">
+        {/* Desktop links - Animated underline style */}
+        <div className="hidden md:flex items-center gap-10">
           {links.map((label, i) => (
             <a
               key={i}
               href={`#${sections[i]}`}
-              className="text-muted-foreground hover:text-primary transition-colors duration-200 font-body text-sm font-medium"
+              className="text-muted-foreground hover:text-foreground transition-colors duration-300 font-body text-[15px] font-medium tracking-wide relative group"
             >
               {label}
+              <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-primary transition-all duration-300 group-hover:w-full"></span>
             </a>
           ))}
         </div>
 
-        <div className="flex items-center gap-3">
-          {/* Language toggle pill */}
-          <div className="flex items-center rounded-full border border-border overflow-hidden">
+        <div className="flex items-center gap-4 md:gap-6 flex-shrink-0">
+          {/* Language toggle - Minimalist text switch */}
+          <div className="hidden md:flex items-center gap-2 font-body text-sm font-semibold tracking-wider">
             <button
               onClick={() => setLang("en")}
-              className={`px-3 py-1.5 text-xs font-body font-semibold transition-all duration-200 ${
-                lang === "en"
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground"
+              className={`transition-colors duration-200 ${
+                lang === "en" ? "text-foreground" : "text-muted-foreground/50 hover:text-muted-foreground"
               }`}
             >
               EN
             </button>
+            <span className="text-white/10">|</span>
             <button
-              onClick={() => setLang("es")}
-              className={`px-3 py-1.5 text-xs font-body font-semibold transition-all duration-200 ${
-                lang === "es"
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
+               onClick={() => setLang("es")}
+               className={`transition-colors duration-200 ${
+                 lang === "es" ? "text-foreground" : "text-muted-foreground/50 hover:text-muted-foreground"
+               }`}
             >
               ES
             </button>
@@ -73,27 +71,53 @@ const Navbar = ({ lang, setLang }: NavbarProps) => {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden text-muted-foreground hover:text-foreground"
-            onClick={() => setOpen(!open)}
+             className="md:hidden text-muted-foreground hover:text-foreground transition-colors"
+             onClick={() => setOpen(!open)}
           >
-            {open ? <X size={24} /> : <Menu size={24} />}
+             {open ? <X size={26} strokeWidth={1.5} /> : <Menu size={26} strokeWidth={1.5} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile menu */}
+       {/* Ultra-minimal mobile menu dropdown */}
       {open && (
-        <div className="md:hidden bg-[rgba(10,12,26,0.95)] border-b border-border px-4 pb-4">
-          {links.map((label, i) => (
-            <a
-              key={i}
-              href={`#${sections[i]}`}
-              onClick={() => setOpen(false)}
-              className="block py-3 text-muted-foreground hover:text-primary transition-colors font-body"
-            >
-              {label}
-            </a>
-          ))}
+        <div className="absolute top-full left-0 w-full bg-[#0A0C1A]/95 backdrop-blur-xl border-b border-white/5 md:hidden shadow-2xl">
+          <div className="container mx-auto px-4 py-6 flex flex-col gap-5">
+            {links.map((label, i) => (
+              <a
+                key={i}
+                href={`#${sections[i]}`}
+                onClick={() => setOpen(false)}
+                className="text-foreground hover:text-primary transition-colors font-headline text-2xl font-semibold tracking-tight"
+              >
+                {label}
+              </a>
+            ))}
+            
+            <div className="h-px bg-white/5 my-2 w-full" />
+            
+            <div className="flex items-center gap-4">
+              <span className="text-xs uppercase tracking-widest text-muted-foreground/50 font-bold">Language</span>
+              <div className="flex items-center gap-3 font-body text-sm font-bold">
+                 <button
+                    onClick={() => { setLang("en"); setOpen(false); }}
+                    className={`transition-colors duration-200 ${
+                      lang === "en" ? "text-primary" : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    EN
+                 </button>
+                 <button
+                    onClick={() => { setLang("es"); setOpen(false); }}
+                    className={`transition-colors duration-200 ${
+                       lang === "es" ? "text-primary" : "text-muted-foreground hover:text-foreground"
+                    }`}
+                 >
+                    ES
+                 </button>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </nav>
