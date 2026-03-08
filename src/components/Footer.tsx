@@ -67,7 +67,7 @@ const Footer = ({ lang, setLang }: FooterProps) => {
           <p className="text-muted-foreground/60 font-body text-xs">{t.copyright}</p>
           <p className="text-muted-foreground/40 font-body text-xs">
             {lang === "en" ? "Illustrations by " : "Ilustraciones por "} 
-            <a href="https://storyset.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Storyset.com</a>
+            <a href="https://storyset.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors min-h-[44px] inline-flex items-center">Storyset.com</a>
           </p>
         </div>
       </div>

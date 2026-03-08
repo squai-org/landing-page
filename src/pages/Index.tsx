@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import type { Lang } from "@/lib/content";
+import SeoHead from "@/components/SeoHead";
 import Navbar from "@/components/Navbar";
 import GradientBackground from "@/components/GradientBackground";
 import HeroSection from "@/components/HeroSection";
@@ -21,6 +22,18 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative overflow-x-clip">
+      <SeoHead
+        lang={lang}
+        title={{
+          en: "Squai — AI Implementation for Growing Teams",
+          es: "Squai — Implementación de IA para Equipos en Crecimiento",
+        }}
+        description={{
+          en: "We embed with your team, map your operations, and implement AI that fits. AI implementation consultancy for startups and scaleups in Latin America.",
+          es: "Nos integramos con tu equipo, mapeamos tus operaciones e implementamos IA que funciona. Consultoría de implementación de IA para startups en Latinoamérica.",
+        }}
+        path="/"
+      />
       <GradientBackground />
       <div className="relative z-10">
         <Navbar lang={lang} setLang={setLang} />

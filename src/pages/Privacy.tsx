@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { content, type Lang } from "@/lib/content";
+import SeoHead from "@/components/SeoHead";
 import GradientBackground from "@/components/GradientBackground";
 import SquaiLogo from "@/components/SquaiLogo";
 
@@ -9,6 +10,18 @@ const Privacy = () => {
 
   return (
     <div className="min-h-screen relative overflow-x-clip">
+      <SeoHead
+        lang={lang}
+        title={{
+          en: "Privacy Policy — Squai",
+          es: "Política de Privacidad — Squai",
+        }}
+        description={{
+          en: "Read Squai's privacy policy. Learn how we collect, use, and protect your data as an AI implementation consultancy.",
+          es: "Lee la política de privacidad de Squai. Conoce cómo recopilamos, usamos y protegemos tus datos como consultoría de IA.",
+        }}
+        path="/privacy"
+      />
       <GradientBackground />
       <div className="relative z-10">
         {/* Minimal top bar */}
@@ -20,7 +33,8 @@ const Privacy = () => {
             <div className="flex items-center rounded-full border border-white/10 bg-white/5 overflow-hidden p-0.5">
               <button
                 onClick={() => setLang("en")}
-                className={`px-3 py-1 text-[10px] font-body font-bold transition-all duration-300 rounded-full ${
+                aria-label="Switch to English"
+                className={`px-4 py-2 min-h-[44px] min-w-[44px] text-xs font-body font-bold transition-all duration-300 rounded-full ${
                   lang === "en"
                     ? "bg-primary text-primary-foreground shadow-lg"
                     : "text-muted-foreground hover:text-foreground"
@@ -30,7 +44,8 @@ const Privacy = () => {
               </button>
               <button
                 onClick={() => setLang("es")}
-                className={`px-3 py-1 text-[10px] font-body font-bold transition-all duration-300 rounded-full ${
+                aria-label="Cambiar a Español"
+                className={`px-4 py-2 min-h-[44px] min-w-[44px] text-xs font-body font-bold transition-all duration-300 rounded-full ${
                   lang === "es"
                     ? "bg-primary text-primary-foreground shadow-lg"
                     : "text-muted-foreground hover:text-foreground"
@@ -68,7 +83,7 @@ const Privacy = () => {
           <div className="mt-16 pt-8 border-t border-border">
             <a
               href="/"
-              className="text-primary hover:underline font-body text-sm transition-colors"
+              className="text-primary hover:underline font-body text-sm transition-colors min-h-[44px] inline-flex items-center"
             >
               {t.backHome[lang]}
             </a>
