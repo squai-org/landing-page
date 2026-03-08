@@ -39,19 +39,11 @@ const ProblemSection = ({ lang }: { lang: Lang }) => {
   const t = content.problems;
 
   return (
-    <section className="py-24 bg-background relative overflow-hidden">
-      {/* Smoother Qovery-style easing transition from light section */}
-      <div className="absolute top-0 left-0 right-0 h-48 pointer-events-none z-10 gradient-easing-t rotate-180" />
-      
-      {/* Background glow blob for depth */}
-      <div className="glow-blob w-[500px] h-[300px] -top-24 right-0 bg-secondary/10 blur-[100px]" />
-      
-      {/* Teal glow bottom-left */}
-      <div className="glow-orb-teal w-[400px] h-[400px] -bottom-32 -left-32" />
+    <section className="py-16 relative">
 
       <div className="container mx-auto px-4 relative z-10">
         <AnimatedSection>
-          <h2 className="font-headline font-black text-3xl md:text-5xl lg:text-[56px] text-center mb-16">
+          <h2 className="font-headline font-black text-3xl md:text-5xl lg:text-[56px] text-center mb-10">
             {t.title[lang]}
           </h2>
         </AnimatedSection>

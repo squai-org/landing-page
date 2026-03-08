@@ -21,8 +21,7 @@ const ServicesSection = ({ lang }: { lang: Lang }) => {
   const t = content.services;
 
   return (
-    <section id="services" className="py-24 bg-deep relative overflow-hidden">
-      <div className="glow-orb-primary w-[500px] h-[500px] -top-40 -right-40" />
+    <section id="services" className="py-16 relative">
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.h2
@@ -30,7 +29,7 @@ const ServicesSection = ({ lang }: { lang: Lang }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="font-headline font-black text-3xl md:text-5xl lg:text-[56px] text-center mb-16"
+          className="font-headline font-black text-3xl md:text-5xl lg:text-[56px] text-center mb-10"
         >
           {t.title[lang]}
         </motion.h2>

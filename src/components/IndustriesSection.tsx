@@ -7,17 +7,14 @@ const IndustriesSection = ({ lang }: { lang: Lang }) => {
   const t = content.industries;
 
   return (
-    <section id="industries" className="py-32 bg-background border-y border-white/5 relative overflow-hidden">
+    <section id="industries" className="py-16 relative">
       <div className="w-full relative">
         
-        <h2 className="font-headline font-black text-3xl md:text-5xl lg:text-[56px] text-center mb-16 px-4">
+        <h2 className="font-headline font-black text-3xl md:text-5xl lg:text-[56px] text-center mb-10 px-4">
           {lang === "en" ? "Trusted by organizations in" : "Confiado por organizaciones en"}
         </h2>
 
         <div className="relative mx-auto flex overflow-hidden w-full">
-          {/* Fading edges */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-r from-background to-transparent z-10"></div>
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-l from-background to-transparent z-10"></div>
 
           {/* Marquee Container */}
           <div className="flex w-max animate-marquee">
@@ -31,8 +28,8 @@ const IndustriesSection = ({ lang }: { lang: Lang }) => {
                       key={i}
                       className="flex items-center gap-3 group opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-default"
                     >
-                      <Icon className="text-foreground" size={28} strokeWidth={1.5} />
-                      <span className="font-headline font-semibold text-lg md:text-2xl text-foreground whitespace-nowrap">
+                      <Icon className="text-foreground" size={36} strokeWidth={1.5} />
+                      <span className="font-headline font-semibold text-xl md:text-3xl text-foreground whitespace-nowrap">
                         {item}
                       </span>
                     </div>

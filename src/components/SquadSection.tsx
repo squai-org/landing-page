@@ -54,8 +54,7 @@ const SquadSection = ({ lang }: { lang: Lang }) => {
   const t = content.squad;
 
   return (
-    <section id="squad" className="py-24 bg-deep relative overflow-hidden">
-      <div className="glow-orb-gold w-[400px] h-[400px] -top-32 -right-32" />
+    <section id="squad" className="py-16 relative">
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -67,7 +66,7 @@ const SquadSection = ({ lang }: { lang: Lang }) => {
           <h2 className="font-headline font-black text-3xl md:text-5xl lg:text-[56px] text-center mb-4">
             {t.title[lang]}
           </h2>
-          <p className="text-muted-foreground font-body text-lg text-center max-w-2xl mx-auto mb-16">
+          <p className="text-muted-foreground font-body text-lg text-center max-w-2xl mx-auto mb-10">
             {t.sub[lang]}
           </p>
         </motion.div>

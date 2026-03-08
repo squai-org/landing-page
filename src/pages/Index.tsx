@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Lang } from "@/lib/content";
 import Navbar from "@/components/Navbar";
+import GradientBackground from "@/components/GradientBackground";
 import HeroSection from "@/components/HeroSection";
 import ProblemSection from "@/components/ProblemSection";
 import ServicesSection from "@/components/ServicesSection";
@@ -15,17 +16,20 @@ const Index = () => {
   const [lang, setLang] = useState<Lang>("en");
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar lang={lang} setLang={setLang} />
-      <HeroSection lang={lang} />
-      <ProblemSection lang={lang} />
-      <ServicesSection lang={lang} />
-      <SquadSection lang={lang} />
-      <HowItWorksSection lang={lang} />
-      <IndustriesSection lang={lang} />
-      <WhySquaiSection lang={lang} />
-      <CtaSection lang={lang} />
-      <Footer lang={lang} setLang={setLang} />
+    <div className="min-h-screen relative">
+      <GradientBackground />
+      <div className="relative z-10">
+        <Navbar lang={lang} setLang={setLang} />
+        <HeroSection lang={lang} />
+        <ProblemSection lang={lang} />
+        <ServicesSection lang={lang} />
+        <SquadSection lang={lang} />
+        <HowItWorksSection lang={lang} />
+        <IndustriesSection lang={lang} />
+        <WhySquaiSection lang={lang} />
+        <CtaSection lang={lang} />
+        <Footer lang={lang} setLang={setLang} />
+      </div>
     </div>
   );
 };

@@ -15,10 +15,10 @@ const WhySquaiSection = ({ lang }: { lang: Lang }) => {
   const t = content.whySquai;
 
   return (
-    <section className="py-24 bg-surface">
+    <section className="py-16 relative">
       <div className="container mx-auto px-4">
         <AnimatedSection>
-          <h2 className="font-headline font-black text-3xl md:text-5xl lg:text-[56px] text-center mb-16">
+          <h2 className="font-headline font-black text-3xl md:text-5xl lg:text-[56px] text-center mb-10">
             {t.title[lang]}
           </h2>
         </AnimatedSection>

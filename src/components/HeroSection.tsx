@@ -32,16 +32,7 @@ const HeroSection = ({ lang }: { lang: Lang }) => {
   const words = headline.split(" ");
 
   return (
-    <section className="relative pt-32 pb-24 overflow-hidden bg-surface-light">
-      {/* Background decoration */}
-      <div className="absolute inset-0 dot-grid opacity-[0.2]" />
-      <div className="absolute inset-0 glow-radial opacity-30" />
-      
-      {/* Smoother Qovery-style easing transition to dark section */}
-      <div className="absolute bottom-0 left-0 right-0 h-64 pointer-events-none z-10 gradient-easing-b" />
-      
-      {/* Background glow blob at transition */}
-      <div className="glow-blob w-[600px] h-[400px] -bottom-48 left-1/2 -translate-x-1/2 bg-primary/20 blur-[120px]" />
+    <section className="relative min-h-screen flex flex-col justify-center pt-20 pb-16">
 
       <div className="container mx-auto px-4 relative z-10 max-w-6xl">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
@@ -97,7 +88,7 @@ const HeroSection = ({ lang }: { lang: Lang }) => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="hidden lg:flex flex-shrink-0 w-[450px] h-[450px] items-center justify-center p-0"
+            className="hidden lg:flex flex-1 items-center justify-center p-0"
           >
             <img src="/illustrations/Creative team-cuate.svg" alt="" className="w-full h-full object-contain" />
           </motion.div>

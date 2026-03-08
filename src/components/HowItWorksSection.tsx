@@ -74,14 +74,14 @@ const HowItWorksSection = ({ lang }: { lang: Lang }) => {
   ];
 
   return (
-    <section id="how-it-works" className="py-24 bg-surface relative overflow-hidden">
+    <section id="how-it-works" className="py-16 relative">
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16 md:mb-24"
+          className="text-center mb-10 md:mb-16"
         >
           <h2 className="font-headline font-black text-4xl md:text-5xl lg:text-6xl mb-6">
             {t.title[lang]}

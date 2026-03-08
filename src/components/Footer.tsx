@@ -10,7 +10,7 @@ const Footer = ({ lang, setLang }: FooterProps) => {
   const t = content.footer;
 
   return (
-    <footer className="bg-surface relative overflow-hidden">
+    <footer id="contact" className="relative">
       {/* Gradient top border */}
       <div className="h-[3px] gradient-bar" />
 
