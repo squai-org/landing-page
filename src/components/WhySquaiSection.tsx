@@ -75,7 +75,7 @@ const WhySquaiSection = ({ lang }: { lang: Lang }) => {
 
   return (
     <section className="relative">
-      <div className="container mx-auto px-5 sm:px-6">
+      <div className="container mx-auto px-4">
         <div className="hidden md:block pt-16">
           <h2 className="font-headline font-black text-3xl md:text-5xl lg:text-[56px] text-center w-full mb-8 text-white">
             {t.title[lang]}
@@ -86,7 +86,7 @@ const WhySquaiSection = ({ lang }: { lang: Lang }) => {
         <div className="hidden md:flex gap-4 items-start">
           {/* LEFT: Sticky Image Panel */}
           <div className="flex-1 sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-            <div className="relative flex items-center justify-center w-full max-w-md lg:max-w-3xl">
+            <div className="relative flex items-center justify-center w-full max-w-3xl">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={activeId}
@@ -137,7 +137,7 @@ const WhySquaiSection = ({ lang }: { lang: Lang }) => {
                 <div 
                   key={ids[i]} 
                   id={ids[i]} 
-                  className="min-h-screen flex flex-col justify-center items-start px-4 md:px-8 lg:px-16"
+                  className="min-h-screen flex flex-col justify-center items-start px-8 md:px-16"
                 >
                   <div className="flex flex-col gap-3">
                     <motion.h3
@@ -164,19 +164,19 @@ const WhySquaiSection = ({ lang }: { lang: Lang }) => {
         </div>
 
         {/* MOBILE FALLBACK: Vertical Stacked Cards */}
-        <div className="md:hidden py-10 sm:py-16">
+        <div className="md:hidden py-16">
           <AnimatedSection>
-            <h2 className="font-headline font-black text-[1.75rem] sm:text-3xl text-center mb-8 sm:mb-10 text-white px-2">
+            <h2 className="font-headline font-black text-3xl text-center mb-10 text-white">
               {t.title[lang]}
             </h2>
           </AnimatedSection>
-          <div className="grid gap-5 sm:gap-8">
+          <div className="grid gap-8">
             {t.items.map((item, i) => {
               const Icon = icons[i];
               return (
                 <AnimatedSection key={i} delay={i * 0.1}>
-                  <div className="bg-[#12152A] rounded-2xl overflow-hidden border border-[rgba(124,140,255,0.15)] p-5 sm:p-6 md:p-8 flex flex-col">
-                    <div className="w-full h-44 sm:h-56 flex items-center justify-center p-2 mb-4 sm:mb-6 rounded-xl overflow-hidden relative">
+                  <div className="bg-[#12152A] rounded-2xl overflow-hidden border border-[rgba(124,140,255,0.15)] p-6 md:p-8 flex flex-col">
+                    <div className="w-full h-56 flex items-center justify-center p-2 mb-6 rounded-xl overflow-hidden relative">
                       <img 
                         src={illustrations[i]} 
                         alt="" 
@@ -184,11 +184,11 @@ const WhySquaiSection = ({ lang }: { lang: Lang }) => {
                       />
                       <div className="absolute inset-0 bg-primary/5 rounded-full blur-3xl" />
                     </div>
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 sm:mb-5">
-                      <Icon className="text-primary" size={22} />
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-5">
+                      <Icon className="text-primary" size={24} />
                     </div>
-                    <h3 className="font-headline font-extrabold text-lg sm:text-xl mb-2 sm:mb-3 text-white">{item.title[lang]}</h3>
-                    <p className="text-muted-foreground font-body text-sm sm:text-base leading-relaxed">
+                    <h3 className="font-headline font-extrabold text-xl mb-3 text-white">{item.title[lang]}</h3>
+                    <p className="text-muted-foreground font-body text-base leading-relaxed">
                       {item.desc[lang]}
                     </p>
                   </div>
