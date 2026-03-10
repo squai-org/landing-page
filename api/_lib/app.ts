@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import { scheduleRoute } from "./schedule";
+import { scheduleRoute } from "./schedule.js";
 
 const app = new Hono();
 
