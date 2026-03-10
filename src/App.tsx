@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 
 const Privacy = lazy(() => import("./pages/Privacy"));
@@ -22,8 +22,13 @@ const App = () => (
           v7_relativeSplatPath: true,
         }}>
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/privacy" element={<Suspense fallback={null}><Privacy /></Suspense>} />
+          {/* Redirect bare / to /en */}
+          <Route path="/" element={<Navigate to="/en" replace />} />
+          <Route path="/privacy" element={<Navigate to="/en/privacy" replace />} />
+
+          {/* Language-prefixed routes */}
+          <Route path="/:lang" element={<Index />} />
+          <Route path="/:lang/privacy" element={<Suspense fallback={null}><Privacy /></Suspense>} />
           <Route path="*" element={<Suspense fallback={null}><NotFound /></Suspense>} />
         </Routes>
       </BrowserRouter>

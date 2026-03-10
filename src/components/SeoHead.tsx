@@ -23,7 +23,9 @@ const structuredData = {
 };
 
 const SeoHead = ({ lang, title, description, path }: SeoHeadProps) => {
-  const canonical = `${SITE_URL}${path}`;
+  const canonical = `${SITE_URL}/${lang}${path === "/" ? "" : path}`;
+  const altLang = lang === "en" ? "es" : "en";
+  const altCanonical = `${SITE_URL}/${altLang}${path === "/" ? "" : path}`;
 
   return (
     <Helmet>
@@ -31,6 +33,9 @@ const SeoHead = ({ lang, title, description, path }: SeoHeadProps) => {
       <title>{title[lang]}</title>
       <meta name="description" content={description[lang]} />
       <link rel="canonical" href={canonical} />
+      <link rel="alternate" hrefLang={lang} href={canonical} />
+      <link rel="alternate" hrefLang={altLang} href={altCanonical} />
+      <link rel="alternate" hrefLang="x-default" href={`${SITE_URL}/en${path === "/" ? "" : path}`} />
 
       {/* Open Graph */}
       <meta property="og:title" content={title[lang]} />

@@ -15,8 +15,12 @@ dist
 dist-ssr
 
 # Environment variables
+.env
 .env.local
 .env.*.local
+
+# Service account credentials
+service-account*.json
 
 # Editor directories and files
 .vscode/*

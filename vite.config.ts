@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => ({
     securityHeadersPlugin(),
     Sitemap({
       hostname: "https://heysquai.vercel.app",
-      dynamicRoutes: ["/privacy"],
+      dynamicRoutes: ["/en", "/es", "/en/privacy", "/es/privacy"],
       exclude: ["/404"],
       outDir: "./dist",
     }),

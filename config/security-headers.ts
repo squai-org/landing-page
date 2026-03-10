@@ -28,7 +28,7 @@ const CSP = [
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: https://storage.googleapis.com",
-  "connect-src 'self'",
+  `connect-src 'self' ${process.env.VITE_API_URL ?? ''}`.trim(),
   "frame-ancestors 'none'",
   "object-src 'none'",
   "base-uri 'self'",
