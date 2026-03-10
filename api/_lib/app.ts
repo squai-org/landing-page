@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import { scheduleRoute } from "./schedule.js";
+import { scheduleRoute } from "./schedule";
 
 const app = new Hono();
 
@@ -67,5 +67,11 @@ if (!process.env.VERCEL) {
 app.route("/api", scheduleRoute);
 
 app.get("/health", (c) => c.json({ status: "ok" }));
+
+// Global error handler — ensures Vercel always gets a response
+app.onError((err, c) => {
+  console.error("Unhandled error:", err);
+  return c.json({ error: "server_error" }, 500);
+});
 
 export default app;

@@ -107,6 +107,12 @@ function getCalendarClient() {
   const credentials = keyPath
     ? JSON.parse(readFileSync(resolve(keyPath), "utf-8"))
     : JSON.parse(keyJson!);
+
+  // Vercel env vars may store \n as literal two-char sequences;
+  // the Google Auth SDK requires actual newline characters in the PEM key.
+  if (typeof credentials.private_key === "string") {
+    credentials.private_key = credentials.private_key.replace(/\\n/g, "\n");
+  }
   const auth = new google.auth.GoogleAuth({
     credentials,
     scopes: ["https://www.googleapis.com/auth/calendar"],
