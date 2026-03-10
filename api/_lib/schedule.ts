@@ -100,13 +100,23 @@ function getCalendarClient() {
   const keyPath = process.env.GOOGLE_SERVICE_ACCOUNT_KEY_FILE;
   const keyJson = process.env.GOOGLE_SERVICE_ACCOUNT_KEY;
 
+  console.log("[calendar] keyPath:", keyPath ? "set" : "unset", "| keyJson length:", keyJson?.length ?? 0);
+
   if (!keyPath && !keyJson) {
     throw new Error("Set GOOGLE_SERVICE_ACCOUNT_KEY_FILE or GOOGLE_SERVICE_ACCOUNT_KEY");
   }
 
-  const credentials = keyPath
-    ? JSON.parse(readFileSync(resolve(keyPath), "utf-8"))
-    : JSON.parse(keyJson!);
+  let credentials: Record<string, unknown>;
+  try {
+    credentials = keyPath
+      ? JSON.parse(readFileSync(resolve(keyPath), "utf-8"))
+      : JSON.parse(keyJson!);
+  } catch (e) {
+    throw new Error(`Failed to parse service account JSON: ${e instanceof Error ? e.message : e}`);
+  }
+
+  console.log("[calendar] client_email:", credentials.client_email);
+  console.log("[calendar] private_key starts with:", typeof credentials.private_key === "string" ? credentials.private_key.slice(0, 30) : "NOT A STRING");
 
   // Vercel env vars may store \n as literal two-char sequences;
   // the Google Auth SDK requires actual newline characters in the PEM key.
@@ -209,6 +219,7 @@ scheduleRoute.post("/schedule", async (c) => {
 const BOGOTA_OFFSET = "-05:00"; // Colombia has no DST
 
 scheduleRoute.get("/availability", async (c) => {
+  console.log("[availability] Handler called", c.req.url);
   const from = c.req.query("from");
   const to = c.req.query("to");
 
@@ -228,8 +239,10 @@ scheduleRoute.get("/availability", async (c) => {
   }
 
   try {
+    console.log("[availability] Building calendar client...");
     const calendar = getCalendarClient();
     const calendarId = getCalendarId();
+    console.log("[availability] Calling freebusy.query...");
 
     const freebusyRes = await calendar.freebusy.query({
       requestBody: {
@@ -239,6 +252,7 @@ scheduleRoute.get("/availability", async (c) => {
         items: [{ id: calendarId }],
       },
     });
+    console.log("[availability] freebusy.query completed");
 
     const periods = freebusyRes.data.calendars?.[calendarId]?.busy ?? [];
     const slotMs = SLOT_DURATION_MIN * 60_000;
@@ -266,8 +280,8 @@ scheduleRoute.get("/availability", async (c) => {
     }
 
     return c.json({ busy });
-  } catch (err) {
-    console.error("Failed to fetch availability:", err);
+  } catch (err: unknown) {
+    console.error("[availability] Error:", err instanceof Error ? err.message : err);
     return c.json({ error: "server_error" }, 500);
   }
 });

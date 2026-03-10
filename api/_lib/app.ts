@@ -68,6 +68,9 @@ app.route("/api", scheduleRoute);
 
 app.get("/health", (c) => c.json({ status: "ok" }));
 
+// Also mount health under /api so it's reachable via Vercel rewrite
+app.get("/api/health", (c) => c.json({ status: "ok" }));
+
 // Global error handler — ensures Vercel always gets a response
 app.onError((err, c) => {
   console.error("Unhandled error:", err);
