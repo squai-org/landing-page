@@ -30,7 +30,7 @@ const Footer = ({ lang, setLang, onOpenContact }: FooterProps) => {
             <div className="flex items-center gap-6 flex-wrap">
               {t.links[lang].map((label, i) => (
                 <a
-                  key={i}
+                  key={t.sections[i]}
                   href={`#${t.sections[i]}`}
                   className="text-muted-foreground hover:text-primary transition-colors duration-200 font-body text-sm min-h-[44px] inline-flex items-center"
                 >

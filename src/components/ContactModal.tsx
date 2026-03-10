@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, Fragment } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { content, type Lang } from "@/lib/content";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -99,7 +99,10 @@ const ContactModal = ({ open, onOpenChange, lang }: ContactModalProps) => {
       const res = await fetch(`${API_URL}/api/availability?from=${from}&to=${to}`);
       if (res.ok) {
         const data = await res.json();
-        setBusySlots((prev) => ({ ...prev, ...(data.busy ?? {}) }));
+        setBusySlots((prev) => {
+          const busy = data.busy;
+          return busy ? { ...prev, ...busy } : prev;
+        });
       }
     } catch {
       // Fetch failed — slots appear available; server validates on booking
@@ -178,7 +181,7 @@ const ContactModal = ({ open, onOpenChange, lang }: ContactModalProps) => {
         }),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
 
       if (!res.ok) {
         if (data.error === "slot_taken") {
@@ -216,6 +219,19 @@ const ContactModal = ({ open, onOpenChange, lang }: ContactModalProps) => {
 
   const renderStepper = () => {
     if (step === "success") return null;
+
+    const getCircleCls = (done: boolean, active: boolean) => {
+      if (done) return "bg-primary text-primary-foreground";
+      if (active) return "bg-primary text-primary-foreground ring-[3px] ring-primary/20";
+      return "bg-white/10 text-muted-foreground";
+    };
+
+    const getLabelCls = (done: boolean, active: boolean) => {
+      if (active) return "text-foreground";
+      if (done) return "text-primary/80";
+      return "text-muted-foreground/60";
+    };
+
     return (
       <nav aria-label={t.formProgress[lang]} className="mb-5">
         <ol className="flex items-start w-full">
@@ -223,19 +239,13 @@ const ContactModal = ({ open, onOpenChange, lang }: ContactModalProps) => {
             const done = i < currentIdx;
             const active = i === currentIdx;
             return (
-              <li key={i} aria-current={active ? "step" : undefined}
+              <li key={s.label} aria-current={active ? "step" : undefined}
                 className={`flex items-start ${i < stepInfo.length - 1 ? "flex-1" : ""}`}>
                 <div className="flex flex-col items-center gap-1 min-w-[3rem]">
-                  <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 transition-all duration-300 ${
-                    done ? "bg-primary text-primary-foreground" :
-                    active ? "bg-primary text-primary-foreground ring-[3px] ring-primary/20" :
-                    "bg-white/10 text-muted-foreground"
-                  }`}>
+                  <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 transition-all duration-300 ${getCircleCls(done, active)}`}>
                     {done ? <Check className="h-3.5 w-3.5" aria-hidden="true" /> : i + 1}
                   </div>
-                  <span className={`text-[10px] font-body font-semibold whitespace-nowrap transition-colors duration-300 ${
-                    active ? "text-foreground" : done ? "text-primary/80" : "text-muted-foreground/60"
-                  }`}>
+                  <span className={`text-[10px] font-body font-semibold whitespace-nowrap transition-colors duration-300 ${getLabelCls(done, active)}`}>
                     {s.label}
                   </span>
                 </div>
@@ -264,10 +274,7 @@ const ContactModal = ({ open, onOpenChange, lang }: ContactModalProps) => {
           <div className="rounded-full bg-primary/10 p-4">
             <CheckCircle2 className="h-10 w-10 text-primary" aria-hidden="true" />
           </div>
-          <h3 className="font-headline font-bold text-xl text-foreground">
-            {t.successTitle[lang]}
-          </h3>
-          <p className="text-muted-foreground font-body text-sm max-w-xs">
+          <p className="text-muted-foreground font-body text-xl font-bold max-w-xs">
             {t.successMessage[lang]}
           </p>
           <Button variant="hero" onClick={() => onOpenChange(false)} className="mt-2">
@@ -510,11 +517,23 @@ const ContactModal = ({ open, onOpenChange, lang }: ContactModalProps) => {
           </DialogHeader>
         </div>
 
-        <div className="px-6 pb-6 pt-2 min-h-[24rem] sm:min-h-[26rem]" role="group"
-          aria-label={step !== "success" ? stepInfo[STEP_INDEX[step]].desc : t.bookingConfirmed[lang]}>
+        <fieldset className="px-6 pb-6 pt-2 min-h-[24rem] sm:min-h-[26rem] relative border-0 p-0 m-0"
+          aria-label={step === "success" ? t.bookingConfirmed[lang] : stepInfo[STEP_INDEX[step]].desc}>
+
+          {(loadingSlots || scheduling) && (
+            <div className="absolute inset-0 z-20 flex items-center justify-center bg-card/80 backdrop-blur-sm rounded-b-lg">
+              <div className="flex flex-col items-center gap-3">
+                <Loader2 className="h-6 w-6 animate-spin text-primary" aria-hidden="true" />
+                <span className="text-sm font-body text-muted-foreground">
+                  {scheduling ? t.scheduling[lang] : t.loadingAvailability[lang]}
+                </span>
+              </div>
+            </div>
+          )}
+
           {renderStepper()}
           {renderContent()}
-        </div>
+        </fieldset>
       </DialogContent>
     </Dialog>
   );

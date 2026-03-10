@@ -2,14 +2,14 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useCallback } from "react";
 import type { Lang } from "@/lib/content";
 
-const SUPPORTED_LANGS: Lang[] = ["en", "es"];
+const SUPPORTED_LANGS = new Set<Lang>(["en", "es"]);
 
 export function useLang() {
   const { lang } = useParams<{ lang: string }>();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const currentLang: Lang = SUPPORTED_LANGS.includes(lang as Lang)
+  const currentLang: Lang = SUPPORTED_LANGS.has(lang as Lang)
     ? (lang as Lang)
     : "en";
 

@@ -38,7 +38,7 @@ const Navbar = ({ lang, setLang }: NavbarProps) => {
         <div className="hidden md:flex items-center gap-10">
           {links.map((label, i) => (
             <a
-              key={i}
+              key={sections[i]}
               href={`#${sections[i]}`}
               className="text-muted-foreground hover:text-foreground transition-colors duration-300 font-body text-[15px] font-medium tracking-wide relative group min-h-[44px] flex items-center"
             >
@@ -96,7 +96,7 @@ const Navbar = ({ lang, setLang }: NavbarProps) => {
             <div className="container mx-auto px-5 sm:px-6 py-6 sm:py-8 flex flex-col gap-5 sm:gap-6">
               {links.map((label, i) => (
                 <motion.a
-                  key={i}
+                  key={sections[i]}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05 + 0.1 }}

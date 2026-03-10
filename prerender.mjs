@@ -87,7 +87,9 @@ async function prerender() {
   console.log("[prerender] Done ✓");
 }
 
-prerender().catch((err) => {
+try {
+  await prerender();
+} catch (err) {
   console.error("[prerender] Fatal:", err);
   process.exit(1);
-});
+}

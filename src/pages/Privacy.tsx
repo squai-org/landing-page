@@ -67,8 +67,8 @@ const Privacy = () => {
           </p>
 
           <div className="space-y-10">
-            {t.sections.map((section, i) => (
-              <section key={i}>
+            {t.sections.map((section) => (
+              <section key={section.heading.en}>
                 <h2 className="font-headline font-extrabold text-xl text-white mb-3">
                   {section.heading[lang]}
                 </h2>

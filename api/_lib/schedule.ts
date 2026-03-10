@@ -14,7 +14,7 @@ const TIME_RANGES = [
 ];
 
 // Days of week: 1=Monday ... 5=Friday
-const VALID_DAYS = [1, 2, 3, 4, 5];
+const VALID_DAYS = new Set([1, 2, 3, 4, 5]);
 
 // All bookable 30-min slots (derived from TIME_RANGES)
 const ALL_SLOTS: string[] = [];
@@ -32,7 +32,7 @@ const HTML_TAG_RE = /<[^>]*>/g;
 
 /** Strip HTML tags to prevent injection into calendar event fields */
 function sanitize(str: string): string {
-  return str.replace(HTML_TAG_RE, "").trim();
+  return str.replaceAll(HTML_TAG_RE, "").trim();
 }
 
 interface ScheduleBody {
@@ -45,62 +45,71 @@ interface ScheduleBody {
   lang?: "en" | "es";
 }
 
-function validateBody(body: unknown): { data?: ScheduleBody; error?: string } {
-  if (!body || typeof body !== "object") return { error: "Invalid request body" };
+function extractFields(body: Record<string, unknown>) {
+  return {
+    name: typeof body.name === "string" ? sanitize(body.name) : "",
+    company: typeof body.company === "string" ? sanitize(body.company) : "",
+    email: typeof body.email === "string" ? body.email.trim() : "",
+    description: typeof body.description === "string" ? sanitize(body.description) : "",
+    date: typeof body.date === "string" ? body.date.trim() : "",
+    time: typeof body.time === "string" ? body.time.trim() : "",
+    lang: body.lang === "es" ? ("es" as const) : ("en" as const),
+  };
+}
 
-  const b = body as Record<string, unknown>;
+function validateFields(f: ReturnType<typeof extractFields>): string | null {
+  if (!f.name) return "Name is required";
+  if (f.name.length > 200) return "Name too long";
+  if (!f.company) return "Company is required";
+  if (f.company.length > 200) return "Company too long";
+  if (!f.email || !EMAIL_RE.test(f.email)) return "Valid email is required";
+  if (f.description.length > 2000) return "Description too long";
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(f.date)) return "Invalid date format (YYYY-MM-DD)";
+  if (!/^\d{2}:\d{2}$/.test(f.time)) return "Invalid time format (HH:mm)";
+  return null;
+}
 
-  const name = typeof b.name === "string" ? sanitize(b.name) : "";
-  const company = typeof b.company === "string" ? sanitize(b.company) : "";
-  const email = typeof b.email === "string" ? b.email.trim() : "";
-  const description = typeof b.description === "string" ? sanitize(b.description) : "";
-  const date = typeof b.date === "string" ? b.date.trim() : "";
-  const time = typeof b.time === "string" ? b.time.trim() : "";
-  const lang = b.lang === "es" ? "es" : "en";
-
-  if (!name) return { error: "Name is required" };
-  if (name.length > 200) return { error: "Name too long" };
-  if (!company) return { error: "Company is required" };
-  if (company.length > 200) return { error: "Company too long" };
-  if (!email || !EMAIL_RE.test(email)) return { error: "Valid email is required" };
-  if (description.length > 2000) return { error: "Description too long" };
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return { error: "Invalid date format (YYYY-MM-DD)" };
-  if (!/^\d{2}:\d{2}$/.test(time)) return { error: "Invalid time format (HH:mm)" };
-
-  // Validate the date is a valid weekday
+function validateDateAndTime(date: string, time: string): string | null {
   const dateObj = new Date(`${date}T12:00:00`);
-  if (isNaN(dateObj.getTime())) return { error: "Invalid date" };
+  if (Number.isNaN(dateObj.getTime())) return "Invalid date";
   const dayOfWeek = dateObj.getUTCDay(); // 0=Sun, 1=Mon ... 6=Sat
-  // Convert to ISO day (1=Mon ... 7=Sun)
   const isoDay = dayOfWeek === 0 ? 7 : dayOfWeek;
-  if (!VALID_DAYS.includes(isoDay)) return { error: "Only weekdays are available" };
+  if (!VALID_DAYS.has(isoDay)) return "Only weekdays are available";
 
-  // Validate the date is not in the past
-  const now = new Date();
-  const todayStr = now.toLocaleDateString("en-CA", { timeZone: TIMEZONE }); // YYYY-MM-DD
-  if (date < todayStr) return { error: "Cannot schedule in the past" };
+  const todayStr = new Date().toLocaleDateString("en-CA", { timeZone: TIMEZONE });
+  if (date < todayStr) return "Cannot schedule in the past";
 
-  // Validate the time slot
   const [hourStr, minStr] = time.split(":");
-  const hour = parseInt(hourStr, 10);
-  const min = parseInt(minStr, 10);
-  if (min % SLOT_DURATION_MIN !== 0) return { error: "Invalid time slot" };
+  const hour = Number.parseInt(hourStr, 10);
+  const min = Number.parseInt(minStr, 10);
+  if (min % SLOT_DURATION_MIN !== 0) return "Invalid time slot";
 
   const totalMinutes = hour * 60 + min;
   const isValidSlot = TIME_RANGES.some(
     (r) => totalMinutes >= r.startHour * 60 && totalMinutes + SLOT_DURATION_MIN <= r.endHour * 60,
   );
-  if (!isValidSlot) return { error: "Time slot is outside available hours" };
+  if (!isValidSlot) return "Time slot is outside available hours";
 
-  return { data: { name, company, email, description, date, time, lang } };
+  return null;
+}
+
+function validateBody(body: unknown): { data?: ScheduleBody; error?: string } {
+  if (!body || typeof body !== "object") return { error: "Invalid request body" };
+
+  const f = extractFields(body as Record<string, unknown>);
+  const fieldError = validateFields(f);
+  if (fieldError) return { error: fieldError };
+
+  const dateTimeError = validateDateAndTime(f.date, f.time);
+  if (dateTimeError) return { error: dateTimeError };
+
+  return { data: { name: f.name, company: f.company, email: f.email, description: f.description, date: f.date, time: f.time, lang: f.lang } };
 }
 
 // ─── Google Calendar client ─────────────────────────────────────────────
 function getCalendarClient() {
   const keyPath = process.env.GOOGLE_SERVICE_ACCOUNT_KEY_FILE;
   const keyJson = process.env.GOOGLE_SERVICE_ACCOUNT_KEY;
-
-  console.log("[calendar] keyPath:", keyPath ? "set" : "unset", "| keyJson length:", keyJson?.length ?? 0);
 
   if (!keyPath && !keyJson) {
     throw new Error("Set GOOGLE_SERVICE_ACCOUNT_KEY_FILE or GOOGLE_SERVICE_ACCOUNT_KEY");
@@ -115,13 +124,14 @@ function getCalendarClient() {
     throw new Error(`Failed to parse service account JSON: ${e instanceof Error ? e.message : e}`);
   }
 
-  console.log("[calendar] client_email:", credentials.client_email);
-  console.log("[calendar] private_key starts with:", typeof credentials.private_key === "string" ? credentials.private_key.slice(0, 30) : "NOT A STRING");
-
   // Vercel env vars may store \n as literal two-char sequences;
   // the Google Auth SDK requires actual newline characters in the PEM key.
   if (typeof credentials.private_key === "string") {
-    credentials.private_key = credentials.private_key.replace(/\\n/g, "\n");
+    credentials.private_key = credentials.private_key.replaceAll(
+      String.raw`\n`,
+      String.raw`
+`,
+    );
   }
   const auth = new google.auth.GoogleAuth({
     credentials,
@@ -141,21 +151,14 @@ function getCalendarId(): string {
 export const scheduleRoute = new Hono();
 
 scheduleRoute.post("/schedule", async (c) => {
-  console.log("[schedule] Handler called");
-  const body = await c.req.json().catch((e: unknown) => {
-    console.error("[schedule] Failed to parse body:", e);
-    return null;
-  });
-  console.log("[schedule] Body parsed:", body ? "ok" : "null");
+  const body = await c.req.json().catch(() => null);
   const { data, error } = validateBody(body);
 
   if (error || !data) {
-    console.log("[schedule] Validation failed:", error);
     return c.json({ error: "validation", message: error }, 400);
   }
 
   try {
-    console.log("[schedule] Building calendar client...");
     const calendar = getCalendarClient();
     const calendarId = getCalendarId();
 
@@ -169,7 +172,6 @@ scheduleRoute.post("/schedule", async (c) => {
     const endDateTime = `${data.date}T${endTime}:00`;
 
     // Check if the slot is free
-    console.log("[schedule] Checking freebusy...");
     const busyCheck = await calendar.freebusy.query({
       requestBody: {
         timeMin: new Date(`${startDateTime}-05:00`).toISOString(),
@@ -178,7 +180,6 @@ scheduleRoute.post("/schedule", async (c) => {
         items: [{ id: calendarId }],
       },
     });
-    console.log("[schedule] Freebusy done");
 
     const busy = busyCheck.data.calendars?.[calendarId]?.busy ?? [];
     if (busy.length > 0) {
@@ -186,7 +187,6 @@ scheduleRoute.post("/schedule", async (c) => {
     }
 
     // Create the event
-    console.log("[schedule] Creating event...");
     const summary =
       data.lang === "es"
         ? `Llamada de Descubrimiento — ${data.name} (${data.company})`
@@ -201,7 +201,7 @@ scheduleRoute.post("/schedule", async (c) => {
       .filter(Boolean)
       .join("\n");
 
-    const event = await calendar.events.insert({
+    await calendar.events.insert({
       calendarId,
       requestBody: {
         summary,
@@ -218,8 +218,7 @@ scheduleRoute.post("/schedule", async (c) => {
       },
     });
 
-    console.log("[schedule] Event created:", event.data.id);
-    return c.json({ success: true, eventId: event.data.id });
+    return c.json({ success: true });
   } catch (err: unknown) {
     console.error("[schedule] Error:", err instanceof Error ? err.message : err);
     return c.json({ error: "server_error" }, 500);
@@ -229,8 +228,48 @@ scheduleRoute.post("/schedule", async (c) => {
 // ─── Availability ───────────────────────────────────────────────────────
 const BOGOTA_OFFSET = "-05:00"; // Colombia has no DST
 
+interface BusyPeriod {
+  start?: string | null;
+  end?: string | null;
+}
+
+function isSlotTaken(slotStartMs: number, slotEndMs: number, periods: BusyPeriod[]): boolean {
+  return periods.some((p) => {
+    if (!p.start || !p.end) return false;
+    return slotStartMs < new Date(p.end).getTime() && slotEndMs > new Date(p.start).getTime();
+  });
+}
+
+function computeBusySlots(
+  from: string,
+  to: string,
+  periods: BusyPeriod[],
+): Record<string, string[]> {
+  const slotMs = SLOT_DURATION_MIN * 60_000;
+  const busy: Record<string, string[]> = {};
+
+  let cursor = from;
+  while (cursor <= to) {
+    const dow = new Date(`${cursor}T12:00:00${BOGOTA_OFFSET}`).getUTCDay();
+    if (dow !== 0 && dow !== 6) {
+      const dayBusy: string[] = [];
+      for (const slot of ALL_SLOTS) {
+        const slotStartMs = Date.parse(`${cursor}T${slot}:00${BOGOTA_OFFSET}`);
+        if (isSlotTaken(slotStartMs, slotStartMs + slotMs, periods)) {
+          dayBusy.push(slot);
+        }
+      }
+      if (dayBusy.length > 0) busy[cursor] = dayBusy;
+    }
+    const next = new Date(`${cursor}T12:00:00Z`);
+    next.setUTCDate(next.getUTCDate() + 1);
+    cursor = next.toISOString().slice(0, 10);
+  }
+
+  return busy;
+}
+
 scheduleRoute.get("/availability", async (c) => {
-  console.log("[availability] Handler called", c.req.url);
   const from = c.req.query("from");
   const to = c.req.query("to");
 
@@ -241,7 +280,7 @@ scheduleRoute.get("/availability", async (c) => {
   const fromMs = Date.parse(`${from}T00:00:00${BOGOTA_OFFSET}`);
   const toMs = Date.parse(`${to}T23:59:59${BOGOTA_OFFSET}`);
 
-  if (isNaN(fromMs) || isNaN(toMs) || from > to) {
+  if (Number.isNaN(fromMs) || Number.isNaN(toMs) || from > to) {
     return c.json({ error: "validation", message: "Invalid date range" }, 400);
   }
 
@@ -250,10 +289,8 @@ scheduleRoute.get("/availability", async (c) => {
   }
 
   try {
-    console.log("[availability] Building calendar client...");
     const calendar = getCalendarClient();
     const calendarId = getCalendarId();
-    console.log("[availability] Calling freebusy.query...");
 
     const freebusyRes = await calendar.freebusy.query({
       requestBody: {
@@ -263,32 +300,9 @@ scheduleRoute.get("/availability", async (c) => {
         items: [{ id: calendarId }],
       },
     });
-    console.log("[availability] freebusy.query completed");
 
     const periods = freebusyRes.data.calendars?.[calendarId]?.busy ?? [];
-    const slotMs = SLOT_DURATION_MIN * 60_000;
-    const busy: Record<string, string[]> = {};
-
-    let cursor = from;
-    while (cursor <= to) {
-      const dow = new Date(`${cursor}T12:00:00${BOGOTA_OFFSET}`).getUTCDay();
-      if (dow !== 0 && dow !== 6) {
-        const dayBusy: string[] = [];
-        for (const slot of ALL_SLOTS) {
-          const slotStartMs = Date.parse(`${cursor}T${slot}:00${BOGOTA_OFFSET}`);
-          const slotEndMs = slotStartMs + slotMs;
-          const taken = periods.some((p) => {
-            if (!p.start || !p.end) return false;
-            return slotStartMs < new Date(p.end).getTime() && slotEndMs > new Date(p.start).getTime();
-          });
-          if (taken) dayBusy.push(slot);
-        }
-        if (dayBusy.length > 0) busy[cursor] = dayBusy;
-      }
-      const next = new Date(`${cursor}T12:00:00Z`);
-      next.setUTCDate(next.getUTCDate() + 1);
-      cursor = next.toISOString().slice(0, 10);
-    }
+    const busy = computeBusySlots(from, to, periods);
 
     return c.json({ busy });
   } catch (err: unknown) {
