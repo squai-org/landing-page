@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { content, type Lang } from "@/lib/content";
+import { content } from "@/lib/content";
+import { useLang } from "@/hooks/use-lang";
 import SeoHead from "@/components/SeoHead";
 import GradientBackground from "@/components/GradientBackground";
 import SquaiLogo from "@/components/SquaiLogo";
 
 const Privacy = () => {
-  const [lang, setLang] = useState<Lang>("en");
+  const { lang, setLang } = useLang();
   const t = content.privacy;
 
   return (
@@ -27,7 +27,7 @@ const Privacy = () => {
         {/* Minimal top bar */}
         <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0A0C1A]/80 backdrop-blur-md border-b border-white/5 py-4">
           <div className="container mx-auto flex items-center justify-between px-5 sm:px-6 md:px-8">
-            <a href="/" className="hover:opacity-80 transition-opacity flex-shrink-0">
+            <a href={`/${lang}`} className="hover:opacity-80 transition-opacity flex-shrink-0">
               <SquaiLogo height={32} />
             </a>
             <div className="flex items-center rounded-full border border-white/10 bg-white/5 overflow-hidden p-0.5">
@@ -82,7 +82,7 @@ const Privacy = () => {
           {/* Back link */}
           <div className="mt-16 pt-8 border-t border-border">
             <a
-              href="/"
+              href={`/${lang}`}
               className="text-primary hover:underline font-body text-sm transition-colors min-h-[44px] inline-flex items-center"
             >
               {t.backHome[lang]}

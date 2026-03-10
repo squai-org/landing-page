@@ -1,0 +1,21 @@
+{
+  "name": "squai-api",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch _lib/index.ts",
+    "build": "tsc",
+    "start": "node dist/_lib/index.js"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.0",
+    "dotenv": "^17.3.1",
+    "googleapis": "^144.0.0",
+    "hono": "^4.7.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}

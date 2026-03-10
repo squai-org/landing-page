@@ -33,7 +33,7 @@ export default function securityHeadersPlugin(): Plugin {
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
         "font-src 'self' https://fonts.gstatic.com",
         "img-src 'self' data: https://storage.googleapis.com",
-        "connect-src 'self' ws://localhost:* ws:",
+        "connect-src 'self' ws://localhost:* ws: http://localhost:*",
         "frame-ancestors 'none'",
         "object-src 'none'",
         "base-uri 'self'",
@@ -63,9 +63,17 @@ export default function securityHeadersPlugin(): Plugin {
         "utf-8",
       );
 
-      // Vercel (also kept in project root; this copy lands in dist/ as reference)
+      // Vercel — headers + rewrites + output config
       const vercelConfig = JSON.stringify(
-        { headers: toVercelHeaders(securityHeaders) },
+        {
+          headers: toVercelHeaders(securityHeaders),
+          rewrites: [
+            // Route all /api/* requests to the single serverless function
+            { source: "/api/:path*", destination: "/api" },
+            // SPA fallback — all non-file routes serve index.html
+            { source: "/(.*)", destination: "/index.html" },
+          ],
+        },
         null,
         2,
       );

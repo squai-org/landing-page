@@ -4,9 +4,10 @@ import { content, type Lang } from "@/lib/content";
 interface FooterProps {
   lang: Lang;
   setLang: (l: Lang) => void;
+  onOpenContact?: () => void;
 }
 
-const Footer = ({ lang, setLang }: FooterProps) => {
+const Footer = ({ lang, setLang, onOpenContact }: FooterProps) => {
   const t = content.footer;
 
   return (
@@ -18,7 +19,7 @@ const Footer = ({ lang, setLang }: FooterProps) => {
       <div className="container mx-auto px-5 sm:px-6 py-8 sm:py-12 relative z-10">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 sm:gap-8">
           <div>
-            <a href="/" className="hover:opacity-80 transition-opacity">
+            <a href={`/${lang}`} className="hover:opacity-80 transition-opacity">
               <SquaiLogo height={28} />
             </a>
             <p className="text-muted-foreground font-body text-sm mt-3 max-w-xs">

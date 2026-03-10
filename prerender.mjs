@@ -19,7 +19,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DIST = path.resolve(__dirname, "dist");
 const PORT = 45678;
-const ROUTES = ["/", "/privacy"];
+const ROUTES = ["/en", "/es", "/en/privacy", "/es/privacy"];
 
 /** Create a tiny static file server pointed at dist/ */
 function startServer() {

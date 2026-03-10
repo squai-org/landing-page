@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import type { Lang } from "@/lib/content";
+import { useLang } from "@/hooks/use-lang";
 import SeoHead from "@/components/SeoHead";
 import Navbar from "@/components/Navbar";
 import GradientBackground from "@/components/GradientBackground";
@@ -15,7 +15,7 @@ import Footer from "@/components/Footer";
 import ContactModal from "@/components/ContactModal";
 
 const Index = () => {
-  const [lang, setLang] = useState<Lang>("en");
+  const { lang, setLang } = useLang();
   const [contactOpen, setContactOpen] = useState(false);
 
   const openContact = useCallback(() => setContactOpen(true), []);
@@ -46,7 +46,7 @@ const Index = () => {
         <IndustriesSection lang={lang} />
         <WhySquaiSection lang={lang} />
         <CtaSection lang={lang} onOpenContact={openContact} />
-        <Footer lang={lang} setLang={setLang} />
+        <Footer lang={lang} setLang={setLang} onOpenContact={openContact} />
         </main>
       </div>
 
