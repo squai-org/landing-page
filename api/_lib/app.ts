@@ -70,11 +70,7 @@ if (!process.env.VERCEL) {
   }, 300_000);
 }
 
-// On Vercel the /api prefix is stripped by the serverless adapter
-// (function lives at api/index.ts → receives /availability, /schedule, etc.)
-// Locally, requests arrive as /api/availability, /api/schedule, etc.
-const routePrefix = process.env.VERCEL ? "/" : "/api";
-app.route(routePrefix, scheduleRoute);
+app.route("/api", scheduleRoute);
 
 app.get("/health", (c) => c.json({ status: "ok" }));
 
