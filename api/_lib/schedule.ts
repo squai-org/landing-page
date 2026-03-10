@@ -141,14 +141,21 @@ function getCalendarId(): string {
 export const scheduleRoute = new Hono();
 
 scheduleRoute.post("/schedule", async (c) => {
-  const body = await c.req.json().catch(() => null);
+  console.log("[schedule] Handler called");
+  const body = await c.req.json().catch((e: unknown) => {
+    console.error("[schedule] Failed to parse body:", e);
+    return null;
+  });
+  console.log("[schedule] Body parsed:", body ? "ok" : "null");
   const { data, error } = validateBody(body);
 
   if (error || !data) {
+    console.log("[schedule] Validation failed:", error);
     return c.json({ error: "validation", message: error }, 400);
   }
 
   try {
+    console.log("[schedule] Building calendar client...");
     const calendar = getCalendarClient();
     const calendarId = getCalendarId();
 
@@ -162,6 +169,7 @@ scheduleRoute.post("/schedule", async (c) => {
     const endDateTime = `${data.date}T${endTime}:00`;
 
     // Check if the slot is free
+    console.log("[schedule] Checking freebusy...");
     const busyCheck = await calendar.freebusy.query({
       requestBody: {
         timeMin: new Date(`${startDateTime}-05:00`).toISOString(),
@@ -170,6 +178,7 @@ scheduleRoute.post("/schedule", async (c) => {
         items: [{ id: calendarId }],
       },
     });
+    console.log("[schedule] Freebusy done");
 
     const busy = busyCheck.data.calendars?.[calendarId]?.busy ?? [];
     if (busy.length > 0) {
@@ -177,6 +186,7 @@ scheduleRoute.post("/schedule", async (c) => {
     }
 
     // Create the event
+    console.log("[schedule] Creating event...");
     const summary =
       data.lang === "es"
         ? `Llamada de Descubrimiento — ${data.name} (${data.company})`
@@ -208,9 +218,10 @@ scheduleRoute.post("/schedule", async (c) => {
       },
     });
 
+    console.log("[schedule] Event created:", event.data.id);
     return c.json({ success: true, eventId: event.data.id });
-  } catch (err) {
-    console.error("Failed to create calendar event:", err);
+  } catch (err: unknown) {
+    console.error("[schedule] Error:", err instanceof Error ? err.message : err);
     return c.json({ error: "server_error" }, 500);
   }
 });
