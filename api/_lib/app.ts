@@ -19,7 +19,7 @@ const allowedOrigins = (process.env.ALLOWED_ORIGINS ?? "")
 
 if (allowedOrigins.length > 0) {
   app.use(
-    "/api/*",
+    "*",
     cors({
       origin: allowedOrigins,
       allowMethods: ["GET", "POST", "OPTIONS"],
@@ -36,7 +36,7 @@ const RATE_WINDOW_MS = 60_000; // 1 minute
 const RATE_MAX = 10; // max requests per window
 const hits = new Map<string, { count: number; resetAt: number }>();
 
-app.use("/api/*", async (c, next) => {
+app.use("*", async (c, next) => {
   const ip =
     c.req.header("x-forwarded-for")?.split(",")[0]?.trim() ||
     c.req.header("x-real-ip") ||
@@ -70,12 +70,13 @@ if (!process.env.VERCEL) {
   }, 300_000);
 }
 
-app.route("/api", scheduleRoute);
+// On Vercel the /api prefix is stripped by the serverless adapter
+// (function lives at api/index.ts → receives /availability, /schedule, etc.)
+// Locally, requests arrive as /api/availability, /api/schedule, etc.
+const routePrefix = process.env.VERCEL ? "/" : "/api";
+app.route(routePrefix, scheduleRoute);
 
 app.get("/health", (c) => c.json({ status: "ok" }));
-
-// Also mount health under /api so it's reachable via Vercel rewrite
-app.get("/api/health", (c) => c.json({ status: "ok" }));
 
 // Catch-all: if nothing matched, log it
 app.all("*", (c) => {
