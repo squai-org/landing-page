@@ -4,6 +4,12 @@ import { scheduleRoute } from "./schedule.js";
 
 const app = new Hono();
 
+// ── Debug: log every incoming request so we can see what URL Hono receives
+app.use("*", async (c, next) => {
+  console.log(`[hono] ${c.req.method} ${c.req.url} (path: ${c.req.path})`);
+  await next();
+});
+
 // CORS — only needed when frontend runs on a different origin (local dev).
 // On Vercel the API is same-origin, so CORS headers are unnecessary.
 const allowedOrigins = (process.env.ALLOWED_ORIGINS ?? "")
@@ -70,6 +76,12 @@ app.get("/health", (c) => c.json({ status: "ok" }));
 
 // Also mount health under /api so it's reachable via Vercel rewrite
 app.get("/api/health", (c) => c.json({ status: "ok" }));
+
+// Catch-all: if nothing matched, log it
+app.all("*", (c) => {
+  console.log(`[hono] 404 — no route matched for ${c.req.method} ${c.req.path}`);
+  return c.json({ error: "not_found", path: c.req.path }, 404);
+});
 
 // Global error handler — ensures Vercel always gets a response
 app.onError((err, c) => {
