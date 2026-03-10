@@ -63,9 +63,17 @@ export default function securityHeadersPlugin(): Plugin {
         "utf-8",
       );
 
-      // Vercel (also kept in project root; this copy lands in dist/ as reference)
+      // Vercel — headers + rewrites + output config
       const vercelConfig = JSON.stringify(
-        { headers: toVercelHeaders(securityHeaders) },
+        {
+          headers: toVercelHeaders(securityHeaders),
+          rewrites: [
+            // Route all /api/* requests to the single serverless function
+            { source: "/api/:path*", destination: "/api" },
+            // SPA fallback — all non-file routes serve index.html
+            { source: "/(.*)", destination: "/index.html" },
+          ],
+        },
         null,
         2,
       );

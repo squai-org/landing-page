@@ -22,7 +22,7 @@ import {
 import { format } from "date-fns";
 import { es as esLocale, enUS } from "date-fns/locale";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+const API_URL = import.meta.env.VITE_API_URL ?? (import.meta.env.DEV ? "http://localhost:3001" : "");
 
 type Step = "date" | "time" | "form" | "success";
 
