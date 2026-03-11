@@ -11,7 +11,6 @@ const Privacy = () => {
   return (
     <div className="min-h-screen relative overflow-x-clip">
       <SeoHead
-        lang={lang}
         title={{
           en: "Privacy Policy — Squai",
           es: "Política de Privacidad — Squai",
@@ -33,7 +32,7 @@ const Privacy = () => {
             <div className="flex items-center rounded-full border border-white/10 bg-white/5 overflow-hidden p-0.5">
               <button
                 onClick={() => setLang("en")}
-                aria-label="Switch to English"
+                aria-label={t.switchToEnglish[lang]}
                 className={`px-4 py-2 min-h-[44px] min-w-[44px] text-xs font-body font-bold transition-all duration-300 rounded-full ${
                   lang === "en"
                     ? "bg-primary text-primary-foreground shadow-lg"
@@ -44,7 +43,7 @@ const Privacy = () => {
               </button>
               <button
                 onClick={() => setLang("es")}
-                aria-label="Cambiar a Español"
+                aria-label={t.switchToSpanish[lang]}
                 className={`px-4 py-2 min-h-[44px] min-w-[44px] text-xs font-body font-bold transition-all duration-300 rounded-full ${
                   lang === "es"
                     ? "bg-primary text-primary-foreground shadow-lg"

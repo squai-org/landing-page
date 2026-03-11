@@ -1,4 +1,5 @@
-import { content, type Lang } from "@/lib/content";
+import { content } from "@/lib/content";
+import { useLang } from "@/hooks/use-lang";
 import { Button } from "@/components/ui/button";
 import { motion, type Variants } from "framer-motion";
 
@@ -26,10 +27,17 @@ const word: Variants = {
   },
 };
 
-const HeroSection = ({ lang, onOpenContact }: { lang: Lang; onOpenContact: () => void }) => {
+const HeroSection = ({ onOpenContact }: { onOpenContact: () => void }) => {
+  const { lang } = useLang();
   const t = content.hero;
   const headline = t.headline[lang];
   const words = headline.split(" ");
+  const seenWords: Record<string, number> = {};
+  const wordsWithKeys = words.map((wordText) => {
+    const count = (seenWords[wordText] ?? 0) + 1;
+    seenWords[wordText] = count;
+    return { wordText, key: `${wordText}-${count}` };
+  });
 
   return (
     <section className="relative min-h-[100svh] flex flex-col justify-center pt-20 pb-10 sm:pb-16">
@@ -44,8 +52,8 @@ const HeroSection = ({ lang, onOpenContact }: { lang: Lang; onOpenContact: () =>
               animate="show"
               className="font-headline font-black text-[2.25rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-[80px] lg:leading-tight mb-4 gradient-wave-text"
             >
-              {words.map((wordText, i) => (
-                <motion.span key={i} variants={word} className="inline-block mr-2 sm:mr-3 mb-1 sm:mb-2">
+              {wordsWithKeys.map(({ wordText, key }) => (
+                <motion.span key={key} variants={word} className="inline-block mr-2 sm:mr-3 mb-1 sm:mb-2">
                   {wordText}
                 </motion.span>
               ))}

@@ -3,6 +3,8 @@ import { resolve } from "node:path";
 import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 import { Hono } from "hono";
 import { google } from "googleapis";
+import { getScheduleCopy } from "./schedule-copy.js";
+import { normalizeLang } from "./lang.js";
 
 // ─── Configuration ──────────────────────────────────────────────────────
 const TIMEZONE = "America/Bogota";
@@ -33,6 +35,15 @@ function sanitize(str: string): string {
   return str.replaceAll(HTML_TAG_RE, "").trim();
 }
 
+function escapeHtml(str: string): string {
+  return str
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
 interface ScheduleBody {
   name: string;
   company: string;
@@ -40,7 +51,15 @@ interface ScheduleBody {
   description?: string;
   date: string;
   time: string;
-  lang?: "en" | "es";
+  lang: "en" | "es";
+}
+
+interface RescheduleBody {
+  eventId: string;
+  email: string;
+  date: string;
+  time: string;
+  lang: "en" | "es";
 }
 
 function extractFields(body: Record<string, unknown>) {
@@ -51,7 +70,7 @@ function extractFields(body: Record<string, unknown>) {
     description: typeof body.description === "string" ? sanitize(body.description) : "",
     date: typeof body.date === "string" ? body.date.trim() : "",
     time: typeof body.time === "string" ? body.time.trim() : "",
-    lang: body.lang === "es" ? ("es" as const) : ("en" as const),
+    lang: normalizeLang(body.lang),
   };
 }
 
@@ -102,6 +121,30 @@ function validateBody(body: unknown): { data?: ScheduleBody; error?: string } {
   if (dateTimeError) return { error: dateTimeError };
 
   return { data: { name: f.name, company: f.company, email: f.email, description: f.description, date: f.date, time: f.time, lang: f.lang } };
+}
+
+function validateRescheduleBody(body: unknown): { data?: RescheduleBody; error?: string } {
+  if (!body || typeof body !== "object") return { error: "Invalid request body" };
+
+  const raw = body as Record<string, unknown>;
+  const data: RescheduleBody = {
+    eventId: typeof raw.eventId === "string" ? raw.eventId.trim() : "",
+    email: typeof raw.email === "string" ? raw.email.trim() : "",
+    date: typeof raw.date === "string" ? raw.date.trim() : "",
+    time: typeof raw.time === "string" ? raw.time.trim() : "",
+    lang: normalizeLang(raw.lang),
+  };
+
+  if (!data.eventId) return { error: "eventId is required" };
+  if (!/^[a-z0-9]{5,1024}$/i.test(data.eventId)) return { error: "Invalid eventId format" };
+  if (!data.email || !EMAIL_RE.test(data.email)) return { error: "Valid email is required" };
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(data.date)) return { error: "Invalid date format (YYYY-MM-DD)" };
+  if (!/^\d{2}:\d{2}$/.test(data.time)) return { error: "Invalid time format (HH:mm)" };
+
+  const dateTimeError = validateDateAndTime(data.date, data.time);
+  if (dateTimeError) return { error: dateTimeError };
+
+  return { data };
 }
 
 // ─── Google Calendar client ─────────────────────────────────────────────
@@ -254,18 +297,52 @@ function buildGoogleEventId(): string {
   return randomBytes(10).toString("hex");
 }
 
-function buildRescheduleLink(eventId: string, email: string): string {
+function buildRescheduleLink(eventId: string, email: string, lang: "en" | "es"): string {
   const base = process.env.BOOKING_RESCHEDULE_URL?.trim();
   if (!base) return "";
 
   try {
     const url = new URL(base);
+    url.pathname = `/${lang}`;
+    url.searchParams.set("reschedule", "1");
     url.searchParams.set("eventId", eventId);
     url.searchParams.set("email", email);
+    url.searchParams.set("lang", lang);
     return url.toString();
   } catch {
     return base;
   }
+}
+
+function buildStartAndEnd(date: string, time: string) {
+  const startDateTime = `${date}T${time}:00`;
+  const [h, m] = time.split(":").map(Number);
+  const endMin = m + SLOT_DURATION_MIN;
+  const endH = h + Math.floor(endMin / 60);
+  const endM = endMin % 60;
+  const endTime = `${String(endH).padStart(2, "0")}:${String(endM).padStart(2, "0")}`;
+  const endDateTime = `${date}T${endTime}:00`;
+  return { startDateTime, endDateTime };
+}
+
+async function hasSlotConflict(
+  calendar: ReturnType<typeof google.calendar>,
+  calendarId: string,
+  startDateTime: string,
+  endDateTime: string,
+  excludeEventId?: string,
+) {
+  const eventsRes = await calendar.events.list({
+    calendarId,
+    timeMin: new Date(`${startDateTime}-05:00`).toISOString(),
+    timeMax: new Date(`${endDateTime}-05:00`).toISOString(),
+    singleEvents: true,
+    showDeleted: false,
+    maxResults: 20,
+  });
+
+  const items = eventsRes.data.items ?? [];
+  return items.some((ev) => ev.id !== excludeEventId && ev.status !== "cancelled");
 }
 
 // ─── Route ──────────────────────────────────────────────────────────────
@@ -374,13 +451,7 @@ scheduleRoute.post("/schedule", async (c) => {
     const calendar = getCalendarClient();
     const calendarId = getCalendarId();
     
-    const startDateTime = `${data.date}T${data.time}:00`;
-    const [h, m] = data.time.split(":").map(Number);
-    const endMin = m + SLOT_DURATION_MIN;
-    const endH = h + Math.floor(endMin / 60);
-    const endM = endMin % 60;
-    const endTime = `${String(endH).padStart(2, "0")}:${String(endM).padStart(2, "0")}`;
-    const endDateTime = `${data.date}T${endTime}:00`;
+    const { startDateTime, endDateTime } = buildStartAndEnd(data.date, data.time);
     
     const busyCheck = await calendar.freebusy.query({
       requestBody: {
@@ -397,24 +468,23 @@ scheduleRoute.post("/schedule", async (c) => {
     }
     
     const summary =
-      data.lang === "es"
-        ? `Llamada de Descubrimiento — ${data.name} (${data.company})`
-        : `Discovery Call — ${data.name} (${data.company})`;
+      `${getScheduleCopy(data.lang ?? "en").summary} — ${data.name} (${data.company})`;
 
     const eventId = buildGoogleEventId();
-    const rescheduleLink = buildRescheduleLink(eventId, data.email);
+    const rescheduleLink = buildRescheduleLink(eventId, data.email, data.lang);
+    const copy = getScheduleCopy(data.lang);
 
-    const description = [
-      `Name: ${data.name}`,
-      `Company: ${data.company}`,
-      `Email: ${data.email}`,
-      data.description ? `\nMessage:\n${data.description}` : "",
+    const descriptionLines = [
+      `${copy.labels.name}: ${escapeHtml(data.name)}`,
+      `${copy.labels.company}: ${escapeHtml(data.company)}`,
+      `${copy.labels.email}: ${escapeHtml(data.email)}`,
+      data.description ? `${copy.labels.message}: ${escapeHtml(data.description)}` : "",
       rescheduleLink
-        ? `\nReschedule: ${rescheduleLink}`
+        ? `<br/><a href="${escapeHtml(rescheduleLink)}"><strong>${copy.cta.reschedule}</strong></a>`
         : "",
-    ]
-      .filter(Boolean)
-      .join("\n");
+    ].filter(Boolean);
+
+    const description = descriptionLines.join("<br/>");
 
     await calendar.events.insert({
       calendarId,
@@ -457,6 +527,59 @@ scheduleRoute.post("/schedule", async (c) => {
       );
     }
 
+    return c.json({ error: "server_error" }, 500);
+  }
+});
+
+scheduleRoute.post("/reschedule", async (c) => {
+  const body = await c.req.json().catch(() => null);
+  const { data, error } = validateRescheduleBody(body);
+
+  if (error || !data) {
+    return c.json({ error: "validation", message: error }, 400);
+  }
+
+  try {
+    const calendar = getCalendarClient();
+    const calendarId = getCalendarId();
+    const { startDateTime, endDateTime } = buildStartAndEnd(data.date, data.time);
+
+    const existing = await calendar.events.get({ calendarId, eventId: data.eventId });
+    const event = existing.data;
+    const attendees = event.attendees ?? [];
+    const attendeeMatch = attendees.some(
+      (a) => typeof a.email === "string" && a.email.toLowerCase() === data.email.toLowerCase(),
+    );
+
+    if (!attendeeMatch) {
+      return c.json({ error: "forbidden", message: "Email is not an attendee of this event" }, 403);
+    }
+
+    const hasConflict = await hasSlotConflict(
+      calendar,
+      calendarId,
+      startDateTime,
+      endDateTime,
+      data.eventId,
+    );
+    if (hasConflict) {
+      return c.json({ error: "slot_taken" }, 409);
+    }
+
+    await calendar.events.patch({
+      calendarId,
+      eventId: data.eventId,
+      sendUpdates: "all",
+      requestBody: {
+        start: { dateTime: startDateTime, timeZone: TIMEZONE },
+        end: { dateTime: endDateTime, timeZone: TIMEZONE },
+      },
+    });
+
+    return c.json({ success: true, action: "rescheduled" });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error("[reschedule] Error:", message);
     return c.json({ error: "server_error" }, 500);
   }
 });

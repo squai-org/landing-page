@@ -1,13 +1,13 @@
 import SquaiLogo from "./SquaiLogo";
-import { content, type Lang } from "@/lib/content";
+import { content } from "@/lib/content";
+import { useLang } from "@/hooks/use-lang";
 
 interface FooterProps {
-  lang: Lang;
-  setLang: (l: Lang) => void;
   onOpenContact?: () => void;
 }
 
-const Footer = ({ lang, setLang, onOpenContact }: FooterProps) => {
+const Footer = ({ onOpenContact }: FooterProps) => {
+  const { lang, setLang } = useLang();
   const t = content.footer;
 
   return (
@@ -41,7 +41,7 @@ const Footer = ({ lang, setLang, onOpenContact }: FooterProps) => {
             <div className="flex items-center rounded-full border border-white/10 bg-white/5 overflow-hidden p-0.5">
               <button
                 onClick={() => setLang("en")}
-                aria-label="Switch to English"
+                aria-label={t.switchToEnglish[lang]}
                 className={`px-4 py-2 min-h-[44px] min-w-[44px] text-xs font-body font-bold transition-all duration-300 rounded-full ${
                   lang === "en"
                     ? "bg-primary text-primary-foreground shadow-lg"
@@ -52,7 +52,7 @@ const Footer = ({ lang, setLang, onOpenContact }: FooterProps) => {
               </button>
               <button
                 onClick={() => setLang("es")}
-                aria-label="Cambiar a Español"
+                aria-label={t.switchToSpanish[lang]}
                 className={`px-4 py-2 min-h-[44px] min-w-[44px] text-xs font-body font-bold transition-all duration-300 rounded-full ${
                   lang === "es"
                     ? "bg-primary text-primary-foreground shadow-lg"
@@ -67,7 +67,7 @@ const Footer = ({ lang, setLang, onOpenContact }: FooterProps) => {
         <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-border flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4">
           <p className="text-muted-foreground/60 font-body text-xs">{t.copyright}</p>
           <p className="text-muted-foreground/40 font-body text-xs">
-            {lang === "en" ? "Illustrations by " : "Ilustraciones por "} 
+            {t.illustrationsBy[lang]} 
             <a href="https://storyset.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors min-h-[44px] inline-flex items-center">Storyset.com</a>
           </p>
         </div>

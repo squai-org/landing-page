@@ -1,8 +1,3 @@
-/**
- * Local development entry point.
- * Starts a persistent Node.js server with @hono/node-server.
- * On Vercel, the app is served via api/index.ts (serverless adapter).
- */
 import { existsSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -21,5 +16,5 @@ if (existsSync(apiEnvPath)) {
 const port = Number.parseInt(process.env.PORT ?? "3001", 10);
 
 serve({ fetch: app.fetch, port }, () => {
-  console.log(`API server running on http://localhost:${port}`);
+  console.log(`API server running on port ${port}`);
 });

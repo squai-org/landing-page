@@ -1,4 +1,5 @@
-import { content, type Lang } from "@/lib/content";
+import { content } from "@/lib/content";
+import { useLang } from "@/hooks/use-lang";
 import { Button } from "@/components/ui/button";
 import { Check, Users, Clock } from "lucide-react";
 import { motion } from "framer-motion";
@@ -17,7 +18,8 @@ const hoverGlows: Record<string, string> = {
 
 const slideDirections = [-1, 0, 1]; // left, center, right
 
-const ServicesSection = ({ lang }: { lang: Lang }) => {
+const ServicesSection = () => {
+  const { lang } = useLang();
   const t = content.services;
 
   return (
@@ -37,7 +39,7 @@ const ServicesSection = ({ lang }: { lang: Lang }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-6 max-w-7xl mx-auto items-start">
           {t.tiers.map((tier, i) => (
             <motion.div
-              key={i}
+              key={tier.label.en}
               initial={{ opacity: 0, x: slideDirections[i] * 80 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-60px" }}
@@ -50,7 +52,7 @@ const ServicesSection = ({ lang }: { lang: Lang }) => {
               >
                 {tier.popular && (
                   <div className="absolute -top-3 right-6 bg-accent text-accent-foreground text-xs font-body font-bold px-4 py-1 rounded-full">
-                    {lang === "en" ? "Most Popular" : "Más Popular"}
+                    {t.mostPopular[lang]}
                   </div>
                 )}
 
@@ -82,11 +84,11 @@ const ServicesSection = ({ lang }: { lang: Lang }) => {
 
                   <div className="flex-1 text-left">
                     <p className="font-body font-semibold text-xs uppercase tracking-wider text-foreground mb-4 sm:mb-5">
-                      {lang === "en" ? "What you get:" : "Lo que obtienes:"}
+                      {t.whatYouGet[lang]}
                     </p>
                     <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-                      {tier.items[lang].map((item, j) => (
-                        <li key={j} className="flex items-start gap-2 sm:gap-3 text-muted-foreground font-body text-xs sm:text-sm lg:text-base leading-snug">
+                      {tier.items[lang].map((item) => (
+                        <li key={`${tier.label.en}-${item}`} className="flex items-start gap-2 sm:gap-3 text-muted-foreground font-body text-xs sm:text-sm lg:text-base leading-snug">
                           <Check className="text-primary mt-0.5 sm:mt-1 shrink-0" size={14} />
                           <span>{item}</span>
                         </li>

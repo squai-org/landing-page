@@ -1,4 +1,4 @@
-export type Lang = "en" | "es";
+export type { Lang } from "@/i18n/types";
 
 export const content = {
   nav: {
@@ -7,6 +7,9 @@ export const content = {
       es: ["Servicios", "Cómo funciona", "Industrias", "Contacto"],
     },
     sections: ["services", "how-it-works", "industries", "contact"],
+    languageLabel: { en: "Language", es: "Idioma" },
+    switchToEnglish: { en: "Switch to English", es: "Cambiar a inglés" },
+    switchToSpanish: { en: "Switch to Spanish", es: "Cambiar a español" },
   },
   hero: {
     headline: {
@@ -54,6 +57,8 @@ export const content = {
   services: {
     eyebrow: { en: "OUR SERVICES", es: "NUESTROS SERVICIOS" },
     title: { en: "Our Services", es: "Nuestros Servicios" },
+    mostPopular: { en: "Most Popular", es: "Más Popular" },
+    whatYouGet: { en: "What you get:", es: "Lo que obtienes:" },
     tiers: [
       {
         label: { en: "Tier 1", es: "Nivel 1" },
@@ -187,10 +192,15 @@ export const content = {
       en: ["Discovery Call", "Proposal in 48hrs", "Kickoff", "Mapping & Building", "Delivery", "Support Period"],
       es: ["Llamada de diagnóstico", "Propuesta en 48hrs", "Kickoff", "Mapeo y construcción", "Entrega", "Período de soporte"],
     },
+    subtitle: {
+      en: "A proven, structured approach to scaling your operations inside out.",
+      es: "Un enfoque estructurado y comprobado para escalar tus operaciones de adentro hacia afuera.",
+    },
   },
   industries: {
     eyebrow: { en: "WHO WE SERVE", es: "A QUIÉN SERVIMOS" },
     title: { en: "Industries We Serve", es: "Industrias que atendemos" },
+    marqueeTitle: { en: "Trusted by organizations in", es: "Confiado por organizaciones en" },
     items: {
       en: ["SaaS & Tech Startups", "E-Learning & Education", "Professional Services", "Digital E-Commerce", "Agencies & Consultancies"],
       es: ["SaaS y Startups Tech", "E-Learning y Educación", "Servicios Profesionales", "E-Commerce Digital", "Agencias y Consultoras"],
@@ -354,6 +364,10 @@ members: [
       en: "Something went wrong. Please try again.",
       es: "Algo salió mal. Inténtalo de nuevo.",
     },
+    errorRescheduleForbidden: {
+      en: "This reschedule link does not match your email.",
+      es: "Este enlace no corresponde a tu correo.",
+    },
     changeDate: { en: "Change date", es: "Cambiar fecha" },
     selectedDate: { en: "Selected", es: "Seleccionado" },
     // Step indicator
@@ -391,6 +405,8 @@ members: [
     title: { en: "Privacy Policy", es: "Política de Privacidad" },
     lastUpdated: { en: "Last updated: March 8, 2026", es: "Última actualización: 8 de marzo de 2026" },
     backHome: { en: "← Back to home", es: "← Volver al inicio" },
+    switchToEnglish: { en: "Switch to English", es: "Cambiar a inglés" },
+    switchToSpanish: { en: "Switch to Spanish", es: "Cambiar a español" },
     sections: [
       {
         heading: { en: "Who we are", es: "Quiénes somos" },
@@ -448,11 +464,24 @@ members: [
       en: "Your team doesn't need to figure out AI alone.",
       es: "Tu equipo no tiene que descifrar la IA solo.",
     },
+    switchToEnglish: { en: "Switch to English", es: "Cambiar a inglés" },
+    switchToSpanish: { en: "Switch to Spanish", es: "Cambiar a español" },
     links: {
       en: ["Services", "How It Works", "Contact"],
       es: ["Servicios", "Cómo funciona", "Contacto"],
     },
     sections: ["services", "how-it-works", "contact"],
+    illustrationsBy: { en: "Illustrations by", es: "Ilustraciones por" },
     copyright: "© 2026 Squai. All rights reserved.",
+  },
+  rescheduleResume: {
+    message: {
+      en: "You closed your reschedule flow. You can continue whenever you want.",
+      es: "Cerraste el flujo de reagendado. Puedes continuarlo cuando quieras.",
+    },
+    action: {
+      en: "Continue rescheduling",
+      es: "Continuar reagendando",
+    },
   },
 };
