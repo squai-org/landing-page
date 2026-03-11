@@ -1,4 +1,5 @@
-import { content, type Lang } from "@/lib/content";
+import { content } from "@/lib/content";
+import { useLang } from "@/hooks/use-lang";
 import { BrainCircuit, Sparkles, Building2 } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 
@@ -35,7 +36,8 @@ const cardStyles = [
   }
 ];
 
-const ProblemSection = ({ lang }: { lang: Lang }) => {
+const ProblemSection = () => {
+  const { lang } = useLang();
   const t = content.problems;
 
   return (
@@ -53,7 +55,7 @@ const ProblemSection = ({ lang }: { lang: Lang }) => {
             const Icon = style.icon;
             
             return (
-              <AnimatedSection key={i} delay={i * 0.12}>
+              <AnimatedSection key={item.title.en} delay={i * 0.12}>
                 <div className={`bg-[#12152A] rounded-2xl overflow-hidden border border-[rgba(124,140,255,0.15)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_25px_-5px_hsl(233,100%,74%,0.15)] group h-full flex flex-col`}>
                   {/* Illustration */}
                   <div className="w-full h-40 sm:h-48 bg-[#E8ECFF] flex items-center justify-center p-2 border-b border-[rgba(124,140,255,0.1)] relative">

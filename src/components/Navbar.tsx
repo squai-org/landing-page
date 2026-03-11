@@ -1,15 +1,12 @@
 import { useState, useEffect } from "react";
 import SquaiLogo from "./SquaiLogo";
-import { content, type Lang } from "@/lib/content";
+import { content } from "@/lib/content";
+import { useLang } from "@/hooks/use-lang";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-interface NavbarProps {
-  lang: Lang;
-  setLang: (l: Lang) => void;
-}
-
-const Navbar = ({ lang, setLang }: NavbarProps) => {
+const Navbar = () => {
+  const { lang, setLang } = useLang();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const links = content.nav.links[lang];
@@ -53,7 +50,7 @@ const Navbar = ({ lang, setLang }: NavbarProps) => {
           <div className="hidden md:flex items-center gap-2 font-body text-sm font-semibold tracking-wider">
             <button
               onClick={() => setLang("en")}
-              aria-label="Switch to English"
+              aria-label={content.nav.switchToEnglish[lang]}
               className={`min-w-[44px] min-h-[44px] flex items-center justify-center transition-colors duration-200 ${
                 lang === "en" ? "text-foreground" : "text-muted-foreground/50 hover:text-muted-foreground"
               }`}
@@ -63,7 +60,7 @@ const Navbar = ({ lang, setLang }: NavbarProps) => {
             <span className="text-white/10">|</span>
             <button
                onClick={() => setLang("es")}
-               aria-label="Cambiar a Español"
+              aria-label={content.nav.switchToSpanish[lang]}
                className={`min-w-[44px] min-h-[44px] flex items-center justify-center transition-colors duration-200 ${
                  lang === "es" ? "text-foreground" : "text-muted-foreground/50 hover:text-muted-foreground"
                }`}
@@ -121,7 +118,7 @@ const Navbar = ({ lang, setLang }: NavbarProps) => {
                 transition={{ delay: 0.4 }}
                 className="flex items-center justify-between"
               >
-                <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-bold">Language</span>
+                <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-bold">{content.nav.languageLabel[lang]}</span>
                 <div className="flex items-center gap-4 font-body text-base font-bold bg-white/5 p-1 rounded-full border border-white/10">
                    <button
                       onClick={() => { setLang("en"); setOpen(false); }}

@@ -1,10 +1,11 @@
 import { Helmet } from "react-helmet-async";
-import type { Lang } from "@/lib/content";
+import { useLang } from "@/hooks/use-lang";
+import type { Localized } from "@/i18n/types";
+import { getAltLang, OG_LOCALE_BY_LANG } from "@/i18n/config";
 
 interface SeoHeadProps {
-  lang: Lang;
-  title: { en: string; es: string };
-  description: { en: string; es: string };
+  title: Localized;
+  description: Localized;
   path: string;
 }
 
@@ -22,9 +23,10 @@ const structuredData = {
   availableLanguage: ["Spanish", "English"],
 };
 
-const SeoHead = ({ lang, title, description, path }: SeoHeadProps) => {
+const SeoHead = ({ title, description, path }: SeoHeadProps) => {
+  const { lang } = useLang();
   const canonical = `${SITE_URL}/${lang}${path === "/" ? "" : path}`;
-  const altLang = lang === "en" ? "es" : "en";
+  const altLang = getAltLang(lang);
   const altCanonical = `${SITE_URL}/${altLang}${path === "/" ? "" : path}`;
 
   return (
@@ -43,10 +45,10 @@ const SeoHead = ({ lang, title, description, path }: SeoHeadProps) => {
       <meta property="og:url" content={canonical} />
       <meta property="og:type" content="website" />
       <meta property="og:image" content={OG_IMAGE} />
-      <meta property="og:locale" content={lang === "en" ? "en_US" : "es_419"} />
+      <meta property="og:locale" content={OG_LOCALE_BY_LANG[lang]} />
       <meta
         property="og:locale:alternate"
-        content={lang === "en" ? "es_419" : "en_US"}
+        content={OG_LOCALE_BY_LANG[altLang]}
       />
 
       {/* Twitter */}

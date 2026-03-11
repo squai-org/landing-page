@@ -1,7 +1,9 @@
-import { content, type Lang } from "@/lib/content";
+import { content } from "@/lib/content";
+import { useLang } from "@/hooks/use-lang";
 import { motion } from "framer-motion";
 
-const HowItWorksSection = ({ lang }: { lang: Lang }) => {
+const HowItWorksSection = () => {
+  const { lang } = useLang();
   const t = content.howItWorks;
   // Step names and descriptions
   const stepNames = {
@@ -86,19 +88,17 @@ const HowItWorksSection = ({ lang }: { lang: Lang }) => {
             {t.title[lang]}
           </h2>
           <p className="font-body text-base sm:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto px-2">
-            {lang === "en" 
-              ? "A proven, structured approach to scaling your operations inside out." 
-              : "Un enfoque estructurado y comprobado para escalar tus operaciones de adentro hacia afuera."}
+            {t.subtitle[lang]}
           </p>
         </motion.div>
 
         {/* 3x2 Grid for Steps */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 max-w-7xl mx-auto">
-          {Array.from({ length: 6 }).map((_, i) => {
+          {stepNames[lang].map((stepName, i) => {
             const style = colorStyles[i % colorStyles.length];
             return (
               <motion.div
-                key={i}
+                key={stepName}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -109,7 +109,7 @@ const HowItWorksSection = ({ lang }: { lang: Lang }) => {
                 <div className="w-full h-36 sm:h-48 bg-[#E8ECFF] flex items-center justify-center p-2 border-b border-[rgba(124,140,255,0.1)] relative">
                   <img 
                     src={stepIllustrations[i]} 
-                    alt={stepNames[lang][i]} 
+                    alt={stepName} 
                     width="400"
                     height="320"
                     className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-500"
@@ -127,7 +127,7 @@ const HowItWorksSection = ({ lang }: { lang: Lang }) => {
                     </span>
                   </div>
                   <h3 className={`mb-2 sm:mb-3 font-headline font-extrabold text-lg sm:text-xl lg:text-2xl text-transparent bg-clip-text bg-gradient-to-r ${style.gradient}`}>
-                    {stepNames[lang][i]}
+                    {stepName}
                   </h3>
                   <p className="font-body text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed">
                     {stepDescriptions[lang][i]}

@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
-import { content, type Lang } from "@/lib/content";
+import { content } from "@/lib/content";
+import { useLang } from "@/hooks/use-lang";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -38,7 +39,11 @@ const ALL_SLOTS = [...MORNING_SLOTS, ...AFTERNOON_SLOTS];
 interface ContactModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  lang: Lang;
+  onRescheduleCompleted?: () => void;
+  rescheduleContext?: {
+    eventId: string;
+    email: string;
+  } | null;
 }
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -50,8 +55,10 @@ function isWeekdayAndFuture(date: Date): boolean {
   return day !== 0 && day !== 6 && date >= today;
 }
 
-const ContactModal = ({ open, onOpenChange, lang }: ContactModalProps) => {
+const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleContext }: ContactModalProps) => {
+  const { lang } = useLang();
   const t = content.contactModal;
+  const isRescheduleMode = Boolean(rescheduleContext?.eventId && rescheduleContext?.email);
 
   // ── Step flow ──
   const [step, setStep] = useState<Step>("date");
@@ -87,6 +94,12 @@ const ContactModal = ({ open, onOpenChange, lang }: ContactModalProps) => {
       return () => clearTimeout(timeout);
     }
   }, [open]);
+
+  useEffect(() => {
+    if (!open || !isRescheduleMode || !rescheduleContext) return;
+    setEmail(rescheduleContext.email);
+    setEmailTouched(true);
+  }, [open, isRescheduleMode, rescheduleContext]);
 
   // ── Availability fetch ──
   const fetchAvailability = useCallback(async (month: Date) => {
@@ -132,11 +145,12 @@ const ContactModal = ({ open, onOpenChange, lang }: ContactModalProps) => {
     return null;
   }, [email, emailTouched, submitted, lang, t]);
 
-  const isValid =
-    name.trim() !== "" &&
-    company.trim() !== "" &&
-    EMAIL_REGEX.test(email.trim()) &&
-    privacy;
+  const isValid = isRescheduleMode
+    ? EMAIL_REGEX.test(email.trim()) && privacy
+    : name.trim() !== "" &&
+      company.trim() !== "" &&
+      EMAIL_REGEX.test(email.trim()) &&
+      privacy;
 
   const privacyError =
     submitted && !privacy ? t.privacyRequired[lang] : null;
@@ -167,18 +181,29 @@ const ContactModal = ({ open, onOpenChange, lang }: ContactModalProps) => {
 
     try {
       const dateStr = format(selectedDate, "yyyy-MM-dd");
-      const res = await fetch(`${API_URL}/api/schedule`, {
+      const endpoint = isRescheduleMode ? "/api/reschedule" : "/api/schedule";
+      const payload = isRescheduleMode && rescheduleContext
+        ? {
+            eventId: rescheduleContext.eventId,
+            email: email.trim(),
+            date: dateStr,
+            time: selectedTime,
+            lang,
+          }
+        : {
+            name: name.trim(),
+            company: company.trim(),
+            email: email.trim(),
+            description: description.trim(),
+            date: dateStr,
+            time: selectedTime,
+            lang,
+          };
+
+      const res = await fetch(`${API_URL}${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: name.trim(),
-          company: company.trim(),
-          email: email.trim(),
-          description: description.trim(),
-          date: dateStr,
-          time: selectedTime,
-          lang,
-        }),
+        body: JSON.stringify(payload),
       });
 
       const data = await res.json().catch(() => ({}));
@@ -187,10 +212,16 @@ const ContactModal = ({ open, onOpenChange, lang }: ContactModalProps) => {
         if (data.error === "slot_taken") {
           setScheduleError(t.errorSlotTaken[lang]);
           setStep("time");
+        } else if (data.error === "forbidden") {
+          setScheduleError(t.errorRescheduleForbidden[lang]);
         } else {
           setScheduleError(t.errorGeneric[lang]);
         }
         return;
+      }
+
+      if (isRescheduleMode) {
+        onRescheduleCompleted?.();
       }
 
       setStep("success");
@@ -422,31 +453,35 @@ const ContactModal = ({ open, onOpenChange, lang }: ContactModalProps) => {
           </div>
         )}
 
-        {/* Name */}
-        <div className="space-y-1.5">
-          <Label htmlFor="c-name" className="text-foreground font-body font-semibold text-sm">
-            {t.nameLabel[lang]} <span className="text-destructive">*</span>
-          </Label>
-          <Input id="c-name" value={name} onChange={(e) => setName(e.target.value)}
-            placeholder={t.namePlaceholder[lang]} autoComplete="name"
-            className={`${inputCls} ${submitted && !name.trim() ? inputErrCls : ""}`} />
-          {submitted && !name.trim() && (
-            <p className="text-xs font-body text-destructive">{t.nameRequired[lang]}</p>
-          )}
-        </div>
+        {!isRescheduleMode && (
+          <>
+            {/* Name */}
+            <div className="space-y-1.5">
+              <Label htmlFor="c-name" className="text-foreground font-body font-semibold text-sm">
+                {t.nameLabel[lang]} <span className="text-destructive">*</span>
+              </Label>
+              <Input id="c-name" value={name} onChange={(e) => setName(e.target.value)}
+                placeholder={t.namePlaceholder[lang]} autoComplete="name"
+                className={`${inputCls} ${submitted && !name.trim() ? inputErrCls : ""}`} />
+              {submitted && !name.trim() && (
+                <p className="text-xs font-body text-destructive">{t.nameRequired[lang]}</p>
+              )}
+            </div>
 
-        {/* Company */}
-        <div className="space-y-1.5">
-          <Label htmlFor="c-company" className="text-foreground font-body font-semibold text-sm">
-            {t.companyLabel[lang]} <span className="text-destructive">*</span>
-          </Label>
-          <Input id="c-company" value={company} onChange={(e) => setCompany(e.target.value)}
-            placeholder={t.companyPlaceholder[lang]} autoComplete="organization"
-            className={`${inputCls} ${submitted && !company.trim() ? inputErrCls : ""}`} />
-          {submitted && !company.trim() && (
-            <p className="text-xs font-body text-destructive">{t.companyRequired[lang]}</p>
-          )}
-        </div>
+            {/* Company */}
+            <div className="space-y-1.5">
+              <Label htmlFor="c-company" className="text-foreground font-body font-semibold text-sm">
+                {t.companyLabel[lang]} <span className="text-destructive">*</span>
+              </Label>
+              <Input id="c-company" value={company} onChange={(e) => setCompany(e.target.value)}
+                placeholder={t.companyPlaceholder[lang]} autoComplete="organization"
+                className={`${inputCls} ${submitted && !company.trim() ? inputErrCls : ""}`} />
+              {submitted && !company.trim() && (
+                <p className="text-xs font-body text-destructive">{t.companyRequired[lang]}</p>
+              )}
+            </div>
+          </>
+        )}
 
         {/* Email */}
         <div className="space-y-1.5">
@@ -457,21 +492,23 @@ const ContactModal = ({ open, onOpenChange, lang }: ContactModalProps) => {
             onChange={(e) => setEmail(e.target.value)}
             onBlur={() => setEmailTouched(true)}
             placeholder={t.emailPlaceholder[lang]} autoComplete="email"
+            readOnly={isRescheduleMode}
             className={`${inputCls} ${emailErr ? inputErrCls : ""}`} />
           {emailErr && (
             <p className="text-xs font-body text-destructive">{emailErr}</p>
           )}
         </div>
 
-        {/* Description */}
-        <div className="space-y-1.5">
-          <Label htmlFor="c-desc" className="text-foreground font-body font-semibold text-sm">
-            {t.descriptionLabel[lang]}
-          </Label>
-          <Textarea id="c-desc" value={description} onChange={(e) => setDescription(e.target.value)}
-            placeholder={t.descriptionPlaceholder[lang]} rows={2}
-            className={`${inputCls} resize-none`} />
-        </div>
+        {!isRescheduleMode && (
+          <div className="space-y-1.5">
+            <Label htmlFor="c-desc" className="text-foreground font-body font-semibold text-sm">
+              {t.descriptionLabel[lang]}
+            </Label>
+            <Textarea id="c-desc" value={description} onChange={(e) => setDescription(e.target.value)}
+              placeholder={t.descriptionPlaceholder[lang]} rows={2}
+              className={`${inputCls} resize-none`} />
+          </div>
+        )}
 
         {/* Privacy */}
         <div className="space-y-1.5">

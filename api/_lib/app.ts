@@ -1,11 +1,21 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
+import { existsSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import { config as loadEnv } from "dotenv";
 import { scheduleRoute } from "./schedule.js";
 
 const app = new Hono();
 
-// CORS — only needed when frontend runs on a different origin (local dev).
-// On Vercel the API is same-origin, so CORS headers are unnecessary.
+const currentDir = dirname(fileURLToPath(import.meta.url));
+const apiEnvPath = resolve(currentDir, "..", ".env");
+if (existsSync(apiEnvPath)) {
+  loadEnv({ path: apiEnvPath, override: false });
+} else {
+  loadEnv();
+}
+
 const allowedOrigins = (process.env.ALLOWED_ORIGINS ?? "")
   .split(",")
   .map((o) => o.trim())
@@ -23,11 +33,8 @@ if (allowedOrigins.length > 0) {
   );
 }
 
-// ── Rate limiter (in-memory, per IP) ────────────────────────────────────
-// Note: effective for long-running servers (local dev). On serverless each
-// invocation may be a new instance, so this won't enforce limits reliably.
-const RATE_WINDOW_MS = 60_000; // 1 minute
-const RATE_MAX = 10; // max requests per window
+const RATE_WINDOW_MS = 60_000;
+const RATE_MAX = 10;
 const hits = new Map<string, { count: number; resetAt: number }>();
 
 app.use("*", async (c, next) => {
@@ -54,7 +61,6 @@ app.use("*", async (c, next) => {
   await next();
 });
 
-// Periodic cleanup — only useful for long-running processes
 if (!process.env.VERCEL) {
   setInterval(() => {
     const now = Date.now();
@@ -72,7 +78,7 @@ app.all("*", (c) => {
   return c.json({ error: "not_found" }, 404);
 });
 
-// Global error handler — ensures Vercel always gets a response
+
 app.onError((err, c) => {
   console.error("Unhandled error:", err instanceof Error ? err.message : "unknown");
   return c.json({ error: "server_error" }, 500);

@@ -1,8 +1,10 @@
-import { content, type Lang } from "@/lib/content";
+import { content } from "@/lib/content";
+import { useLang } from "@/hooks/use-lang";
 import { Button } from "@/components/ui/button";
 import AnimatedSection from "./AnimatedSection";
 
-const CtaSection = ({ lang, onOpenContact }: { lang: Lang; onOpenContact: () => void }) => {
+const CtaSection = ({ onOpenContact }: { onOpenContact: () => void }) => {
+  const { lang } = useLang();
   const t = content.ctaSection;
 
   return (

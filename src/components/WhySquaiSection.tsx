@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { content, type Lang } from "@/lib/content";
+import { content } from "@/lib/content";
+import { useLang } from "@/hooks/use-lang";
 import { Users, Globe, Zap, Rocket } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import AnimatedSection from "./AnimatedSection";
@@ -66,7 +67,8 @@ const textVariants = {
   inactive: { opacity: 0.15, y: 10 }
 };
 
-const WhySquaiSection = ({ lang }: { lang: Lang }) => {
+const WhySquaiSection = () => {
+  const { lang } = useLang();
   const t = content.whySquai;
   const ids = t.items.map((_, i) => `why-squai-item-${i}`);
   const activeId = useActiveSection(ids);
@@ -177,7 +179,7 @@ const WhySquaiSection = ({ lang }: { lang: Lang }) => {
             {t.items.map((item, i) => {
               const Icon = icons[i];
               return (
-                <AnimatedSection key={i} delay={i * 0.1}>
+                <AnimatedSection key={item.title.en} delay={i * 0.1}>
                   <div className="bg-[#12152A] rounded-2xl overflow-hidden border border-[rgba(124,140,255,0.15)] p-6 md:p-8 flex flex-col">
                     <div className="w-full h-56 flex items-center justify-center p-2 mb-6 rounded-xl overflow-hidden relative">
                       <img 

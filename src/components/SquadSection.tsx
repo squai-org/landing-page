@@ -1,5 +1,6 @@
 import React from "react";
-import { content, type Lang } from "@/lib/content";
+import { content } from "@/lib/content";
+import { useLang } from "@/hooks/use-lang";
 import { motion } from "framer-motion";
 
 const borderColorMap: Record<string, string> = {
@@ -50,7 +51,8 @@ const cardVariants = {
   },
 };
 
-const SquadSection = ({ lang }: { lang: Lang }) => {
+const SquadSection = () => {
+  const { lang } = useLang();
   const t = content.squad;
 
   return (
@@ -84,7 +86,7 @@ const SquadSection = ({ lang }: { lang: Lang }) => {
 
             return (
               <motion.div
-                key={i}
+                key={person.name}
                 variants={cardVariants}
                 className="flex flex-col h-full group transition-all duration-300 hover:-translate-y-2"
               >
