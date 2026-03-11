@@ -90,7 +90,7 @@ const HeroSection = ({ lang, onOpenContact }: { lang: Lang; onOpenContact: () =>
             transition={{ duration: 0.8, delay: 0.5 }}
             className="flex flex-1 items-center justify-center p-0 w-full max-w-[240px] sm:max-w-[350px] md:max-w-[400px] lg:max-w-none"
           >
-            <img src="/illustrations/Creative team-cuate.svg" alt="Creative team collaborating with AI" width="600" height="600" fetchPriority="high" className="w-full h-full object-contain" />
+            <img src="/illustrations/Creative team-cuate.svg" alt="Creative team collaborating with AI" width="600" height="600" className="w-full h-full object-contain" />
           </motion.div>
         </div>
       </div>
