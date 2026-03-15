@@ -1,20 +1,8 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import { existsSync } from "node:fs";
-import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
-import { config as loadEnv } from "dotenv";
 import { scheduleRoute } from "./schedule.js";
 
 const app = new Hono();
-
-const currentDir = dirname(fileURLToPath(import.meta.url));
-const apiEnvPath = resolve(currentDir, "..", ".env");
-if (existsSync(apiEnvPath)) {
-  loadEnv({ path: apiEnvPath, override: false });
-} else {
-  loadEnv();
-}
 
 const allowedOrigins = (process.env.ALLOWED_ORIGINS ?? "")
   .split(",")
@@ -32,6 +20,7 @@ if (allowedOrigins.length > 0) {
     }),
   );
 }
+
 
 const RATE_WINDOW_MS = 60_000;
 const RATE_MAX = 10;

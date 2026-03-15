@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import { content } from "@/lib/content";
 import { useLang } from "@/hooks/use-lang";
 import { Button } from "@/components/ui/button";
@@ -23,18 +23,24 @@ import {
 import { format } from "date-fns";
 import { es as esLocale, enUS } from "date-fns/locale";
 
-const API_URL = import.meta.env.VITE_API_URL ?? (import.meta.env.DEV ? "http://localhost:3001" : "");
+const API_URL = import.meta.env.VITE_API_URL ?? "";
 
 type Step = "date" | "time" | "form" | "success";
 
 const STEP_INDEX: Record<Step, number> = { date: 0, time: 1, form: 2, success: 3 };
 
-// STEP_INFO built inside component from content.ts
+/** Format an ISO slot to the user's local time (e.g. "9:00 AM") */
+function formatSlotLocal(iso: string, lang: "en" | "es"): string {
+  return new Date(iso).toLocaleTimeString(lang === "es" ? "es" : "en", {
+    hour: "numeric",
+    minute: "2-digit",
+  });
+}
 
-// Morning 9:00–12:00, Afternoon 14:00–17:00, 30-min slots
-const MORNING_SLOTS = ["09:00", "09:30", "10:00", "10:30", "11:00", "11:30"];
-const AFTERNOON_SLOTS = ["14:00", "14:30", "15:00", "15:30", "16:00", "16:30"];
-const ALL_SLOTS = [...MORNING_SLOTS, ...AFTERNOON_SLOTS];
+/** Get the local hour from an ISO string (for morning/afternoon grouping) */
+function getLocalHour(iso: string): number {
+  return new Date(iso).getHours();
+}
 
 interface ContactModalProps {
   open: boolean;
@@ -63,7 +69,7 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
   // ── Step flow ──
   const [step, setStep] = useState<Step>("date");
   const [selectedDate, setSelectedDate] = useState<Date | undefined>();
-  const [selectedTime, setSelectedTime] = useState<string | undefined>();
+  const [selectedSlot, setSelectedSlot] = useState<string | undefined>(); // ISO string
 
   // ── Form state ──
   const [name, setName] = useState("");
@@ -76,8 +82,8 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
   const [scheduling, setScheduling] = useState(false);
   const [scheduleError, setScheduleError] = useState<string | null>(null);
 
-  // ── Availability ──
-  const [busySlots, setBusySlots] = useState<Record<string, string[]>>({});
+  // ── Availability (ISO strings from backend, keyed by business date) ──
+  const [availableSlots, setAvailableSlots] = useState<Record<string, string[]>>({});
   const [loadingSlots, setLoadingSlots] = useState(false);
   const [calendarMonth, setCalendarMonth] = useState(() => new Date());
 
@@ -85,11 +91,11 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
   useEffect(() => {
     if (!open) {
       const timeout = setTimeout(() => {
-        setStep("date"); setSelectedDate(undefined); setSelectedTime(undefined);
+        setStep("date"); setSelectedDate(undefined); setSelectedSlot(undefined);
         setName(""); setCompany(""); setEmail(""); setDescription("");
         setEmailTouched(false); setPrivacy(false); setSubmitted(false);
         setScheduling(false); setScheduleError(null);
-        setBusySlots({}); setLoadingSlots(false); setCalendarMonth(new Date());
+        setAvailableSlots({}); setLoadingSlots(false); setCalendarMonth(new Date());
       }, 200);
       return () => clearTimeout(timeout);
     }
@@ -112,13 +118,13 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
       const res = await fetch(`${API_URL}/api/availability?from=${from}&to=${to}`);
       if (res.ok) {
         const data = await res.json();
-        setBusySlots((prev) => {
-          const busy = data.busy;
-          return busy ? { ...prev, ...busy } : prev;
+        setAvailableSlots((prev) => {
+          const slots = data.slots;
+          return slots ? { ...prev, ...slots } : prev;
         });
       }
     } catch {
-      // Fetch failed — slots appear available; server validates on booking
+      // Fetch failed — server validates on booking
     } finally {
       setLoadingSlots(false);
     }
@@ -131,11 +137,22 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
   const isDayFullyBooked = useCallback(
     (date: Date): boolean => {
       const dateStr = format(date, "yyyy-MM-dd");
-      const busy = busySlots[dateStr];
-      return !!busy && ALL_SLOTS.every((s) => busy.includes(s));
+      // If we have data and this date has no available slots, it's fully booked
+      return Object.keys(availableSlots).length > 0 && (availableSlots[dateStr]?.length ?? 0) <= 0;
     },
-    [busySlots],
+    [availableSlots],
   );
+
+  // ── Slots for the selected date, grouped by local morning/afternoon ──
+  const { morningSlots, afternoonSlots } = useMemo(() => {
+    if (!selectedDate) return { morningSlots: [] as string[], afternoonSlots: [] as string[] };
+    const dateStr = format(selectedDate, "yyyy-MM-dd");
+    const daySlots = availableSlots[dateStr] ?? [];
+    return {
+      morningSlots: daySlots.filter((s) => getLocalHour(s) < 12),
+      afternoonSlots: daySlots.filter((s) => getLocalHour(s) >= 12),
+    };
+  }, [selectedDate, availableSlots]);
 
   // ── Validation ──
   const emailError = useCallback((): string | null => {
@@ -160,13 +177,13 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
   // ── Handlers ──
   const handleDateSelect = (date: Date | undefined) => {
     setSelectedDate(date);
-    setSelectedTime(undefined);
+    setSelectedSlot(undefined);
     setScheduleError(null);
     if (date) setStep("time");
   };
 
-  const handleTimeSelect = (time: string) => {
-    setSelectedTime(time);
+  const handleTimeSelect = (slot: string) => {
+    setSelectedSlot(slot);
     setScheduleError(null);
     setStep("form");
   };
@@ -174,20 +191,18 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
-    if (!isValid || !selectedDate || !selectedTime) return;
+    if (!isValid || !selectedDate || !selectedSlot) return;
 
     setScheduling(true);
     setScheduleError(null);
 
     try {
-      const dateStr = format(selectedDate, "yyyy-MM-dd");
       const endpoint = isRescheduleMode ? "/api/reschedule" : "/api/schedule";
       const payload = isRescheduleMode && rescheduleContext
         ? {
             eventId: rescheduleContext.eventId,
             email: email.trim(),
-            date: dateStr,
-            time: selectedTime,
+            datetime: selectedSlot,
             lang,
           }
         : {
@@ -195,8 +210,7 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
             company: company.trim(),
             email: email.trim(),
             description: description.trim(),
-            date: dateStr,
-            time: selectedTime,
+            datetime: selectedSlot,
             lang,
           };
 
@@ -239,6 +253,8 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
   const dateFmt = selectedDate
     ? format(selectedDate, "EEE, MMM d", { locale: lang === "es" ? esLocale : enUS })
     : "";
+
+  const selectedTimeFmt = selectedSlot ? formatSlotLocal(selectedSlot, lang) : "";
 
   // ── Step indicator ──
   const stepInfo = [
@@ -334,7 +350,7 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
             head_row: "flex w-full",
             head_cell: "text-muted-foreground rounded-md flex-1 font-normal text-[0.8rem]",
             row: "flex w-full mt-2",
-            cell: "flex-1 h-9 text-center text-sm p-0 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
+            cell: "flex-1 h-9 text-center text-sm p-0 relative focus-within:relative focus-within:z-20",
           }}
         />
       );
@@ -342,10 +358,7 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
 
     // ── TIME ──
     if (step === "time") {
-      const dateBusy = selectedDate ? busySlots[format(selectedDate, "yyyy-MM-dd")] ?? [] : [];
-      const availMorning = MORNING_SLOTS.filter((s) => !dateBusy.includes(s));
-      const availAfternoon = AFTERNOON_SLOTS.filter((s) => !dateBusy.includes(s));
-      const noSlots = !loadingSlots && availMorning.length === 0 && availAfternoon.length === 0;
+      const noSlots = !loadingSlots && morningSlots.length === 0 && afternoonSlots.length === 0;
 
       return (
         <div className="space-y-4">
@@ -381,44 +394,44 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
             <p className="text-sm font-body text-muted-foreground text-center py-6">{t.noSlots[lang]}</p>
           )}
 
-          {!loadingSlots && availMorning.length > 0 && (
+          {!loadingSlots && morningSlots.length > 0 && (
             <div className="space-y-2">
               <p className="text-xs font-body font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
                 <Clock className="h-3 w-3" aria-hidden="true" /> {t.morning[lang]}
               </p>
               <div className="grid grid-cols-3 gap-2">
-                {availMorning.map((slot) => (
+                {morningSlots.map((slot) => (
                   <button key={slot} type="button" onClick={() => handleTimeSelect(slot)}
-                    aria-label={`${slot} ${dateFmt}`}
-                    aria-pressed={selectedTime === slot}
+                    aria-label={`${formatSlotLocal(slot, lang)} ${dateFmt}`}
+                    aria-pressed={selectedSlot === slot}
                     className={`rounded-lg border text-sm font-body font-medium py-2.5 transition-all duration-200 min-h-[44px] ${
-                      selectedTime === slot
+                      selectedSlot === slot
                         ? "border-primary bg-primary/10 text-primary shadow-sm"
                         : "border-white/10 bg-white/5 text-foreground hover:border-primary/40 hover:bg-primary/5"
                     }`}>
-                    {slot}
+                    {formatSlotLocal(slot, lang)}
                   </button>
                 ))}
               </div>
             </div>
           )}
 
-          {!loadingSlots && availAfternoon.length > 0 && (
+          {!loadingSlots && afternoonSlots.length > 0 && (
             <div className="space-y-2">
               <p className="text-xs font-body font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
                 <Clock className="h-3 w-3" aria-hidden="true" /> {t.afternoon[lang]}
               </p>
               <div className="grid grid-cols-3 gap-2">
-                {availAfternoon.map((slot) => (
+                {afternoonSlots.map((slot) => (
                   <button key={slot} type="button" onClick={() => handleTimeSelect(slot)}
-                    aria-label={`${slot} ${dateFmt}`}
-                    aria-pressed={selectedTime === slot}
+                    aria-label={`${formatSlotLocal(slot, lang)} ${dateFmt}`}
+                    aria-pressed={selectedSlot === slot}
                     className={`rounded-lg border text-sm font-body font-medium py-2.5 transition-all duration-200 min-h-[44px] ${
-                      selectedTime === slot
+                      selectedSlot === slot
                         ? "border-primary bg-primary/10 text-primary shadow-sm"
                         : "border-white/10 bg-white/5 text-foreground hover:border-primary/40 hover:bg-primary/5"
                     }`}>
-                    {slot}
+                    {formatSlotLocal(slot, lang)}
                   </button>
                 ))}
               </div>
@@ -439,7 +452,7 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
             <ChevronLeft className="h-4 w-4" aria-hidden="true" />
           </button>
           <span className="text-sm font-body text-foreground font-semibold">
-            {dateFmt} · {selectedTime}
+            {dateFmt} · {selectedTimeFmt}
           </span>
           <button type="button" onClick={() => setStep("date")}
             className="text-xs text-primary hover:underline font-body ml-auto">

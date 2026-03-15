@@ -7,8 +7,9 @@ import { getScheduleCopy } from "./schedule-copy.js";
 import { normalizeLang } from "./lang.js";
 
 // ─── Configuration ──────────────────────────────────────────────────────
-const TIMEZONE = "America/Bogota";
+const BUSINESS_TZ = process.env.BUSINESS_TIMEZONE?.trim() || "America/Bogota";
 const SLOT_DURATION_MIN = 30;
+const PREPARATION_BUFFER_MIN = 30;
 
 const TIME_RANGES = [
   { startHour: 9, endHour: 12 },
@@ -24,6 +25,63 @@ for (const r of TIME_RANGES) {
       `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`,
     );
   }
+}
+
+// ─── Timezone helpers ────────────────────────────────────────────────────
+const dateParts = new Intl.DateTimeFormat("en", {
+  timeZone: BUSINESS_TZ,
+  year: "numeric", month: "2-digit", day: "2-digit",
+  hour: "2-digit", minute: "2-digit", hour12: false,
+});
+
+/** Format a Date to YYYY-MM-DD in the business timezone */
+function toBusinessDate(d: Date): string {
+  const p = Object.fromEntries(
+    dateParts.formatToParts(d).map((x) => [x.type, x.value]),
+  );
+  return `${p.year}-${p.month}-${p.day}`;
+}
+
+/** Get hours and minutes from a Date in the business timezone */
+function toBusinessTime(d: Date): { hour: number; minute: number } {
+  const p = Object.fromEntries(
+    dateParts.formatToParts(d).map((x) => [x.type, x.value]),
+  );
+  return { hour: Number(p.hour), minute: Number(p.minute) };
+}
+
+function getBusinessToday(): string {
+  return toBusinessDate(new Date());
+}
+
+function getBusinessNowMinutes(): number {
+  const { hour, minute } = toBusinessTime(new Date());
+  return hour * 60 + minute;
+}
+
+/** Compute the UTC offset string (e.g. "-05:00") for the business TZ right now */
+function getBusinessOffset(): string {
+  const now = new Date();
+  const utcStr = now.toLocaleString("sv-SE", { timeZone: "UTC" });
+  const bizStr = now.toLocaleString("sv-SE", { timeZone: BUSINESS_TZ });
+  const diffMs = new Date(bizStr).getTime() - new Date(utcStr).getTime();
+  const sign = diffMs >= 0 ? "+" : "-";
+  const abs = Math.abs(diffMs);
+  const h = String(Math.floor(abs / 3_600_000)).padStart(2, "0");
+  const m = String(Math.floor((abs % 3_600_000) / 60_000)).padStart(2, "0");
+  return `${sign}${h}:${m}`;
+}
+
+function isWeekday(dateStr: string): boolean {
+  const offset = getBusinessOffset();
+  const dow = new Date(`${dateStr}T12:00:00${offset}`).getUTCDay();
+  return dow !== 0 && dow !== 6;
+}
+
+function nextDay(dateStr: string): string {
+  const d = new Date(`${dateStr}T12:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + 1);
+  return d.toISOString().slice(0, 10);
 }
 
 // ─── Validation helpers ─────────────────────────────────────────────────
@@ -49,16 +107,14 @@ interface ScheduleBody {
   company: string;
   email: string;
   description?: string;
-  date: string;
-  time: string;
+  datetime: string;
   lang: "en" | "es";
 }
 
 interface RescheduleBody {
   eventId: string;
   email: string;
-  date: string;
-  time: string;
+  datetime: string;
   lang: "en" | "es";
 }
 
@@ -68,8 +124,7 @@ function extractFields(body: Record<string, unknown>) {
     company: typeof body.company === "string" ? sanitize(body.company) : "",
     email: typeof body.email === "string" ? body.email.trim() : "",
     description: typeof body.description === "string" ? sanitize(body.description) : "",
-    date: typeof body.date === "string" ? body.date.trim() : "",
-    time: typeof body.time === "string" ? body.time.trim() : "",
+    datetime: typeof body.datetime === "string" ? body.datetime.trim() : "",
     lang: normalizeLang(body.lang),
   };
 }
@@ -81,19 +136,31 @@ function validateFields(f: ReturnType<typeof extractFields>): string | null {
   if (f.company.length > 200) return "Company too long";
   if (!f.email || !EMAIL_RE.test(f.email)) return "Valid email is required";
   if (f.description.length > 2000) return "Description too long";
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(f.date)) return "Invalid date format (YYYY-MM-DD)";
-  if (!/^\d{2}:\d{2}$/.test(f.time)) return "Invalid time format (HH:mm)";
+  if (!f.datetime) return "Datetime is required";
   return null;
 }
 
-function validateDateAndTime(date: string, time: string): string | null {
+/** Parse an ISO datetime and extract date/time in business TZ */
+function parseDatetime(datetime: string): { date: string; time: string; parsed: Date } | null {
+  const parsed = new Date(datetime);
+  if (Number.isNaN(parsed.getTime())) return null;
+  const date = toBusinessDate(parsed);
+  const { hour, minute } = toBusinessTime(parsed);
+  const time = `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
+  return { date, time, parsed };
+}
+
+function validateDatetime(datetime: string): string | null {
+  const result = parseDatetime(datetime);
+  if (!result) return "Invalid datetime";
+  const { date, time } = result;
+
   const dateObj = new Date(`${date}T12:00:00`);
-  if (Number.isNaN(dateObj.getTime())) return "Invalid date";
   const dayOfWeek = dateObj.getUTCDay();
   const isoDay = dayOfWeek === 0 ? 7 : dayOfWeek;
   if (!VALID_DAYS.has(isoDay)) return "Only weekdays are available";
 
-  const todayStr = new Date().toLocaleDateString("en-CA", { timeZone: TIMEZONE });
+  const todayStr = getBusinessToday();
   if (date < todayStr) return "Cannot schedule in the past";
 
   const [hourStr, minStr] = time.split(":");
@@ -107,6 +174,10 @@ function validateDateAndTime(date: string, time: string): string | null {
   );
   if (!isValidSlot) return "Time slot is outside available hours";
 
+  if (date === todayStr && totalMinutes < getBusinessNowMinutes() + PREPARATION_BUFFER_MIN) {
+    return "Time slot is no longer available";
+  }
+
   return null;
 }
 
@@ -117,10 +188,10 @@ function validateBody(body: unknown): { data?: ScheduleBody; error?: string } {
   const fieldError = validateFields(f);
   if (fieldError) return { error: fieldError };
 
-  const dateTimeError = validateDateAndTime(f.date, f.time);
+  const dateTimeError = validateDatetime(f.datetime);
   if (dateTimeError) return { error: dateTimeError };
 
-  return { data: { name: f.name, company: f.company, email: f.email, description: f.description, date: f.date, time: f.time, lang: f.lang } };
+  return { data: { name: f.name, company: f.company, email: f.email, description: f.description, datetime: f.datetime, lang: f.lang } };
 }
 
 function validateRescheduleBody(body: unknown): { data?: RescheduleBody; error?: string } {
@@ -130,18 +201,16 @@ function validateRescheduleBody(body: unknown): { data?: RescheduleBody; error?:
   const data: RescheduleBody = {
     eventId: typeof raw.eventId === "string" ? raw.eventId.trim() : "",
     email: typeof raw.email === "string" ? raw.email.trim() : "",
-    date: typeof raw.date === "string" ? raw.date.trim() : "",
-    time: typeof raw.time === "string" ? raw.time.trim() : "",
+    datetime: typeof raw.datetime === "string" ? raw.datetime.trim() : "",
     lang: normalizeLang(raw.lang),
   };
 
   if (!data.eventId) return { error: "eventId is required" };
   if (!/^[a-z0-9]{5,1024}$/i.test(data.eventId)) return { error: "Invalid eventId format" };
   if (!data.email || !EMAIL_RE.test(data.email)) return { error: "Valid email is required" };
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(data.date)) return { error: "Invalid date format (YYYY-MM-DD)" };
-  if (!/^\d{2}:\d{2}$/.test(data.time)) return { error: "Invalid time format (HH:mm)" };
+  if (!data.datetime) return { error: "Datetime is required" };
 
-  const dateTimeError = validateDateAndTime(data.date, data.time);
+  const dateTimeError = validateDatetime(data.datetime);
   if (dateTimeError) return { error: dateTimeError };
 
   return { data };
@@ -154,7 +223,7 @@ function getOauthConfig() {
     clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET?.trim() ?? "",
     refreshToken: process.env.GOOGLE_OAUTH_REFRESH_TOKEN?.trim() ?? "",
     redirectBaseUrl:
-      process.env.GOOGLE_OAUTH_REDIRECT_BASE_URL?.trim() ?? "http://localhost:3001",
+      process.env.GOOGLE_OAUTH_REDIRECT_BASE_URL?.trim() ?? "",
     stateSecret:
       process.env.GOOGLE_OAUTH_STATE_SECRET?.trim() ??
       process.env.GOOGLE_OAUTH_CLIENT_SECRET?.trim() ??
@@ -314,28 +383,18 @@ function buildRescheduleLink(eventId: string, email: string, lang: "en" | "es"):
   }
 }
 
-function buildStartAndEnd(date: string, time: string) {
-  const startDateTime = `${date}T${time}:00`;
-  const [h, m] = time.split(":").map(Number);
-  const endMin = m + SLOT_DURATION_MIN;
-  const endH = h + Math.floor(endMin / 60);
-  const endM = endMin % 60;
-  const endTime = `${String(endH).padStart(2, "0")}:${String(endM).padStart(2, "0")}`;
-  const endDateTime = `${date}T${endTime}:00`;
-  return { startDateTime, endDateTime };
-}
 
 async function hasSlotConflict(
   calendar: ReturnType<typeof google.calendar>,
   calendarId: string,
-  startDateTime: string,
-  endDateTime: string,
+  startMs: number,
+  endMs: number,
   excludeEventId?: string,
 ) {
   const eventsRes = await calendar.events.list({
     calendarId,
-    timeMin: new Date(`${startDateTime}-05:00`).toISOString(),
-    timeMax: new Date(`${endDateTime}-05:00`).toISOString(),
+    timeMin: new Date(startMs).toISOString(),
+    timeMax: new Date(endMs).toISOString(),
     singleEvents: true,
     showDeleted: false,
     maxResults: 20,
@@ -451,13 +510,15 @@ scheduleRoute.post("/schedule", async (c) => {
     const calendar = getCalendarClient();
     const calendarId = getCalendarId();
     
-    const { startDateTime, endDateTime } = buildStartAndEnd(data.date, data.time);
+    const result = parseDatetime(data.datetime)!;
+    const startMs = result.parsed.getTime();
+    const endMs = startMs + SLOT_DURATION_MIN * 60_000;
     
     const busyCheck = await calendar.freebusy.query({
       requestBody: {
-        timeMin: new Date(`${startDateTime}-05:00`).toISOString(),
-        timeMax: new Date(`${endDateTime}-05:00`).toISOString(),
-        timeZone: TIMEZONE,
+        timeMin: new Date(startMs).toISOString(),
+        timeMax: new Date(endMs).toISOString(),
+        timeZone: BUSINESS_TZ,
         items: [{ id: calendarId }],
       },
     });
@@ -466,7 +527,7 @@ scheduleRoute.post("/schedule", async (c) => {
     if (busy.length > 0) {
       return c.json({ error: "slot_taken" }, 409);
     }
-    
+
     const summary =
       `${getScheduleCopy(data.lang ?? "en").summary} — ${data.name} (${data.company})`;
 
@@ -489,18 +550,25 @@ scheduleRoute.post("/schedule", async (c) => {
     await calendar.events.insert({
       calendarId,
       sendUpdates: "all",
+      conferenceDataVersion: 1,
       requestBody: {
         id: eventId,
         summary,
         description,
-        start: { dateTime: startDateTime, timeZone: TIMEZONE },
-        end: { dateTime: endDateTime, timeZone: TIMEZONE },
+        start: { dateTime: new Date(startMs).toISOString() },
+        end: { dateTime: new Date(endMs).toISOString() },
         attendees: [
           {
             email: data.email,
             displayName: data.name,
           },
         ],
+        conferenceData: {
+          createRequest: {
+            requestId: eventId,
+            conferenceSolutionKey: { type: "hangoutsMeet" },
+          },
+        },
         reminders: {
           useDefault: false,
           overrides: [
@@ -542,7 +610,9 @@ scheduleRoute.post("/reschedule", async (c) => {
   try {
     const calendar = getCalendarClient();
     const calendarId = getCalendarId();
-    const { startDateTime, endDateTime } = buildStartAndEnd(data.date, data.time);
+    const result = parseDatetime(data.datetime)!;
+    const startMs = result.parsed.getTime();
+    const endMs = startMs + SLOT_DURATION_MIN * 60_000;
 
     const existing = await calendar.events.get({ calendarId, eventId: data.eventId });
     const event = existing.data;
@@ -558,8 +628,8 @@ scheduleRoute.post("/reschedule", async (c) => {
     const hasConflict = await hasSlotConflict(
       calendar,
       calendarId,
-      startDateTime,
-      endDateTime,
+      startMs,
+      endMs,
       data.eventId,
     );
     if (hasConflict) {
@@ -571,8 +641,8 @@ scheduleRoute.post("/reschedule", async (c) => {
       eventId: data.eventId,
       sendUpdates: "all",
       requestBody: {
-        start: { dateTime: startDateTime, timeZone: TIMEZONE },
-        end: { dateTime: endDateTime, timeZone: TIMEZONE },
+        start: { dateTime: new Date(startMs).toISOString() },
+        end: { dateTime: new Date(endMs).toISOString() },
       },
     });
 
@@ -585,8 +655,6 @@ scheduleRoute.post("/reschedule", async (c) => {
 });
 
 // ─── Availability ───────────────────────────────────────────────────────
-const BOGOTA_OFFSET = "-05:00";
-
 interface BusyPeriod {
   start?: string | null;
   end?: string | null;
@@ -599,33 +667,48 @@ function isSlotTaken(slotStartMs: number, slotEndMs: number, periods: BusyPeriod
   });
 }
 
-function computeBusySlots(
+function getSlotIso(
+  slot: string,
+  dateStr: string,
+  offset: string,
+  todayStr: string,
+  minSlotMinutes: number,
+  slotMs: number,
+  periods: BusyPeriod[],
+): string | null {
+  const slotStartMs = Date.parse(`${dateStr}T${slot}:00${offset}`);
+  if (isSlotTaken(slotStartMs, slotStartMs + slotMs, periods)) return null;
+
+  if (dateStr === todayStr) {
+    const [sh, sm] = slot.split(":").map(Number);
+    if (sh * 60 + sm < minSlotMinutes) return null;
+  }
+
+  return new Date(slotStartMs).toISOString();
+}
+
+function computeAvailableSlots(
   from: string,
   to: string,
   periods: BusyPeriod[],
 ): Record<string, string[]> {
+  const offset = getBusinessOffset();
+  const todayStr = getBusinessToday();
+  const minSlotMinutes = getBusinessNowMinutes() + PREPARATION_BUFFER_MIN;
   const slotMs = SLOT_DURATION_MIN * 60_000;
-  const busy: Record<string, string[]> = {};
+  const slots: Record<string, string[]> = {};
 
-  let cursor = from;
-  while (cursor <= to) {
-    const dow = new Date(`${cursor}T12:00:00${BOGOTA_OFFSET}`).getUTCDay();
-    if (dow !== 0 && dow !== 6) {
-      const dayBusy: string[] = [];
-      for (const slot of ALL_SLOTS) {
-        const slotStartMs = Date.parse(`${cursor}T${slot}:00${BOGOTA_OFFSET}`);
-        if (isSlotTaken(slotStartMs, slotStartMs + slotMs, periods)) {
-          dayBusy.push(slot);
-        }
-      }
-      if (dayBusy.length > 0) busy[cursor] = dayBusy;
-    }
-    const next = new Date(`${cursor}T12:00:00Z`);
-    next.setUTCDate(next.getUTCDate() + 1);
-    cursor = next.toISOString().slice(0, 10);
+  for (let cursor = from; cursor <= to; cursor = nextDay(cursor)) {
+    if (!isWeekday(cursor)) continue;
+
+    const daySlots = ALL_SLOTS
+      .map((slot) => getSlotIso(slot, cursor, offset, todayStr, minSlotMinutes, slotMs, periods))
+      .filter((iso): iso is string => iso !== null);
+
+    if (daySlots.length > 0) slots[cursor] = daySlots;
   }
 
-  return busy;
+  return slots;
 }
 
 scheduleRoute.get("/availability", async (c) => {
@@ -636,8 +719,9 @@ scheduleRoute.get("/availability", async (c) => {
     return c.json({ error: "validation", message: "from and to params required (YYYY-MM-DD)" }, 400);
   }
 
-  const fromMs = Date.parse(`${from}T00:00:00${BOGOTA_OFFSET}`);
-  const toMs = Date.parse(`${to}T23:59:59${BOGOTA_OFFSET}`);
+  const offset = getBusinessOffset();
+  const fromMs = Date.parse(`${from}T00:00:00${offset}`);
+  const toMs = Date.parse(`${to}T23:59:59${offset}`);
 
   if (Number.isNaN(fromMs) || Number.isNaN(toMs) || from > to) {
     return c.json({ error: "validation", message: "Invalid date range" }, 400);
@@ -655,15 +739,15 @@ scheduleRoute.get("/availability", async (c) => {
       requestBody: {
         timeMin: new Date(fromMs).toISOString(),
         timeMax: new Date(toMs).toISOString(),
-        timeZone: TIMEZONE,
+        timeZone: BUSINESS_TZ,
         items: [{ id: calendarId }],
       },
     });
 
     const periods = freebusyRes.data.calendars?.[calendarId]?.busy ?? [];
-    const busy = computeBusySlots(from, to, periods);
+    const slots = computeAvailableSlots(from, to, periods);
 
-    return c.json({ busy });
+    return c.json({ slots });
   } catch (err: unknown) {
     console.error("[availability] Error:", err instanceof Error ? err.message : err);
     return c.json({ error: "server_error" }, 500);
