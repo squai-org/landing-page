@@ -1,11 +1,10 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
-import path from "path";
+import path from "node:path";
 import { componentTagger } from "lovable-tagger";
 import securityHeadersPlugin from "./plugins/vite-plugin-security-headers";
 import Sitemap from "vite-plugin-sitemap";
 
-// https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   base: '/',
   server: {

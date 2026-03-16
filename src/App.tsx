@@ -11,7 +11,6 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
 
-/** Detect language from browser locale — "es*" → /es, everything else → /en */
 function detectLang(): "en" | "es" {
   const browserLang = navigator.language ?? "";
   return browserLang.startsWith("es") ? "es" : "en";
@@ -28,11 +27,9 @@ const App = () => (
           v7_relativeSplatPath: true,
         }}>
         <Routes>
-          {/* Redirect bare / to detected language */}
           <Route path="/" element={<Navigate to={`/${detectLang()}`} replace />} />
           <Route path="/privacy" element={<Navigate to={`/${detectLang()}/privacy`} replace />} />
 
-          {/* Language-prefixed routes */}
           <Route path="/:lang" element={<Index />} />
           <Route path="/:lang/privacy" element={<Suspense fallback={null}><Privacy /></Suspense>} />
           <Route path="*" element={<Suspense fallback={null}><NotFound /></Suspense>} />

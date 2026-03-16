@@ -20,8 +20,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DIST = path.resolve(__dirname, "dist");
 const PORT = 45678;
 const ROUTES = ["/en", "/es", "/en/privacy", "/es/privacy"];
-
-/** Create a tiny static file server pointed at dist/ */
 function startServer() {
   const server = http.createServer((req, res) =>
     handler(req, res, {
@@ -38,7 +36,6 @@ function startServer() {
 }
 
 async function prerender() {
-  // Try to import puppeteer — skip gracefully if Chrome is not available (CI)
   let launch;
   try {
     const puppeteer = await import("puppeteer");
@@ -66,14 +63,11 @@ async function prerender() {
 
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: "networkidle0", timeout: 30_000 });
-
-    // Let React Helmet update <head>
     await page.evaluate(() => new Promise((r) => setTimeout(r, 500)));
 
     const html = await page.content();
     await page.close();
-
-    // Determine output file path
+    
     const outDir =
       route === "/" ? DIST : path.join(DIST, route.replace(/^\//, ""));
     await mkdir(outDir, { recursive: true });

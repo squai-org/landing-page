@@ -2,26 +2,13 @@ import { Helmet } from "react-helmet-async";
 import { useLang } from "@/hooks/use-lang";
 import type { Localized } from "@/i18n/types";
 import { getAltLang, OG_LOCALE_BY_LANG } from "@/i18n/config";
+import { SITE_URL, OG_IMAGE, STRUCTURED_DATA } from "@/constants";
 
 interface SeoHeadProps {
   title: Localized;
   description: Localized;
   path: string;
 }
-
-const SITE_URL = "https://heysquai.vercel.app";
-const OG_IMAGE =
-  "https://storage.googleapis.com/gpt-engineer-file-uploads/YGktk21auYRi2XgzqQtnZjjqIc12/social-images/social-1772750720767-Squai_logo_(1).webp";
-
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "Squai",
-  description: "AI implementation consultancy for growing teams in Latin America",
-  url: SITE_URL,
-  areaServed: "Latin America",
-  availableLanguage: ["Spanish", "English"],
-};
 
 const SeoHead = ({ title, description, path }: SeoHeadProps) => {
   const { lang } = useLang();
@@ -39,7 +26,6 @@ const SeoHead = ({ title, description, path }: SeoHeadProps) => {
       <link rel="alternate" hrefLang={altLang} href={altCanonical} />
       <link rel="alternate" hrefLang="x-default" href={`${SITE_URL}/en${path === "/" ? "" : path}`} />
 
-      {/* Open Graph */}
       <meta property="og:title" content={title[lang]} />
       <meta property="og:description" content={description[lang]} />
       <meta property="og:url" content={canonical} />
@@ -51,17 +37,15 @@ const SeoHead = ({ title, description, path }: SeoHeadProps) => {
         content={OG_LOCALE_BY_LANG[altLang]}
       />
 
-      {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title[lang]} />
       <meta name="twitter:description" content={description[lang]} />
       <meta name="twitter:image" content={OG_IMAGE} />
       <meta name="twitter:site" content="@Squai" />
 
-      {/* Structured Data — only on homepage */}
       {path === "/" && (
         <script type="application/ld+json">
-          {JSON.stringify(structuredData)}
+          {JSON.stringify(STRUCTURED_DATA)}
         </script>
       )}
     </Helmet>
