@@ -14,7 +14,19 @@ import {
 import { HttpStatus, ErrorCode } from "../config/constants.js";
 import { getErrorMessage } from "../utils/index.js";
 
-/** Handles POST /api/schedule — validates body and creates a calendar booking. */
+/**
+ * Handles POST /api/schedule.
+ *
+ * Validates the request body ({@link CreateBookingParams}), checks calendar
+ * availability via Google FreeBusy, and creates a Calendar event with a
+ * Google Meet link and confirmation email.
+ *
+ * @param c - Hono request context with JSON body.
+ * @returns 200 `{ success: true }` on success.
+ * @returns 400 if validation fails.
+ * @returns 409 if the requested time slot is already taken.
+ * @returns 500 on calendar permission or unexpected errors.
+ */
 export async function handleSchedule(c: Context) {
   const body = await c.req.json().catch(() => null);
   const result = validateScheduleBody(body);
@@ -55,7 +67,19 @@ export async function handleSchedule(c: Context) {
   }
 }
 
-/** Handles POST /api/reschedule — validates body and moves an existing event. */
+/**
+ * Handles POST /api/reschedule.
+ *
+ * Validates the request body ({@link RescheduleBookingParams}), verifies the
+ * email matches an attendee of the existing event, checks for conflicts,
+ * and patches the event with the new time.
+ *
+ * @param c - Hono request context with JSON body.
+ * @returns 200 `{ success: true, action: "rescheduled" }` on success.
+ * @returns 400 if validation fails.
+ * @returns 403 if the email is not an attendee of the event.
+ * @returns 409 if the new time slot is already taken.
+ */
 export async function handleReschedule(c: Context) {
   const body = await c.req.json().catch(() => null);
   const result = validateRescheduleBody(body);
@@ -89,7 +113,17 @@ export async function handleReschedule(c: Context) {
   }
 }
 
-/** Handles GET /api/availability — returns available slots for a date range. */
+/**
+ * Handles GET /api/availability.
+ *
+ * Accepts `from` and `to` query parameters (YYYY-MM-DD) and returns available
+ * 30-minute booking slots grouped by date, excluding busy periods from
+ * Google Calendar and respecting business hours.
+ *
+ * @param c - Hono request context with `from` and `to` query params.
+ * @returns 200 `{ slots: Record<string, string[]> }` with ISO datetime strings.
+ * @returns 400 if query params are missing or the range exceeds 45 days.
+ */
 export async function handleAvailability(c: Context) {
   const from = c.req.query("from");
   const to = c.req.query("to");
