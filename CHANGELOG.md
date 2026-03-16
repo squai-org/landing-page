@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.0.2](https://github.com/squai-org/landing-page/compare/squai-landing-page-v1.0.1...squai-landing-page-v1.0.2) (2026-03-16)
+
+
+### Bug Fixes
+
+* use plain version tags without component prefix ([d55177e](https://github.com/squai-org/landing-page/commit/d55177e712d119f7c8f8adf5736a9ac3d0345196))
+
 ## [1.0.1](https://github.com/squai-org/landing-page/compare/squai-landing-page-v1.0.0...squai-landing-page-v1.0.1) (2026-03-16)
 
 
