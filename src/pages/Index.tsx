@@ -1,25 +1,23 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { content } from "@/lib/content";
+import { t } from "@/lib/content";
 import { useLang } from "@/hooks/use-lang";
 import { Button } from "@/components/ui/button";
 import SeoHead from "@/components/SeoHead";
-import Navbar from "@/components/Navbar";
-import GradientBackground from "@/components/GradientBackground";
-import HeroSection from "@/components/HeroSection";
-import ProblemSection from "@/components/ProblemSection";
-import ServicesSection from "@/components/ServicesSection";
-import HowItWorksSection from "@/components/HowItWorksSection";
-import IndustriesSection from "@/components/IndustriesSection";
-import WhySquaiSection from "@/components/WhySquaiSection";
-import SquadSection from "@/components/SquadSection";
-import CtaSection from "@/components/CtaSection";
-import Footer from "@/components/Footer";
+import MainLayout from "@/layouts/MainLayout";
+import HeroSection from "@/components/sections/HeroSection";
+import ProblemSection from "@/components/sections/ProblemSection";
+import ServicesSection from "@/components/sections/ServicesSection";
+import HowItWorksSection from "@/components/sections/HowItWorksSection";
+import IndustriesSection from "@/components/sections/IndustriesSection";
+import WhySquaiSection from "@/components/sections/WhySquaiSection";
+import SquadSection from "@/components/sections/SquadSection";
+import CtaSection from "@/components/sections/CtaSection";
 import ContactModal from "@/components/ContactModal";
 
 const Index = () => {
   const { lang } = useLang();
-  const t = content.rescheduleResume;
+  const { rescheduleResume } = t(lang);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const deeplinkConsumedRef = useRef(false);
@@ -84,7 +82,7 @@ const Index = () => {
   }, [searchParams, navigate]);
 
   return (
-    <div className="min-h-screen relative overflow-x-clip">
+    <>
       <SeoHead
         title={{
           en: "Squai — AI Implementation for Growing Teams",
@@ -96,21 +94,16 @@ const Index = () => {
         }}
         path="/"
       />
-      <GradientBackground />
-      <div className="relative z-10">
-        <Navbar />
-        <main>
+      <MainLayout onOpenContact={openContact}>
         <HeroSection onOpenContact={openContact} />
         <ProblemSection />
-        <ServicesSection />
+        <ServicesSection onOpenContact={openContact} />
         <SquadSection />
         <HowItWorksSection />
         <IndustriesSection />
         <WhySquaiSection />
         <CtaSection onOpenContact={openContact} />
-        <Footer onOpenContact={openContact} />
-        </main>
-      </div>
+      </MainLayout>
 
       <ContactModal
         open={contactOpen}
@@ -121,13 +114,13 @@ const Index = () => {
 
       {showResumeReschedule && rescheduleContext && !contactOpen && (
         <div className="fixed bottom-4 left-4 right-4 z-30 rounded-xl border border-primary/20 bg-background/92 p-3 shadow-lg backdrop-blur sm:left-auto sm:right-5 sm:w-[360px]">
-          <p className="font-body text-sm text-foreground/90">{t.message[lang]}</p>
+          <p className="font-body text-sm text-foreground/90">{rescheduleResume.message}</p>
           <Button className="mt-2 h-9 w-full sm:w-auto" onClick={() => handleContactOpenChange(true)}>
-            {t.action[lang]}
+            {rescheduleResume.action}
           </Button>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

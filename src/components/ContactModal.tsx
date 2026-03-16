@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useMemo } from "react";
-import { content } from "@/lib/content";
+import { t } from "@/lib/content";
 import { useLang } from "@/hooks/use-lang";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,14 +22,18 @@ import {
 } from "@/components/ui/dialog";
 import { format } from "date-fns";
 import { es as esLocale, enUS } from "date-fns/locale";
-
-const API_URL = import.meta.env.VITE_API_URL ?? "";
+import {
+  getAvailability,
+  scheduleCall,
+  rescheduleCall,
+  ApiClientError,
+} from "@/services";
+import { EMAIL_PATTERN } from "@/constants";
 
 type Step = "date" | "time" | "form" | "success";
 
 const STEP_INDEX: Record<Step, number> = { date: 0, time: 1, form: 2, success: 3 };
 
-/** Format an ISO slot to the user's local time (e.g. "9:00 AM") */
 function formatSlotLocal(iso: string, lang: "en" | "es"): string {
   return new Date(iso).toLocaleTimeString(lang === "es" ? "es" : "en", {
     hour: "numeric",
@@ -37,7 +41,6 @@ function formatSlotLocal(iso: string, lang: "en" | "es"): string {
   });
 }
 
-/** Get the local hour from an ISO string (for morning/afternoon grouping) */
 function getLocalHour(iso: string): number {
   return new Date(iso).getHours();
 }
@@ -52,8 +55,6 @@ interface ContactModalProps {
   } | null;
 }
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 function isWeekdayAndFuture(date: Date): boolean {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -63,15 +64,13 @@ function isWeekdayAndFuture(date: Date): boolean {
 
 const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleContext }: ContactModalProps) => {
   const { lang } = useLang();
-  const t = content.contactModal;
+  const { contactModal: cm } = t(lang);
   const isRescheduleMode = Boolean(rescheduleContext?.eventId && rescheduleContext?.email);
 
-  // ── Step flow ──
   const [step, setStep] = useState<Step>("date");
   const [selectedDate, setSelectedDate] = useState<Date | undefined>();
-  const [selectedSlot, setSelectedSlot] = useState<string | undefined>(); // ISO string
+  const [selectedSlot, setSelectedSlot] = useState<string | undefined>();
 
-  // ── Form state ──
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
@@ -82,12 +81,10 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
   const [scheduling, setScheduling] = useState(false);
   const [scheduleError, setScheduleError] = useState<string | null>(null);
 
-  // ── Availability (ISO strings from backend, keyed by business date) ──
   const [availableSlots, setAvailableSlots] = useState<Record<string, string[]>>({});
   const [loadingSlots, setLoadingSlots] = useState(false);
   const [calendarMonth, setCalendarMonth] = useState(() => new Date());
 
-  // ── Reset on close ──
   useEffect(() => {
     if (!open) {
       const timeout = setTimeout(() => {
@@ -107,7 +104,6 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
     setEmailTouched(true);
   }, [open, isRescheduleMode, rescheduleContext]);
 
-  // ── Availability fetch ──
   const fetchAvailability = useCallback(async (month: Date) => {
     setLoadingSlots(true);
     try {
@@ -115,16 +111,13 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
       const m = month.getMonth();
       const from = format(new Date(y, m, 1), "yyyy-MM-dd");
       const to = format(new Date(y, m + 1, 0), "yyyy-MM-dd");
-      const res = await fetch(`${API_URL}/api/availability?from=${from}&to=${to}`);
-      if (res.ok) {
-        const data = await res.json();
-        setAvailableSlots((prev) => {
-          const slots = data.slots;
-          return slots ? { ...prev, ...slots } : prev;
-        });
-      }
+      const data = await getAvailability(from, to);
+      setAvailableSlots((prev) => {
+        const slots = data.slots;
+        return slots ? { ...prev, ...slots } : prev;
+      });
     } catch {
-      // Fetch failed — server validates on booking
+      // server validates on booking
     } finally {
       setLoadingSlots(false);
     }
@@ -137,13 +130,11 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
   const isDayFullyBooked = useCallback(
     (date: Date): boolean => {
       const dateStr = format(date, "yyyy-MM-dd");
-      // If we have data and this date has no available slots, it's fully booked
       return Object.keys(availableSlots).length > 0 && (availableSlots[dateStr]?.length ?? 0) <= 0;
     },
     [availableSlots],
   );
 
-  // ── Slots for the selected date, grouped by local morning/afternoon ──
   const { morningSlots, afternoonSlots } = useMemo(() => {
     if (!selectedDate) return { morningSlots: [] as string[], afternoonSlots: [] as string[] };
     const dateStr = format(selectedDate, "yyyy-MM-dd");
@@ -154,27 +145,25 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
     };
   }, [selectedDate, availableSlots]);
 
-  // ── Validation ──
   const emailError = useCallback((): string | null => {
     if (!emailTouched && !submitted) return null;
-    if (!email.trim()) return t.emailRequired[lang];
-    if (!EMAIL_REGEX.test(email.trim())) return t.emailInvalid[lang];
+    if (!email.trim()) return cm.emailRequired;
+    if (!EMAIL_PATTERN.test(email.trim())) return cm.emailInvalid;
     return null;
-  }, [email, emailTouched, submitted, lang, t]);
+  }, [email, emailTouched, submitted, cm.emailRequired, cm.emailInvalid]);
 
   const isValid = isRescheduleMode
-    ? EMAIL_REGEX.test(email.trim()) && privacy
+    ? EMAIL_PATTERN.test(email.trim()) && privacy
     : name.trim() !== "" &&
       company.trim() !== "" &&
-      EMAIL_REGEX.test(email.trim()) &&
+      EMAIL_PATTERN.test(email.trim()) &&
       privacy;
 
   const privacyError =
-    submitted && !privacy ? t.privacyRequired[lang] : null;
+    submitted && !privacy ? cm.privacyRequired : null;
 
   const emailErr = emailError();
 
-  // ── Handlers ──
   const handleDateSelect = (date: Date | undefined) => {
     setSelectedDate(date);
     setSelectedSlot(undefined);
@@ -197,56 +186,45 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
     setScheduleError(null);
 
     try {
-      const endpoint = isRescheduleMode ? "/api/reschedule" : "/api/schedule";
-      const payload = isRescheduleMode && rescheduleContext
-        ? {
-            eventId: rescheduleContext.eventId,
-            email: email.trim(),
-            datetime: selectedSlot,
-            lang,
-          }
-        : {
-            name: name.trim(),
-            company: company.trim(),
-            email: email.trim(),
-            description: description.trim(),
-            datetime: selectedSlot,
-            lang,
-          };
-
-      const res = await fetch(`${API_URL}${endpoint}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await res.json().catch(() => ({}));
-
-      if (!res.ok) {
-        if (data.error === "slot_taken") {
-          setScheduleError(t.errorSlotTaken[lang]);
-          setStep("time");
-        } else if (data.error === "forbidden") {
-          setScheduleError(t.errorRescheduleForbidden[lang]);
-        } else {
-          setScheduleError(t.errorGeneric[lang]);
-        }
-        return;
-      }
-
-      if (isRescheduleMode) {
+      if (isRescheduleMode && rescheduleContext) {
+        await rescheduleCall({
+          eventId: rescheduleContext.eventId,
+          email: email.trim(),
+          datetime: selectedSlot,
+          lang,
+        });
         onRescheduleCompleted?.();
+      } else {
+        await scheduleCall({
+          name: name.trim(),
+          company: company.trim(),
+          email: email.trim(),
+          description: description.trim(),
+          datetime: selectedSlot,
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          lang,
+        });
       }
 
       setStep("success");
-    } catch {
-      setScheduleError(t.errorGeneric[lang]);
+    } catch (err) {
+      if (err instanceof ApiClientError) {
+        if (err.code === "slot_taken") {
+          setScheduleError(cm.errorSlotTaken);
+          setStep("time");
+        } else if (err.code === "forbidden") {
+          setScheduleError(cm.errorRescheduleForbidden);
+        } else {
+          setScheduleError(cm.errorGeneric);
+        }
+      } else {
+        setScheduleError(cm.errorGeneric);
+      }
     } finally {
       setScheduling(false);
     }
   };
 
-  // ── Styles ──
   const inputCls = "bg-background/60 border-border/60 font-body placeholder:text-muted-foreground/50 focus-visible:ring-primary/60 transition-colors";
   const inputErrCls = "border-destructive/70 focus-visible:ring-destructive/40";
 
@@ -256,11 +234,10 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
 
   const selectedTimeFmt = selectedSlot ? formatSlotLocal(selectedSlot, lang) : "";
 
-  // ── Step indicator ──
   const stepInfo = [
-    { label: t.stepDateLabel[lang], desc: t.stepDateDesc[lang] },
-    { label: t.stepTimeLabel[lang], desc: t.stepTimeDesc[lang] },
-    { label: t.stepDetailsLabel[lang], desc: t.stepDetailsDesc[lang] },
+    { label: cm.stepDateLabel, desc: cm.stepDateDesc },
+    { label: cm.stepTimeLabel, desc: cm.stepTimeDesc },
+    { label: cm.stepDetailsLabel, desc: cm.stepDetailsDesc },
   ];
   const currentIdx = STEP_INDEX[step];
 
@@ -280,7 +257,7 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
     };
 
     return (
-      <nav aria-label={t.formProgress[lang]} className="mb-5">
+      <nav aria-label={cm.formProgress} className="mb-5">
         <ol className="flex items-start w-full">
           {stepInfo.map((s, i) => {
             const done = i < currentIdx;
@@ -312,9 +289,7 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
     );
   };
 
-  // ── Render per step ──
   const renderContent = () => {
-    // ── SUCCESS ──
     if (step === "success") {
       return (
         <div className="flex flex-col items-center text-center py-8 space-y-4" role="status" aria-live="polite">
@@ -322,16 +297,15 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
             <CheckCircle2 className="h-10 w-10 text-primary" aria-hidden="true" />
           </div>
           <p className="text-muted-foreground font-body text-xl font-bold max-w-xs">
-            {t.successMessage[lang]}
+            {cm.successMessage}
           </p>
           <Button variant="hero" onClick={() => onOpenChange(false)} className="mt-2">
-            {t.closeBtn[lang]}
+            {cm.closeBtn}
           </Button>
         </div>
       );
     }
 
-    // ── DATE ──
     if (step === "date") {
       return (
         <CalendarComponent
@@ -356,7 +330,6 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
       );
     }
 
-    // ── TIME ──
     if (step === "time") {
       const noSlots = !loadingSlots && morningSlots.length === 0 && afternoonSlots.length === 0;
 
@@ -364,16 +337,16 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
         <div className="space-y-4">
           <div className="flex items-center gap-2">
             <button type="button" onClick={() => setStep("date")}
-              aria-label={t.backToDate[lang]}
+              aria-label={cm.backToDate}
               className="text-muted-foreground hover:text-foreground transition-colors p-1 -ml-1">
               <ChevronLeft className="h-4 w-4" aria-hidden="true" />
             </button>
             <span className="text-sm font-body text-foreground font-semibold">
-              {t.selectedDate[lang]}: {dateFmt}
+              {cm.selectedDate}: {dateFmt}
             </span>
             <button type="button" onClick={() => setStep("date")}
               className="text-xs text-primary hover:underline font-body ml-auto">
-              {t.changeDate[lang]}
+              {cm.changeDate}
             </button>
           </div>
 
@@ -386,18 +359,18 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
           {loadingSlots && (
             <div className="flex items-center justify-center gap-2 py-6">
               <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" aria-hidden="true" />
-              <span className="text-sm font-body text-muted-foreground">{t.loadingAvailability[lang]}</span>
+              <span className="text-sm font-body text-muted-foreground">{cm.loadingAvailability}</span>
             </div>
           )}
 
           {noSlots && (
-            <p className="text-sm font-body text-muted-foreground text-center py-6">{t.noSlots[lang]}</p>
+            <p className="text-sm font-body text-muted-foreground text-center py-6">{cm.noSlots}</p>
           )}
 
           {!loadingSlots && morningSlots.length > 0 && (
             <div className="space-y-2">
               <p className="text-xs font-body font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
-                <Clock className="h-3 w-3" aria-hidden="true" /> {t.morning[lang]}
+                <Clock className="h-3 w-3" aria-hidden="true" /> {cm.morning}
               </p>
               <div className="grid grid-cols-3 gap-2">
                 {morningSlots.map((slot) => (
@@ -419,7 +392,7 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
           {!loadingSlots && afternoonSlots.length > 0 && (
             <div className="space-y-2">
               <p className="text-xs font-body font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
-                <Clock className="h-3 w-3" aria-hidden="true" /> {t.afternoon[lang]}
+                <Clock className="h-3 w-3" aria-hidden="true" /> {cm.afternoon}
               </p>
               <div className="grid grid-cols-3 gap-2">
                 {afternoonSlots.map((slot) => (
@@ -441,13 +414,11 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
       );
     }
 
-    // ── FORM ──
     return (
       <form onSubmit={handleSubmit} noValidate className="space-y-4">
-        {/* Back + date/time summary */}
         <div className="flex items-center gap-2">
           <button type="button" onClick={() => setStep("time")}
-            aria-label={t.backToTime[lang]}
+            aria-label={cm.backToTime}
             className="text-muted-foreground hover:text-foreground transition-colors p-1 -ml-1">
             <ChevronLeft className="h-4 w-4" aria-hidden="true" />
           </button>
@@ -456,7 +427,7 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
           </span>
           <button type="button" onClick={() => setStep("date")}
             className="text-xs text-primary hover:underline font-body ml-auto">
-            {t.changeDate[lang]}
+            {cm.changeDate}
           </button>
         </div>
 
@@ -468,43 +439,40 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
 
         {!isRescheduleMode && (
           <>
-            {/* Name */}
             <div className="space-y-1.5">
               <Label htmlFor="c-name" className="text-foreground font-body font-semibold text-sm">
-                {t.nameLabel[lang]} <span className="text-destructive">*</span>
+                {cm.nameLabel} <span className="text-destructive">*</span>
               </Label>
               <Input id="c-name" value={name} onChange={(e) => setName(e.target.value)}
-                placeholder={t.namePlaceholder[lang]} autoComplete="name"
+                placeholder={cm.namePlaceholder} autoComplete="name"
                 className={`${inputCls} ${submitted && !name.trim() ? inputErrCls : ""}`} />
               {submitted && !name.trim() && (
-                <p className="text-xs font-body text-destructive">{t.nameRequired[lang]}</p>
+                <p className="text-xs font-body text-destructive">{cm.nameRequired}</p>
               )}
             </div>
 
-            {/* Company */}
             <div className="space-y-1.5">
               <Label htmlFor="c-company" className="text-foreground font-body font-semibold text-sm">
-                {t.companyLabel[lang]} <span className="text-destructive">*</span>
+                {cm.companyLabel} <span className="text-destructive">*</span>
               </Label>
               <Input id="c-company" value={company} onChange={(e) => setCompany(e.target.value)}
-                placeholder={t.companyPlaceholder[lang]} autoComplete="organization"
+                placeholder={cm.companyPlaceholder} autoComplete="organization"
                 className={`${inputCls} ${submitted && !company.trim() ? inputErrCls : ""}`} />
               {submitted && !company.trim() && (
-                <p className="text-xs font-body text-destructive">{t.companyRequired[lang]}</p>
+                <p className="text-xs font-body text-destructive">{cm.companyRequired}</p>
               )}
             </div>
           </>
         )}
 
-        {/* Email */}
         <div className="space-y-1.5">
           <Label htmlFor="c-email" className="text-foreground font-body font-semibold text-sm">
-            {t.emailLabel[lang]} <span className="text-destructive">*</span>
+            {cm.emailLabel} <span className="text-destructive">*</span>
           </Label>
           <Input id="c-email" type="email" value={email}
             onChange={(e) => setEmail(e.target.value)}
             onBlur={() => setEmailTouched(true)}
-            placeholder={t.emailPlaceholder[lang]} autoComplete="email"
+            placeholder={cm.emailPlaceholder} autoComplete="email"
             readOnly={isRescheduleMode}
             className={`${inputCls} ${emailErr ? inputErrCls : ""}`} />
           {emailErr && (
@@ -515,23 +483,22 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
         {!isRescheduleMode && (
           <div className="space-y-1.5">
             <Label htmlFor="c-desc" className="text-foreground font-body font-semibold text-sm">
-              {t.descriptionLabel[lang]}
+              {cm.descriptionLabel}
             </Label>
             <Textarea id="c-desc" value={description} onChange={(e) => setDescription(e.target.value)}
-              placeholder={t.descriptionPlaceholder[lang]} rows={2}
+              placeholder={cm.descriptionPlaceholder} rows={2}
               className={`${inputCls} resize-none`} />
           </div>
         )}
 
-        {/* Privacy */}
         <div className="space-y-1.5">
           <label className="flex items-start gap-2.5 cursor-pointer">
             <input type="checkbox" checked={privacy} onChange={(e) => setPrivacy(e.target.checked)}
               className="mt-1 h-4 w-4 shrink-0 rounded border-border/60 accent-primary cursor-pointer" />
             <span className="text-xs font-body text-muted-foreground leading-relaxed select-none">
-              {t.privacyPrefix[lang]}
-              <a href={`/${lang}/privacy`} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{t.privacyLink[lang]}</a>
-              {t.privacySuffix[lang]}
+              {cm.privacyPrefix}
+              <a href={`/${lang}/privacy`} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{cm.privacyLink}</a>
+              {cm.privacySuffix}
             </span>
           </label>
           {privacyError && <p className="text-xs font-body text-destructive pl-6">{privacyError}</p>}
@@ -541,10 +508,10 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
           {scheduling ? (
             <span className="flex items-center gap-2">
               <Loader2 className="h-4 w-4 animate-spin" />
-              {t.scheduling[lang]}
+              {cm.scheduling}
             </span>
           ) : (
-            t.scheduleBtn[lang]
+            cm.scheduleBtn
           )}
         </Button>
       </form>
@@ -559,23 +526,23 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
         <div className="px-6 pt-8 pb-2">
           <DialogHeader>
             <DialogTitle className="font-headline font-black text-xl sm:text-2xl gradient-wave-text pb-1">
-              {t.title[lang]}
+              {cm.title}
             </DialogTitle>
             <DialogDescription className="text-muted-foreground font-body text-sm sm:text-base">
-              {t.description[lang]}
+              {cm.description}
             </DialogDescription>
           </DialogHeader>
         </div>
 
         <fieldset className="px-6 pb-6 pt-2 min-h-[24rem] sm:min-h-[26rem] relative border-0 p-0 m-0"
-          aria-label={step === "success" ? t.bookingConfirmed[lang] : stepInfo[STEP_INDEX[step]].desc}>
+          aria-label={step === "success" ? cm.bookingConfirmed : stepInfo[STEP_INDEX[step]].desc}>
 
           {(loadingSlots || scheduling) && (
             <div className="absolute inset-0 z-20 flex items-center justify-center bg-card/80 backdrop-blur-sm rounded-b-lg">
               <div className="flex flex-col items-center gap-3">
                 <Loader2 className="h-6 w-6 animate-spin text-primary" aria-hidden="true" />
                 <span className="text-sm font-body text-muted-foreground">
-                  {scheduling ? t.scheduling[lang] : t.loadingAvailability[lang]}
+                  {scheduling ? cm.scheduling : cm.loadingAvailability}
                 </span>
               </div>
             </div>

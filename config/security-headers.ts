@@ -1,42 +1,39 @@
-/**
- * Single source of truth for all security headers.
- *
- * This config is consumed by:
- *  - The Vite dev-server plugin   (vite-plugin-security-headers.ts)
- *  - The build-time generator      → dist/_headers   (Netlify / Cloudflare Pages)
- *  - vercel.json                   → auto-generated  (Vercel)
- *
- * To on-board a new provider, read this file and translate it into
- * whatever format the provider expects.
- */
-
 export interface SecurityHeader {
   key: string;
   value: string;
 }
 
 export interface HeaderRule {
-  /** Glob / path pattern that the rule applies to. */
   path: string;
   headers: SecurityHeader[];
 }
 
-// ─── Content Security Policy ────────────────────────────────────────────
-const CSP = [
-  "default-src 'self'",
-  "script-src 'self'",
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "font-src 'self' https://fonts.gstatic.com",
-  "img-src 'self' data: https://storage.googleapis.com",
-  `connect-src 'self' ${process.env.VITE_API_URL ?? ''}`.trim(),
-  "frame-ancestors 'none'",
-  "object-src 'none'",
-  "base-uri 'self'",
-  "form-action 'self'",
-  "upgrade-insecure-requests",
-].join("; ");
+/** Base CSP directive-value map shared between production and dev configurations. */
+export const BASE_CSP_DIRECTIVES: Record<string, string> = {
+  "default-src": "'self'",
+  "script-src": "'self'",
+  "style-src": "'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src": "'self' https://fonts.gstatic.com",
+  "img-src": "'self' data: https://storage.googleapis.com",
+  "connect-src": `'self' ${process.env.VITE_API_URL ?? ""}`.trim(),
+  "frame-ancestors": "'none'",
+  "object-src": "'none'",
+  "base-uri": "'self'",
+  "form-action": "'self'",
+  "upgrade-insecure-requests": "",
+};
 
-// ─── Header rules ───────────────────────────────────────────────────────
+/** Builds a CSP header string from {@link BASE_CSP_DIRECTIVES} with optional overrides. */
+export function buildCsp(overrides: Record<string, string> = {}): string {
+  const merged = { ...BASE_CSP_DIRECTIVES, ...overrides };
+  return Object.entries(merged)
+    .map(([key, value]) => (value ? `${key} ${value}` : key))
+    .join("; ");
+}
+
+const CSP = buildCsp();
+
+/** Production security headers applied to all routes. */
 export const securityHeaders: HeaderRule[] = [
   {
     path: "/*",
@@ -68,9 +65,7 @@ export const securityHeaders: HeaderRule[] = [
   },
 ];
 
-// ─── Helpers for provider adapters ──────────────────────────────────────
-
-/** Format used by Netlify & Cloudflare Pages `_headers` files. */
+/** Serializes header rules into Netlify/Cloudflare `_headers` file format. */
 export function toHeadersFile(rules: HeaderRule[]): string {
   return rules
     .map((rule) => {
@@ -80,7 +75,7 @@ export function toHeadersFile(rules: HeaderRule[]): string {
     .join("\n\n");
 }
 
-/** Format used by `vercel.json` `headers` array. */
+/** Converts header rules into the Vercel `vercel.json` headers format. */
 export function toVercelHeaders(
   rules: HeaderRule[],
 ): { source: string; headers: { key: string; value: string }[] }[] {
@@ -90,10 +85,7 @@ export function toVercelHeaders(
   }));
 }
 
-/**
- * Returns a flat Record<string, string> for the catch-all rule.
- * Useful for Vite dev-server or any Node.js HTTP server.
- */
+/** Flattens the catch-all (`/*`) rule into a key-value Record for dev middleware. */
 export function toFlatHeaders(
   rules: HeaderRule[],
 ): Record<string, string> {

@@ -1,0 +1,162 @@
+import React from "react";
+import { t } from "@/lib/content";
+import { useLang } from "@/hooks/use-lang";
+import { motion } from "framer-motion";
+
+const borderColorMap: Record<string, string> = {
+  primary: "border-b-[#7C8CFF]",
+  accent: "border-b-[#7C8CFF]",
+  secondary: "border-b-[#7C8CFF]",
+};
+
+const pillColorMap: Record<string, string> = {
+  primary: "border-[rgba(68,212,200,0.3)] text-[#44D4C8]",
+  accent: "border-[rgba(68,212,200,0.3)] text-[#44D4C8]",
+  secondary: "border-[rgba(68,212,200,0.3)] text-[#44D4C8]",
+};
+
+const hoverGlowMap: Record<string, string> = {
+  primary: "hover:shadow-[0_0_25px_-5px_#7C8CFF]",
+  accent: "hover:shadow-[0_0_25px_-5px_#7C8CFF]",
+  secondary: "hover:shadow-[0_0_25px_-5px_#7C8CFF]",
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { 
+    opacity: 0, 
+    y: 30, 
+    scale: 0.94,
+    filter: "blur(4px)"
+  },
+  show: { 
+    opacity: 1, 
+    y: 0, 
+    scale: 1,
+    filter: "blur(0px)",
+    transition: { 
+      duration: 0.8, 
+      ease: [0.21, 1.11, 0.81, 0.99] as const
+    } 
+  },
+};
+
+const SquadSection = () => {
+  const { lang } = useLang();
+  const { squad } = t(lang);
+
+  return (
+    <section id="squad" className="py-10 sm:py-16 relative">
+
+      <div className="container mx-auto px-5 sm:px-6 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <h2 className="font-headline font-black text-[1.75rem] sm:text-3xl md:text-5xl lg:text-[56px] text-center mb-3 sm:mb-4 px-2">
+            {squad.title}
+          </h2>
+          <p className="text-muted-foreground font-body text-base sm:text-lg text-center max-w-2xl mx-auto mb-8 sm:mb-10 px-2">
+            {squad.sub}
+          </p>
+        </motion.div>
+
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-60px" }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-6xl mx-auto"
+        >
+          {squad.members.map((member, i) => {
+            const person = squad.gallery[i];
+            const imgIndex = i + 1;
+
+            return (
+              <motion.div
+                key={person.name}
+                variants={cardVariants}
+                className="flex flex-col h-full group transition-all duration-300 hover:-translate-y-2"
+              >
+                <div
+                  className={`bg-[#12152A] rounded-2xl overflow-hidden border border-[rgba(124,140,255,0.15)] hover:border-[rgba(124,140,255,0.4)] flex flex-col h-full shadow-md ${hoverGlowMap[member.borderColor]}`}
+                >
+                  <div className="w-full aspect-[4/3] sm:aspect-[3/4] xl:max-h-[350px] bg-muted/20 relative flex items-center justify-center overflow-hidden border-b border-[rgba(124,140,255,0.1)]">
+                    <img 
+                      src={`/${imgIndex}.webp`} 
+                      alt={`${person.name} - ${person.role}`} 
+                      width="400"
+                      height="300"
+                      className="w-full h-full object-cover object-top grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105 absolute inset-0 z-10"
+                      loading="lazy"
+                      decoding="async"
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        if (target.src.endsWith('.webp')) {
+                          target.src = `/${imgIndex}.webp`;
+                        } else {
+                          target.style.display = 'none';
+                          target.parentElement?.classList.add('bg-[#1A1E38]');
+                        }
+                      }}
+                    />
+                    <div className="text-muted-foreground/30 z-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                      </svg>
+                    </div>
+                  </div>
+
+                  <div className={`p-4 sm:p-6 flex-1 flex flex-col border-b-4 ${borderColorMap[member.borderColor]}`}>
+                    <div className="flex items-end justify-between mb-2 sm:mb-3 gap-2">
+                      <div>
+                        <h3 className="font-headline font-bold text-lg sm:text-xl lg:text-2xl text-foreground mb-0.5 sm:mb-1">
+                          {person.name}
+                        </h3>
+                        <p className="font-headline font-semibold text-xs sm:text-sm text-primary">
+                          {member.role}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <p className="font-body font-bold text-[10px] sm:text-xs uppercase tracking-wider text-accent mb-3 sm:mb-4">
+                      {member.specialty}
+                    </p>
+                    <p className="font-body text-sm sm:text-base lg:text-lg text-muted-foreground mb-4 sm:mb-6 flex-1 leading-relaxed">
+                      {member.desc}
+                    </p>
+                    
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-auto">
+                      {member.tiers.map((tier) => (
+                        <span
+                          key={tier}
+                          className={`text-xs font-body font-medium px-3 py-1.5 rounded-full border bg-[#1A1E38] ${pillColorMap[member.borderColor]}`}
+                        >
+                          {tier}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default SquadSection;

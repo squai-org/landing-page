@@ -3,6 +3,7 @@ import { useCallback } from "react";
 import type { Lang } from "@/i18n/types";
 import { DEFAULT_LANG, isLang } from "@/i18n/config";
 
+/** Reads the current language from the URL and provides a setter that navigates to the new locale path. */
 export function useLang() {
   const { lang } = useParams<{ lang: string }>();
   const navigate = useNavigate();

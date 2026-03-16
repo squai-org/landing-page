@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
-import app from "./_lib/app.js";
+import app from "../server/app.js";
 
 async function bufferBody(req: IncomingMessage): Promise<Uint8Array | undefined> {
   if (req.method === "GET" || req.method === "HEAD") return undefined;
@@ -18,11 +18,6 @@ function buildHeaders(raw: IncomingMessage["headers"]): Headers {
   return headers;
 }
 
-/**
- * Vercel Serverless Function handler.
- * Manually converts Node.js IncomingMessage → Web Request → Hono → Web Response → ServerResponse.
- * This avoids body-stream issues with the @hono/node-server/vercel adapter.
- */
 export default async function handler(req: IncomingMessage, res: ServerResponse) {
   const url = new URL(req.url ?? "/", `https://${req.headers.host ?? "localhost"}`);
   const body = await bufferBody(req);

@@ -1,0 +1,327 @@
+{
+  "nav": {
+    "links": ["Servicios", "Cómo funciona", "Industrias", "Contacto"],
+    "sections": ["services", "how-it-works", "industries", "contact"],
+    "languageLabel": "Idioma",
+    "switchToEnglish": "Cambiar a inglés",
+    "switchToSpanish": "Cambiar a español"
+  },
+  "hero": {
+    "headline": "Tu equipo no tiene que descifrar la IA solo.",
+    "headlineHighlight": "descifrar la IA solo.",
+    "sub": "Trabajamos junto a tu equipo, mapeamos cómo funciona tu negocio e integramos IA que realmente funciona, no solo herramientas que se ven bien en una presentación.",
+    "cta1": "Agenda una llamada gratuita",
+    "cta2": "Ver nuestros servicios"
+  },
+  "problems": {
+    "eyebrow": "¿TE SUENA FAMILIAR?",
+    "title": "No eres el único pasando por esto.",
+    "items": [
+      {
+        "title": "Todo está en la cabeza de alguien",
+        "desc": "Tus procesos dependen de que las personas correctas estén disponibles. Cuando no lo están, todo se rompe."
+      },
+      {
+        "title": "La IA se siente urgente pero imposible de comenzar",
+        "desc": "Sabes que necesitas avanzar con la IA. Pero entre el ruido, las opciones y el día a día, nunca sucede."
+      },
+      {
+        "title": "Las grandes consultoras no son la respuesta",
+        "desc": "No necesitas un proyecto de seis cifras ni 200 diapositivas. Necesitas a alguien que trabaje de verdad contigo."
+      }
+    ]
+  },
+  "services": {
+    "eyebrow": "NUESTROS SERVICIOS",
+    "title": "Nuestros Servicios",
+    "mostPopular": "Más Popular",
+    "whatYouGet": "Lo que obtienes:",
+    "tiers": [
+      {
+        "label": "Nivel 1",
+        "name": "Squaimap",
+        "borderColor": "primary",
+        "partnership": "El primer paso antes de cambiar cualquier cosa.",
+        "description": "Todo proyecto de Squai empieza aquí. Nos adentramos en tu negocio, estudiamos cómo trabaja tu equipo de verdad, encontramos qué te está frenando y mapeamos dónde la IA puede marcar una diferencia real. Luego nos sentamos juntos, revisamos los hallazgos y definimos el camino a seguir.",
+        "items": [
+          "Un análisis profundo de tus operaciones: cómo trabaja tu equipo hoy, dónde están los cuellos de botella y qué te está costando tiempo y dinero",
+          "Un mapa de oportunidades de IA con exactamente dónde puede ayudar, según tus herramientas, equipo, presupuesto y madurez",
+          "Un reporte escrito con hallazgos claros y recomendaciones priorizadas",
+          "Una sesión en vivo donde revisamos todo juntos y definimos los próximos pasos"
+        ],
+        "duration": "2 semanas",
+        "popular": false,
+        "pricePrefix": "",
+        "price": "1,500 USD",
+        "priceNote": "Precio fijo. Incluido en todos los niveles, sin atajos.",
+        "squadAssigned": "2 de 6 miembros del squad",
+        "cta": "Empezar con Squaimap"
+      },
+      {
+        "label": "Nivel 2",
+        "name": "Squailab",
+        "borderColor": "accent",
+        "partnership": "Tomamos lo que aprendimos y construimos sistemas que tu equipo realmente va a usar.",
+        "description": "Tomamos los hallazgos del Squaimap y nos ponemos a trabajar. Juntos decidimos qué flujos importan más ahora mismo, los documentamos bien, los hacemos accesibles para todo tu equipo e integramos IA donde tiene más sentido para tu negocio.",
+        "items": [
+          "Todo lo del Squaimap",
+          "3 a 5 flujos de trabajo principales completamente mapeados y documentados, lo suficientemente claros para que cualquiera en tu equipo pueda seguirlos",
+          "Playbooks operativos entregados en las herramientas que tu equipo ya usa",
+          "Implementaciones de IA en tus flujos prioritarios, con alcance definido juntos durante el Squaimap",
+          "Una sesión de cierre para que tu equipo sepa manejar todo lo que construimos",
+          "1 semana de soporte post-entrega"
+        ],
+        "duration": "4 a 6 semanas",
+        "popular": true,
+        "pricePrefix": "Desde",
+        "price": "5,500 USD",
+        "priceNote": "Alcance y precio final confirmados después de la sesión de cierre del Squaimap.",
+        "squadAssigned": "4 de 6 miembros del squad",
+        "cta": "Empezar con Squailab"
+      },
+      {
+        "label": "Nivel 3",
+        "name": "Squaicore",
+        "borderColor": "secondary",
+        "partnership": "Un sistema operativo completo para que tu negocio dependa de procesos, no de personas.",
+        "description": "Este es el trabajo completo. Profundizamos en toda tu operación, mapeamos cada flujo crítico, construimos un playbook completo sobre el que tu negocio pueda sostenerse e implementamos IA donde genera verdadero valor. Luego entrenamos a tu equipo de forma práctica para que esté listo para operar y crecer cuando el proyecto termine.",
+        "items": [
+          "Todo lo del Squaimap",
+          "6 a 10 flujos de trabajo principales completamente mapeados, documentados e interconectados",
+          "Un playbook operativo completo que cubre todo tu negocio",
+          "Implementaciones de IA en todos los flujos prioritarios, con alcance definido de forma colaborativa durante el Squaimap",
+          "Una revisión de integridad de datos para que tus decisiones estén basadas en información confiable y bien conectada",
+          "Una revisión de seguridad de la información para que tus procesos y herramientas manejen datos sensibles de forma responsable",
+          "Entrenamiento completo del equipo, práctico, por proceso y diseñado para el uso real",
+          "2 semanas de soporte post-entrega"
+        ],
+        "duration": "8 a 12 semanas",
+        "popular": false,
+        "pricePrefix": "Desde",
+        "price": "12,000 USD",
+        "priceNote": "Alcance y precio final confirmados después de la sesión de cierre del Squaimap.",
+        "squadAssigned": "Squad completo, los 6 miembros",
+        "cta": "Empezar con Squaicore"
+      }
+    ]
+  },
+  "howItWorks": {
+    "eyebrow": "CÓMO FUNCIONA",
+    "title": "Cómo funciona",
+    "steps": [
+      { "name": "Llamada de Diagnóstico", "description": "Una llamada gratuita de 30 minutos con tu Estratega de Operaciones. Aprendemos sobre tu negocio y recomendamos el proyecto adecuado." },
+      { "name": "Propuesta en 48hrs", "description": "Recibes una propuesta clara en 48 horas — alcance exacto, entregables, cronograma, miembros del squad e inversión. Sin ambigüedad." },
+      { "name": "Kickoff", "description": "Una vez aprobado, agendamos una sesión de kickoff con tus stakeholders clave. Aquí comienza el trabajo oficialmente." },
+      { "name": "Mapeo y Construcción", "description": "El squad trabaja semana a semana. Check-ins regulares y avances tempranos — sin grandes sorpresas al final." },
+      { "name": "Entrega", "description": "Todos los entregables en tus herramientas y formatos preferidos. Nos adaptamos a cómo trabaja tu equipo — no al revés." },
+      { "name": "Período de Soporte", "description": "1 a 2 semanas de soporte post-entrega para preguntas, ajustes y onboarding de tu equipo a los nuevos procesos y herramientas." }
+    ],
+    "subtitle": "Un enfoque estructurado y comprobado para escalar tus operaciones de adentro hacia afuera."
+  },
+  "industries": {
+    "eyebrow": "A QUIÉN SERVIMOS",
+    "title": "Industrias que atendemos",
+    "marqueeTitle": "Confiado por organizaciones en",
+    "items": ["SaaS y Startups Tech", "E-Learning y Educación", "Servicios Profesionales", "E-Commerce Digital", "Agencias y Consultoras"]
+  },
+  "whySquai": {
+    "eyebrow": "POR QUÉ SQUAI",
+    "title": "¿Por qué Squai?",
+    "items": [
+      {
+        "title": "Un equipo, no un solo consultor",
+        "desc": "Personas reales con roles definidos trabajando dentro de tu negocio, no un chatbot, no una metodología, no una presentación."
+      },
+      {
+        "title": "Hablamos tu idioma, literalmente",
+        "desc": "Inglés o español. Notion o Confluence. Nos adaptamos a donde estás y trabajamos como trabaja tu equipo."
+      },
+      {
+        "title": "IA práctica, no teórica",
+        "desc": "No te dejamos una lista de herramientas y nos vamos. Implementamos lo que se adapta al nivel real de tu equipo y nos aseguramos de que funcione."
+      },
+      {
+        "title": "Construimos para que no nos necesites para siempre",
+        "desc": "Todo lo que construimos está pensado para que tu equipo lo maneje por su cuenta. Nuestro trabajo termina cuando ya no nos necesitas."
+      }
+    ]
+  },
+  "squad": {
+    "eyebrow": "EL SQUAD",
+    "title": "Conoce a tu Squad",
+    "sub": "Cada proyecto asigna las personas correctas según tus necesidades. Siempre trabajas directamente con quienes hacen el trabajo.",
+    "members": [
+      {
+        "role": "Estratega de Operaciones",
+        "specialty": "Estrategia y Dirección",
+        "desc": "Tu punto de contacto principal desde el primer día. Diagnostica tu negocio, diseña la hoja de ruta operativa y mantiene todo el proyecto en la dirección correcta.",
+        "tiers": ["Squaimap", "Squailab", "Squaicore"],
+        "borderColor": "accent"
+      },
+      {
+        "role": "Ingeniero de IA",
+        "specialty": "Especialista en Automatización",
+        "desc": "Construye las soluciones de IA identificadas en el Squaimap. Automatizaciones e integraciones diseñadas alrededor de cómo trabaja tu equipo, no soluciones genéricas.",
+        "tiers": ["Squailab", "Squaicore"],
+        "borderColor": "secondary"
+      },
+      {
+        "role": "Analista de Procesos de Negocio",
+        "specialty": "Diseño y Estrategia de Procesos",
+        "desc": "Mapea cómo trabaja tu equipo de verdad, día a día, no como dice el manual. Encuentra dónde las cosas fallan y conecta cada mejora con algo que realmente importa.",
+        "tiers": ["Squaimap", "Squailab", "Squaicore"],
+        "borderColor": "primary"
+      },
+      {
+        "role": "Gestor de Conocimiento",
+        "specialty": "Diseño y Gestión de Conocimiento",
+        "desc": "Convierte todo lo que construimos en documentación clara y estructurada que vive en las herramientas que tu equipo ya usa, para que cualquiera pueda seguirla, no solo quienes estuvieron en las reuniones.",
+        "tiers": ["Squailab", "Squaicore"],
+        "borderColor": "primary"
+      },
+      {
+        "role": "Analista de Datos",
+        "specialty": "Integridad y Conexiones de Datos",
+        "desc": "Se asegura de que los datos que fluyen por tus procesos sean confiables. Encuentra dónde hay información incompleta, desconectada o mal usada, y lo corrige antes de que se convierta en un problema mayor.",
+        "tiers": ["Squaicore"],
+        "borderColor": "primary"
+      },
+      {
+        "role": "Analista de Seguridad de la Información",
+        "specialty": "Gestión de Seguridad y Riesgos",
+        "desc": "Revisa cómo tus procesos, herramientas y documentación manejan información sensible. Se asegura de que todo lo que construimos siga las mejores prácticas de seguridad, para que tu negocio esté protegido a medida que crece.",
+        "tiers": ["Squailab", "Squaicore"],
+        "borderColor": "primary"
+      }
+    ],
+    "gallery": [
+      { "name": "Laura Villada", "role": "Estratega de Operaciones" },
+      { "name": "Sebastián Rico", "role": "Ingeniero IA" },
+      { "name": "Daniel Guzmán", "role": "Analista de Procesos" },
+      { "name": "Ana Lasso", "role": "Gestor de Conocimiento" },
+      { "name": "Luis López", "role": "Analista de Datos" },
+      { "name": "Carlos Gómez", "role": "Analista de Seguridad" }
+    ]
+  },
+  "contactModal": {
+    "title": "Cuéntanos tu desafío",
+    "description": "Envíanos un mensaje o agenda una llamada gratuita de descubrimiento de 30 minutos.",
+    "tabMessage": "Enviar Mensaje",
+    "tabSchedule": "Agendar Llamada",
+    "nameLabel": "Nombre",
+    "namePlaceholder": "Tu nombre",
+    "nameRequired": "El nombre es obligatorio",
+    "companyLabel": "Empresa",
+    "companyPlaceholder": "Tu empresa",
+    "companyRequired": "La empresa es obligatoria",
+    "emailLabel": "Correo electrónico",
+    "emailPlaceholder": "tu@empresa.com",
+    "emailRequired": "El correo es obligatorio",
+    "emailInvalid": "Ingresa un correo válido",
+    "descriptionLabel": "¿Qué problema enfrentas?",
+    "descriptionPlaceholder": "Cuéntanos brevemente el desafío con el que necesitas ayuda…",
+    "submit": "Enviar",
+    "pickDate": "Elige una fecha",
+    "pickTime": "Selecciona una hora",
+    "morning": "Mañana",
+    "afternoon": "Tarde",
+    "scheduleBtn": "Agendar Llamada",
+    "scheduling": "Agendando…",
+    "successTitle": "¡Listo!",
+    "successMessage": "Tu llamada de descubrimiento ha sido agendada. Revisa tu correo para la invitación del calendario.",
+    "errorSlotTaken": "Este horario ya no está disponible. Por favor elige otro.",
+    "errorGeneric": "Algo salió mal. Inténtalo de nuevo.",
+    "errorRescheduleForbidden": "Este enlace no corresponde a tu correo.",
+    "changeDate": "Cambiar fecha",
+    "selectedDate": "Seleccionado",
+    "stepDateLabel": "Fecha",
+    "stepDateDesc": "¿Cuándo te viene mejor?",
+    "stepTimeLabel": "Hora",
+    "stepTimeDesc": "¿Mañana o tarde?",
+    "stepDetailsLabel": "Datos",
+    "stepDetailsDesc": "¡Casi listo! Cuéntanos de ti",
+    "formProgress": "Progreso del formulario",
+    "closeBtn": "Cerrar",
+    "backToDate": "Volver a seleccionar fecha",
+    "backToTime": "Volver a seleccionar hora",
+    "bookingConfirmed": "Reserva confirmada",
+    "loadingAvailability": "Verificando disponibilidad\u2026",
+    "noSlots": "No hay horarios disponibles para esta fecha. Por favor elige otro día.",
+    "privacyRequired": "Debes aceptar la política de privacidad",
+    "privacyPrefix": "Acepto la ",
+    "privacyLink": "política de privacidad",
+    "privacySuffix": ". Tus datos se usan únicamente para responder tu consulta."
+  },
+  "ctaSection": {
+    "headline": "¿Listo para conocer tu squad?",
+    "sub": "Un equipo real, una llamada gratuita de 30 minutos. Sin compromiso, sin presión, solo una conversación honesta sobre dónde estás y a dónde quieres llegar.",
+    "cta": "Agenda tu llamada gratis"
+  },
+  "privacy": {
+    "title": "Política de Privacidad",
+    "lastUpdated": "Última actualización: 8 de marzo de 2026",
+    "backHome": "← Volver al inicio",
+    "switchToEnglish": "Cambiar a inglés",
+    "switchToSpanish": "Cambiar a español",
+    "sections": [
+      {
+        "heading": "Quiénes somos",
+        "body": "Squai es responsable del tratamiento de los datos personales recopilados a través de este sitio web. Si tienes alguna pregunta, puedes contactarnos en heysquai@gmail.com."
+      },
+      {
+        "heading": "Qué datos recopilamos",
+        "body": "Cuando usas nuestro formulario de contacto, recopilamos tu nombre, correo electrónico y el mensaje que escribes. No recopilamos ningún otro dato personal."
+      },
+      {
+        "heading": "Para qué los usamos",
+        "body": "Usamos tus datos únicamente para responder a tu consulta. No los utilizaremos para marketing, perfilado ni ningún otro propósito."
+      },
+      {
+        "heading": "Terceros",
+        "body": "Para enviarte nuestra respuesta, utilizamos Resend como servicio de envío de correo. Tus datos pueden ser procesados por este proveedor de acuerdo con su propia política de privacidad. No compartimos tus datos con nadie más."
+      },
+      {
+        "heading": "Cuánto tiempo conservamos tus datos",
+        "body": "Conservamos tus datos hasta 1 año después de tu consulta. Pasado ese plazo, se eliminan de forma permanente."
+      },
+      {
+        "heading": "Tus derechos",
+        "body": "Tienes derecho a acceder, corregir o eliminar tus datos personales en cualquier momento. También puedes retirar tu consentimiento. Estos derechos aplican sin importar tu ubicación."
+      },
+      {
+        "heading": "Cómo ejercer tus derechos",
+        "body": "Para ejercer cualquiera de estos derechos, envíanos un correo a heysquai@gmail.com. Responderemos en un plazo de 30 días."
+      }
+    ]
+  },
+  "footer": {
+    "tagline": "Tu equipo no tiene que descifrar la IA solo.",
+    "switchToEnglish": "Cambiar a inglés",
+    "switchToSpanish": "Cambiar a español",
+    "links": ["Servicios", "Cómo funciona", "Contacto"],
+    "sections": ["services", "how-it-works", "contact"],
+    "illustrationsBy": "Ilustraciones por",
+    "copyright": "© 2026 Squai. All rights reserved."
+  },
+  "rescheduleResume": {
+    "message": "Cerraste el flujo de reagendado. Puedes continuarlo cuando quieras.",
+    "action": "Continuar reagendando"
+  },
+  "backend": {
+    "schedule": {
+      "summary": "Sesión de Estrategia de IA"
+    },
+    "email": {
+      "schedule": {
+        "heading": "¡Tu Sesión de Estrategia de IA está confirmada!",
+        "greeting": "Hola {{name}}, estamos emocionados de hablar contigo sobre cómo optimizar procesos en {{company}}.",
+        "detailsHeading": "Detalles de la Sesión:",
+        "dateLabel": "📅 Fecha y hora",
+        "meetLabel": "🔗 Enlace de reunión",
+        "problemQuestion": "Tu respuesta a \"¿Qué problema enfrentas?\":",
+        "rescheduleText": "Si surge algo y no puedes asistir, no te preocupes. Puedes encontrar un mejor horario haciendo clic {{cta}}.",
+        "ctaLabel": "Aquí"
+      }
+    }
+  }
+}
