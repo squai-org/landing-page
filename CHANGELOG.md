@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.0.3](https://github.com/squai-org/landing-page/compare/v1.0.2...v1.0.3) (2026-03-16)
+
+
+### Bug Fixes
+
+* **api:** add debug logging to diagnose Vercel routing ([fe8dbbc](https://github.com/squai-org/landing-page/commit/fe8dbbcb124e275c2ca9c23783c64c76b5029e93))
+* **api:** add diagnostic logs to schedule handler ([c9f2d47](https://github.com/squai-org/landing-page/commit/c9f2d475f9a3536eb16d86cb7773573cd3edcf74))
+* **api:** always use /api prefix (node-server adapter preserves path) ([1541476](https://github.com/squai-org/landing-page/commit/15414765db02959e0bb1b7e961c69d35c2175eab))
+* **api:** manual vercel handler to fix body stream hanging ([868a496](https://github.com/squai-org/landing-page/commit/868a496cd2598860bcdf20f74f7d7390c801c328))
+* **api:** use dynamic route prefix for Vercel (strips /api) ([73de4d9](https://github.com/squai-org/landing-page/commit/73de4d932368cf7f147b904dbe3a1497d743b786))
+* **api:** use node-server/vercel adapter instead of edge ([c048b00](https://github.com/squai-org/landing-page/commit/c048b004ebb1061ef3b06bc1eaa976f8ccd0cfb4))
+* remove component prefix from release tags ([1e6a940](https://github.com/squai-org/landing-page/commit/1e6a9403f309085a5ebcaa067920f2fa3cb56a6f))
+* rename package from vite_react_shadcn_ts to squai-landing-page ([c241d9a](https://github.com/squai-org/landing-page/commit/c241d9a49018fdf0c309a20903346f0c56d4baee))
+* use plain version tags without component prefix ([d55177e](https://github.com/squai-org/landing-page/commit/d55177e712d119f7c8f8adf5736a9ac3d0345196))
+
 ## [1.0.2](https://github.com/squai-org/landing-page/compare/squai-landing-page-v1.0.1...squai-landing-page-v1.0.2) (2026-03-16)
 
 
