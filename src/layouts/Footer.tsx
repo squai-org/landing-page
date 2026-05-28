@@ -48,7 +48,15 @@ const Footer = ({ onOpenContact }: FooterProps) => {
           </div>
         </div>
         <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-border flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4">
-          <p className="text-muted-foreground/60 font-body text-xs">{footer.copyright}</p>
+          <div className="flex items-center gap-4">
+            <p className="text-muted-foreground/60 font-body text-xs">{footer.copyright}</p>
+            <a
+              href={`/${lang}/privacy`}
+              className="text-muted-foreground/60 hover:text-primary transition-colors duration-200 font-body text-xs"
+            >
+              {footer.privacyLink}
+            </a>
+          </div>
           <p className="text-muted-foreground/40 font-body text-xs">
             {footer.illustrationsBy} 
             <a href="https://storyset.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors min-h-[44px] inline-flex items-center">Storyset.com</a>

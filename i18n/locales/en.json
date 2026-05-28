@@ -316,6 +316,7 @@
     "links": ["Services", "How It Works", "Contact"],
     "sections": ["services", "how-it-works", "contact"],
     "illustrationsBy": "Illustrations by",
+    "privacyLink": "Privacy Policy",
     "copyright": "\u00a9 2026 Squai. All rights reserved."
   },
   "rescheduleResume": {
