@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.1.0](https://github.com/squai-org/landing-page/compare/v1.0.3...v1.1.0) (2026-05-28)
+
+
+### Features
+
+* **component:** add privacy link in the footer ([#8](https://github.com/squai-org/landing-page/issues/8)) ([18298f1](https://github.com/squai-org/landing-page/commit/18298f1ba06f3265222744e0af2c0ad71a70bb44))
+
 ## [1.0.3](https://github.com/squai-org/landing-page/compare/v1.0.2...v1.0.3) (2026-03-16)
 
 
