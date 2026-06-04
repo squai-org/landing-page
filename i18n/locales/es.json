@@ -7,7 +7,7 @@
     "switchToSpanish": "Cambiar a español"
   },
   "hero": {
-    "headline": "Ya sabes que deberías usar IA. El problema es que nadie sabe por dónde empezar.",
+    "headline": "Ya sabes que deberías usar IA. El problema es que nadie sabe por dónde empezar",
     "headlineHighlight": "El problema es que nadie sabe por dónde empezar.",
     "sub": "Entrenamos a profesionales y equipos para usar la IA en su trabajo real, en su idioma, con su contexto, sin una sola línea de código.",
     "cta1": "Agenda una llamada gratuita",
@@ -15,7 +15,7 @@
   },
   "problems": {
     "eyebrow": "¿TE SUENA FAMILIAR?",
-    "title": "No eres el único pasando por esto.",
+    "title": "No eres el único pasando por esto",
     "items": [
       {
         "title": "Todo el mundo habla de IA pero nadie sabe cómo usarla bien",
@@ -266,7 +266,7 @@
     "privacySuffix": ". Tus datos se usan únicamente para responder tu consulta."
   },
   "ctaSection": {
-    "headline": "Da el primer paso sin comprometer nada.",
+    "headline": "Da el primer paso sin comprometerte con nada",
     "sub": "Una llamada gratuita de 30 minutos para entender dónde estás y qué programa tiene sentido para ti. Sin presión, sin vendedores.",
     "cta": "Agenda tu llamada gratis"
   },
