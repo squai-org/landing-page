@@ -7,7 +7,7 @@
     "switchToSpanish": "Switch to Spanish"
   },
   "hero": {
-    "headline": "You already know you should be using AI. The problem is nobody knows where to start.",
+    "headline": "You already know you should be using AI. The problem is nobody knows where to start",
     "headlineHighlight": "The problem is nobody knows where to start.",
     "sub": "We train professionals and teams to use AI in their real work — in their language, with their context, without a single line of code.",
     "cta1": "Book a Free Discovery Call",
@@ -15,7 +15,7 @@
   },
   "problems": {
     "eyebrow": "SOUND FAMILIAR?",
-    "title": "You're not the only one stuck here.",
+    "title": "You're not the only one stuck here",
     "items": [
       {
         "title": "Everyone's talking about AI but nobody actually knows how to use it well",
@@ -266,7 +266,7 @@
     "privacySuffix": ". Your data is used solely to respond to your inquiry."
   },
   "ctaSection": {
-    "headline": "Take the first step without committing to anything.",
+    "headline": "Take the first step without committing to anything",
     "sub": "A free 30-minute call to understand where you are and what program makes sense for you. No pressure, no sales pitch.",
     "cta": "Book Your Free Call"
   },
