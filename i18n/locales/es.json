@@ -309,6 +309,7 @@
   },
   "footer": {
     "tagline": "Ya sabes que deberías usar IA. El problema es que nadie sabe por dónde empezar.",
+    "email": "team@squai.io",
     "switchToEnglish": "Cambiar a inglés",
     "switchToSpanish": "Cambiar a español",
     "links": ["Servicios", "Cómo funciona", "Contacto"],
