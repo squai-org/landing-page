@@ -7,9 +7,9 @@
     "switchToSpanish": "Switch to Spanish"
   },
   "hero": {
-    "headline": "AI Adoption Starts With People, Not Tools.",
-    "headlineHighlight": "People, Not Tools.",
-    "sub": "We train professionals and teams to understand, use, and grow with AI — in plain language, at their own pace, applied to the work they actually do.",
+    "headline": "You already know you should be using AI. The problem is nobody knows where to start.",
+    "headlineHighlight": "The problem is nobody knows where to start.",
+    "sub": "We train professionals and teams across LATAM to use AI in their real work — in their language, with their context, without a single line of code.",
     "cta1": "Book a Free Discovery Call",
     "cta2": "See Our Services"
   },
@@ -18,16 +18,16 @@
     "title": "You're not the only one stuck here.",
     "items": [
       {
-        "title": "Everyone's talking about AI but nobody on your team actually uses it",
+        "title": "Everyone's talking about AI but nobody actually knows how to use it well",
         "desc": "The tools are there. The pressure is real. But between the noise, the options, and the day-to-day, nobody knows where to start."
       },
       {
         "title": "You've tried tools that got abandoned after a week",
-        "desc": "Not because they were bad — because nobody understood them well enough to make them stick."
+        "desc": "Not because they were bad. Nobody understood them well enough to make them stick."
       },
       {
-        "title": "You don't need a developer, you need someone to make sense of this",
-        "desc": "AI doesn't have to be a tech project. You just need the right guidance, in your language, applied to your real work."
+        "title": "Every explanation has so much jargon you end up more confused than before",
+        "desc": "AI doesn't have to be a programming project. You just need someone to explain it in your language, applied to your actual work."
       }
     ]
   },
@@ -39,172 +39,170 @@
     "tiers": [
       {
         "label": "For Professionals",
-        "name": "Squai for Professionals",
+        "name": "Squai One",
         "borderColor": "primary",
-        "partnership": "For office professionals who want to use AI in their day-to-day work — no technical background required.",
-        "description": "1:1 training sessions tailored to your role and goals. We start with a free 30-minute discovery call to understand how you work and propose a program that fits. Sessions are in plain language — no tech jargon, no generic content.",
+        "partnership": "For professionals and entrepreneurs who want to use AI in their daily work, no technical background required.",
+        "description": "1:1 sessions tailored to your role and what you actually do every day.",
         "items": [
-          "Free 30-minute discovery call to understand your needs and propose a training plan",
-          "1.5-hour sessions booked on demand, tailored to your role and real work",
-          "AI tools and prompting techniques you can apply from day one",
-          "No technical background required — sessions taught in plain language",
-          "Every 5 sessions, the 6th is on us"
+          "Free 30-minute discovery call before you commit to anything",
+          "1-hour sessions booked when it works for you, using examples from your real work",
+          "Tools and techniques you can apply from the very first session",
+          "No technical background required, no jargon, no generic content"
         ],
-        "duration": "On demand",
+        "duration": "At your own pace",
         "popular": false,
         "pricePrefix": "",
-        "price": "50 USD",
+        "price": "40 USD",
         "priceNote": "Per session. Paid upfront to reserve your spot.",
-        "squadAssigned": "1 dedicated trainer",
+        "squadAssigned": "1 dedicated squad member",
         "cta": "Let's Talk About Your Work"
       },
       {
         "label": "For Teams",
-        "name": "Squai for Teams",
+        "name": "Squai Grow",
         "borderColor": "accent",
-        "partnership": "Custom AI adoption programs for small companies. Train your team to understand AI and build the habits to use it well.",
-        "description": "We start with a free 60-minute assessment call to understand your team and business context. From there we design a custom training program and send a clear proposal within 48 hours. Sessions are run by the squad member best matched to your team's profile.",
+        "partnership": "For small and mid-sized companies that want to understand AI and learn to use it on their own, without depending on anyone.",
+        "description": "A training program built around your team and your context.",
         "items": [
-          "Free 60-minute assessment call and custom proposal within 48 hours",
-          "Three fixed packages: 10 hours at 600 USD, 20 hours at 1,700 USD, 35 hours at 2,450 USD",
-          "Up to 15 participants per group — teams larger than 15 are split into two separate groups, each billed at the package price",
-          "AI opportunities report included in the 20h and 35h packages",
-          "Sessions can be recorded — online by default, in-person available at your offices in Manizales, Caldas, Colombia"
+          "Free 60-minute discovery call and training proposal within 48 hours",
+          "Three training packages: Starter (10h), Growth (20h), and Pro (40h)",
+          "Up to 10 participants per group, with the squad member best matched to your team",
+          "From Growth: a written diagnosis of AI opportunities across your processes",
+          "Virtual sessions or in-person at your offices, available in Manizales, Colombia"
         ],
-        "duration": "Coordinated with your team",
+        "duration": "",
         "popular": true,
-        "pricePrefix": "",
-        "price": "600 USD",
-        "priceNote": "Fixed price per package. Schedule coordinated with your team.",
+        "pricePrefix": "From",
+        "price": "500 USD",
+        "priceNote": "Schedule coordinated with your team.",
         "squadAssigned": "Matched to your team's profile",
         "cta": "Let's Build Your Program"
       },
       {
         "label": "Implementation",
-        "name": "AI Implementation",
+        "name": "Squai Build",
         "borderColor": "secondary",
-        "partnership": "Training is what makes implementation last. We only build with teams that have trained with us first.",
-        "description": "Once your team understands AI, knows their processes, and has built the right habits, we can build alongside you. Implementation is only available after completing a training program — because that's the only way we can guarantee the work holds.",
+        "partnership": "For companies that want their processes and workflows optimized with AI, built to fit how they actually work.",
+        "description": "Every implementation is different. We start with a diagnostic session to understand your operation and define the scope and investment together.",
         "items": [
-          "Available exclusively to teams that have completed a Squai training program",
-          "Process mapping, workflow documentation, and AI integrations",
-          "Built around how your team actually works — not generic fixes",
-          "Scope and investment defined together after a diagnostic session",
-          "Contact us to discuss whether your team is ready to build"
+          "Process mapping and workflow documentation",
+          "AI integrations built around how your team actually works",
+          "Scope and investment defined together, no surprises",
+          "Squad assigned based on your project's technical profile"
         ],
         "duration": "Scope defined per project",
         "popular": false,
         "pricePrefix": "",
         "price": "Custom Quote",
-        "priceNote": "Contact us to explore the right scope for your operation.",
+        "priceNote": "Contact us to define the right scope for your operation.",
         "squadAssigned": "Squad assigned per project",
         "cta": "Explore Implementation"
       }
     ]
   },
   "howItWorks": {
-    "eyebrow": "HOW IT WORKS",
+    "eyebrow": "THE PROCESS",
     "title": "How It Works",
     "steps": [
       {
         "name": "Discovery Call",
-        "description": "A free call with your assigned trainer — 30 minutes for professionals, 60 minutes for teams. We learn about your work and recommend the right program."
+        "description": "A free 30-minute call for professionals and entrepreneurs, 60 minutes for teams and companies. We learn how you work and recommend the right program."
       },
       {
-        "name": "Proposal in 48hrs",
-        "description": "You receive a clear proposal within 48 hours — tailored program outline, sessions, deliverables, and investment. No ambiguity."
+        "name": "Training Proposal in 48 Hours",
+        "description": "You receive a clear training proposal in under 48 hours: program outline, sessions, deliverables, and investment."
       },
       {
         "name": "Kickoff",
-        "description": "We align on schedule, format, and expectations. Training starts on your terms — online or in-person at your offices in Manizales, Caldas, Colombia."
+        "description": "We align on schedule, format, and expectations. The program starts on your terms — virtual or in-person at your offices."
       },
       {
         "name": "Training Program",
-        "description": "Live sessions run by the squad member best matched to your profile. Practical, focused on your real work, in plain language — no filler content."
+        "description": "Live sessions run by the squad member best matched to your profile. Practical, applied to your real work, in your language."
       },
       {
-        "name": "AI Opportunities Report",
-        "description": "Included in team packages of 20 hours and above. A written analysis of where AI can help your specific operation, with clear and prioritized recommendations."
+        "name": "AI Opportunities Diagnosis",
+        "description": "A written document with concrete AI opportunities for your company's processes, with clear and prioritized recommendations."
       },
       {
         "name": "Keep Growing",
-        "description": "After the program your team has the knowledge to move forward independently. And if you want to build — we'll be ready when you are."
+        "description": "When the program ends, you have the tools to apply AI in your work from day one."
       }
     ],
-    "subtitle": "A clear, structured approach to AI adoption that actually sticks."
+    "subtitle": "A clear process, no unnecessary steps, so AI becomes part of your work and stays there."
   },
   "industries": {
     "eyebrow": "WHO WE SERVE",
     "title": "Industries We Serve",
-    "marqueeTitle": "Trusted by organizations in",
+    "marqueeTitle": "We work with people and teams in",
     "items": ["SaaS & Tech Startups", "E-Learning & Education", "Professional Services", "Digital E-Commerce", "Agencies & Consultancies"]
   },
   "whySquai": {
-    "eyebrow": "WHY SQUAI",
-    "title": "Why Squai",
+    "eyebrow": "WHY US",
+    "title": "Why Squai?",
     "items": [
       {
-        "title": "No technical background needed",
-        "desc": "We teach AI in plain language. You don't need to know how to code — you just need to know your work, and we'll take it from there."
+        "title": "No jargon, no code",
+        "desc": "We teach AI in plain language. You just need to know your work — we take it from there."
       },
       {
-        "title": "Trained for your real work, not for demos",
-        "desc": "Every session uses examples and exercises from your actual role. What you learn on Tuesday you can apply on Wednesday."
+        "title": "Applied to your real work, not to demos",
+        "desc": "Every session uses examples from your role and your context. What you learn on Tuesday you can use on Wednesday."
       },
       {
-        "title": "The right expert for your team",
-        "desc": "We assign the squad member who best matches your team's profile — not a generic trainer for everyone."
+        "title": "The right squad member for you",
+        "desc": "We assign whoever best fits your profile and your industry — not the same specialist for everyone."
       },
       {
-        "title": "You leave empowered, not dependent",
-        "desc": "Our goal is for you to walk away with the knowledge and confidence to keep growing with AI on your own."
+        "title": "You leave with tools, not dependency",
+        "desc": "The goal is for you to finish with the tools and confidence to keep applying AI on your own."
       }
     ]
   },
   "squad": {
     "eyebrow": "THE SQUAD",
-    "title": "Meet Your Squad",
-    "sub": "Every training program assigns the squad member who best fits your team's profile. You always work directly with real people — not a platform, not a bot.",
+    "title": "Meet the Squad",
+    "sub": "Every program assigns the squad member who best fits your profile. You always work with real people — not a platform, not a bot.",
     "members": [
       {
         "role": "Operations Strategist",
-        "specialty": "Strategy & Direction",
-        "desc": "Leads the assessment, designs the custom training program, and guides non-technical teams through AI adoption. Your main point of contact from the discovery call to the final session.",
+        "specialty": "Business, Operations & Innovation",
+        "desc": "If you want to understand how to use AI to work better, be more productive, and make sharper decisions every day, you'll work with her. No code, no jargon — applied to your real work.",
         "tiers": ["Professionals", "Teams"],
         "borderColor": "accent"
       },
       {
         "role": "AI Engineer",
-        "specialty": "Automation Specialist",
-        "desc": "Leads technical training tracks, explains how AI tools and workflows actually work under the hood, and helps technical teams understand how to build and scale with AI responsibly.",
+        "specialty": "Automation & Implementation",
+        "desc": "If your team is technical and wants to understand how to build, integrate, and scale AI solutions, he leads that part of the program.",
         "tiers": ["Teams"],
         "borderColor": "secondary"
       },
       {
         "role": "Business Process Analyst",
         "specialty": "Process Design & Strategy",
-        "desc": "Helps teams identify where their current processes can benefit from AI, and trains them to think about their workflows before jumping to automation. Process clarity first, AI second.",
+        "desc": "If you need to understand and document how your processes work today before automating anything, you'll work with him. Clarity first, AI second.",
         "tiers": ["Teams"],
         "borderColor": "primary"
       },
       {
         "role": "Knowledge Manager",
-        "specialty": "Systems & Knowledge Design",
-        "desc": "Trains teams on how to document, organize, and preserve knowledge so AI tools can actually work with their information effectively. Because AI is only as good as the information you give it.",
+        "specialty": "Knowledge Design & Management",
+        "desc": "If your company has valuable information that's scattered or poorly documented, she helps you organize it so AI tools can actually use it.",
         "tiers": ["Teams"],
         "borderColor": "primary"
       },
       {
         "role": "Data Analyst",
         "specialty": "Data Integrity & Connections",
-        "desc": "Guides teams through understanding their data — where it lives, how reliable it is, and what needs to be in place before AI can use it well. Good AI starts with good data.",
+        "desc": "If you need to understand where your data lives, how reliable it is, and what needs to be in order before AI can work with it, he's your starting point.",
         "tiers": ["Teams"],
         "borderColor": "primary"
       },
       {
         "role": "Information Security Analyst",
         "specialty": "Security & Risk Management",
-        "desc": "Trains teams on how to use AI safely — what data should never go into public tools, and how to build good security habits from day one. So your team adopts AI without putting your business at risk.",
+        "desc": "If you want your team to adopt AI without putting your company's information at risk, he teaches you what to protect and how to do it from day one.",
         "tiers": ["Teams"],
         "borderColor": "primary"
       }
@@ -219,22 +217,22 @@
     ]
   },
   "contactModal": {
-    "title": "Let's talk about your challenge",
-    "description": "Send us a message or schedule a free discovery call.",
+    "title": "Tell us what you're working on",
+    "description": "Write to us or book a free call. No long forms, no waiting.",
     "tabMessage": "Send a Message",
     "tabSchedule": "Schedule a Call",
     "nameLabel": "Name",
     "namePlaceholder": "Your name",
     "nameRequired": "Name is required",
     "companyLabel": "Company",
-    "companyPlaceholder": "Your company",
+    "companyPlaceholder": "Your company or project",
     "companyRequired": "Company is required",
     "emailLabel": "Email",
-    "emailPlaceholder": "you@company.com",
+    "emailPlaceholder": "you@email.com",
     "emailRequired": "Email is required",
     "emailInvalid": "Please enter a valid email",
     "descriptionLabel": "What problem are you facing?",
-    "descriptionPlaceholder": "Tell us briefly about the challenge you'd like help with\u2026",
+    "descriptionPlaceholder": "Tell us briefly what you want to improve with AI in your work\u2026",
     "submit": "Send",
     "pickDate": "Pick a date",
     "pickTime": "Select a time",
@@ -243,18 +241,18 @@
     "scheduleBtn": "Schedule Call",
     "scheduling": "Scheduling\u2026",
     "successTitle": "You're all set!",
-    "successMessage": "Your discovery call has been scheduled. Check your email for the calendar invitation.",
+    "successMessage": "Your call is scheduled. Check your email for the details.",
     "errorSlotTaken": "This time slot is no longer available. Please choose another.",
     "errorGeneric": "Something went wrong. Please try again.",
     "errorRescheduleForbidden": "This reschedule link does not match your email.",
     "changeDate": "Change date",
     "selectedDate": "Selected",
     "stepDateLabel": "Date",
-    "stepDateDesc": "When works best for you?",
+    "stepDateDesc": "When do you have 30 minutes?",
     "stepTimeLabel": "Time",
     "stepTimeDesc": "Morning or afternoon?",
     "stepDetailsLabel": "Details",
-    "stepDetailsDesc": "Almost there! Tell us about you",
+    "stepDetailsDesc": "Almost there, tell us about you",
     "formProgress": "Form progress",
     "closeBtn": "Close",
     "backToDate": "Go back to date selection",
@@ -268,8 +266,8 @@
     "privacySuffix": ". Your data is used solely to respond to your inquiry."
   },
   "ctaSection": {
-    "headline": "Ready to start?",
-    "sub": "A free call, no commitment, no pressure. Just a real conversation about where you are and where you want to go with AI.",
+    "headline": "Take the first step without committing to anything.",
+    "sub": "A free 30-minute call to understand where you are and what program makes sense for you. No pressure, no sales pitch.",
     "cta": "Book Your Free Call"
   },
   "privacy": {
@@ -310,7 +308,7 @@
     ]
   },
   "footer": {
-    "tagline": "AI Adoption Starts With People, Not Tools.",
+    "tagline": "You already know you should be using AI. The problem is nobody knows where to start.",
     "switchToEnglish": "Switch to English",
     "switchToSpanish": "Switch to Spanish",
     "links": ["Services", "How It Works", "Contact"],
