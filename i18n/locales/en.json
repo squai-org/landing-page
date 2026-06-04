@@ -309,6 +309,7 @@
   },
   "footer": {
     "tagline": "You already know you should be using AI. The problem is nobody knows where to start.",
+    "email": "team@squai.io",
     "switchToEnglish": "Switch to English",
     "switchToSpanish": "Switch to Spanish",
     "links": ["Services", "How It Works", "Contact"],
