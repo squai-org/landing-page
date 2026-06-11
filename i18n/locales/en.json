@@ -35,6 +35,7 @@
     "eyebrow": "OUR SERVICES",
     "title": "Our Services",
     "mostPopular": "Most Popular",
+    "applyTo": "",
     "whatYouGet": "What you get:",
     "tiers": [
       {
@@ -53,9 +54,11 @@
         "popular": false,
         "pricePrefix": "",
         "price": "40 USD",
+        "priceUSD": "",
         "priceNote": "Per session. Paid upfront to reserve your spot.",
         "squadAssigned": "1 dedicated squad member",
-        "cta": "Let's Talk About Your Work"
+        "cta": "Let's Talk About Your Work",
+        "applyTo": false
       },
       {
         "label": "For Teams",
@@ -74,9 +77,11 @@
         "popular": true,
         "pricePrefix": "From",
         "price": "500 USD",
+        "priceUSD": "",
         "priceNote": "Schedule coordinated with your team.",
         "squadAssigned": "Matched to your team's profile",
-        "cta": "Let's Build Your Program"
+        "cta": "Let's Build Your Program",
+        "applyTo": false
       },
       {
         "label": "Implementation",
@@ -94,9 +99,11 @@
         "popular": false,
         "pricePrefix": "",
         "price": "Custom Quote",
+        "priceUSD": "",
         "priceNote": "Contact us to define the right scope for your operation.",
         "squadAssigned": "Squad assigned per project",
-        "cta": "Explore Implementation"
+        "cta": "Explore Implementation",
+        "applyTo": false
       }
     ]
   },
