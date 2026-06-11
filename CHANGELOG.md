@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.2.0](https://github.com/squai-org/landing-page/compare/v1.1.0...v1.2.0) (2026-06-11)
+
+
+### Features
+
+* **services:** add Colombian pricing badge and improve card spacing ([#12](https://github.com/squai-org/landing-page/issues/12)) ([25e4557](https://github.com/squai-org/landing-page/commit/25e4557c3d097040fde8091228130ad32b42c13c))
+
 ## [1.1.0](https://github.com/squai-org/landing-page/compare/v1.0.3...v1.1.0) (2026-05-28)
 
 
