@@ -10,7 +10,17 @@ import {
 import { HttpStatus, ErrorCode } from "../config/constants.js";
 import { getErrorMessage } from "../utils/index.js";
 
-/** Handles GET /api/oauth/google/start — initiates the OAuth2 consent flow. */
+/**
+ * Handles GET /api/oauth/google/start.
+ *
+ * Creates a Google OAuth2 client and redirects the caller to Google's
+ * consent screen with `access_type=offline` and `prompt=consent` to
+ * obtain a refresh token.
+ *
+ * @param c - Hono request context.
+ * @returns 302 redirect to Google's authorization URL.
+ * @returns 500 if OAuth client credentials are not configured.
+ */
 export async function handleOAuthStart(c: Context) {
   try {
     const oauthClient = createOAuthClient();
@@ -39,7 +49,18 @@ export async function handleOAuthStart(c: Context) {
   }
 }
 
-/** Handles GET /api/oauth/google/callback — exchanges the authorization code for tokens. */
+/**
+ * Handles GET /api/oauth/google/callback.
+ *
+ * Receives the authorization `code` and HMAC-signed `state` from Google,
+ * verifies the state for CSRF protection, exchanges the code for tokens,
+ * and returns the refresh token for environment configuration.
+ *
+ * @param c - Hono request context with `code`, `state`, and optional `error` query params.
+ * @returns 200 `{ success: true, refreshToken, scope, expiryDate }` on success.
+ * @returns 400 if code is missing, state is invalid, or no refresh token is returned.
+ * @returns 500 if the token exchange fails.
+ */
 export async function handleOAuthCallback(c: Context) {
   const code = c.req.query("code");
   const state = c.req.query("state");
@@ -93,7 +114,15 @@ export async function handleOAuthCallback(c: Context) {
   }
 }
 
-/** Handles GET /api/oauth/google/status — reports current OAuth configuration state. */
+/**
+ * Handles GET /api/oauth/google/status.
+ *
+ * Returns the current state of Google OAuth configuration without exposing
+ * sensitive values. Useful for verifying setup during deployment.
+ *
+ * @param c - Hono request context.
+ * @returns 200 with boolean flags for client, refresh token, and state secret configuration.
+ */
 export function handleOAuthStatus(c: Context) {
   const { clientId, clientSecret, refreshToken, redirectBaseUrl, stateSecret } =
     getOAuthConfig();

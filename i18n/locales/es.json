@@ -7,27 +7,27 @@
     "switchToSpanish": "Cambiar a español"
   },
   "hero": {
-    "headline": "Tu equipo no tiene que descifrar la IA solo.",
-    "headlineHighlight": "descifrar la IA solo.",
-    "sub": "Trabajamos junto a tu equipo, mapeamos cómo funciona tu negocio e integramos IA que realmente funciona, no solo herramientas que se ven bien en una presentación.",
+    "headline": "Ya sabes que deberías usar IA. El problema es que nadie sabe por dónde empezar",
+    "headlineHighlight": "El problema es que nadie sabe por dónde empezar.",
+    "sub": "Entrenamos a profesionales y equipos para usar la IA en su trabajo real, en su idioma, con su contexto, sin una sola línea de código.",
     "cta1": "Agenda una llamada gratuita",
     "cta2": "Ver nuestros servicios"
   },
   "problems": {
     "eyebrow": "¿TE SUENA FAMILIAR?",
-    "title": "No eres el único pasando por esto.",
+    "title": "No eres el único pasando por esto",
     "items": [
       {
-        "title": "Todo está en la cabeza de alguien",
-        "desc": "Tus procesos dependen de que las personas correctas estén disponibles. Cuando no lo están, todo se rompe."
+        "title": "Todo el mundo habla de IA pero nadie sabe cómo usarla bien",
+        "desc": "Las herramientas existen. La presión es real. Pero entre el ruido, las opciones y el día a día, nadie sabe por dónde empezar."
       },
       {
-        "title": "La IA se siente urgente pero imposible de comenzar",
-        "desc": "Sabes que necesitas avanzar con la IA. Pero entre el ruido, las opciones y el día a día, nunca sucede."
+        "title": "Ya probaste herramientas que terminaron abandonadas a la semana",
+        "desc": "No porque fueran malas. Nadie las entendió lo suficiente como para convertirlas en hábito."
       },
       {
-        "title": "Las grandes consultoras no son la respuesta",
-        "desc": "No necesitas un proyecto de seis cifras ni 200 diapositivas. Necesitas a alguien que trabaje de verdad contigo."
+        "title": "Cada explicación tiene tantos tecnicismos que terminas más confundido que antes",
+        "desc": "La IA no tiene que ser un proyecto de programación. Solo necesitas que alguien te lo explique en tu idioma, aplicado a tu trabajo."
       }
     ]
   },
@@ -35,162 +35,182 @@
     "eyebrow": "NUESTROS SERVICIOS",
     "title": "Nuestros Servicios",
     "mostPopular": "Más Popular",
+    "applyTo": "Para Colombia",
     "whatYouGet": "Lo que obtienes:",
     "tiers": [
       {
-        "label": "Nivel 1",
-        "name": "Squaimap",
+        "label": "Para Profesionales",
+        "name": "Squai One",
         "borderColor": "primary",
-        "partnership": "El primer paso antes de cambiar cualquier cosa.",
-        "description": "Todo proyecto de Squai empieza aquí. Nos adentramos en tu negocio, estudiamos cómo trabaja tu equipo de verdad, encontramos qué te está frenando y mapeamos dónde la IA puede marcar una diferencia real. Luego nos sentamos juntos, revisamos los hallazgos y definimos el camino a seguir.",
+        "partnership": "Para profesionales y emprendedores que quieren usar la IA en su trabajo diario, sin necesidad de saber de tecnología.",
+        "description": "Sesiones 1 a 1 adaptadas a tu rol y a lo que haces todos los días.",
         "items": [
-          "Un análisis profundo de tus operaciones: cómo trabaja tu equipo hoy, dónde están los cuellos de botella y qué te está costando tiempo y dinero",
-          "Un mapa de oportunidades de IA con exactamente dónde puede ayudar, según tus herramientas, equipo, presupuesto y madurez",
-          "Un reporte escrito con hallazgos claros y recomendaciones priorizadas",
-          "Una sesión en vivo donde revisamos todo juntos y definimos los próximos pasos"
+          "Llamada de diagnóstico gratuita de 30 minutos antes de comprometer cualquier inversión",
+          "Sesiones de 1 hora agendadas cuando puedas, con ejemplos de tu trabajo real",
+          "Herramientas y técnicas que puedes aplicar desde la primera sesión",
+          "Sin conocimientos técnicos previos, sin tecnicismos, sin contenido genérico"
         ],
-        "duration": "2 semanas",
+        "duration": "A tu ritmo",
         "popular": false,
         "pricePrefix": "",
-        "price": "1,500 USD",
-        "priceNote": "Precio fijo. Incluido en todos los niveles, sin atajos.",
-        "squadAssigned": "2 de 6 miembros del squad",
-        "cta": "Empezar con Squaimap"
+        "price": "$120,000 COP",
+        "priceUSD": "40 USD",
+        "priceNote": "Por sesión. Se paga por adelantado para reservar tu lugar.",
+        "squadAssigned": "1 miembro del squad dedicado",
+        "cta": "Hablemos de tu trabajo",
+        "applyTo": true
       },
       {
-        "label": "Nivel 2",
-        "name": "Squailab",
+        "label": "Para Equipos",
+        "name": "Squai Grow",
         "borderColor": "accent",
-        "partnership": "Tomamos lo que aprendimos y construimos sistemas que tu equipo realmente va a usar.",
-        "description": "Tomamos los hallazgos del Squaimap y nos ponemos a trabajar. Juntos decidimos qué flujos importan más ahora mismo, los documentamos bien, los hacemos accesibles para todo tu equipo e integramos IA donde tiene más sentido para tu negocio.",
+        "partnership": "Para pequeñas y medianas empresas que quieren entender la IA y aprender a usarla solos, sin depender de nadie.",
+        "description": "Un programa de entrenamiento diseñado a la medida de tu equipo y tu contexto.",
         "items": [
-          "Todo lo del Squaimap",
-          "3 a 5 flujos de trabajo principales completamente mapeados y documentados, lo suficientemente claros para que cualquiera en tu equipo pueda seguirlos",
-          "Playbooks operativos entregados en las herramientas que tu equipo ya usa",
-          "Implementaciones de IA en tus flujos prioritarios, con alcance definido juntos durante el Squaimap",
-          "Una sesión de cierre para que tu equipo sepa manejar todo lo que construimos",
-          "1 semana de soporte post-entrega"
+          "Llamada de diagnóstico gratuita de 60 minutos y propuesta de entrenamiento en 48 horas",
+          "Tres paquetes de entrenamiento: Starter (10h), Growth (20h) y Pro (40h)",
+          "Hasta 10 personas por grupo, con el miembro del squad más alineado a tu equipo",
+          "Desde Growth: diagnóstico escrito de oportunidades de IA en tus procesos",
+          "Sesiones virtuales o presenciales en tus oficinas, disponible en Manizales, Colombia"
         ],
-        "duration": "4 a 6 semanas",
+        "duration": "",
         "popular": true,
         "pricePrefix": "Desde",
-        "price": "5,500 USD",
-        "priceNote": "Alcance y precio final confirmados después de la sesión de cierre del Squaimap.",
-        "squadAssigned": "4 de 6 miembros del squad",
-        "cta": "Empezar con Squailab"
+        "price": "$1,800,000 COP",
+        "priceUSD": "500 USD",
+        "priceNote": "El cronograma se coordina con tu equipo.",
+        "squadAssigned": "Asignado según el perfil de tu equipo",
+        "cta": "Construyamos tu programa",
+        "applyTo": true
       },
       {
-        "label": "Nivel 3",
-        "name": "Squaicore",
+        "label": "Implementación",
+        "name": "Squai Build",
         "borderColor": "secondary",
-        "partnership": "Un sistema operativo completo para que tu negocio dependa de procesos, no de personas.",
-        "description": "Este es el trabajo completo. Profundizamos en toda tu operación, mapeamos cada flujo crítico, construimos un playbook completo sobre el que tu negocio pueda sostenerse e implementamos IA donde genera verdadero valor. Luego entrenamos a tu equipo de forma práctica para que esté listo para operar y crecer cuando el proyecto termine.",
+        "partnership": "Para empresas que quieren sus procesos y flujos de trabajo optimizados con IA, construidos a su medida.",
+        "description": "Cada implementación es distinta. Empezamos con una sesión de diagnóstico para entender tu operación y definir juntos el alcance y la inversión.",
         "items": [
-          "Todo lo del Squaimap",
-          "6 a 10 flujos de trabajo principales completamente mapeados, documentados e interconectados",
-          "Un playbook operativo completo que cubre todo tu negocio",
-          "Implementaciones de IA en todos los flujos prioritarios, con alcance definido de forma colaborativa durante el Squaimap",
-          "Una revisión de integridad de datos para que tus decisiones estén basadas en información confiable y bien conectada",
-          "Una revisión de seguridad de la información para que tus procesos y herramientas manejen datos sensibles de forma responsable",
-          "Entrenamiento completo del equipo, práctico, por proceso y diseñado para el uso real",
-          "2 semanas de soporte post-entrega"
+          "Mapeo de procesos y documentación de flujos de trabajo",
+          "Integraciones de IA construidas alrededor de cómo trabaja tu equipo",
+          "Alcance e inversión definidos juntos, sin sorpresas",
+          "Squad asignado según el perfil técnico de tu proyecto"
         ],
-        "duration": "8 a 12 semanas",
+        "duration": "Alcance definido por proyecto",
         "popular": false,
-        "pricePrefix": "Desde",
-        "price": "12,000 USD",
-        "priceNote": "Alcance y precio final confirmados después de la sesión de cierre del Squaimap.",
-        "squadAssigned": "Squad completo, los 6 miembros",
-        "cta": "Empezar con Squaicore"
+        "pricePrefix": "",
+        "price": "Cotización a medida",
+        "priceUSD": "",
+        "priceNote": "Contáctanos para definir el alcance adecuado para tu operación.",
+        "squadAssigned": "Squad asignado por proyecto",
+        "cta": "Explorar implementación",
+        "applyTo": false
       }
     ]
   },
   "howItWorks": {
-    "eyebrow": "CÓMO FUNCIONA",
+    "eyebrow": "EL PROCESO",
     "title": "Cómo funciona",
     "steps": [
-      { "name": "Llamada de Diagnóstico", "description": "Una llamada gratuita de 30 minutos con tu Estratega de Operaciones. Aprendemos sobre tu negocio y recomendamos el proyecto adecuado." },
-      { "name": "Propuesta en 48hrs", "description": "Recibes una propuesta clara en 48 horas — alcance exacto, entregables, cronograma, miembros del squad e inversión. Sin ambigüedad." },
-      { "name": "Kickoff", "description": "Una vez aprobado, agendamos una sesión de kickoff con tus stakeholders clave. Aquí comienza el trabajo oficialmente." },
-      { "name": "Mapeo y Construcción", "description": "El squad trabaja semana a semana. Check-ins regulares y avances tempranos — sin grandes sorpresas al final." },
-      { "name": "Entrega", "description": "Todos los entregables en tus herramientas y formatos preferidos. Nos adaptamos a cómo trabaja tu equipo — no al revés." },
-      { "name": "Período de Soporte", "description": "1 a 2 semanas de soporte post-entrega para preguntas, ajustes y onboarding de tu equipo a los nuevos procesos y herramientas." }
+      {
+        "name": "Llamada de Diagnóstico",
+        "description": "Una llamada gratuita de 30 minutos para profesionales y emprendedores, 60 minutos para equipos y empresas. Entendemos cómo trabajas y te recomendamos el programa adecuado."
+      },
+      {
+        "name": "Propuesta de Entrenamiento en 48 horas",
+        "description": "Recibes una propuesta de entrenamiento clara en menos de 48 horas: esquema del programa, sesiones, entregables e inversión."
+      },
+      {
+        "name": "Kickoff",
+        "description": "Alineamos cronograma, formato y expectativas. El programa empieza en tus términos, virtual o presencial en tus oficinas."
+      },
+      {
+        "name": "Programa de Entrenamiento",
+        "description": "Sesiones en vivo lideradas por el miembro del squad más alineado a tu perfil. Práctico, aplicado a tu trabajo real, en tu idioma."
+      },
+      {
+        "name": "Diagnóstico de Oportunidades de IA",
+        "description": "Un documento escrito con las oportunidades concretas de IA para los procesos de tu empresa, con recomendaciones claras y priorizadas."
+      },
+      {
+        "name": "Sigue Creciendo",
+        "description": "Al terminar el programa tienes las herramientas para aplicar la IA en tu trabajo desde el primer día."
+      }
     ],
-    "subtitle": "Un enfoque estructurado y comprobado para escalar tus operaciones de adentro hacia afuera."
+    "subtitle": "Un proceso claro, sin pasos innecesarios, para que la IA entre a tu trabajo y se quede."
   },
   "industries": {
     "eyebrow": "A QUIÉN SERVIMOS",
     "title": "Industrias que atendemos",
-    "marqueeTitle": "Confiado por organizaciones en",
+    "marqueeTitle": "Trabajamos con personas y equipos en",
     "items": ["SaaS y Startups Tech", "E-Learning y Educación", "Servicios Profesionales", "E-Commerce Digital", "Agencias y Consultoras"]
   },
   "whySquai": {
-    "eyebrow": "POR QUÉ SQUAI",
+    "eyebrow": "POR QUÉ NOSOTROS",
     "title": "¿Por qué Squai?",
     "items": [
       {
-        "title": "Un equipo, no un solo consultor",
-        "desc": "Personas reales con roles definidos trabajando dentro de tu negocio, no un chatbot, no una metodología, no una presentación."
+        "title": "Sin tecnicismos, sin código",
+        "desc": "Enseñamos IA en un lenguaje que cualquiera entiende. Solo necesitas conocer tu trabajo, de ahí arrancamos."
       },
       {
-        "title": "Hablamos tu idioma, literalmente",
-        "desc": "Inglés o español. Notion o Confluence. Nos adaptamos a donde estás y trabajamos como trabaja tu equipo."
+        "title": "Aplicado a tu trabajo real, no a demos",
+        "desc": "Cada sesión usa ejemplos de tu rol y tu contexto. Lo que aprendes el martes lo puedes usar el miércoles."
       },
       {
-        "title": "IA práctica, no teórica",
-        "desc": "No te dejamos una lista de herramientas y nos vamos. Implementamos lo que se adapta al nivel real de tu equipo y nos aseguramos de que funcione."
+        "title": "El miembro del squad correcto para ti",
+        "desc": "Asignamos a quien mejor se ajusta a tu perfil y tu industria, no al mismo especialista para todos."
       },
       {
-        "title": "Construimos para que no nos necesites para siempre",
-        "desc": "Todo lo que construimos está pensado para que tu equipo lo maneje por su cuenta. Nuestro trabajo termina cuando ya no nos necesitas."
+        "title": "Te vas con herramientas, no con dependencia",
+        "desc": "El objetivo es que termines con las herramientas y la seguridad para seguir aplicando la IA por tu cuenta."
       }
     ]
   },
   "squad": {
     "eyebrow": "EL SQUAD",
-    "title": "Conoce a tu Squad",
-    "sub": "Cada proyecto asigna las personas correctas según tus necesidades. Siempre trabajas directamente con quienes hacen el trabajo.",
+    "title": "Conoce al Squad",
+    "sub": "Cada programa asigna al miembro del squad que mejor se ajusta a tu perfil. Siempre trabajas con personas reales, no con una plataforma ni con un bot.",
     "members": [
       {
         "role": "Estratega de Operaciones",
-        "specialty": "Estrategia y Dirección",
-        "desc": "Tu punto de contacto principal desde el primer día. Diagnostica tu negocio, diseña la hoja de ruta operativa y mantiene todo el proyecto en la dirección correcta.",
-        "tiers": ["Squaimap", "Squailab", "Squaicore"],
+        "specialty": "Negocios, Operaciones e Innovación",
+        "desc": "Si quieres entender cómo usar la IA para trabajar mejor, ser más productivo y tomar mejores decisiones en tu día a día, trabajarás con ella. Sin código, sin tecnicismos, aplicado a tu trabajo real.",
+        "tiers": ["Profesionales", "Equipos"],
         "borderColor": "accent"
       },
       {
         "role": "Ingeniero de IA",
-        "specialty": "Especialista en Automatización",
-        "desc": "Construye las soluciones de IA identificadas en el Squaimap. Automatizaciones e integraciones diseñadas alrededor de cómo trabaja tu equipo, no soluciones genéricas.",
-        "tiers": ["Squailab", "Squaicore"],
+        "specialty": "Automatización e Implementación",
+        "desc": "Si tu equipo es técnico y quiere entender cómo construir, integrar y escalar soluciones de IA, él lidera esa parte del programa.",
+        "tiers": ["Equipos"],
         "borderColor": "secondary"
       },
       {
         "role": "Analista de Procesos de Negocio",
         "specialty": "Diseño y Estrategia de Procesos",
-        "desc": "Mapea cómo trabaja tu equipo de verdad, día a día, no como dice el manual. Encuentra dónde las cosas fallan y conecta cada mejora con algo que realmente importa.",
-        "tiers": ["Squaimap", "Squailab", "Squaicore"],
+        "desc": "Si antes de automatizar necesitas entender y documentar cómo funcionan tus procesos hoy, trabajarás con él. Primero claridad, después IA.",
+        "tiers": ["Equipos"],
         "borderColor": "primary"
       },
       {
-        "role": "Gestor de Conocimiento",
+        "role": "Gestora de Conocimiento",
         "specialty": "Diseño y Gestión de Conocimiento",
-        "desc": "Convierte todo lo que construimos en documentación clara y estructurada que vive en las herramientas que tu equipo ya usa, para que cualquiera pueda seguirla, no solo quienes estuvieron en las reuniones.",
-        "tiers": ["Squailab", "Squaicore"],
+        "desc": "Si tu empresa tiene información valiosa dispersa o mal documentada, ella te ayuda a organizarla para que las herramientas de IA puedan usarla bien.",
+        "tiers": ["Equipos"],
         "borderColor": "primary"
       },
       {
         "role": "Analista de Datos",
         "specialty": "Integridad y Conexiones de Datos",
-        "desc": "Se asegura de que los datos que fluyen por tus procesos sean confiables. Encuentra dónde hay información incompleta, desconectada o mal usada, y lo corrige antes de que se convierta en un problema mayor.",
-        "tiers": ["Squaicore"],
+        "desc": "Si necesitas entender dónde están tus datos, qué tan confiables son y qué hace falta ordenar antes de implementar IA, él es tu punto de partida.",
+        "tiers": ["Equipos"],
         "borderColor": "primary"
       },
       {
         "role": "Analista de Seguridad de la Información",
         "specialty": "Gestión de Seguridad y Riesgos",
-        "desc": "Revisa cómo tus procesos, herramientas y documentación manejan información sensible. Se asegura de que todo lo que construimos siga las mejores prácticas de seguridad, para que tu negocio esté protegido a medida que crece.",
-        "tiers": ["Squailab", "Squaicore"],
+        "desc": "Si quieres que tu equipo adopte la IA sin poner en riesgo la información de tu empresa, él te enseña qué proteger y cómo hacerlo desde el principio.",
+        "tiers": ["Equipos"],
         "borderColor": "primary"
       }
     ],
@@ -198,48 +218,48 @@
       { "name": "Laura Villada", "role": "Estratega de Operaciones" },
       { "name": "Sebastián Rico", "role": "Ingeniero IA" },
       { "name": "Daniel Guzmán", "role": "Analista de Procesos" },
-      { "name": "Ana Lasso", "role": "Gestor de Conocimiento" },
+      { "name": "Ana Lasso", "role": "Gestora de Conocimiento" },
       { "name": "Luis López", "role": "Analista de Datos" },
       { "name": "Carlos Gómez", "role": "Analista de Seguridad" }
     ]
   },
   "contactModal": {
-    "title": "Cuéntanos tu desafío",
-    "description": "Envíanos un mensaje o agenda una llamada gratuita de descubrimiento de 30 minutos.",
+    "title": "Cuéntanos en qué estás trabajando",
+    "description": "Escríbenos o agenda una llamada gratuita. Sin formularios largos, sin esperas.",
     "tabMessage": "Enviar Mensaje",
     "tabSchedule": "Agendar Llamada",
     "nameLabel": "Nombre",
     "namePlaceholder": "Tu nombre",
     "nameRequired": "El nombre es obligatorio",
     "companyLabel": "Empresa",
-    "companyPlaceholder": "Tu empresa",
+    "companyPlaceholder": "Tu empresa o proyecto",
     "companyRequired": "La empresa es obligatoria",
     "emailLabel": "Correo electrónico",
-    "emailPlaceholder": "tu@empresa.com",
+    "emailPlaceholder": "tu@correo.com",
     "emailRequired": "El correo es obligatorio",
     "emailInvalid": "Ingresa un correo válido",
     "descriptionLabel": "¿Qué problema enfrentas?",
-    "descriptionPlaceholder": "Cuéntanos brevemente el desafío con el que necesitas ayuda…",
+    "descriptionPlaceholder": "Cuéntanos brevemente qué quieres mejorar con la IA en tu trabajo\u2026",
     "submit": "Enviar",
     "pickDate": "Elige una fecha",
     "pickTime": "Selecciona una hora",
     "morning": "Mañana",
     "afternoon": "Tarde",
     "scheduleBtn": "Agendar Llamada",
-    "scheduling": "Agendando…",
-    "successTitle": "¡Listo!",
-    "successMessage": "Tu llamada de descubrimiento ha sido agendada. Revisa tu correo para la invitación del calendario.",
+    "scheduling": "Agendando\u2026",
+    "successTitle": "\u00a1Listo!",
+    "successMessage": "Tu llamada está agendada. Revisa tu correo para los detalles.",
     "errorSlotTaken": "Este horario ya no está disponible. Por favor elige otro.",
     "errorGeneric": "Algo salió mal. Inténtalo de nuevo.",
     "errorRescheduleForbidden": "Este enlace no corresponde a tu correo.",
     "changeDate": "Cambiar fecha",
     "selectedDate": "Seleccionado",
     "stepDateLabel": "Fecha",
-    "stepDateDesc": "¿Cuándo te viene mejor?",
+    "stepDateDesc": "¿Cuándo tienes 30 minutos?",
     "stepTimeLabel": "Hora",
     "stepTimeDesc": "¿Mañana o tarde?",
     "stepDetailsLabel": "Datos",
-    "stepDetailsDesc": "¡Casi listo! Cuéntanos de ti",
+    "stepDetailsDesc": "Casi listo, cuéntanos de ti",
     "formProgress": "Progreso del formulario",
     "closeBtn": "Cerrar",
     "backToDate": "Volver a seleccionar fecha",
@@ -253,20 +273,20 @@
     "privacySuffix": ". Tus datos se usan únicamente para responder tu consulta."
   },
   "ctaSection": {
-    "headline": "¿Listo para conocer tu squad?",
-    "sub": "Un equipo real, una llamada gratuita de 30 minutos. Sin compromiso, sin presión, solo una conversación honesta sobre dónde estás y a dónde quieres llegar.",
+    "headline": "Da el primer paso sin comprometerte con nada",
+    "sub": "Una llamada gratuita de 30 minutos para entender dónde estás y qué programa tiene sentido para ti. Sin presión, sin vendedores.",
     "cta": "Agenda tu llamada gratis"
   },
   "privacy": {
     "title": "Política de Privacidad",
     "lastUpdated": "Última actualización: 8 de marzo de 2026",
-    "backHome": "← Volver al inicio",
+    "backHome": "\u2190 Volver al inicio",
     "switchToEnglish": "Cambiar a inglés",
     "switchToSpanish": "Cambiar a español",
     "sections": [
       {
         "heading": "Quiénes somos",
-        "body": "Squai es responsable del tratamiento de los datos personales recopilados a través de este sitio web. Si tienes alguna pregunta, puedes contactarnos en heysquai@gmail.com."
+        "body": "Squai es responsable del tratamiento de los datos personales recopilados a través de este sitio web. Si tienes alguna pregunta, puedes contactarnos en team@squai.io"
       },
       {
         "heading": "Qué datos recopilamos",
@@ -290,18 +310,20 @@
       },
       {
         "heading": "Cómo ejercer tus derechos",
-        "body": "Para ejercer cualquiera de estos derechos, envíanos un correo a heysquai@gmail.com. Responderemos en un plazo de 30 días."
+        "body": "Para ejercer cualquiera de estos derechos, envíanos un correo a team@squai.io. Responderemos en un plazo de 30 días."
       }
     ]
   },
   "footer": {
-    "tagline": "Tu equipo no tiene que descifrar la IA solo.",
+    "tagline": "Ya sabes que deberías usar IA. El problema es que nadie sabe por dónde empezar.",
+    "email": "team@squai.io",
     "switchToEnglish": "Cambiar a inglés",
     "switchToSpanish": "Cambiar a español",
     "links": ["Servicios", "Cómo funciona", "Contacto"],
     "sections": ["services", "how-it-works", "contact"],
     "illustrationsBy": "Ilustraciones por",
-    "copyright": "© 2026 Squai. All rights reserved."
+    "privacyLink": "Política de privacidad",
+    "copyright": "\u00a9 2026 Squai. All rights reserved."
   },
   "rescheduleResume": {
     "message": "Cerraste el flujo de reagendado. Puedes continuarlo cuando quieras.",
@@ -313,11 +335,11 @@
     },
     "email": {
       "schedule": {
-        "heading": "¡Tu Sesión de Estrategia de IA está confirmada!",
+        "heading": "\u00a1Tu Sesión de Estrategia de IA está confirmada!",
         "greeting": "Hola {{name}}, estamos emocionados de hablar contigo sobre cómo optimizar procesos en {{company}}.",
         "detailsHeading": "Detalles de la Sesión:",
-        "dateLabel": "📅 Fecha y hora",
-        "meetLabel": "🔗 Enlace de reunión",
+        "dateLabel": "\ud83d\udcc5 Fecha y hora",
+        "meetLabel": "\ud83d\udd17 Enlace de reunión",
         "problemQuestion": "Tu respuesta a \"¿Qué problema enfrentas?\":",
         "rescheduleText": "Si surge algo y no puedes asistir, no te preocupes. Puedes encontrar un mejor horario haciendo clic {{cta}}.",
         "ctaLabel": "Aquí"

@@ -61,34 +61,44 @@ const ServicesSection = ({ onOpenContact }: ServicesSectionProps) => {
                 )}
 
                 <div className="p-5 sm:p-8 flex flex-col h-full text-center">
-                  <p className="text-primary font-body font-semibold text-[10px] uppercase tracking-[0.2em] mb-3 sm:mb-4">
+                  <p className="text-primary font-body font-semibold text-[10px] uppercase tracking-[0.2em] mb-4 sm:mb-5">
                     {tier.label}
                   </p>
-                  <h3 className="font-headline font-black text-xl sm:text-2xl lg:text-3xl mb-3 sm:mb-4">{tier.name}</h3>
+                  <h3 className="font-headline font-black text-xl sm:text-2xl lg:text-3xl mb-5 sm:mb-6">{tier.name}</h3>
 
-                  <div className="mb-4 sm:mb-6 h-auto sm:h-20 flex flex-col justify-center">
+                  <div className="mb-5 sm:mb-8 h-auto flex flex-col justify-center">
                     <div className="flex items-center justify-center gap-2">{tier.pricePrefix && (
                         <p className="font-body font-semibold text-xs sm:text-sm text-accent">{tier.pricePrefix}</p>)}
                         <p className="font-headline font-black text-3xl sm:text-4xl text-primary">{tier.price}</p>
                     </div>
-                    <p className="font-body font-medium text-[10px] sm:text-xs text-muted-foreground mt-2">{tier.priceNote}</p>
+                    {tier.applyTo && (
+                      <div className="flex flex-col items-center gap-2 mt-3 mb-1">
+                        <span className="inline-flex px-3 py-1 rounded-full bg-[#1a1f3a] border border-[rgba(124,140,255,0.25)] text-[rgba(124,140,255,0.9)] font-body text-[10px] font-semibold tracking-wide">
+                          {services.applyTo}
+                        </span>
+                        {tier.priceUSD && (
+                          <p className="font-body font-medium text-xs text-muted-foreground">~{tier.pricePrefix ? `${tier.pricePrefix} ` : ""}{tier.priceUSD}</p>
+                        )}
+                      </div>
+                    )}
+                    <p className="font-body font-medium text-[10px] sm:text-xs text-muted-foreground mt-3 sm:mt-4">{tier.priceNote}</p>
                   </div>
 
-                  <Button variant="cta" className="w-full mb-6 sm:mb-8 h-11 sm:h-12 text-sm sm:text-base font-bold shrink-0" onClick={onOpenContact}>
+                  <Button variant="cta" className="w-full mb-7 sm:mb-9 h-11 sm:h-12 text-sm sm:text-base font-bold shrink-0" onClick={onOpenContact}>
                     {tier.cta}
                   </Button>
 
-                  <p className="text-accent font-body font-light text-xs sm:text-sm italic leading-relaxed mb-6 sm:mb-8 px-1 sm:px-2 min-h-[48px] sm:min-h-[60px]">
+                  <p className="text-accent font-body font-light text-xs sm:text-sm italic leading-relaxed mb-7 sm:mb-9 px-1 sm:px-2 min-h-[48px] sm:min-h-[60px]">
                     {tier.partnership}
                   </p>
 
-                  <div className="w-full h-px bg-white/5 mb-6 sm:mb-8" />
+                  <div className="w-full h-px bg-white/5 mb-7 sm:mb-9" />
 
                   <div className="flex-1 text-left">
-                    <p className="font-body font-semibold text-xs uppercase tracking-wider text-foreground mb-4 sm:mb-5">
+                    <p className="font-body font-semibold text-xs uppercase tracking-wider text-foreground mb-5 sm:mb-6">
                       {services.whatYouGet}
                     </p>
-                    <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+                    <ul className="space-y-4 sm:space-y-5 mb-7 sm:mb-9">
                       {tier.items.map((item, j) => (
                         <li key={`tier-${i}-item-${j}`} className="flex items-start gap-2 sm:gap-3 text-muted-foreground font-body text-xs sm:text-sm lg:text-base leading-snug">
                           <Check className="text-primary mt-0.5 sm:mt-1 shrink-0" size={14} />
@@ -98,7 +108,7 @@ const ServicesSection = ({ onOpenContact }: ServicesSectionProps) => {
                     </ul>
                   </div>
 
-                  <div className="pt-4 sm:pt-6 border-t border-white/5 flex flex-col sm:flex-row flex-wrap justify-between gap-y-2 mt-auto">
+                  <div className="pt-5 sm:pt-7 border-t border-white/5 flex flex-col sm:flex-row flex-wrap justify-between gap-y-2 mt-auto">
                     <div className="flex items-center gap-2 text-muted-foreground font-body text-[10px] sm:text-xs">
                       <Clock size={12} className="text-primary" />
                       {tier.duration}

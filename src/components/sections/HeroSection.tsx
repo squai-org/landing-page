@@ -49,7 +49,7 @@ const HeroSection = ({ onOpenContact }: { onOpenContact: () => void }) => {
               variants={container}
               initial="hidden"
               animate="show"
-              className="font-headline font-black text-[2.25rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-[80px] lg:leading-tight mb-4 gradient-wave-text"
+              className="font-headline font-black text-[2.25rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-[56px] lg:leading-[1.15] mb-4 gradient-wave-text"
             >
               {wordsWithKeys.map(({ wordText, key }) => (
                 <motion.span key={key} variants={word} className="inline-block mr-2 sm:mr-3 mb-1 sm:mb-2">
