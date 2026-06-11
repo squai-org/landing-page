@@ -35,6 +35,7 @@
     "eyebrow": "NUESTROS SERVICIOS",
     "title": "Nuestros Servicios",
     "mostPopular": "Más Popular",
+    "applyTo": "Para Colombia",
     "whatYouGet": "Lo que obtienes:",
     "tiers": [
       {
@@ -52,10 +53,12 @@
         "duration": "A tu ritmo",
         "popular": false,
         "pricePrefix": "",
-        "price": "40 USD",
+        "price": "$120,000 COP",
+        "priceUSD": "40 USD",
         "priceNote": "Por sesión. Se paga por adelantado para reservar tu lugar.",
         "squadAssigned": "1 miembro del squad dedicado",
-        "cta": "Hablemos de tu trabajo"
+        "cta": "Hablemos de tu trabajo",
+        "applyTo": true
       },
       {
         "label": "Para Equipos",
@@ -73,10 +76,12 @@
         "duration": "",
         "popular": true,
         "pricePrefix": "Desde",
-        "price": "500 USD",
+        "price": "$1,800,000 COP",
+        "priceUSD": "500 USD",
         "priceNote": "El cronograma se coordina con tu equipo.",
         "squadAssigned": "Asignado según el perfil de tu equipo",
-        "cta": "Construyamos tu programa"
+        "cta": "Construyamos tu programa",
+        "applyTo": true
       },
       {
         "label": "Implementación",
@@ -94,9 +99,11 @@
         "popular": false,
         "pricePrefix": "",
         "price": "Cotización a medida",
+        "priceUSD": "",
         "priceNote": "Contáctanos para definir el alcance adecuado para tu operación.",
         "squadAssigned": "Squad asignado por proyecto",
-        "cta": "Explorar implementación"
+        "cta": "Explorar implementación",
+        "applyTo": false
       }
     ]
   },
