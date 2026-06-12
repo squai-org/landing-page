@@ -1,0 +1,291 @@
+{
+  "nav": {
+    "links": [
+      { "label": "Por qué Teo", "href": "#por-que-teo" },
+      { "label": "Cómo funciona", "href": "#como-funciona" },
+      { "label": "Precios", "href": "#precios" },
+      { "label": "Preguntas frecuentes", "href": "#faq" }
+    ],
+    "cta": { "label": "Quiero probar a Teo", "href": "#empezar" },
+    "menuAriaLabel": "Menú"
+  },
+  "hero": {
+    "badge": "El profe de primaria de tu hijo · En WhatsApp",
+    "titleLines": ["Son las 8 de la noche.", "Tu hijo tiene tarea", "y no sabes cómo"],
+    "titleAccent": "explicarle.",
+    "sub": "Teo es el profe que aparece exactamente en ese momento. Le hace preguntas, lo guía paso a paso y no le da la respuesta: le enseña a encontrarla. Funciona en WhatsApp, nada nuevo que instalar ni aprender.",
+    "cta": "Conocer a Teo",
+    "trust": "7 días gratis para que tu hijo lo pruebe",
+    "phone": {
+      "contactName": "Teo",
+      "contactStatus": "en línea",
+      "messages": [
+        { "direction": "out", "text": "Teo, tengo tarea de biología 😭 ¿qué son las células?", "time": "8:02 PM" },
+        { "direction": "in", "text": "Tranqui 😄 Mira tu mano ¿crees que está hecha de una sola pieza o de muchas partes pequeñitas?", "time": "8:02 PM" },
+        { "direction": "out", "text": "De muchas partes pequeñitas.", "time": "8:03 PM" },
+        { "direction": "in", "text": "Exacto! En tu mano hay células que forman la piel, células musculares que mueven los dedos y glóbulos rojos que llevan oxígeno 🙌 ¿Crees que todas hacen el mismo trabajo?", "time": "8:03 PM" }
+      ]
+    }
+  },
+  "why": {
+    "eyebrow": "Por qué Teo",
+    "titleLines": ["No es Google.", "No es ChatGPT."],
+    "titleLastLineBefore": "Es un ",
+    "titleAccent": "profe.",
+    "paragraphs": [
+      { "text": "Cuando tu hijo le pregunta algo a Google o a ChatGPT, recibe la respuesta y listo. Copia, pega y ", "strong": "no aprendió nada." },
+      { "text": "Teo funciona diferente. En lugar de dar la respuesta, le pregunta, lo guía y lo acompaña hasta que tu hijo llega solo. Igual que un buen profe haría." },
+      { "text": "Está diseñado para niños de 1° a 5° de primaria, sabe cómo hablarles, conoce su currículo y se adapta a cómo aprende cada uno." }
+    ],
+    "cards": [
+      {
+        "title": "Se adapta a cada niño",
+        "description": "Teo recuerda cómo aprende tu hijo y ajusta cada explicación a su nivel.",
+        "image": "/why-adapta.png",
+        "alt": "Se adapta a cada niño"
+      },
+      {
+        "title": "Enseña a pensar",
+        "description": "Nunca da la respuesta directa. Guía con preguntas hasta que tu hijo llega solo.",
+        "image": "/why-piensa.png",
+        "alt": "Enseña a pensar"
+      },
+      {
+        "title": "Diseñado para menores",
+        "description": "Conversaciones seguras y supervisadas. Solo habla de tareas escolares.",
+        "image": "/why-menores.png",
+        "alt": "Diseñado para menores"
+      },
+      {
+        "title": "En WhatsApp, ya mismo",
+        "description": "Sin descargas, sin contraseñas. Donde ya están tú y tu hijo.",
+        "image": "/why-whatsapp.svg",
+        "alt": "En WhatsApp, ya mismo"
+      }
+    ]
+  },
+  "howItWorks": {
+    "eyebrow": "Así de simple",
+    "titleLine1": "Tu hijo tiene a Teo",
+    "titleLine2Before": "en menos de ",
+    "titleAccent": "5 minutos",
+    "steps": [
+      {
+        "title": "Regístrate",
+        "description": "Deja el número de WhatsApp de tu hijo, o el tuyo si tu hijo no tiene celular propio."
+      },
+      {
+        "title": "Cuéntale a Teo quién es tu hijo",
+        "description": "Teo te pregunta el nombre de tu hijo y su grado. Con eso ya sabe cómo hablarle, qué nivel manejar y por dónde empezar."
+      },
+      {
+        "title": "Tu hijo le escribe a Teo",
+        "description": "Foto de la tarea, mensaje de voz o texto, como le quede más fácil. Teo entiende todo y responde exactamente a su nivel."
+      },
+      {
+        "title": "Teo lo guía hasta que entiende",
+        "description": "No le da la respuesta. Le hace preguntas, le da pistas y se va adaptando a cómo aprende tu hijo. Cada sesión Teo lo conoce mejor."
+      }
+    ]
+  },
+  "testimonialHero": {
+    "quote": "Las noches de tarea eran un estrés en la casa. Mi hijo se sienta, le habla a Teo y yo puedo estar en otras cosas. Es la primera vez en años que no termino enojada.",
+    "name": "Marcela R.",
+    "role": "Mamá de Sebastián, 5° grado · Manizales"
+  },
+  "pricing": {
+    "eyebrow": "Un solo plan",
+    "titleLines": ["Por menos de lo que cuesta una hora", "de clases particulares, tu hijo tiene"],
+    "titleLastLineBefore": "a Teo ",
+    "titleAccent": "todo el mes",
+    "tag": "⭐ Plan completo",
+    "currency": "$",
+    "amount": "29.900",
+    "period": "COP al mes",
+    "usd": "(aprox. 9.99 USD)",
+    "caption": "Todo incluido. Todas las materias. A cualquier hora.",
+    "features": [
+      "Todas las materias de primaria",
+      "Texto, fotos y notas de voz",
+      "Teo se adapta al nivel de tu hijo",
+      "Teo recuerda todas las conversaciones, como un tutor privado que lo conoce mejor cada día",
+      "Basado en métodos de aprendizaje reales, no respuestas automáticas",
+      "Diseñado para menores, con conversaciones seguras y supervisadas",
+      "Reporte mensual con el avance de tu hijo",
+      "Si tu hijo pregunta algo fuera de lo académico, te lo hacemos saber"
+    ],
+    "cta": { "label": "Quiero que Teo ayude a mi hijo", "href": "#empezar" },
+    "trustLines": ["7 días gratis · Cancelas cuando quieras", "No te cobramos nada si cancelas antes del día 8."]
+  },
+  "testimonials": {
+    "eyebrow": "Lo que dicen",
+    "titleBefore": "Papás y mamás que ",
+    "titleAccent": "ya confían en Teo",
+    "items": [
+      {
+        "text": "\"Mi hijo tenía tarea de divisiones y yo ni me acordaba cómo dividir a mano. Le dije que le escribiera a Teo y listo, en un momento lo estaba haciendo solo. Yo quedé asombrada.\"",
+        "name": "Carolina M.",
+        "role": "Mamá de Tomás, 4° grado · Medellín",
+        "variant": "gold"
+      },
+      {
+        "text": "\"Mi hija antes llegaba del colegio y no quería hablar de las tareas. Ahora llega contándome qué aprendió y con ganas de ponerse a hacerlas, creo que solo para tener una excusa de hablarle a Teo.\"",
+        "name": "Andrés P.",
+        "role": "Papá de Valeria, 3° grado · Bogotá",
+        "variant": "teal"
+      }
+    ]
+  },
+  "faq": {
+    "eyebrow": "Antes de que lo preguntes",
+    "titleBefore": "Las dudas ",
+    "titleAccent": "más comunes",
+    "items": [
+      {
+        "question": "¿Teo le va a dar las respuestas a mi hijo?",
+        "answer": "No. Teo nunca da la respuesta directa. Le hace preguntas, le da pistas y lo guía hasta que tu hijo llega solo. Si después de varios intentos tu hijo no puede avanzar, Teo explica el proceso completo para que lo entienda, no para que lo copie."
+      },
+      {
+        "question": "¿Para qué materias sirve Teo?",
+        "answer": "Para todas las materias de 1° a 5° de primaria: matemáticas, lenguaje, ciencias, sociales e inglés básico. Tu hijo solo tiene que contarle qué tarea tiene y Teo se encarga del resto."
+      },
+      {
+        "question": "¿Es seguro que mi hijo use una IA?",
+        "answer": "Teo solo habla de tareas escolares. Si tu hijo pregunta algo fuera de ese tema, Teo lo redirige y te lo hacemos saber por email. Las conversaciones son privadas y no se comparten con nadie."
+      },
+      {
+        "question": "¿Qué pasa si quiero cancelar?",
+        "answer": "Cancelas cuando quieras desde el portal de gestión. Si cancelas antes de los 7 días de prueba, no te cobramos nada. Si cancelas después, el acceso se mantiene hasta el final del período ya cobrado."
+      }
+    ]
+  },
+  "ctaSection": {
+    "titleLines": ["Esta noche las tareas", "no tienen que ser"],
+    "titleLastLineBefore": "un ",
+    "titleAccent": "problema.",
+    "sub": "En menos de 5 minutos tu hijo tiene a Teo.",
+    "cta": "Quiero probar a Teo",
+    "trust": "7 días gratis · Cancelas cuando quieras"
+  },
+  "footer": {
+    "links": [
+      { "label": "Términos y condiciones", "href": "/terminos" },
+      { "label": "Política de privacidad", "href": "/privacidad" }
+    ],
+    "copy": "Teo es un producto de Squai S.A.S. · Colombia · © 2026 · Todos los derechos reservados",
+    "email": "teo@squai.co"
+  },
+  "terms": {
+    "title": "TÉRMINOS Y CONDICIONES",
+    "subtitle": "Teo · Squai S.A.S.",
+    "lastUpdated": "Última actualización: [fecha]",
+    "backHome": "← Volver al inicio",
+    "sections": [
+      {
+        "heading": "1. Qué es Teo",
+        "body": [
+          "Teo es un servicio de tutoría académica por WhatsApp para niños de 1° a 5° de primaria, operado por Squai S.A.S., empresa constituida en Colombia."
+        ]
+      },
+      {
+        "heading": "2. Quién puede usar Teo",
+        "body": [
+          "El registro debe ser realizado por un adulto responsable del menor. Al registrarse, el adulto declara tener la autoridad para aceptar estos términos en nombre del menor y autorizar el tratamiento de sus datos personales."
+        ]
+      },
+      {
+        "heading": "3. Suscripción y pagos",
+        "body": [
+          "El servicio tiene un período de prueba de 7 días gratis. Al registrarse se requiere una tarjeta de crédito o débito válida. Si no cancelas antes del día 8, se cobra automáticamente $29.900 COP mensuales. El cobro se repite cada mes desde la fecha de activación. Puedes cancelar en cualquier momento desde el portal de gestión — el acceso se mantiene hasta el final del período ya cobrado. No hay reembolsos por períodos en curso."
+        ]
+      },
+      {
+        "heading": "4. Uso del servicio",
+        "body": [
+          "Teo está diseñado para uso individual de un solo niño por número de WhatsApp. Está prohibido compartir el acceso entre múltiples usuarios. Squai se reserva el derecho de suspender cuentas con patrones de uso que indiquen uso compartido o abuso del servicio."
+        ]
+      },
+      {
+        "heading": "5. Limitaciones del servicio",
+        "body": [
+          "Teo es una herramienta de apoyo académico y no reemplaza al docente ni a la institución educativa. Las respuestas de Teo tienen como único propósito guiar al niño en su proceso de aprendizaje. Squai no garantiza resultados académicos específicos."
+        ]
+      },
+      {
+        "heading": "6. Modificaciones",
+        "body": [
+          "Squai puede modificar estos términos en cualquier momento. Los cambios se notificarán por email con al menos 15 días de anticipación."
+        ]
+      },
+      {
+        "heading": "7. Contacto",
+        "body": [
+          "teo@squai.co"
+        ]
+      }
+    ]
+  },
+  "privacy": {
+    "title": "POLÍTICA DE PRIVACIDAD",
+    "subtitle": "Teo · Squai S.A.S.",
+    "legalBasis": "En cumplimiento de la Ley 1581 de 2012 y el Decreto 1377 de 2013.",
+    "lastUpdated": "Última actualización: [fecha]",
+    "backHome": "← Volver al inicio",
+    "sections": [
+      {
+        "heading": "1. Responsable del tratamiento",
+        "body": [
+          "Squai S.A.S., con domicilio en Manizales, Colombia. Contacto: teo@squai.co"
+        ]
+      },
+      {
+        "heading": "2. Datos que recopilamos",
+        "body": [
+          "Del padre o cuidador: nombre, número de WhatsApp, email y datos de tarjeta de crédito o débito (procesados por un tercero certificado, Squai no almacena datos de tarjeta).",
+          "Del menor: nombre, grado escolar e historial de conversaciones con Teo."
+        ]
+      },
+      {
+        "heading": "3. Uso de los datos",
+        "body": [
+          "Los datos se usan exclusivamente para prestar el servicio de tutoría, enviar reportes mensuales al padre o cuidador, procesar pagos y mejorar el funcionamiento de Teo."
+        ]
+      },
+      {
+        "heading": "4. Datos de menores de edad",
+        "body": [
+          "Los datos personales de menores de edad tienen protección especial bajo la ley colombiana y su tratamiento solo procede cuando no se vulneran sus derechos fundamentales y se busca su desarrollo armónico integral. El registro y la autorización del tratamiento de datos del menor deben ser realizados por el padre o cuidador responsable. Squai no comparte datos de menores con terceros salvo obligación legal. Imsalud"
+        ]
+      },
+      {
+        "heading": "5. Compartir datos con terceros",
+        "body": [
+          "Squai utiliza servicios de terceros para procesar pagos y operar la infraestructura tecnológica del servicio. Estos terceros están contractualmente obligados a proteger los datos. Squai prohíbe la transferencia de datos personales a países que no proporcionen niveles adecuados de protección de datos. Función Pública"
+        ]
+      },
+      {
+        "heading": "6. Derechos del titular",
+        "body": [
+          "El padre o cuidador puede en cualquier momento conocer, actualizar, rectificar o solicitar la eliminación de los datos del menor escribiendo a teo@squai.co. Squai responderá en un plazo máximo de 15 días hábiles."
+        ]
+      },
+      {
+        "heading": "7. Seguridad",
+        "body": [
+          "Squai implementa medidas técnicas y organizativas para proteger los datos contra acceso no autorizado, pérdida o alteración."
+        ]
+      },
+      {
+        "heading": "8. Vigencia",
+        "body": [
+          "Los datos se conservan mientras el servicio esté activo. Al cancelar la suscripción, el historial de conversaciones se elimina después de 30 días."
+        ]
+      }
+    ]
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Ups, esta página no existe",
+    "backHome": "Volver al inicio"
+  }
+}

@@ -1,0 +1,26 @@
+name: Landing CI
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "teo/**"
+  pull_request:
+    paths-ignore:
+      - "teo/**"
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    env:
+      PUPPETEER_SKIP_DOWNLOAD: "true"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npx tsc -p tsconfig.app.json --noEmit
+      - run: npm run build:noprerender
