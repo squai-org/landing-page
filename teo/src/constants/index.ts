@@ -1,13 +1,6 @@
-/** Canonical site URL used in Open Graph and structured data. */
 export const SITE_URL = "https://teo.squai.co";
-
-/** Contact email shown across the site. */
 export const CONTACT_EMAIL = "teo@squai.co";
-
-/** Intersection threshold that triggers scroll-based reveal animations. */
 export const REVEAL_THRESHOLD = 0.1;
-
-/** JSON-LD structured data for the main landing page. */
 export const STRUCTURED_DATA = {
   "@context": "https://schema.org",
   "@type": "Service",

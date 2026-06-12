@@ -1,15 +1,10 @@
 interface WaveDividerProps {
-  /** Background color of the section above the wave. */
   background: string;
-  /** SVG path for the wave shape. */
   d: string;
-  /** Fill color of the section below the wave. */
   fill: string;
-  /** Optional solid strip at the bottom edge to avoid sub-pixel seams. */
   seam?: { y: number; height: number };
 }
 
-/** Decorative wave transition between two adjacent landing sections. */
 const WaveDivider = ({ background, d, fill, seam }: WaveDividerProps) => (
   <div className="wave" style={{ background, lineHeight: 0 }} aria-hidden="true">
     <svg

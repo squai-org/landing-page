@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── TEO DESIGN SYSTEM — ported verbatim from the approved landing design ── */
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -34,7 +32,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── ANIMATIONS ── */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50%       { transform: translateY(-10px); }
@@ -74,7 +71,6 @@ body {
 .fade-up.d3 { transition-delay: 0.24s; }
 .fade-up.d4 { transition-delay: 0.32s; }
 
-/* ── NAV — teal principal #2A9D8F, texto blanco ── */
 nav.teo-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   background: var(--teal);
@@ -121,7 +117,6 @@ nav.teo-nav {
   text-align: center; font-weight: 700; margin-top: 4px; border-radius: 12px;
 }
 
-/* ── SECTION COMMONS ── */
 .section-eyebrow {
   font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
   text-transform: uppercase; color: var(--teal); margin-bottom: 12px;
@@ -138,7 +133,6 @@ nav.teo-nav {
 .section-title span { color: var(--teal); }
 .section-title.light span { color: var(--gold); }
 
-/* ── HERO — solid teal-tint, sin manchas ── */
 .hero {
   min-height: 100vh;
   background: var(--teal-tint);
@@ -146,14 +140,12 @@ nav.teo-nav {
   padding: 100px 56px 60px; gap: 56px;
   position: relative; overflow: hidden;
 }
-/* Subtle dot texture only */
 .hero::before {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   opacity: 0.03;
   background-image: radial-gradient(var(--teal-dark) 1.2px, transparent 1.2px);
   background-size: 28px 28px;
 }
-/* Gold top bar */
 .hero::after {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
   background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-dark));
@@ -211,7 +203,6 @@ nav.teo-nav {
 }
 .hero-trust::before { content: ''; width: 20px; height: 1px; background: var(--gold); }
 
-/* Hero visual */
 .hero-visual {
   flex: 1; display: flex; align-items: flex-end; justify-content: center;
   position: relative; z-index: 2; animation: fadeUp 0.9s ease 0.2s both;
@@ -265,11 +256,9 @@ nav.teo-nav {
 .wa-typing.wa-in-typing { animation: slideInL 0.4s ease 1.6s forwards; }
 .phone-gold-strip { height: 4px; background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-dark)); }
 
-/* ── WAVE ── */
 .wave { line-height: 0; display: block; overflow: hidden; margin: 0; padding: 0; border: none; outline: none; }
 .wave svg { display: block; width: 100%; margin: 0; padding: 0; }
 
-/* ── POR QUÉ TEO — solid teal #2A9D8F ── */
 .why-section {
   padding: 80px 56px;
   background: var(--teal);
@@ -307,7 +296,6 @@ nav.teo-nav {
 .why-card-title { font-size: 14px; font-weight: 600; color: white; margin-bottom: 3px; }
 .why-card-desc  { font-size: 13px; color: rgba(255,255,255,0.58); line-height: 1.6; }
 
-/* ── CÓMO FUNCIONA — gradient teal profundo ── */
 .how-section {
   padding: 80px 56px;
   background: #E9C46A;
@@ -341,7 +329,6 @@ nav.teo-nav {
 .step-title { font-family: 'Baloo 2', sans-serif; font-size: 19px; font-weight: 700; color: #1A2E2C; margin-bottom: 6px; }
 .step-desc { font-size: 15px; color: rgba(26,46,44,0.7); line-height: 1.7; font-weight: 300; }
 
-/* ── TESTIMONIO MARCELA — solid gold-pale ── */
 .testi-hero-section {
   padding: 80px 56px;
   background: var(--gold-pale);
@@ -357,7 +344,6 @@ nav.teo-nav {
 .testi-hero-name { font-size: 15px; font-weight: 600; color: var(--dark); }
 .testi-hero-role { font-size: 13px; color: var(--gold-dark); margin-top: 3px; }
 
-/* ── PRECIO — solid teal-ghost ── */
 .pricing-section { padding: 80px 56px; background: var(--teal-ghost); }
 .pricing-inner { max-width: 900px; margin: 0 auto; }
 .pricing-header { margin-bottom: 40px; }
@@ -409,7 +395,6 @@ nav.teo-nav {
 .btn-price:hover { background: var(--teal-mid); transform: translateY(-2px); box-shadow: 0 14px 32px rgba(42,157,143,0.32); }
 .price-trust { font-size: 12px; color: var(--text-l); line-height: 1.8; text-align: center; }
 
-/* ── TESTIMONIOS — solid teal-pale ── */
 .testimonials-section { padding: 80px 56px; background: var(--teal-pale); }
 .testi-grid {
   max-width: 1000px; margin: 36px auto 0;
@@ -432,7 +417,6 @@ nav.teo-nav {
 .testi-name { font-size: 13px; font-weight: 600; color: var(--dark); }
 .testi-role { font-size: 11px; color: var(--text-l); margin-top: 2px; }
 
-/* ── FAQ — solid teal #2A9D8F ── */
 .faq-section { padding: 80px 56px; background: var(--teal); }
 .faq-inner { max-width: 700px; margin: 0 auto; }
 .faq-header { margin-bottom: 40px; }
@@ -463,7 +447,6 @@ nav.teo-nav {
 }
 .faq-item.open .faq-a { max-height: 300px; padding: 0 22px 18px; }
 
-/* ── CTA CIERRE — gradient dorado ── */
 .cta-section {
   padding: 88px 56px;
   background: linear-gradient(135deg, #C49A30 0%, #E9C46A 50%, #F0D48A 100%);
@@ -502,7 +485,6 @@ nav.teo-nav {
 .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(42,157,143,0.4); background: var(--teal-mid); }
 .cta-trust { font-size: 13px; color: rgba(26,46,44,0.5); margin-top: 16px; }
 
-/* ── FOOTER — teal ── */
 footer.teo-footer { background: var(--teal-dark); padding: 44px 56px 32px; }
 .footer-top {
   display: flex; align-items: center; justify-content: space-between;
@@ -524,7 +506,6 @@ footer.teo-footer { background: var(--teal-dark); padding: 44px 56px 32px; }
 .footer-email { font-size: 13px; color: var(--gold-light); text-decoration: none; transition: color 0.2s; }
 .footer-email:hover { color: var(--gold); }
 
-/* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
   nav.teo-nav { padding: 0 32px; }
   .hero, .why-section, .how-section, .pricing-section,
@@ -569,7 +550,6 @@ footer.teo-footer { background: var(--teal-dark); padding: 44px 56px 32px; }
 }
 }
 
-/* ── LEGAL PAGES (Términos / Privacidad) ── */
 .legal-page { min-height: 100vh; background: var(--teal-ghost); }
 .legal-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;

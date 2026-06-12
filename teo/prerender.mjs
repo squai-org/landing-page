@@ -1,15 +1,3 @@
-/**
- * Post-build prerender script.
- * Spins up a static server for the Vite build output, visits each route with
- * Puppeteer, and overwrites the HTML files with the fully-rendered markup so
- * that search-engine crawlers receive real content instead of an empty <div>.
- *
- * On CI environments (Vercel, GitHub Actions, etc.) where Chrome is not
- * available, the script exits gracefully — the static index.html already
- * contains all critical SEO meta tags, structured data, and OG tags.
- * Run `npm run build` locally to commit prerendered HTML before deploying.
- */
-
 import handler from "serve-handler";
 import http from "node:http";
 import { writeFile, mkdir } from "node:fs/promises";

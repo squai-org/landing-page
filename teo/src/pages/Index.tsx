@@ -19,14 +19,14 @@ const Index = () => (
     />
     <MainLayout>
       <HeroSection />
-      {/* WAVE: teal-tint → teal */}
+      {}
       <WaveDivider
         background="var(--teal-tint)"
         d="M0,0 C180,55 360,0 540,35 C720,55 900,10 1080,40 C1260,55 1380,15 1440,28 L1440,55 L0,55 Z"
         fill="#2A9D8F"
       />
       <WhyTeoSection />
-      {/* WAVE: teal → gold */}
+      {}
       <WaveDivider
         background="#2A9D8F"
         d="M0,55 C180,10 360,55 540,20 C720,0 900,50 1080,15 C1260,0 1380,45 1440,28 L1440,55 L0,55 Z"
@@ -34,18 +34,18 @@ const Index = () => (
         seam={{ y: 53, height: 3 }}
       />
       <HowItWorksSection />
-      {/* WAVE: gold → gold-pale */}
+      {}
       <WaveDivider
         background="#E9C46A"
         d="M0,55 C180,0 360,55 540,20 C720,0 900,45 1080,15 C1260,0 1380,40 1440,28 L1440,55 L0,55 Z"
         fill="#F7EABD"
       />
       <TestimonialHeroSection />
-      {/* STRAIGHT CUT: gold-pale → teal-ghost */}
+      {}
       <PricingSection />
-      {/* STRAIGHT CUT: teal-ghost → teal-pale */}
+      {}
       <TestimonialsSection />
-      {/* WAVE: teal-pale → teal */}
+      {}
       <WaveDivider
         background="#C4EAE6"
         d="M0,28 C180,55 360,0 540,40 C720,55 900,5 1080,35 C1260,55 1380,10 1440,25 L1440,55 L0,55 Z"
@@ -53,7 +53,7 @@ const Index = () => (
         seam={{ y: 54, height: 2 }}
       />
       <FaqSection />
-      {/* STRAIGHT CUT: teal → gradient dorado (CTA) */}
+      {}
       <CtaSection />
     </MainLayout>
   </>

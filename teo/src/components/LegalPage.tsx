@@ -13,14 +13,12 @@ interface LegalPageProps {
   path: string;
   title: string;
   subtitle: string;
-  /** Optional compliance line shown under the subtitle (privacy policy only). */
   legalBasis?: string;
   lastUpdated: string;
   sections: LegalSection[];
   backHome: string;
 }
 
-/** Renders a paragraph, turning the contact email into a mailto link when present. */
 const LegalParagraph = ({ text }: { text: string }) => {
   if (!text.includes(CONTACT_EMAIL)) return <p>{text}</p>;
 
@@ -34,7 +32,6 @@ const LegalParagraph = ({ text }: { text: string }) => {
   );
 };
 
-/** Shared layout for the Spanish-language legal pages (Términos / Privacidad). */
 const LegalPage = ({
   seoTitle,
   seoDescription,
