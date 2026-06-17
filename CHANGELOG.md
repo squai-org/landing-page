@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.3.1](https://github.com/squai-org/landing-page/compare/v1.3.0...v1.3.1) (2026-06-17)
+
+
+### Bug Fixes
+
+* **component:** fix some wrong dommains, from .co to .io and some copies ([a42f31d](https://github.com/squai-org/landing-page/commit/a42f31da7cfb33082139dfb2142ba27ebf1fcd84))
+
 ## [1.3.0](https://github.com/squai-org/landing-page/compare/v1.2.0...v1.3.0) (2026-06-17)
 
 
