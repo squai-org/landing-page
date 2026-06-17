@@ -12,10 +12,10 @@ import {
 export default function securityHeadersPlugin(): Plugin {
   return {
     name: "security-headers",
-    
+
     configureServer(server) {
       const devHeaders = toFlatHeaders(securityHeaders);
-      
+
       const devCsp = buildCsp({
         "script-src": "'self' 'unsafe-inline' 'unsafe-eval'",
         "connect-src": "'self' ws://localhost:* ws: http://localhost:*",
@@ -33,11 +33,11 @@ export default function securityHeadersPlugin(): Plugin {
         next();
       });
     },
-    
+
     closeBundle() {
       const outDir = resolve(process.cwd(), "dist");
       mkdirSync(outDir, { recursive: true });
-      
+
       writeFileSync(
         resolve(outDir, "_headers"),
         toHeadersFile(securityHeaders),
@@ -46,12 +46,9 @@ export default function securityHeadersPlugin(): Plugin {
 
       const vercelConfig = JSON.stringify(
         {
-          ignoreCommand: "git diff --quiet HEAD^ HEAD -- . ':(exclude)teo'",
+          ignoreCommand: "git diff --quiet HEAD^ HEAD -- .",
           headers: toVercelHeaders(securityHeaders),
-          rewrites: [
-            { source: "/api/:path*", destination: "/api" },
-            { source: "/(.*)", destination: "/index.html" },
-          ],
+          rewrites: [{ source: "/(.*)", destination: "/index.html" }],
         },
         null,
         2,

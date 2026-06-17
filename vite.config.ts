@@ -33,14 +33,24 @@ export default defineConfig(({ mode }) => ({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
-          'vendor-motion': ['framer-motion', 'motion'],
-          'vendor-radix': [
-            '@radix-ui/react-dialog',
-            '@radix-ui/react-toast',
-            '@radix-ui/react-tooltip',
-          ],
+        manualChunks(id) {
+          if (
+            id.includes('node_modules/react/') ||
+            id.includes('node_modules/react-dom/') ||
+            id.includes('node_modules/react-router-dom/') ||
+            id.includes('node_modules/react-router/')
+          ) {
+            return 'vendor-react';
+          }
+          if (
+            id.includes('node_modules/framer-motion/') ||
+            id.includes('node_modules/motion/')
+          ) {
+            return 'vendor-motion';
+          }
+          if (id.includes('node_modules/@radix-ui/')) {
+            return 'vendor-radix';
+          }
         },
       },
     },
