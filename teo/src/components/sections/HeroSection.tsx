@@ -43,9 +43,6 @@ const HeroSection = () => {
                 {hero.phone.messages[0].text}
                 <div className="wa-msg-time">{hero.phone.messages[0].time}</div>
               </div>
-              <div className="wa-typing wa-in-typing">
-                <div className="wa-dot"></div><div className="wa-dot"></div><div className="wa-dot"></div>
-              </div>
               <div className="wa-msg wa-msg-in wa-in-2">
                 {hero.phone.messages[1].text}
                 <div className="wa-msg-time">{hero.phone.messages[1].time}</div>

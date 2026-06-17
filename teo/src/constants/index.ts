@@ -1,5 +1,5 @@
-export const SITE_URL = "https://teo.squai.co";
-export const CONTACT_EMAIL = "teo@squai.co";
+export const SITE_URL = "https://teo.squai.io";
+export const CONTACT_EMAIL = "teo@squai.io";
 export const REVEAL_THRESHOLD = 0.1;
 export const STRUCTURED_DATA = {
   "@context": "https://schema.org",

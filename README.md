@@ -50,7 +50,7 @@ This repository hosts two independently built and deployed apps:
 | App | Folder | Domain | CI workflow |
 |-----|--------|--------|-------------|
 | Squai landing + scheduling API | `.` (root) | heysquai.vercel.app | `landing-ci.yml` |
-| Teo product landing | `teo/` | teo.squai.co | `teo-ci.yml` |
+| Teo product landing | `teo/` | teo.squai.io | `teo-ci.yml` |
 
 Each app has its own `package.json`, lockfile, build, and Vercel project. CI workflows are
 path-filtered (`teo/**`), and each app's generated `vercel.json` carries an `ignoreCommand`

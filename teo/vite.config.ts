@@ -17,7 +17,7 @@ export default defineConfig({
     react(),
     securityHeadersPlugin(),
     Sitemap({
-      hostname: "https://teo.squai.co",
+      hostname: "https://teo.squai.io",
       dynamicRoutes: ["/terminos", "/privacidad"],
       exclude: ["/404"],
       outDir: "./dist",

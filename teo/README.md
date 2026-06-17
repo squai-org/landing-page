@@ -1,6 +1,6 @@
 # Teo Landing Page
 
-Spanish-language landing page for **Teo** — an academic tutoring service over WhatsApp for kids in grades 1–5, a product of [Squai S.A.S.](https://heysquai.vercel.app/) Lives in the `teo/` folder of the main `landing-page` repository as a self-contained app and deploys as a subdomain of the main application: `https://teo.squai.co`.
+Spanish-language landing page for **Teo** — an academic tutoring service over WhatsApp for kids in grades 1–5, a product of [Squai S.A.S.](https://heysquai.vercel.app/) Lives in the `teo/` folder of the main `landing-page` repository as a self-contained app and deploys as a subdomain of the main application: `https://teo.squai.io`.
 
 ## Tech Stack
 
@@ -72,7 +72,7 @@ npm run dev        # http://localhost:8081
 CI and CD are independent from the main landing app:
 
 - **CI**: `.github/workflows/teo-ci.yml` runs lint, typecheck, tests, and build — only when files under `teo/**` change. The main app's `landing-ci.yml` ignores `teo/**`.
-- **CD**: deploy as a second Vercel project on the same repository with **Root Directory = `teo`** and the `teo.squai.co` subdomain assigned (Settings → Domains). The generated `vercel.json` includes an `ignoreCommand` that skips the deployment when no files in this folder changed; the main app's `vercel.json` does the inverse (`':(exclude)teo'`).
+- **CD**: deploy as a second Vercel project on the same repository with **Root Directory = `teo`** and the `teo.squai.io` subdomain assigned (Settings → Domains). The generated `vercel.json` includes an `ignoreCommand` that skips the deployment when no files in this folder changed; the main app's `vercel.json` does the inverse (`':(exclude)teo'`).
 
 The build auto-generates `_headers` and `vercel.json` with the security headers and SPA rewrites.
 
