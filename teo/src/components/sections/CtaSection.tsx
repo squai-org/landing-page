@@ -17,7 +17,7 @@ const CtaSection = () => {
           {ctaSection.titleLastLineBefore}<em>{ctaSection.titleAccent}</em>
         </h2>
         <p className="cta-sub">{ctaSection.sub}</p>
-        <a href="#" className="btn-cta">{ctaSection.cta}</a>
+        <a href="#inicio" className="btn-cta">{ctaSection.cta}</a>
         <div className="cta-trust">{ctaSection.trust}</div>
       </FadeUp>
     </section>

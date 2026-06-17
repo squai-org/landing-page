@@ -1,9 +1,18 @@
 import "@testing-library/jest-dom";
 
 class IntersectionObserverStub {
-  observe() {}
-  unobserve() {}
-  disconnect() {}
+  observe() {
+    // intentionally empty: elements never intersect in jsdom
+  }
+
+  unobserve() {
+    // intentionally empty
+  }
+
+  disconnect() {
+    // intentionally empty
+  }
+
   takeRecords() {
     return [];
   }

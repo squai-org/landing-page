@@ -1,4 +1,5 @@
 import { t } from "@/lib/content";
+import TeoIcon from "@/components/TeoIcon";
 
 const Footer = () => {
   const { footer } = t();
@@ -7,7 +8,7 @@ const Footer = () => {
     <footer className="teo-footer">
       <div className="footer-top">
         <div className="footer-logo">
-          <svg width="30" height="30" viewBox="0 0 500 500"><use href="#teo-icon" /></svg>
+          <TeoIcon size={30} />
           Teo
         </div>
         <div className="footer-links">

@@ -2,7 +2,8 @@ import { Fragment } from "react";
 import { t } from "@/lib/content";
 import FadeUp from "@/components/FadeUp";
 
-const CARD_ICON_VARIANTS = ["", "", "", "none"] as const;
+// The WhatsApp card (last one) renders its icon without the tinted background.
+const TRANSPARENT_ICON_INDEX = 3;
 
 const WhyTeoSection = () => {
   const { why } = t();
@@ -32,7 +33,7 @@ const WhyTeoSection = () => {
             <FadeUp key={card.title} delay={(i + 1) as 1 | 2 | 3 | 4} className="why-card">
               <div
                 className="why-card-icon"
-                style={CARD_ICON_VARIANTS[i] === "none" ? { background: "none" } : undefined}>
+                style={i === TRANSPARENT_ICON_INDEX ? { background: "none" } : undefined}>
                 <img src={card.image} alt={card.alt} loading="lazy" decoding="async" />
               </div>
               <div>

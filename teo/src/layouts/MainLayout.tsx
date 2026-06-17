@@ -7,7 +7,7 @@ interface MainLayoutProps {
   children: ReactNode;
 }
 
-const MainLayout = ({ children }: MainLayoutProps) => (
+const MainLayout = ({ children }: Readonly<MainLayoutProps>) => (
   <>
     <TeoIconSprite />
     <Navbar />

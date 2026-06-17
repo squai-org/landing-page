@@ -8,7 +8,7 @@ interface SeoHeadProps {
   path: string;
 }
 
-const SeoHead = ({ title, description, path }: SeoHeadProps) => {
+const SeoHead = ({ title, description, path }: Readonly<SeoHeadProps>) => {
   const canonical = `${SITE_URL}${path === "/" ? "/" : path}`;
 
   return (

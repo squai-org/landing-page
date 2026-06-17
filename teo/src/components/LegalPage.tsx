@@ -1,4 +1,5 @@
 import SeoHead from "@/components/SeoHead";
+import TeoIcon from "@/components/TeoIcon";
 import TeoIconSprite from "@/components/TeoIconSprite";
 import { CONTACT_EMAIL } from "@/constants";
 
@@ -19,7 +20,7 @@ interface LegalPageProps {
   backHome: string;
 }
 
-const LegalParagraph = ({ text }: { text: string }) => {
+const LegalParagraph = ({ text }: Readonly<{ text: string }>) => {
   if (!text.includes(CONTACT_EMAIL)) return <p>{text}</p>;
 
   const [before, after] = text.split(CONTACT_EMAIL);
@@ -42,13 +43,13 @@ const LegalPage = ({
   lastUpdated,
   sections,
   backHome,
-}: LegalPageProps) => (
+}: Readonly<LegalPageProps>) => (
   <div className="legal-page">
     <SeoHead title={seoTitle} description={seoDescription} path={path} />
     <TeoIconSprite />
     <nav className="legal-nav">
       <a href="/" className="nav-logo">
-        <svg width="32" height="32" viewBox="0 0 500 500"><use href="#teo-icon" /></svg>
+        <TeoIcon size={32} />
         Teo
       </a>
     </nav>

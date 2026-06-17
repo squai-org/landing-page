@@ -9,7 +9,7 @@ interface FadeUpProps {
   id?: string;
 }
 
-const FadeUp = ({ children, delay, className, as = "div", id }: FadeUpProps) => {
+const FadeUp = ({ children, delay, className, as = "div", id }: Readonly<FadeUpProps>) => {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {

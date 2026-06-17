@@ -1,5 +1,5 @@
 import { type Plugin } from "vite";
-import { writeFileSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import {
   buildCsp,
@@ -36,6 +36,7 @@ export default function securityHeadersPlugin(): Plugin {
     
     closeBundle() {
       const outDir = resolve(process.cwd(), "dist");
+      mkdirSync(outDir, { recursive: true });
       
       writeFileSync(
         resolve(outDir, "_headers"),

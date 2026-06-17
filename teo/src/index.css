@@ -136,9 +136,12 @@ nav.teo-nav {
 .hero {
   min-height: 100vh;
   background: var(--teal-tint);
-  display: flex; flex-direction: row; align-items: center;
-  padding: 100px 56px 60px; gap: 56px;
+  padding: 100px 56px 60px;
   position: relative; overflow: hidden;
+}
+.hero-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; flex-direction: row; align-items: center; gap: 56px;
 }
 .hero::before {
   content: ''; position: absolute; inset: 0; pointer-events: none;
@@ -519,7 +522,8 @@ footer.teo-footer { background: var(--teal-dark); padding: 44px 56px 32px; }
   nav.teo-nav { padding: 0 20px; }
   .nav-links { display: none; }
   .nav-hamburger { display: flex; }
-  .hero { flex-direction: column; padding: 96px 20px 52px; text-align: center; gap: 40px; }
+  .hero { padding: 96px 20px 52px; text-align: center; }
+  .hero-inner { flex-direction: column; gap: 40px; }
   .hero-text { max-width: 100%; }
   .hero-sub { max-width: 100%; }
   .hero-cta-group { align-items: center; }

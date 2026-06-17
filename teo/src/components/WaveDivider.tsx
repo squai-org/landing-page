@@ -5,7 +5,7 @@ interface WaveDividerProps {
   seam?: { y: number; height: number };
 }
 
-const WaveDivider = ({ background, d, fill, seam }: WaveDividerProps) => (
+const WaveDivider = ({ background, d, fill, seam }: Readonly<WaveDividerProps>) => (
   <div className="wave" style={{ background, lineHeight: 0 }} aria-hidden="true">
     <svg
       viewBox="0 0 1440 55"

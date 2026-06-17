@@ -1,3 +1,4 @@
+import type { ReactElement } from "react";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
@@ -7,7 +8,7 @@ import Terms from "./Terms";
 import Privacy from "./Privacy";
 import { t } from "@/lib/content";
 
-const renderPage = (page: React.ReactElement, path = "/") =>
+const renderPage = (page: ReactElement, path = "/") =>
   render(
     <HelmetProvider>
       <MemoryRouter initialEntries={[path]}>{page}</MemoryRouter>

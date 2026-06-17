@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { t } from "@/lib/content";
+import TeoIcon from "@/components/TeoIcon";
 
 const Navbar = () => {
   const { nav } = t();
@@ -15,8 +16,8 @@ const Navbar = () => {
   return (
     <>
       <nav className="teo-nav">
-        <a href="#" className="nav-logo">
-          <svg width="32" height="32" viewBox="0 0 500 500"><use href="#teo-icon" /></svg>
+        <a href="#inicio" className="nav-logo">
+          <TeoIcon size={32} />
           Teo
         </a>
         <div className="nav-links">
