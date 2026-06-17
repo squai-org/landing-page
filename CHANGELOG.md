@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.3.0](https://github.com/squai-org/landing-page/compare/v1.2.0...v1.3.0) (2026-06-17)
+
+
+### Features
+
+* **component:** add Teo product landing as independent app with separate CI/CD ([72ab7b9](https://github.com/squai-org/landing-page/commit/72ab7b966f38126c54e0501c13264e846166482c))
+
 ## [1.2.0](https://github.com/squai-org/landing-page/compare/v1.1.0...v1.2.0) (2026-06-11)
 
 
