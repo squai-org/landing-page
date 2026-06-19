@@ -85,12 +85,12 @@ const Index = () => {
     <>
       <SeoHead
         title={{
-          en: "Squai — AI Implementation for Growing Teams",
-          es: "Squai — Implementación de IA para Equipos en Crecimiento",
+          en: "Squai — AI Training & Consulting for Teams",
+          es: "Squai — Capacitación y Consultoría en IA para Equipos",
         }}
         description={{
-          en: "We embed with your team, map your operations, and implement AI that fits. AI implementation consultancy for startups and scaleups in Latin America.",
-          es: "Nos integramos con tu equipo, mapeamos tus operaciones e implementamos IA que funciona. Consultoría de implementación de IA para startups en Latinoamérica.",
+          en: "Squai trains professionals and teams to use AI in their real work — no code, no jargon. AI training, consulting, and implementation across Latin America.",
+          es: "Squai capacita a profesionales y equipos para usar la IA en su trabajo real, sin código ni tecnicismos. Formación, consultoría e implementación de IA en Latinoamérica.",
         }}
         path="/"
       />

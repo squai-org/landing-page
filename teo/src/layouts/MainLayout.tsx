@@ -5,12 +5,13 @@ import TeoIconSprite from "@/components/TeoIconSprite";
 
 interface MainLayoutProps {
   children: ReactNode;
+  onOpenWaitlist: () => void;
 }
 
-const MainLayout = ({ children }: Readonly<MainLayoutProps>) => (
+const MainLayout = ({ children, onOpenWaitlist }: Readonly<MainLayoutProps>) => (
   <>
     <TeoIconSprite />
-    <Navbar />
+    <Navbar onOpenWaitlist={onOpenWaitlist} />
     <main>{children}</main>
     <Footer />
   </>

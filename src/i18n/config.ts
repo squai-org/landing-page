@@ -9,7 +9,7 @@ export const OG_LOCALE_BY_LANG: Record<Lang, string> = {
   es: "es_419",
 };
 
-export const DEFAULT_LANG: Lang = "en";
+export const DEFAULT_LANG: Lang = "es";
 
 /** Type guard that checks if a string is a valid {@link Lang}. */
 export function isLang(value: string | undefined): value is Lang {

@@ -16,3 +16,6 @@ export type {
   ParsedDatetime,
   ValidationResult,
 } from "./schedule.validator.js";
+
+export { validateWaitlistBody } from "./waitlist.validator.js";
+export type { WaitlistBody, WaitlistValidationResult } from "./waitlist.validator.js";

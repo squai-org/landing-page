@@ -66,7 +66,6 @@
     background: linear-gradient(90deg, hsl(233 100% 74%), hsl(43 87% 63%));
   }
 
-  /* Animated gradient wave for hero headline */
   .gradient-wave-text {
     position: relative;
     display: inline-block;
@@ -139,7 +138,6 @@
     @apply font-body font-bold text-xs uppercase tracking-[0.2em] text-accent mb-4;
   }
 
-  /* Qovery-style Gradient Easing (Multi-stop) */
   .gradient-easing-b {
     background: linear-gradient(
       to bottom,
@@ -172,20 +170,18 @@
 
   .glow-blob {
     position: absolute;
-    filter: blur(100px);
+    filter: blur(64px);
     border-radius: 50%;
     pointer-events: none;
     opacity: 0.15;
     z-index: 0;
   }
-
-  /* Qovery-style gradient orbs */
+  
   .gradient-orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(120px);
+    filter: blur(70px);
     pointer-events: none;
-    will-change: transform;
   }
 
   .animate-float-1 {
@@ -254,8 +250,20 @@ html {
   .animate-marquee {
     animation: marquee 30s linear infinite;
   }
-  
+
   .animate-marquee:hover {
     animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gradient-orb,
+  .animate-float-1,
+  .animate-float-2,
+  .animate-float-3,
+  .animate-float-4,
+  .gradient-wave-text,
+  .animate-marquee {
+    animation: none !important;
   }
 }

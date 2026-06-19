@@ -155,7 +155,6 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
   const isValid = isRescheduleMode
     ? EMAIL_PATTERN.test(email.trim()) && privacy
     : name.trim() !== "" &&
-      company.trim() !== "" &&
       EMAIL_PATTERN.test(email.trim()) &&
       privacy;
 
@@ -438,31 +437,17 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
         )}
 
         {!isRescheduleMode && (
-          <>
-            <div className="space-y-1.5">
-              <Label htmlFor="c-name" className="text-foreground font-body font-semibold text-sm">
-                {cm.nameLabel} <span className="text-destructive">*</span>
-              </Label>
-              <Input id="c-name" value={name} onChange={(e) => setName(e.target.value)}
-                placeholder={cm.namePlaceholder} autoComplete="name"
-                className={`${inputCls} ${submitted && !name.trim() ? inputErrCls : ""}`} />
-              {submitted && !name.trim() && (
-                <p className="text-xs font-body text-destructive">{cm.nameRequired}</p>
-              )}
-            </div>
-
-            <div className="space-y-1.5">
-              <Label htmlFor="c-company" className="text-foreground font-body font-semibold text-sm">
-                {cm.companyLabel} <span className="text-destructive">*</span>
-              </Label>
-              <Input id="c-company" value={company} onChange={(e) => setCompany(e.target.value)}
-                placeholder={cm.companyPlaceholder} autoComplete="organization"
-                className={`${inputCls} ${submitted && !company.trim() ? inputErrCls : ""}`} />
-              {submitted && !company.trim() && (
-                <p className="text-xs font-body text-destructive">{cm.companyRequired}</p>
-              )}
-            </div>
-          </>
+          <div className="space-y-1.5">
+            <Label htmlFor="c-name" className="text-foreground font-body font-semibold text-sm">
+              {cm.nameLabel} <span className="text-destructive">*</span>
+            </Label>
+            <Input id="c-name" value={name} onChange={(e) => setName(e.target.value)}
+              placeholder={cm.namePlaceholder} autoComplete="name"
+              className={`${inputCls} ${submitted && !name.trim() ? inputErrCls : ""}`} />
+            {submitted && !name.trim() && (
+              <p className="text-xs font-body text-destructive">{cm.nameRequired}</p>
+            )}
+          </div>
         )}
 
         <div className="space-y-1.5">
@@ -479,6 +464,17 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
             <p className="text-xs font-body text-destructive">{emailErr}</p>
           )}
         </div>
+
+        {!isRescheduleMode && (
+          <div className="space-y-1.5">
+            <Label htmlFor="c-company" className="text-foreground font-body font-semibold text-sm">
+              {cm.companyLabel}
+            </Label>
+            <Input id="c-company" value={company} onChange={(e) => setCompany(e.target.value)}
+              placeholder={cm.companyPlaceholder} autoComplete="organization"
+              className={inputCls} />
+          </div>
+        )}
 
         {!isRescheduleMode && (
           <div className="space-y-1.5">
@@ -523,16 +519,18 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
       <DialogContent className="border-primary/20 bg-card/95 backdrop-blur-xl shadow-2xl shadow-primary/10 sm:max-w-lg p-0 gap-0 overflow-hidden max-h-[90dvh] sm:max-h-[90vh] overflow-y-auto">
         <div className="absolute inset-x-0 top-0 h-1 rounded-t-lg gradient-bar z-10" />
 
-        <div className="px-6 pt-8 pb-2">
-          <DialogHeader>
-            <DialogTitle className="font-headline font-black text-xl sm:text-2xl gradient-wave-text pb-1">
-              {cm.title}
-            </DialogTitle>
-            <DialogDescription className="text-muted-foreground font-body text-sm sm:text-base">
-              {cm.description}
-            </DialogDescription>
-          </DialogHeader>
-        </div>
+        {step !== "success" && (
+          <div className="px-6 pt-8 pb-2">
+            <DialogHeader>
+              <DialogTitle className="font-headline font-black text-xl sm:text-2xl gradient-wave-text pb-1">
+                {cm.title}
+              </DialogTitle>
+              <DialogDescription className="text-muted-foreground font-body text-sm sm:text-base">
+                {cm.description}
+              </DialogDescription>
+            </DialogHeader>
+          </div>
+        )}
 
         <fieldset className="px-6 pb-6 pt-2 min-h-[24rem] sm:min-h-[26rem] relative border-0 p-0 m-0"
           aria-label={step === "success" ? cm.bookingConfirmed : stepInfo[STEP_INDEX[step]].desc}>

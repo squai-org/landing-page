@@ -13,7 +13,7 @@ const queryClient = new QueryClient();
 
 function detectLang(): "en" | "es" {
   const browserLang = navigator.language ?? "";
-  return browserLang.startsWith("es") ? "es" : "en";
+  return browserLang.startsWith("en") ? "en" : "es";
 }
 
 const App = () => (

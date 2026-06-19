@@ -2,7 +2,11 @@ import { Fragment } from "react";
 import { t } from "@/lib/content";
 import FadeUp from "@/components/FadeUp";
 
-const CtaSection = () => {
+interface CtaSectionProps {
+  onOpenWaitlist: () => void;
+}
+
+const CtaSection = ({ onOpenWaitlist }: Readonly<CtaSectionProps>) => {
   const { ctaSection } = t();
 
   return (
@@ -17,7 +21,7 @@ const CtaSection = () => {
           {ctaSection.titleLastLineBefore}<em>{ctaSection.titleAccent}</em>
         </h2>
         <p className="cta-sub">{ctaSection.sub}</p>
-        <a href="#inicio" className="btn-cta">{ctaSection.cta}</a>
+        <button type="button" className="btn-cta" onClick={onOpenWaitlist}>{ctaSection.cta}</button>
         <div className="cta-trust">{ctaSection.trust}</div>
       </FadeUp>
     </section>

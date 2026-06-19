@@ -231,7 +231,7 @@
     "nameLabel": "Nombre",
     "namePlaceholder": "Tu nombre",
     "nameRequired": "El nombre es obligatorio",
-    "companyLabel": "Empresa",
+    "companyLabel": "Empresa/Profesión",
     "companyPlaceholder": "Tu empresa o proyecto",
     "companyRequired": "La empresa es obligatoria",
     "emailLabel": "Correo electrónico",

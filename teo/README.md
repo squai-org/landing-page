@@ -1,6 +1,6 @@
 # Teo Landing Page
 
-Spanish-language landing page for **Teo** — an academic tutoring service over WhatsApp for kids in grades 1–5, a product of [Squai S.A.S.](https://heysquai.vercel.app/) Lives in the `teo/` folder of the main `landing-page` repository as a self-contained app and deploys as a subdomain of the main application: `https://teo.squai.io`.
+Spanish-language landing page for **Teo** — an academic tutoring service over WhatsApp for kids in grades 1–5, a product of [Squai S.A.S.](https://teo.squai.io/) Lives in the `teo/` folder of the main `landing-page` repository as a self-contained app and deploys as a subdomain of the main application: `https://teo.squai.io`.
 
 ## Tech Stack
 

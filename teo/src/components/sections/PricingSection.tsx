@@ -2,7 +2,11 @@ import { Fragment } from "react";
 import { t } from "@/lib/content";
 import FadeUp from "@/components/FadeUp";
 
-const PricingSection = () => {
+interface PricingSectionProps {
+  onOpenWaitlist: () => void;
+}
+
+const PricingSection = ({ onOpenWaitlist }: Readonly<PricingSectionProps>) => {
   const { pricing } = t();
 
   return (
@@ -36,7 +40,7 @@ const PricingSection = () => {
                   <li key={feature}><span className="feat-check">✓</span>{feature}</li>
                 ))}
               </ul>
-              <a href={pricing.cta.href} className="btn-price">{pricing.cta.label}</a>
+              <button type="button" className="btn-price" onClick={onOpenWaitlist}>{pricing.cta.label}</button>
               <div className="price-trust">
                 {pricing.trustLines[0]}<br />{pricing.trustLines[1]}
               </div>

@@ -8,7 +8,6 @@ export interface HeaderRule {
   headers: SecurityHeader[];
 }
 
-/** Base CSP directive-value map shared between production and dev configurations. */
 export const BASE_CSP_DIRECTIVES: Record<string, string> = {
   "default-src": "'self'",
   "script-src": "'self'",
@@ -23,7 +22,6 @@ export const BASE_CSP_DIRECTIVES: Record<string, string> = {
   "upgrade-insecure-requests": "",
 };
 
-/** Builds a CSP header string from {@link BASE_CSP_DIRECTIVES} with optional overrides. */
 export function buildCsp(overrides: Record<string, string> = {}): string {
   const merged = { ...BASE_CSP_DIRECTIVES, ...overrides };
   return Object.entries(merged)
@@ -33,7 +31,6 @@ export function buildCsp(overrides: Record<string, string> = {}): string {
 
 const CSP = buildCsp();
 
-/** Production security headers applied to all routes. */
 export const securityHeaders: HeaderRule[] = [
   {
     path: "/*",
@@ -65,7 +62,6 @@ export const securityHeaders: HeaderRule[] = [
   },
 ];
 
-/** Serializes header rules into Netlify/Cloudflare `_headers` file format. */
 export function toHeadersFile(rules: HeaderRule[]): string {
   return rules
     .map((rule) => {
@@ -75,7 +71,6 @@ export function toHeadersFile(rules: HeaderRule[]): string {
     .join("\n\n");
 }
 
-/** Converts header rules into the Vercel `vercel.json` headers format. */
 export function toVercelHeaders(
   rules: HeaderRule[],
 ): { source: string; headers: { key: string; value: string }[] }[] {
@@ -85,7 +80,6 @@ export function toVercelHeaders(
   }));
 }
 
-/** Flattens the catch-all (`/*`) rule into a key-value Record for dev middleware. */
 export function toFlatHeaders(
   rules: HeaderRule[],
 ): Record<string, string> {

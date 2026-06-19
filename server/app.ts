@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { getAllowedOrigins } from "./config/env.js";
 import { rateLimiter } from "./middleware/index.js";
-import { scheduleRoutes } from "./routes/index.js";
+import { scheduleRoutes, waitlistRoutes } from "./routes/index.js";
 import { HttpStatus, ErrorCode } from "./config/constants.js";
 import { getErrorMessage } from "./utils/index.js";
 
@@ -25,6 +25,7 @@ if (allowedOrigins.length > 0) {
 app.use("*", rateLimiter);
 
 app.route("/api", scheduleRoutes);
+app.route("/api", waitlistRoutes);
 
 app.get("/health", (c) => c.json({ status: "ok" }));
 
