@@ -35,3 +35,10 @@ export function getAllowedOrigins(): string[] {
     .map((o) => o.trim())
     .filter(Boolean);
 }
+
+export function getInternalAttendees(): string[] {
+  return (process.env.INTERNAL_ATTENDEES ?? "")
+    .split(",")
+    .map((e) => e.trim())
+    .filter(Boolean);
+}
