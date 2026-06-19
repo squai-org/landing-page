@@ -1,6 +1,6 @@
 import { randomBytes } from "node:crypto";
 import { google } from "googleapis";
-import { getCalendarClient, getCalendarId, getRescheduleBaseUrl, SLOT_DURATION_MIN, INTL_LOCALE, ErrorCode, HttpStatus } from "../config/index.js";
+import { getCalendarClient, getCalendarId, getRescheduleBaseUrl, getInternalAttendees, SLOT_DURATION_MIN, INTL_LOCALE, ErrorCode, HttpStatus } from "../config/index.js";
 import type { SupportedLang } from "../config/lang.js";
 import { parseDatetime } from "../validators/index.js";
 import { buildScheduleEmail } from "./email.service.js";
@@ -132,7 +132,10 @@ export async function createBooking(params: CreateBookingParams): Promise<{ succ
       description: emailHtml,
       start: { dateTime: new Date(startMs).toISOString() },
       end: { dateTime: new Date(endMs).toISOString() },
-      attendees: [{ email, displayName: name }],
+      attendees: [
+        { email, displayName: name },
+        ...getInternalAttendees().map((internalEmail) => ({ email: internalEmail })),
+      ],
       conferenceData: {
         createRequest: {
           requestId: eventId,
