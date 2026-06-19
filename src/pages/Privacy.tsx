@@ -17,8 +17,8 @@ const Privacy = () => {
           es: "Política de Privacidad — Squai",
         }}
         description={{
-          en: "Read Squai's privacy policy. Learn how we collect, use, and protect your data as an AI implementation consultancy.",
-          es: "Lee la política de privacidad de Squai. Conoce cómo recopilamos, usamos y protegemos tus datos como consultoría de IA.",
+          en: "Read Squai's privacy policy. Learn how we collect, use, and protect your data as an AI training and consulting company.",
+          es: "Lee la política de privacidad de Squai. Conoce cómo recopilamos, usamos y protegemos tus datos como empresa de capacitación y consultoría en IA.",
         }}
         path="/privacy"
       />

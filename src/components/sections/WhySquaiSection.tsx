@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { t } from "@/lib/content";
 import { useLang } from "@/hooks/use-lang";
 import { Users, Globe, Zap, Rocket } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
 
 const icons = [Users, Globe, Zap, Rocket];

@@ -1,4 +1,4 @@
-import { createElement, useEffect, useRef, type ElementType, type ReactNode } from "react";
+import { createElement, useEffect, useRef, useState, type ElementType, type ReactNode } from "react";
 import { REVEAL_THRESHOLD } from "@/constants";
 
 interface FadeUpProps {
@@ -11,6 +11,7 @@ interface FadeUpProps {
 
 const FadeUp = ({ children, delay, className, as = "div", id }: Readonly<FadeUpProps>) => {
   const ref = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -20,7 +21,7 @@ const FadeUp = ({ children, delay, className, as = "div", id }: Readonly<FadeUpP
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
+            setVisible(true);
             observer.unobserve(entry.target);
           }
         });
@@ -32,7 +33,7 @@ const FadeUp = ({ children, delay, className, as = "div", id }: Readonly<FadeUpP
     return () => observer.disconnect();
   }, []);
 
-  const classes = ["fade-up", delay ? `d${delay}` : "", className ?? ""]
+  const classes = ["fade-up", visible ? "visible" : "", delay ? `d${delay}` : "", className ?? ""]
     .filter(Boolean)
     .join(" ");
 

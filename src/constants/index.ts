@@ -1,5 +1,5 @@
 /** Canonical site URL used in Open Graph and structured data. */
-export const SITE_URL = "https://heysquai.vercel.app";
+export const SITE_URL = "https://squai.io";
 
 /** Open Graph social share image URL. */
 export const OG_IMAGE =
@@ -20,8 +20,46 @@ export const STRUCTURED_DATA = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: "Squai",
-  description: "AI implementation consultancy for growing teams in Latin America",
+  description:
+    "Squai trains professionals and teams to use AI in their real work, with no code and no jargon. Services include 1:1 AI training, team training programs, AI consulting, and AI implementation across Latin America.",
   url: SITE_URL,
-  areaServed: "Latin America",
+  image: OG_IMAGE,
+  email: "team@squai.io",
+  areaServed: ["Latin America", "Colombia"],
   availableLanguage: ["Spanish", "English"],
+  serviceType: ["AI training", "AI consulting", "AI implementation"],
+  knowsAbout: [
+    "Artificial intelligence training",
+    "AI consulting",
+    "AI adoption for teams",
+    "Process automation with AI",
+    "AI implementation",
+  ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "AI services",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Squai One — 1:1 AI training for professionals",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Squai Grow — AI training programs for teams",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Squai Build — AI implementation for companies",
+        },
+      },
+    ],
+  },
 } as const;

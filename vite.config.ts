@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => ({
     mode === "development" && componentTagger(),
     securityHeadersPlugin(),
     Sitemap({
-      hostname: "https://heysquai.vercel.app",
+      hostname: "https://squai.io",
       dynamicRoutes: ["/en", "/es", "/en/privacy", "/es/privacy"],
       exclude: ["/404"],
       outDir: "./dist",

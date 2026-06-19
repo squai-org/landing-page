@@ -2,7 +2,11 @@ import { Fragment } from "react";
 import { t } from "@/lib/content";
 import TeoIcon from "@/components/TeoIcon";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  onOpenWaitlist: () => void;
+}
+
+const HeroSection = ({ onOpenWaitlist }: Readonly<HeroSectionProps>) => {
   const { hero } = t();
 
   return (
@@ -19,9 +23,10 @@ const HeroSection = () => {
             ))}
             <span className="accent">{hero.titleAccent}</span>
           </h1>
+          <img src="/teo-figure.svg" alt="Teo" className="teo-figure-mobile" width="848" height="1264" />
           <p className="hero-sub">{hero.sub}</p>
           <div className="hero-cta-group">
-            <a href="#empezar" className="btn-primary">{hero.cta}</a>
+            <button type="button" className="btn-primary" onClick={onOpenWaitlist}>{hero.cta}</button>
             <span className="hero-trust">{hero.trust}</span>
           </div>
         </div>

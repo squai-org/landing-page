@@ -167,6 +167,28 @@
     "cta": "Quiero probar a Teo",
     "trust": "7 días gratis · Cancelas cuando quieras"
   },
+  "waitlistModal": {
+    "title": "¡Asegura el lugar de tus hijos para que aprendan con Teo!",
+    "description": "Regístrate hoy para enviarte una invitación exclusiva y adaptada al nivel de tus hijos en cuanto Teo esté disponible.",
+    "emailLabel": "Correo electrónico",
+    "emailPlaceholder": "tu@email.com",
+    "emailRequired": "El correo es obligatorio",
+    "emailInvalid": "Ingresa un correo válido",
+    "childAgeLabel": "Edad de tu hijo/a",
+    "agePlaceholder": "Selecciona una edad",
+    "addAgeBtn": "+ Agregar otro hijo/a",
+    "removeAgeAriaLabel": "Quitar edad",
+    "ageRequired": "Agrega al menos una edad",
+    "maxAgesReached": "Máximo 10 hijos por registro",
+    "submitBtn": "Unirme a la lista de espera",
+    "submitting": "Enviando…",
+    "successTitle": "¡Listo!",
+    "successMessage": "Te avisaremos por correo en cuanto Teo esté disponible.",
+    "closeBtn": "Cerrar",
+    "errorGeneric": "No pudimos enviar tu registro. Intenta de nuevo.",
+    "closeAriaLabel": "Cerrar",
+    "exitIntentNote": "No te vayas sin asegurar tu lugar en la lista de espera."
+  },
   "footer": {
     "links": [
       { "label": "Términos y condiciones", "href": "/terminos" },

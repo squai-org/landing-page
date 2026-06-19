@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://heysquai.vercel.app/sitemap.xml
+Sitemap: https://squai.io/sitemap.xml

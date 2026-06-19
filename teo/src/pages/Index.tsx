@@ -1,6 +1,9 @@
+import { useCallback, useEffect, useRef, useState } from "react";
+import { t } from "@/lib/content";
 import SeoHead from "@/components/SeoHead";
 import MainLayout from "@/layouts/MainLayout";
 import WaveDivider from "@/components/WaveDivider";
+import WaitlistModal from "@/components/WaitlistModal";
 import HeroSection from "@/components/sections/HeroSection";
 import WhyTeoSection from "@/components/sections/WhyTeoSection";
 import HowItWorksSection from "@/components/sections/HowItWorksSection";
@@ -10,15 +13,44 @@ import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import FaqSection from "@/components/sections/FaqSection";
 import CtaSection from "@/components/sections/CtaSection";
 
-const Index = () => (
+const EXIT_INTENT_KEY = "teo_waitlist_exit_shown";
+
+const Index = () => {
+  const { waitlistModal: wl } = t();
+  const [waitlistOpen, setWaitlistOpen] = useState(false);
+  const [waitlistNote, setWaitlistNote] = useState("");
+  const exitArmed = useRef(true);
+
+  const openWaitlist = useCallback(() => {
+    setWaitlistNote("");
+    setWaitlistOpen(true);
+  }, []);
+
+  useEffect(() => {
+    if (sessionStorage.getItem(EXIT_INTENT_KEY)) return;
+
+    const onMouseOut = (e: MouseEvent) => {
+      if (!exitArmed.current || e.relatedTarget || e.clientY > 0) return;
+      exitArmed.current = false;
+      sessionStorage.setItem(EXIT_INTENT_KEY, "1");
+      setWaitlistNote(wl.exitIntentNote);
+      setWaitlistOpen(true);
+    };
+
+    document.addEventListener("mouseout", onMouseOut);
+    return () => document.removeEventListener("mouseout", onMouseOut);
+  }, [wl.exitIntentNote]);
+
+  return (
   <>
     <SeoHead
       title="Teo — El profe de primaria de tu hijo"
       description="Teo es el profe de primaria por WhatsApp. Guía a tu hijo paso a paso con sus tareas sin darle la respuesta. Para niños de 1° a 5° de primaria. 7 días gratis."
       path="/"
     />
-    <MainLayout>
-      <HeroSection />
+    <WaitlistModal open={waitlistOpen} onOpenChange={setWaitlistOpen} note={waitlistNote} />
+    <MainLayout onOpenWaitlist={openWaitlist}>
+      <HeroSection onOpenWaitlist={openWaitlist} />
       {}
       <WaveDivider
         background="var(--teal-tint)"
@@ -42,7 +74,7 @@ const Index = () => (
       />
       <TestimonialHeroSection />
       {}
-      <PricingSection />
+      <PricingSection onOpenWaitlist={openWaitlist} />
       {}
       <TestimonialsSection />
       {}
@@ -54,9 +86,10 @@ const Index = () => (
       />
       <FaqSection />
       {}
-      <CtaSection />
+      <CtaSection onOpenWaitlist={openWaitlist} />
     </MainLayout>
   </>
-);
+  );
+};
 
 export default Index;

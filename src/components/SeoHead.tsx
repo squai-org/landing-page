@@ -24,7 +24,7 @@ const SeoHead = ({ title, description, path }: SeoHeadProps) => {
       <link rel="canonical" href={canonical} />
       <link rel="alternate" hrefLang={lang} href={canonical} />
       <link rel="alternate" hrefLang={altLang} href={altCanonical} />
-      <link rel="alternate" hrefLang="x-default" href={`${SITE_URL}/en${path === "/" ? "" : path}`} />
+      <link rel="alternate" hrefLang="x-default" href={`${SITE_URL}/es${path === "/" ? "" : path}`} />
 
       <meta property="og:title" content={title[lang]} />
       <meta property="og:description" content={description[lang]} />

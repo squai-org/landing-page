@@ -231,7 +231,7 @@
     "nameLabel": "Name",
     "namePlaceholder": "Your name",
     "nameRequired": "Name is required",
-    "companyLabel": "Company",
+    "companyLabel": "Company/Profession",
     "companyPlaceholder": "Your company or project",
     "companyRequired": "Company is required",
     "emailLabel": "Email",

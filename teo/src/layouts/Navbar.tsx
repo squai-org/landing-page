@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import { t } from "@/lib/content";
 import TeoIcon from "@/components/TeoIcon";
 
-const Navbar = () => {
+interface NavbarProps {
+  onOpenWaitlist: () => void;
+}
+
+const Navbar = ({ onOpenWaitlist }: Readonly<NavbarProps>) => {
   const { nav } = t();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -24,7 +28,7 @@ const Navbar = () => {
           {nav.links.map((link) => (
             <a key={link.href} href={link.href}>{link.label}</a>
           ))}
-          <a href={nav.cta.href} className="nav-cta">{nav.cta.label}</a>
+          <button type="button" className="nav-cta" onClick={onOpenWaitlist}>{nav.cta.label}</button>
         </div>
         <button
           className="nav-hamburger"
@@ -41,9 +45,15 @@ const Navbar = () => {
             {link.label}
           </a>
         ))}
-        <a href={nav.cta.href} className="nav-mobile-cta" onClick={() => setMenuOpen(false)}>
+        <button
+          type="button"
+          className="nav-mobile-cta"
+          onClick={() => {
+            setMenuOpen(false);
+            onOpenWaitlist();
+          }}>
           {nav.cta.label}
-        </a>
+        </button>
       </div>
     </>
   );

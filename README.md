@@ -1,6 +1,6 @@
 # Squai Landing Page
 
-Bilingual (EN/ES) landing page and scheduling API for [Squai](https://heysquai.vercel.app/) — an AI implementation consultancy for growing teams in Latin America.
+Bilingual (EN/ES) landing page and scheduling API for [Squai](https://squai.io/) — an AI training and consulting company that helps professionals and teams in Latin America use AI in their real work.
 
 ## Tech Stack
 
@@ -49,7 +49,7 @@ This repository hosts two independently built and deployed apps:
 
 | App | Folder | Domain | CI workflow |
 |-----|--------|--------|-------------|
-| Squai landing + scheduling API | `.` (root) | heysquai.vercel.app | `landing-ci.yml` |
+| Squai landing + scheduling API | `.` (root) | squai.io | `landing-ci.yml` |
 | Teo product landing | `teo/` | teo.squai.io | `teo-ci.yml` |
 
 Each app has its own `package.json`, lockfile, build, and Vercel project. CI workflows are
