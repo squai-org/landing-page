@@ -2,7 +2,7 @@ export const SITE_URL = "https://teo.squai.io";
 export const CONTACT_EMAIL = "teo@squai.io";
 export const REVEAL_THRESHOLD = 0.1;
 export const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-export const WAITLIST_AGE_OPTIONS = [6, 7, 8, 9, 10, 11] as const;
+export const WAITLIST_AGE_OPTIONS = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14] as const;
 export const MAX_CHILD_AGES = 10;
 export const STRUCTURED_DATA = {
   "@context": "https://schema.org",

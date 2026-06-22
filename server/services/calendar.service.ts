@@ -108,7 +108,9 @@ export async function createBooking(params: CreateBookingParams): Promise<{ succ
   }
 
   const t = loadTranslation(lang);
-  const summary = `${t.backend.schedule.summary} — ${name} (${company})`;
+  const summary = company
+    ? `${t.backend.schedule.summary} — ${name} (${company})`
+    : `${t.backend.schedule.summary} — ${name}`;
 
   const eventId = buildGoogleEventId();
   const rescheduleLink = buildRescheduleLink(eventId, email, lang);
