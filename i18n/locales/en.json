@@ -337,6 +337,7 @@
       "schedule": {
         "heading": "Your AI Strategy Session is confirmed!",
         "greeting": "Hi {{name}}, we're excited to speak with you about how to optimize processes at {{company}}.",
+        "greetingNoCompany": "Hi {{name}}, we're excited to speak with you about how to optimize your processes with AI.",
         "detailsHeading": "Session Details:",
         "dateLabel": "\ud83d\udcc5 Date and time",
         "meetLabel": "\ud83d\udd17 Meeting link",

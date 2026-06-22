@@ -35,10 +35,9 @@ export function buildScheduleEmail(
   const { name, company, dateTime, meetLink, detail, rescheduleLink } = params;
   const e = escapeHtml;
 
-  const greeting = interpolate(copy.greeting, {
-    name: e(name),
-    company: e(company),
-  });
+  const greeting = company
+    ? interpolate(copy.greeting, { name: e(name), company: e(company) })
+    : interpolate(copy.greetingNoCompany, { name: e(name) });
 
   const ctaHtml = rescheduleLink
     ? `<a href="${e(rescheduleLink)}">${e(copy.ctaLabel)}</a>`

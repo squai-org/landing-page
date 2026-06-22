@@ -337,6 +337,7 @@
       "schedule": {
         "heading": "\u00a1Tu Sesión de Estrategia de IA está confirmada!",
         "greeting": "Hola {{name}}, estamos emocionados de hablar contigo sobre cómo optimizar procesos en {{company}}.",
+        "greetingNoCompany": "Hola {{name}}, estamos emocionados de hablar contigo sobre cómo optimizar tus procesos con IA.",
         "detailsHeading": "Detalles de la Sesión:",
         "dateLabel": "\ud83d\udcc5 Fecha y hora",
         "meetLabel": "\ud83d\udd17 Enlace de reunión",
