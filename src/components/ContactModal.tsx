@@ -117,7 +117,6 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
         return slots ? { ...prev, ...slots } : prev;
       });
     } catch {
-      // server validates on booking
     } finally {
       setLoadingSlots(false);
     }
