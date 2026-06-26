@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.1](https://github.com/squai-org/landing-page/compare/teo-v0.3.0...teo-v0.3.1) (2026-06-26)
+
+
+### Bug Fixes
+
+* age dropdown ([#20](https://github.com/squai-org/landing-page/issues/20)) ([1a93bb2](https://github.com/squai-org/landing-page/commit/1a93bb27d3fd993d55b77201cf372463fbe8910a))
+* connect-src url ([abd0399](https://github.com/squai-org/landing-page/commit/abd0399b852d49a26539a544c13a56c4f6743691))
+
 ## [0.3.0](https://github.com/squai-org/landing-page/compare/teo-v0.2.1...teo-v0.3.0) (2026-06-26)
 
 
