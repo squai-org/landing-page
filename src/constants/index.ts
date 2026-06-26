@@ -21,19 +21,18 @@ export const STRUCTURED_DATA = {
   "@type": "ProfessionalService",
   name: "Squai",
   description:
-    "Squai trains professionals and teams to use AI in their real work, with no code and no jargon. Services include 1:1 AI training, team training programs, AI consulting, and AI implementation across Latin America.",
+    "Squai trains professionals and teams to use AI in their real work, with no code and no jargon. Services include 1:1 AI training, group training programs, and tailored AI training for schools and universities across Latin America.",
   url: SITE_URL,
   image: OG_IMAGE,
   email: "team@squai.io",
   areaServed: ["Latin America", "Colombia"],
   availableLanguage: ["Spanish", "English"],
-  serviceType: ["AI training", "AI consulting", "AI implementation"],
+  serviceType: ["AI training", "AI consulting"],
   knowsAbout: [
     "Artificial intelligence training",
     "AI consulting",
     "AI adoption for teams",
-    "Process automation with AI",
-    "AI implementation",
+    "AI training for educational institutions",
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
@@ -50,14 +49,14 @@ export const STRUCTURED_DATA = {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "Squai Grow — AI training programs for teams",
+          name: "Squai Grow — AI training programs for groups",
         },
       },
       {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "Squai Build — AI implementation for companies",
+          name: "Squai Learn — AI training for schools and universities",
         },
       },
     ],

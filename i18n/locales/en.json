@@ -1,7 +1,17 @@
 {
   "nav": {
-    "links": ["Services", "How It Works", "Industries", "Contact"],
-    "sections": ["services", "how-it-works", "industries", "contact"],
+    "links": [
+      "Our Team",
+      "Services",
+      "How It Works",
+      "Contact"
+    ],
+    "sections": [
+      "squad",
+      "services",
+      "how-it-works",
+      "contact"
+    ],
     "languageLabel": "Language",
     "switchToEnglish": "Switch to English",
     "switchToSpanish": "Switch to Spanish"
@@ -35,75 +45,65 @@
     "eyebrow": "OUR SERVICES",
     "title": "Our Services",
     "mostPopular": "Most Popular",
-    "applyTo": "",
     "whatYouGet": "What you get:",
     "tiers": [
       {
-        "label": "For Professionals",
+        "label": "For You",
         "name": "Squai One",
         "borderColor": "primary",
-        "partnership": "For professionals and entrepreneurs who want to use AI in their daily work, no technical background required.",
-        "description": "1:1 sessions tailored to your role and what you actually do every day.",
+        "partnership": "For professionals coming in on their own, either with a specific problem they want to solve or wanting to learn AI from scratch.",
+        "description": "",
         "items": [
-          "Free 30-minute discovery call before you commit to anything",
-          "1-hour sessions booked when it works for you, using examples from your real work",
-          "Tools and techniques you can apply from the very first session",
-          "No technical background required, no jargon, no generic content"
+          "Free diagnostic call before committing to anything",
+          "Hourly consulting if you already know what to solve, or a 20-hour training package for $1,900,000 COP if you want to learn AI from scratch",
+          "No technical background required"
         ],
         "duration": "At your own pace",
         "popular": false,
         "pricePrefix": "",
-        "price": "40 USD",
-        "priceUSD": "",
-        "priceNote": "Per session. Paid upfront to reserve your spot.",
-        "squadAssigned": "1 dedicated squad member",
-        "cta": "Let's Talk About Your Work",
-        "applyTo": false
+        "price": "$120,000 COP/hour",
+        "priceNote": "Or a training package for $1,900,000 COP",
+        "squadAssigned": "1 squad member",
+        "cta": "Let's Talk About Your Case"
       },
       {
-        "label": "For Teams",
+        "label": "For Groups",
         "name": "Squai Grow",
         "borderColor": "accent",
-        "partnership": "For small and mid-sized companies that want to understand AI and learn to use it on their own, without depending on anyone.",
-        "description": "A training program built around your team and your context.",
+        "partnership": "For two or more people who want to learn or train together in AI, whether a group of friends or a work team.",
+        "description": "",
         "items": [
-          "Free 60-minute discovery call and training proposal within 48 hours",
-          "Three training packages: Starter (10h), Growth (20h), and Pro (40h)",
-          "Up to 10 participants per group, with the squad member best matched to your team",
-          "From Growth: a written diagnosis of AI opportunities across your processes",
-          "Virtual sessions or in-person at your offices, available in Manizales, Colombia"
+          "Free diagnostic call and a proposal within 48 hours",
+          "Per-person discount that grows with group size",
+          "Program sized to your group's needs",
+          "Virtual or in-person sessions in select cities"
         ],
-        "duration": "",
+        "duration": "Flexible schedule",
         "popular": true,
         "pricePrefix": "From",
-        "price": "500 USD",
-        "priceUSD": "",
-        "priceNote": "Schedule coordinated with your team.",
-        "squadAssigned": "Matched to your team's profile",
-        "cta": "Let's Build Your Program",
-        "applyTo": false
+        "price": "$1,250,000 COP",
+        "priceNote": "Price per person. The bigger the group, the better the rate.",
+        "squadAssigned": "Matched to your group's profile",
+        "cta": "Let's Build Your Program"
       },
       {
-        "label": "Implementation",
-        "name": "Squai Build",
+        "label": "Tailored Training",
+        "name": "Squai Learn",
         "borderColor": "secondary",
-        "partnership": "For companies that want their processes and workflows optimized with AI, built to fit how they actually work.",
-        "description": "Every implementation is different. We start with a diagnostic session to understand your operation and define the scope and investment together.",
+        "partnership": "For schools and universities that want to train their students or community in AI.",
+        "description": "",
         "items": [
-          "Process mapping and workflow documentation",
-          "AI integrations built around how your team actually works",
-          "Scope and investment defined together, no surprises",
-          "Squad assigned based on your project's technical profile"
+          "Content adapted to your audience: students, teachers, or parents",
+          "Virtual or in-person format in select cities",
+          "Mentors with prior teaching experience"
         ],
-        "duration": "Scope defined per project",
+        "duration": "Scope defined per institution",
         "popular": false,
         "pricePrefix": "",
         "price": "Custom Quote",
-        "priceUSD": "",
-        "priceNote": "Contact us to define the right scope for your operation.",
+        "priceNote": "Contact us to define the format for your institution.",
         "squadAssigned": "Squad assigned per project",
-        "cta": "Explore Implementation",
-        "applyTo": false
+        "cta": "Let's Talk About Your Institution"
       }
     ]
   },
@@ -112,37 +112,31 @@
     "title": "How It Works",
     "steps": [
       {
-        "name": "Discovery Call",
-        "description": "A free 30-minute call for professionals and entrepreneurs, 60 minutes for teams and companies. We learn how you work and recommend the right program."
+        "name": "Diagnostic Call",
+        "description": "A free call to understand how you work and recommend the right service."
       },
       {
-        "name": "Training Proposal in 48 Hours",
-        "description": "You receive a clear training proposal in under 48 hours: program outline, sessions, deliverables, and investment."
+        "name": "Proposal in 48 hours",
+        "description": "You receive a clear proposal in under 48 hours: scope, sessions, deliverables, and investment."
       },
       {
         "name": "Kickoff",
-        "description": "We align on schedule, format, and expectations. The program starts on your terms — virtual or in-person at your offices."
+        "description": "We align on schedule, format, and expectations. We start on your terms, virtual or in person."
       },
       {
-        "name": "Training Program",
-        "description": "Live sessions run by the squad member best matched to your profile. Practical, applied to your real work, in your language."
+        "name": "We work with your real case",
+        "description": "Our work is based on your actual needs, not generic examples."
       },
       {
-        "name": "AI Opportunities Diagnosis",
-        "description": "A written document with concrete AI opportunities for your company's processes, with clear and prioritized recommendations."
+        "name": "You walk away with something usable from day one",
+        "description": "Tools, processes, or a project you can use immediately, not just theory."
       },
       {
-        "name": "Keep Growing",
-        "description": "When the program ends, you have the tools to apply AI in your work from day one."
+        "name": "Keep growing with Squai",
+        "description": "When you're ready for the next step, we help you see what other areas AI can add value to in your work or your team."
       }
     ],
     "subtitle": "A clear process, no unnecessary steps, so AI becomes part of your work and stays there."
-  },
-  "industries": {
-    "eyebrow": "WHO WE SERVE",
-    "title": "Industries We Serve",
-    "marqueeTitle": "We work with people and teams in",
-    "items": ["SaaS & Tech Startups", "E-Learning & Education", "Professional Services", "Digital E-Commerce", "Agencies & Consultancies"]
   },
   "whySquai": {
     "eyebrow": "WHY US",
@@ -157,8 +151,8 @@
         "desc": "Every session uses examples from your role and your context. What you learn on Tuesday you can use on Wednesday."
       },
       {
-        "title": "The right squad member for you",
-        "desc": "We assign whoever best fits your profile and your industry — not the same specialist for everyone."
+        "title": "Mentors with real experience",
+        "desc": "We assign people who have applied AI in professional settings, with real judgment."
       },
       {
         "title": "You leave with tools, not dependency",
@@ -169,86 +163,95 @@
   "squad": {
     "eyebrow": "THE SQUAD",
     "title": "Meet the Squad",
-    "sub": "Every program assigns the squad member who best fits your profile. You always work with real people — not a platform, not a bot.",
+    "sub": "Our mentors come from areas like operations, data, processes, and security — all with real experience using AI in their own work. We don't teach theory. We teach what we've already tested ourselves first.",
     "members": [
       {
         "role": "Operations Strategist",
         "specialty": "Business, Operations & Innovation",
-        "desc": "If you want to understand how to use AI to work better, be more productive, and make sharper decisions every day, you'll work with her. No code, no jargon — applied to your real work.",
-        "tiers": ["Professionals", "Teams"],
+        "desc": "AI gives me the speed of analysis a business strategy needs today.",
         "borderColor": "accent"
       },
       {
         "role": "AI Engineer",
         "specialty": "Automation & Implementation",
-        "desc": "If your team is technical and wants to understand how to build, integrate, and scale AI solutions, he leads that part of the program.",
-        "tiers": ["Teams"],
+        "desc": "With AI, I build in days what used to take months of development.",
         "borderColor": "secondary"
       },
       {
         "role": "Business Process Analyst",
         "specialty": "Process Design & Strategy",
-        "desc": "If you need to understand and document how your processes work today before automating anything, you'll work with him. Clarity first, AI second.",
-        "tiers": ["Teams"],
+        "desc": "Before automating blindly, I use AI to redesign the process first.",
         "borderColor": "primary"
       },
       {
-        "role": "Knowledge Manager",
-        "specialty": "Knowledge Design & Management",
-        "desc": "If your company has valuable information that's scattered or poorly documented, she helps you organize it so AI tools can actually use it.",
-        "tiers": ["Teams"],
+        "role": "Human Talent Management Specialist",
+        "specialty": "Recruiting, Onboarding & Culture",
+        "desc": "With AI, no new hire feels lost in their first week.",
         "borderColor": "primary"
       },
       {
         "role": "Data Analyst",
         "specialty": "Data Integrity & Connections",
-        "desc": "If you need to understand where your data lives, how reliable it is, and what needs to be in order before AI can work with it, he's your starting point.",
-        "tiers": ["Teams"],
+        "desc": "What used to take days of analysis, I now answer in minutes with AI.",
         "borderColor": "primary"
       },
       {
         "role": "Information Security Analyst",
         "specialty": "Security & Risk Management",
-        "desc": "If you want your team to adopt AI without putting your company's information at risk, he teaches you what to protect and how to do it from day one.",
-        "tiers": ["Teams"],
+        "desc": "I catch a risk before it becomes an incident, thanks to AI.",
         "borderColor": "primary"
       }
     ],
     "gallery": [
-      { "name": "Laura Villada", "role": "Operations Strategist" },
-      { "name": "Sebastián Rico", "role": "AI Engineer" },
-      { "name": "Daniel Guzmán", "role": "Process Analyst" },
-      { "name": "Ana Lasso", "role": "Knowledge Manager" },
-      { "name": "Luis López", "role": "Data Analyst" },
-      { "name": "Carlos Gómez", "role": "Security Analyst" }
+      {
+        "name": "Laura Villada",
+        "role": "Operations Strategist"
+      },
+      {
+        "name": "Sebastián Rico",
+        "role": "AI Engineer"
+      },
+      {
+        "name": "Daniel Guzmán",
+        "role": "Process Analyst"
+      },
+      {
+        "name": "Ana Lasso",
+        "role": "Talent Management Specialist"
+      },
+      {
+        "name": "Luis López",
+        "role": "Data Analyst"
+      },
+      {
+        "name": "Carlos Gómez",
+        "role": "Security Analyst"
+      }
     ]
   },
   "contactModal": {
-    "title": "Tell us what you're working on",
+    "title": "Book your free call and tell us more about you",
     "description": "Write to us or book a free call. No long forms, no waiting.",
     "tabMessage": "Send a Message",
     "tabSchedule": "Schedule a Call",
     "nameLabel": "Name",
     "namePlaceholder": "Your name",
     "nameRequired": "Name is required",
-    "companyLabel": "Company/Profession",
-    "companyPlaceholder": "Your company or project",
-    "companyRequired": "Company is required",
     "emailLabel": "Email",
     "emailPlaceholder": "you@email.com",
     "emailRequired": "Email is required",
     "emailInvalid": "Please enter a valid email",
-    "descriptionLabel": "What problem are you facing?",
-    "descriptionPlaceholder": "Tell us briefly what you want to improve with AI in your work\u2026",
+    "descriptionLabel": "How can we help?",
+    "descriptionPlaceholder": "Tell us briefly what you want to improve with AI in your work…",
     "submit": "Send",
     "pickDate": "Pick a date",
     "pickTime": "Select a time",
     "morning": "Morning",
     "afternoon": "Afternoon",
     "scheduleBtn": "Schedule Call",
-    "scheduling": "Scheduling\u2026",
+    "scheduling": "Scheduling…",
     "successTitle": "You're all set!",
-    "successMessage": "Your call is scheduled. Check your email for the details.",
+    "successMessage": "Thanks for reaching out, talk soon!",
     "errorSlotTaken": "This time slot is no longer available. Please choose another.",
     "errorGeneric": "Something went wrong. Please try again.",
     "errorRescheduleForbidden": "This reschedule link does not match your email.",
@@ -265,7 +268,7 @@
     "backToDate": "Go back to date selection",
     "backToTime": "Go back to time selection",
     "bookingConfirmed": "Booking confirmed",
-    "loadingAvailability": "Checking availability\u2026",
+    "loadingAvailability": "Checking availability…",
     "noSlots": "No available slots for this date. Please choose another day.",
     "privacyRequired": "You must accept the privacy policy",
     "privacyPrefix": "I agree to the ",
@@ -274,13 +277,13 @@
   },
   "ctaSection": {
     "headline": "Take the first step without committing to anything",
-    "sub": "A free 30-minute call to understand where you are and what program makes sense for you. No pressure, no sales pitch.",
+    "sub": "A free call to understand where you are and which service makes sense for you. No pressure, no sales pitch.",
     "cta": "Book Your Free Call"
   },
   "privacy": {
     "title": "Privacy Policy",
     "lastUpdated": "Last updated: March 8, 2026",
-    "backHome": "\u2190 Back to home",
+    "backHome": "← Back to home",
     "switchToEnglish": "Switch to English",
     "switchToSpanish": "Switch to Spanish",
     "sections": [
@@ -319,11 +322,19 @@
     "email": "team@squai.io",
     "switchToEnglish": "Switch to English",
     "switchToSpanish": "Switch to Spanish",
-    "links": ["Services", "How It Works", "Contact"],
-    "sections": ["services", "how-it-works", "contact"],
+    "links": [
+      "Services",
+      "How It Works",
+      "Contact"
+    ],
+    "sections": [
+      "services",
+      "how-it-works",
+      "contact"
+    ],
     "illustrationsBy": "Illustrations by",
     "privacyLink": "Privacy Policy",
-    "copyright": "\u00a9 2026 Squai. All rights reserved."
+    "copyright": "© 2026 Squai. All rights reserved."
   },
   "rescheduleResume": {
     "message": "You closed your reschedule flow. You can continue whenever you want.",
@@ -331,19 +342,18 @@
   },
   "backend": {
     "schedule": {
-      "summary": "AI Strategy Session"
+      "summary": "Diagnosis Session — Squai"
     },
     "email": {
       "schedule": {
-        "heading": "Your AI Strategy Session is confirmed!",
-        "greeting": "Hi {{name}}, we're excited to speak with you about how to optimize processes at {{company}}.",
-        "greetingNoCompany": "Hi {{name}}, we're excited to speak with you about how to optimize your processes with AI.",
-        "detailsHeading": "Session Details:",
-        "dateLabel": "\ud83d\udcc5 Date and time",
-        "meetLabel": "\ud83d\udd17 Meeting link",
-        "problemQuestion": "Your answer to \"What problem are you facing?\":",
-        "rescheduleText": "If something comes up and you can't make it, don't worry. You can find a better time by clicking {{cta}}.",
-        "ctaLabel": "Here"
+        "heading": "Your Squai session is confirmed!",
+        "greeting": "Hey {{name}}, see you soon. In this call we'll learn how you work today and figure out together where to start with AI.",
+        "detailsHeading": "Session details:",
+        "dateLabel": "📅 Date & time",
+        "meetLabel": "🔗 Meeting link",
+        "problemQuestion": "Your answer to \"How can we help you?\":",
+        "rescheduleText": "If something comes up, no worries. You can find a better time by clicking {{cta}}.",
+        "ctaLabel": "here"
       }
     }
   }

@@ -7,11 +7,10 @@ import SeoHead from "@/components/SeoHead";
 import MainLayout from "@/layouts/MainLayout";
 import HeroSection from "@/components/sections/HeroSection";
 import ProblemSection from "@/components/sections/ProblemSection";
-import ServicesSection from "@/components/sections/ServicesSection";
-import HowItWorksSection from "@/components/sections/HowItWorksSection";
-import IndustriesSection from "@/components/sections/IndustriesSection";
 import WhySquaiSection from "@/components/sections/WhySquaiSection";
 import SquadSection from "@/components/sections/SquadSection";
+import ServicesSection from "@/components/sections/ServicesSection";
+import HowItWorksSection from "@/components/sections/HowItWorksSection";
 import CtaSection from "@/components/sections/CtaSection";
 import ContactModal from "@/components/ContactModal";
 
@@ -97,11 +96,10 @@ const Index = () => {
       <MainLayout onOpenContact={openContact}>
         <HeroSection onOpenContact={openContact} />
         <ProblemSection />
-        <ServicesSection onOpenContact={openContact} />
-        <SquadSection />
-        <HowItWorksSection />
-        <IndustriesSection />
         <WhySquaiSection />
+        <SquadSection />
+        <ServicesSection onOpenContact={openContact} />
+        <HowItWorksSection />
         <CtaSection onOpenContact={openContact} />
       </MainLayout>
 

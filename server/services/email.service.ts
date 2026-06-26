@@ -17,7 +17,6 @@ function joinLines(lines: (string | false)[]): string {
 /** Parameters for rendering a schedule confirmation email. */
 export interface ScheduleEmailParams {
   name: string;
-  company: string;
   dateTime: string;
   meetLink: string;
   detail: string;
@@ -32,12 +31,10 @@ export function buildScheduleEmail(
   const t = loadTranslation(lang);
   const copy = t.backend.email.schedule;
 
-  const { name, company, dateTime, meetLink, detail, rescheduleLink } = params;
+  const { name, dateTime, meetLink, detail, rescheduleLink } = params;
   const e = escapeHtml;
 
-  const greeting = company
-    ? interpolate(copy.greeting, { name: e(name), company: e(company) })
-    : interpolate(copy.greetingNoCompany, { name: e(name) });
+  const greeting = interpolate(copy.greeting, { name: e(name) });
 
   const ctaHtml = rescheduleLink
     ? `<a href="${e(rescheduleLink)}">${e(copy.ctaLabel)}</a>`

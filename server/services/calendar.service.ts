@@ -74,7 +74,6 @@ export async function hasSlotConflict(
 /** Parameters for creating a new calendar booking. */
 export interface CreateBookingParams {
   name: string;
-  company: string;
   email: string;
   description: string;
   datetime: string;
@@ -84,7 +83,7 @@ export interface CreateBookingParams {
 
 /** Creates a Google Calendar event with a Meet link and confirmation email. */
 export async function createBooking(params: CreateBookingParams): Promise<{ success: true } | { error: string; status: number }> {
-  const { name, company, email, description, datetime, timezone, lang } = params;
+  const { name, email, description, datetime, timezone, lang } = params;
   const calendar = getCalendarClient();
   const calendarId = getCalendarId();
 
@@ -108,16 +107,13 @@ export async function createBooking(params: CreateBookingParams): Promise<{ succ
   }
 
   const t = loadTranslation(lang);
-  const summary = company
-    ? `${t.backend.schedule.summary} — ${name} (${company})`
-    : `${t.backend.schedule.summary} — ${name}`;
+  const summary = `${t.backend.schedule.summary} — ${name}`;
 
   const eventId = buildGoogleEventId();
   const rescheduleLink = buildRescheduleLink(eventId, email, lang);
 
   const emailHtml = buildScheduleEmail(lang, {
     name,
-    company,
     dateTime: formatDateTime(result.parsed, lang, timezone),
     meetLink: "",
     detail: description,
@@ -161,7 +157,6 @@ export async function createBooking(params: CreateBookingParams): Promise<{ succ
   if (meetUri) {
     const fullDescription = buildScheduleEmail(lang, {
       name,
-      company,
       dateTime: formatDateTime(result.parsed, lang, timezone),
       meetLink: meetUri,
       detail: description,

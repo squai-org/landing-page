@@ -71,16 +71,6 @@ const ServicesSection = ({ onOpenContact }: ServicesSectionProps) => {
                         <p className="font-body font-semibold text-xs sm:text-sm text-accent">{tier.pricePrefix}</p>)}
                         <p className="font-headline font-black text-3xl sm:text-4xl text-primary">{tier.price}</p>
                     </div>
-                    {tier.applyTo && (
-                      <div className="flex flex-col items-center gap-2 mt-3 mb-1">
-                        <span className="inline-flex px-3 py-1 rounded-full bg-[#1a1f3a] border border-[rgba(124,140,255,0.25)] text-[rgba(124,140,255,0.9)] font-body text-[10px] font-semibold tracking-wide">
-                          {services.applyTo}
-                        </span>
-                        {tier.priceUSD && (
-                          <p className="font-body font-medium text-xs text-muted-foreground">~{tier.pricePrefix ? `${tier.pricePrefix} ` : ""}{tier.priceUSD}</p>
-                        )}
-                      </div>
-                    )}
                     <p className="font-body font-medium text-[10px] sm:text-xs text-muted-foreground mt-3 sm:mt-4">{tier.priceNote}</p>
                   </div>
 
