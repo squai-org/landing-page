@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.5.0](https://github.com/squai-org/landing-page/compare/v1.4.0...v1.5.0) (2026-06-26)
+
+
+### Features
+
+* drop industries section and company field from schedule flow ([#21](https://github.com/squai-org/landing-page/issues/21)) ([f12a995](https://github.com/squai-org/landing-page/commit/f12a995ed7cb4225e4c13d31639a0e6cbf67b5c8))
+
+
+### Bug Fixes
+
+* age dropdown ([#20](https://github.com/squai-org/landing-page/issues/20)) ([1a93bb2](https://github.com/squai-org/landing-page/commit/1a93bb27d3fd993d55b77201cf372463fbe8910a))
+* connect-src url ([abd0399](https://github.com/squai-org/landing-page/commit/abd0399b852d49a26539a544c13a56c4f6743691))
+
 ## [1.4.0](https://github.com/squai-org/landing-page/compare/v1.3.1...v1.4.0) (2026-06-19)
 
 
