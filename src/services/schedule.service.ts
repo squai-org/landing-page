@@ -7,7 +7,6 @@ export interface AvailabilityResponse {
 
 export interface ScheduleRequest {
   name: string;
-  company: string;
   email: string;
   description?: string;
   datetime: string;

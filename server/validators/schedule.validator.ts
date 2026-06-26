@@ -121,7 +121,6 @@ export function validateDatetime(datetime: string): string | null {
 /** Validated request body for POST /api/schedule. */
 export interface ScheduleBody {
   name: string;
-  company: string;
   email: string;
   description: string;
   datetime: string;
@@ -143,7 +142,6 @@ export type ValidationResult<T> = { data: T; error?: never } | { data?: never; e
 function extractScheduleFields(body: Record<string, unknown>) {
   return {
     name: typeof body.name === "string" ? sanitize(body.name) : "",
-    company: typeof body.company === "string" ? sanitize(body.company) : "",
     email: typeof body.email === "string" ? body.email.trim() : "",
     description:
       typeof body.description === "string" ? sanitize(body.description) : "",
@@ -156,7 +154,6 @@ function extractScheduleFields(body: Record<string, unknown>) {
 function validateScheduleFields(f: ReturnType<typeof extractScheduleFields>): string | null {
   if (!f.name) return "Name is required";
   if (f.name.length > 200) return "Name too long";
-  if (f.company.length > 200) return "Company too long";
   if (!f.email || !EMAIL_PATTERN.test(f.email)) return "Valid email is required";
   if (f.description.length > 2000) return "Description too long";
   if (!f.datetime) return "Datetime is required";
@@ -183,7 +180,6 @@ export function validateScheduleBody(body: unknown): ValidationResult<ScheduleBo
   return {
     data: {
       name: f.name,
-      company: f.company,
       email: f.email,
       description: f.description,
       datetime: f.datetime,

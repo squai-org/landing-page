@@ -9,12 +9,6 @@ const borderColorMap: Record<string, string> = {
   secondary: "border-b-[#7C8CFF]",
 };
 
-const pillColorMap: Record<string, string> = {
-  primary: "border-[rgba(68,212,200,0.3)] text-[#44D4C8]",
-  accent: "border-[rgba(68,212,200,0.3)] text-[#44D4C8]",
-  secondary: "border-[rgba(68,212,200,0.3)] text-[#44D4C8]",
-};
-
 const hoverGlowMap: Record<string, string> = {
   primary: "hover:shadow-[0_0_25px_-5px_#7C8CFF]",
   accent: "hover:shadow-[0_0_25px_-5px_#7C8CFF]",
@@ -134,20 +128,9 @@ const SquadSection = () => {
                     <p className="font-body font-bold text-[10px] sm:text-xs uppercase tracking-wider text-accent mb-3 sm:mb-4">
                       {member.specialty}
                     </p>
-                    <p className="font-body text-sm sm:text-base lg:text-lg text-muted-foreground mb-4 sm:mb-6 flex-1 leading-relaxed">
+                    <p className="font-body italic text-sm sm:text-base lg:text-lg text-muted-foreground mb-4 sm:mb-6 flex-1 leading-relaxed">
                       {member.desc}
                     </p>
-                    
-                    <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-auto">
-                      {member.tiers.map((tier) => (
-                        <span
-                          key={tier}
-                          className={`text-xs font-body font-medium px-3 py-1.5 rounded-full border bg-[#1A1E38] ${pillColorMap[member.borderColor]}`}
-                        >
-                          {tier}
-                        </span>
-                      ))}
-                    </div>
                   </div>
                 </div>
               </motion.div>

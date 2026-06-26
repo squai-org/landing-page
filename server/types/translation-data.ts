@@ -8,7 +8,6 @@ export interface TranslationData {
       schedule: {
         heading: string;
         greeting: string;
-        greetingNoCompany: string;
         detailsHeading: string;
         dateLabel: string;
         meetLabel: string;

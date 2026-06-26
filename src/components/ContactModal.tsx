@@ -72,7 +72,6 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
   const [selectedSlot, setSelectedSlot] = useState<string | undefined>();
 
   const [name, setName] = useState("");
-  const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
   const [emailTouched, setEmailTouched] = useState(false);
@@ -89,7 +88,7 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
     if (!open) {
       const timeout = setTimeout(() => {
         setStep("date"); setSelectedDate(undefined); setSelectedSlot(undefined);
-        setName(""); setCompany(""); setEmail(""); setDescription("");
+        setName(""); setEmail(""); setDescription("");
         setEmailTouched(false); setPrivacy(false); setSubmitted(false);
         setScheduling(false); setScheduleError(null);
         setAvailableSlots({}); setLoadingSlots(false); setCalendarMonth(new Date());
@@ -196,7 +195,6 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
       } else {
         await scheduleCall({
           name: name.trim(),
-          company: company.trim(),
           email: email.trim(),
           description: description.trim(),
           datetime: selectedSlot,
@@ -464,17 +462,6 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
             <p className="text-xs font-body text-destructive">{emailErr}</p>
           )}
         </div>
-
-        {!isRescheduleMode && (
-          <div className="space-y-1.5">
-            <Label htmlFor="c-company" className="text-foreground font-body font-semibold text-sm">
-              {cm.companyLabel}
-            </Label>
-            <Input id="c-company" value={company} onChange={(e) => setCompany(e.target.value)}
-              placeholder={cm.companyPlaceholder} autoComplete="organization"
-              className={inputCls} />
-          </div>
-        )}
 
         {!isRescheduleMode && (
           <div className="space-y-1.5">

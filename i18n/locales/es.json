@@ -1,7 +1,17 @@
 {
   "nav": {
-    "links": ["Servicios", "Cómo funciona", "Industrias", "Contacto"],
-    "sections": ["services", "how-it-works", "industries", "contact"],
+    "links": [
+      "Nuestro Equipo",
+      "Servicios",
+      "Cómo funciona",
+      "Contacto"
+    ],
+    "sections": [
+      "squad",
+      "services",
+      "how-it-works",
+      "contact"
+    ],
     "languageLabel": "Idioma",
     "switchToEnglish": "Cambiar a inglés",
     "switchToSpanish": "Cambiar a español"
@@ -35,75 +45,65 @@
     "eyebrow": "NUESTROS SERVICIOS",
     "title": "Nuestros Servicios",
     "mostPopular": "Más Popular",
-    "applyTo": "Para Colombia",
     "whatYouGet": "Lo que obtienes:",
     "tiers": [
       {
-        "label": "Para Profesionales",
+        "label": "Para Ti",
         "name": "Squai One",
         "borderColor": "primary",
-        "partnership": "Para profesionales y emprendedores que quieren usar la IA en su trabajo diario, sin necesidad de saber de tecnología.",
-        "description": "Sesiones 1 a 1 adaptadas a tu rol y a lo que haces todos los días.",
+        "partnership": "Para profesionales que llegan con una consulta puntual o con ganas de aprender IA desde cero.",
+        "description": "",
         "items": [
-          "Llamada de diagnóstico gratuita de 30 minutos antes de comprometer cualquier inversión",
-          "Sesiones de 1 hora agendadas cuando puedas, con ejemplos de tu trabajo real",
-          "Herramientas y técnicas que puedes aplicar desde la primera sesión",
-          "Sin conocimientos técnicos previos, sin tecnicismos, sin contenido genérico"
+          "Llamada de diagnóstico gratuita antes de comprometer cualquier inversión",
+          "Consultoría por hora si ya sabes qué resolver, o paquete de entrenamiento de 20 horas si quieres aprender IA desde cero",
+          "Sin conocimientos técnicos previos"
         ],
         "duration": "A tu ritmo",
         "popular": false,
         "pricePrefix": "",
-        "price": "$120,000 COP",
-        "priceUSD": "40 USD",
-        "priceNote": "Por sesión. Se paga por adelantado para reservar tu lugar.",
-        "squadAssigned": "1 miembro del squad dedicado",
-        "cta": "Hablemos de tu trabajo",
-        "applyTo": true
+        "price": "$120.000 COP/hora",
+        "priceNote": "O un paquete de entrenamiento por $1.900.000 COP",
+        "squadAssigned": "1 miembro del squad",
+        "cta": "Hablemos de tu caso"
       },
       {
-        "label": "Para Equipos",
+        "label": "Para Grupos",
         "name": "Squai Grow",
         "borderColor": "accent",
-        "partnership": "Para pequeñas y medianas empresas que quieren entender la IA y aprender a usarla solos, sin depender de nadie.",
-        "description": "Un programa de entrenamiento diseñado a la medida de tu equipo y tu contexto.",
+        "partnership": "Para dos o más personas que quieren aprender o entrenarse juntas en IA, ya sea un grupo de amigos o un equipo de trabajo.",
+        "description": "",
         "items": [
-          "Llamada de diagnóstico gratuita de 60 minutos y propuesta de entrenamiento en 48 horas",
-          "Tres paquetes de entrenamiento: Starter (10h), Growth (20h) y Pro (40h)",
-          "Hasta 10 personas por grupo, con el miembro del squad más alineado a tu equipo",
-          "Desde Growth: diagnóstico escrito de oportunidades de IA en tus procesos",
-          "Sesiones virtuales o presenciales en tus oficinas, disponible en Manizales, Colombia"
+          "Llamada de diagnóstico gratuita y propuesta en 48 horas",
+          "Descuento por persona que crece con el tamaño del grupo",
+          "Programa ajustado al tamaño y necesidad de tu grupo",
+          "Sesiones virtuales o presenciales en algunas ciudades"
         ],
-        "duration": "",
+        "duration": "Cronograma flexible",
         "popular": true,
         "pricePrefix": "Desde",
-        "price": "$1,800,000 COP",
-        "priceUSD": "500 USD",
-        "priceNote": "El cronograma se coordina con tu equipo.",
-        "squadAssigned": "Asignado según el perfil de tu equipo",
-        "cta": "Construyamos tu programa",
-        "applyTo": true
+        "price": "$1.250.000 COP",
+        "priceNote": "Precio por persona. A mayor grupo, mejor tarifa.",
+        "squadAssigned": "Según el perfil de tu grupo",
+        "cta": "Construyamos tu programa"
       },
       {
-        "label": "Implementación",
-        "name": "Squai Build",
+        "label": "Formación a la Medida",
+        "name": "Squai Learn",
         "borderColor": "secondary",
-        "partnership": "Para empresas que quieren sus procesos y flujos de trabajo optimizados con IA, construidos a su medida.",
-        "description": "Cada implementación es distinta. Empezamos con una sesión de diagnóstico para entender tu operación y definir juntos el alcance y la inversión.",
+        "partnership": "Para colegios y universidades que quieren formar a sus estudiantes o su comunidad en IA.",
+        "description": "",
         "items": [
-          "Mapeo de procesos y documentación de flujos de trabajo",
-          "Integraciones de IA construidas alrededor de cómo trabaja tu equipo",
-          "Alcance e inversión definidos juntos, sin sorpresas",
-          "Squad asignado según el perfil técnico de tu proyecto"
+          "Contenido adaptado a tu audiencia: estudiantes, profesores o padres de familia",
+          "Modalidad virtual o presencial en algunas ciudades",
+          "Mentores con experiencia previa en docencia"
         ],
-        "duration": "Alcance definido por proyecto",
+        "duration": "Alcance definido por institución",
         "popular": false,
         "pricePrefix": "",
         "price": "Cotización a medida",
-        "priceUSD": "",
-        "priceNote": "Contáctanos para definir el alcance adecuado para tu operación.",
+        "priceNote": "Contáctanos para definir el formato según tu institución.",
         "squadAssigned": "Squad asignado por proyecto",
-        "cta": "Explorar implementación",
-        "applyTo": false
+        "cta": "Hablemos de tu institución"
       }
     ]
   },
@@ -113,36 +113,30 @@
     "steps": [
       {
         "name": "Llamada de Diagnóstico",
-        "description": "Una llamada gratuita de 30 minutos para profesionales y emprendedores, 60 minutos para equipos y empresas. Entendemos cómo trabajas y te recomendamos el programa adecuado."
+        "description": "Una llamada gratuita para entender cómo trabajas y recomendarte el servicio adecuado."
       },
       {
-        "name": "Propuesta de Entrenamiento en 48 horas",
-        "description": "Recibes una propuesta de entrenamiento clara en menos de 48 horas: esquema del programa, sesiones, entregables e inversión."
+        "name": "Propuesta en 48 horas",
+        "description": "Recibes una propuesta clara en menos de 48 horas: alcance, sesiones, entregables e inversión."
       },
       {
         "name": "Kickoff",
-        "description": "Alineamos cronograma, formato y expectativas. El programa empieza en tus términos, virtual o presencial en tus oficinas."
+        "description": "Alineamos cronograma, formato y expectativas. Empezamos en tus términos, virtual o presencial."
       },
       {
-        "name": "Programa de Entrenamiento",
-        "description": "Sesiones en vivo lideradas por el miembro del squad más alineado a tu perfil. Práctico, aplicado a tu trabajo real, en tu idioma."
+        "name": "Trabajamos con tu caso real",
+        "description": "Nuestro trabajo toma como base tus necesidades, no casos genéricos."
       },
       {
-        "name": "Diagnóstico de Oportunidades de IA",
-        "description": "Un documento escrito con las oportunidades concretas de IA para los procesos de tu empresa, con recomendaciones claras y priorizadas."
+        "name": "Te queda algo aplicable desde el primer día",
+        "description": "Herramientas, procesos o un proyecto que puedes usar de inmediato, no solo teoría."
       },
       {
-        "name": "Sigue Creciendo",
-        "description": "Al terminar el programa tienes las herramientas para aplicar la IA en tu trabajo desde el primer día."
+        "name": "Sigue creciendo con Squai",
+        "description": "Cuando estés listo para el siguiente paso, te ayudamos a ver en qué otras áreas la IA le puede sumar a tu trabajo o tu equipo."
       }
     ],
     "subtitle": "Un proceso claro, sin pasos innecesarios, para que la IA entre a tu trabajo y se quede."
-  },
-  "industries": {
-    "eyebrow": "A QUIÉN SERVIMOS",
-    "title": "Industrias que atendemos",
-    "marqueeTitle": "Trabajamos con personas y equipos en",
-    "items": ["SaaS y Startups Tech", "E-Learning y Educación", "Servicios Profesionales", "E-Commerce Digital", "Agencias y Consultoras"]
   },
   "whySquai": {
     "eyebrow": "POR QUÉ NOSOTROS",
@@ -157,8 +151,8 @@
         "desc": "Cada sesión usa ejemplos de tu rol y tu contexto. Lo que aprendes el martes lo puedes usar el miércoles."
       },
       {
-        "title": "El miembro del squad correcto para ti",
-        "desc": "Asignamos a quien mejor se ajusta a tu perfil y tu industria, no al mismo especialista para todos."
+        "title": "Mentores con experiencia",
+        "desc": "Asignamos personas que han aplicado IA en entornos profesionales y con criterio."
       },
       {
         "title": "Te vas con herramientas, no con dependencia",
@@ -169,86 +163,95 @@
   "squad": {
     "eyebrow": "EL SQUAD",
     "title": "Conoce al Squad",
-    "sub": "Cada programa asigna al miembro del squad que mejor se ajusta a tu perfil. Siempre trabajas con personas reales, no con una plataforma ni con un bot.",
+    "sub": "Nuestros mentores vienen de áreas como operaciones, datos, procesos y seguridad, todos con experiencia real usando IA en su trabajo. No enseñamos teoría. Enseñamos lo que ya probamos nosotros primero.",
     "members": [
       {
         "role": "Estratega de Operaciones",
         "specialty": "Negocios, Operaciones e Innovación",
-        "desc": "Si quieres entender cómo usar la IA para trabajar mejor, ser más productivo y tomar mejores decisiones en tu día a día, trabajarás con ella. Sin código, sin tecnicismos, aplicado a tu trabajo real.",
-        "tiers": ["Profesionales", "Equipos"],
+        "desc": "La IA me da la velocidad de análisis que una estrategia de negocio necesita hoy.",
         "borderColor": "accent"
       },
       {
         "role": "Ingeniero de IA",
         "specialty": "Automatización e Implementación",
-        "desc": "Si tu equipo es técnico y quiere entender cómo construir, integrar y escalar soluciones de IA, él lidera esa parte del programa.",
-        "tiers": ["Equipos"],
+        "desc": "Construyo en días, con IA, algo que antes hubiera tomado meses de desarrollo.",
         "borderColor": "secondary"
       },
       {
         "role": "Analista de Procesos de Negocio",
         "specialty": "Diseño y Estrategia de Procesos",
-        "desc": "Si antes de automatizar necesitas entender y documentar cómo funcionan tus procesos hoy, trabajarás con él. Primero claridad, después IA.",
-        "tiers": ["Equipos"],
+        "desc": "Antes de automatizar a ciegas, uso IA para rediseñar el proceso primero.",
         "borderColor": "primary"
       },
       {
-        "role": "Gestora de Conocimiento",
-        "specialty": "Diseño y Gestión de Conocimiento",
-        "desc": "Si tu empresa tiene información valiosa dispersa o mal documentada, ella te ayuda a organizarla para que las herramientas de IA puedan usarla bien.",
-        "tiers": ["Equipos"],
+        "role": "Especialista en Gestión de Talento Humano",
+        "specialty": "Reclutamiento, Onboarding y Cultura",
+        "desc": "Con IA, ningún colaborador nuevo se siente perdido en su primera semana.",
         "borderColor": "primary"
       },
       {
         "role": "Analista de Datos",
         "specialty": "Integridad y Conexiones de Datos",
-        "desc": "Si necesitas entender dónde están tus datos, qué tan confiables son y qué hace falta ordenar antes de implementar IA, él es tu punto de partida.",
-        "tiers": ["Equipos"],
+        "desc": "Lo que antes tomaba días de análisis, con IA lo respondo en minutos.",
         "borderColor": "primary"
       },
       {
         "role": "Analista de Seguridad de la Información",
         "specialty": "Gestión de Seguridad y Riesgos",
-        "desc": "Si quieres que tu equipo adopte la IA sin poner en riesgo la información de tu empresa, él te enseña qué proteger y cómo hacerlo desde el principio.",
-        "tiers": ["Equipos"],
+        "desc": "Gracias a la IA, detecto un riesgo antes de que se vuelva un incidente.",
         "borderColor": "primary"
       }
     ],
     "gallery": [
-      { "name": "Laura Villada", "role": "Estratega de Operaciones" },
-      { "name": "Sebastián Rico", "role": "Ingeniero IA" },
-      { "name": "Daniel Guzmán", "role": "Analista de Procesos" },
-      { "name": "Ana Lasso", "role": "Gestora de Conocimiento" },
-      { "name": "Luis López", "role": "Analista de Datos" },
-      { "name": "Carlos Gómez", "role": "Analista de Seguridad" }
+      {
+        "name": "Laura Villada",
+        "role": "Estratega de Operaciones"
+      },
+      {
+        "name": "Sebastián Rico",
+        "role": "Ingeniero IA"
+      },
+      {
+        "name": "Daniel Guzmán",
+        "role": "Analista de Procesos"
+      },
+      {
+        "name": "Ana Lasso",
+        "role": "Especialista en Talento Humano"
+      },
+      {
+        "name": "Luis López",
+        "role": "Analista de Datos"
+      },
+      {
+        "name": "Carlos Gómez",
+        "role": "Analista de Seguridad"
+      }
     ]
   },
   "contactModal": {
-    "title": "Cuéntanos en qué estás trabajando",
+    "title": "Agenda tu llamada gratuita y cuéntanos más de ti",
     "description": "Escríbenos o agenda una llamada gratuita. Sin formularios largos, sin esperas.",
     "tabMessage": "Enviar Mensaje",
     "tabSchedule": "Agendar Llamada",
     "nameLabel": "Nombre",
     "namePlaceholder": "Tu nombre",
     "nameRequired": "El nombre es obligatorio",
-    "companyLabel": "Empresa/Profesión",
-    "companyPlaceholder": "Tu empresa o proyecto",
-    "companyRequired": "La empresa es obligatoria",
     "emailLabel": "Correo electrónico",
     "emailPlaceholder": "tu@correo.com",
     "emailRequired": "El correo es obligatorio",
     "emailInvalid": "Ingresa un correo válido",
-    "descriptionLabel": "¿Qué problema enfrentas?",
-    "descriptionPlaceholder": "Cuéntanos brevemente qué quieres mejorar con la IA en tu trabajo\u2026",
+    "descriptionLabel": "¿En qué podemos ayudarte?",
+    "descriptionPlaceholder": "Cuéntanos brevemente qué quieres mejorar con la IA…",
     "submit": "Enviar",
     "pickDate": "Elige una fecha",
     "pickTime": "Selecciona una hora",
     "morning": "Mañana",
     "afternoon": "Tarde",
     "scheduleBtn": "Agendar Llamada",
-    "scheduling": "Agendando\u2026",
-    "successTitle": "\u00a1Listo!",
-    "successMessage": "Tu llamada está agendada. Revisa tu correo para los detalles.",
+    "scheduling": "Agendando…",
+    "successTitle": "¡Listo!",
+    "successMessage": "¡Gracias por contactarnos, nos vemos pronto!.",
     "errorSlotTaken": "Este horario ya no está disponible. Por favor elige otro.",
     "errorGeneric": "Algo salió mal. Inténtalo de nuevo.",
     "errorRescheduleForbidden": "Este enlace no corresponde a tu correo.",
@@ -265,7 +268,7 @@
     "backToDate": "Volver a seleccionar fecha",
     "backToTime": "Volver a seleccionar hora",
     "bookingConfirmed": "Reserva confirmada",
-    "loadingAvailability": "Verificando disponibilidad\u2026",
+    "loadingAvailability": "Verificando disponibilidad…",
     "noSlots": "No hay horarios disponibles para esta fecha. Por favor elige otro día.",
     "privacyRequired": "Debes aceptar la política de privacidad",
     "privacyPrefix": "Acepto la ",
@@ -274,13 +277,13 @@
   },
   "ctaSection": {
     "headline": "Da el primer paso sin comprometerte con nada",
-    "sub": "Una llamada gratuita de 30 minutos para entender dónde estás y qué programa tiene sentido para ti. Sin presión, sin vendedores.",
+    "sub": "Una llamada gratuita para entender dónde estás y qué servicio tiene sentido para ti.",
     "cta": "Agenda tu llamada gratis"
   },
   "privacy": {
     "title": "Política de Privacidad",
     "lastUpdated": "Última actualización: 8 de marzo de 2026",
-    "backHome": "\u2190 Volver al inicio",
+    "backHome": "← Volver al inicio",
     "switchToEnglish": "Cambiar a inglés",
     "switchToSpanish": "Cambiar a español",
     "sections": [
@@ -319,11 +322,19 @@
     "email": "team@squai.io",
     "switchToEnglish": "Cambiar a inglés",
     "switchToSpanish": "Cambiar a español",
-    "links": ["Servicios", "Cómo funciona", "Contacto"],
-    "sections": ["services", "how-it-works", "contact"],
+    "links": [
+      "Servicios",
+      "Cómo funciona",
+      "Contacto"
+    ],
+    "sections": [
+      "services",
+      "how-it-works",
+      "contact"
+    ],
     "illustrationsBy": "Ilustraciones por",
     "privacyLink": "Política de privacidad",
-    "copyright": "\u00a9 2026 Squai. All rights reserved."
+    "copyright": "© 2026 Squai. All rights reserved."
   },
   "rescheduleResume": {
     "message": "Cerraste el flujo de reagendado. Puedes continuarlo cuando quieras.",
@@ -331,17 +342,16 @@
   },
   "backend": {
     "schedule": {
-      "summary": "Sesión de Estrategia de IA"
+      "summary": "Sesión de diagnóstico — Squai"
     },
     "email": {
       "schedule": {
-        "heading": "\u00a1Tu Sesión de Estrategia de IA está confirmada!",
-        "greeting": "Hola {{name}}, estamos emocionados de hablar contigo sobre cómo optimizar procesos en {{company}}.",
-        "greetingNoCompany": "Hola {{name}}, estamos emocionados de hablar contigo sobre cómo optimizar tus procesos con IA.",
+        "heading": "¡Tu sesión con Squai está confirmada!",
+        "greeting": "Hola {{name}}, nos vemos pronto. En esta llamada entendemos cómo trabajas hoy y definimos juntos por dónde empezar con la IA.",
         "detailsHeading": "Detalles de la Sesión:",
-        "dateLabel": "\ud83d\udcc5 Fecha y hora",
-        "meetLabel": "\ud83d\udd17 Enlace de reunión",
-        "problemQuestion": "Tu respuesta a \"¿Qué problema enfrentas?\":",
+        "dateLabel": "📅 Fecha y hora",
+        "meetLabel": "🔗 Enlace de reunión",
+        "problemQuestion": "Tu respuesta a \"¿En qué podemos ayudarte?\":",
         "rescheduleText": "Si surge algo y no puedes asistir, no te preocupes. Puedes encontrar un mejor horario haciendo clic {{cta}}.",
         "ctaLabel": "Aquí"
       }
