@@ -1,1 +1,1 @@
-export { rateLimiter, startRateLimitCleanup } from "./rate-limiter.js";
+export { rateLimiter, createRateLimiter, startRateLimitCleanup } from "./rate-limiter.js";

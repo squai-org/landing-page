@@ -113,10 +113,49 @@ Supported languages: English (`en`), Spanish (`es`).
 | `POST` | `/api/schedule` | Create a new booking |
 | `POST` | `/api/reschedule` | Reschedule an existing booking |
 | `GET` | `/api/availability?from=&to=` | Get available time slots |
+| `POST` | `/api/agent` | Chat agent — streams SSE responses |
 | `GET` | `/api/oauth/google/start` | Start OAuth consent flow |
 | `GET` | `/api/oauth/google/callback` | OAuth callback |
 | `GET` | `/api/oauth/google/status` | Check OAuth config status |
 | `GET` | `/health` | Health check |
+
+## AI Chat Agent
+
+A sales-and-information chat agent lives in the bottom-right corner of the landing page. It answers questions about Squai (sourced from the same `i18n/locales/*.json` copy the page renders) and can book the free diagnostic call via the existing `/api/availability` and `/api/schedule` endpoints.
+
+- **Backend:** `server/agent/` (system prompt, tools, security guard, providers, ReAct loop). Exposed at `POST /api/agent` (`server/routes/agent.routes.ts`), streamed as server-sent events.
+- **Frontend:** `src/components/chat/` (`ChatWidget` is mounted once in `src/App.tsx`).
+
+### Switching providers
+
+Set `AI_PROVIDER` in your environment:
+
+| Value | Behavior |
+|-------|----------|
+| `google` *(default)* | Gemini (`gemini-2.0-flash`). Requires `GOOGLE_AI_API_KEY`. |
+| `ollama` | Ollama Cloud (`qwen2.5:7b`). Uses `OLLAMA_API_KEY` / `OLLAMA_BASE_URL`. |
+| `mock` | Deterministic offline provider — no key or network. Used for local dev, CI, and eval. |
+
+If `AI_PROVIDER` is unset, the factory uses Google when `GOOGLE_AI_API_KEY` is present, otherwise the `mock` provider. See `server/agent/providers/index.ts` for the full model-selection rationale.
+
+### Customizing the voice
+
+Edit **only** `server/agent/prompts/voice-tone.ts` to change the assistant's personality, tone, example phrases, and banned words. The system prompt (`server/agent/prompts/system.ts`) is assembled from those slots plus the landing knowledge, so changes cascade everywhere.
+
+### Running the eval
+
+```bash
+npm run eval
+```
+
+Runs every case in `eval/cases/` (info queries, booking flow, injection attacks, out-of-scope) through the real agent loop, grades each with `eval/judge/google-judge.ts`, and prints a pass-rate table. Thresholds live in `eval/eval.config.ts` (overall ≥ 0.85; injection attacks must be 100% blocked). The judge uses Gemini when `GOOGLE_AI_API_KEY` is set, otherwise a deterministic heuristic, so the eval is reproducible without keys.
+
+### Troubleshooting
+
+- **Agent replies look canned / generic:** no `GOOGLE_AI_API_KEY` set, so the deterministic `mock` provider is active. Add a key and set `AI_PROVIDER=google`.
+- **`401`/`403` from the provider:** check the API key and (for Ollama) `OLLAMA_BASE_URL`.
+- **Booking "confirmed" but no calendar event:** `GOOGLE_CALENDAR_ID` is not configured, so `schedule_call` simulates success. Configure Google Calendar (see above) for real bookings.
+- **`429 Too many requests`:** the shared IP rate limiter (10 req/min) kicked in.
 
 ## Deployment
 

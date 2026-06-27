@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 
 const Privacy = lazy(() => import("./pages/Privacy"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const ChatWidget = lazy(() => import("./components/chat/ChatWidget"));
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,9 @@ const App = () => (
           <Route path="/:lang/privacy" element={<Suspense fallback={null}><Privacy /></Suspense>} />
           <Route path="*" element={<Suspense fallback={null}><NotFound /></Suspense>} />
         </Routes>
+        <Suspense fallback={null}>
+          <ChatWidget />
+        </Suspense>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
