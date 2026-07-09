@@ -19,7 +19,7 @@ const hoverGlows: Record<string, string> = {
 const slideDirections = [-1, 0, 1];
 
 interface ServicesSectionProps {
-  onOpenContact?: () => void;
+  onOpenContact?: (service?: string) => void;
 }
 
 const ServicesSection = ({ onOpenContact }: ServicesSectionProps) => {
@@ -74,7 +74,7 @@ const ServicesSection = ({ onOpenContact }: ServicesSectionProps) => {
                     <p className="font-body font-medium text-[10px] sm:text-xs text-muted-foreground mt-3 sm:mt-4">{tier.priceNote}</p>
                   </div>
 
-                  <Button variant="cta" className="w-full mb-7 sm:mb-9 h-11 sm:h-12 text-sm sm:text-base font-bold shrink-0" onClick={onOpenContact}>
+                  <Button variant="cta" className="w-full mb-7 sm:mb-9 h-11 sm:h-12 text-sm sm:text-base font-bold shrink-0" onClick={() => onOpenContact?.(tier.name)}>
                     {tier.cta}
                   </Button>
 

@@ -53,6 +53,7 @@ interface ContactModalProps {
     eventId: string;
     email: string;
   } | null;
+  preselectedService?: string;
 }
 
 function isWeekdayAndFuture(date: Date): boolean {
@@ -62,7 +63,7 @@ function isWeekdayAndFuture(date: Date): boolean {
   return day !== 0 && day !== 6 && date >= today;
 }
 
-const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleContext }: ContactModalProps) => {
+const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleContext, preselectedService }: ContactModalProps) => {
   const { lang } = useLang();
   const { contactModal: cm } = t(lang);
   const isRescheduleMode = Boolean(rescheduleContext?.eventId && rescheduleContext?.email);
@@ -193,10 +194,13 @@ const ContactModal = ({ open, onOpenChange, onRescheduleCompleted, rescheduleCon
         });
         onRescheduleCompleted?.();
       } else {
+        const serviceLine = preselectedService?.trim()
+          ? `${cm.serviceLabel}: ${preselectedService.trim()}`
+          : "";
         await scheduleCall({
           name: name.trim(),
           email: email.trim(),
-          description: description.trim(),
+          description: [serviceLine, description.trim()].filter(Boolean).join("\n\n"),
           datetime: selectedSlot,
           timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
           lang,

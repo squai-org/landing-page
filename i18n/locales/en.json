@@ -234,6 +234,7 @@
     "description": "Write to us or book a free call. No long forms, no waiting.",
     "tabMessage": "Send a Message",
     "tabSchedule": "Schedule a Call",
+    "serviceLabel": "Service",
     "nameLabel": "Name",
     "namePlaceholder": "Your name",
     "nameRequired": "Name is required",

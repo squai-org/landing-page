@@ -80,7 +80,7 @@ const HeroSection = ({ onOpenContact }: { onOpenContact: () => void }) => {
               transition={{ duration: 0.6, delay: 0.8 }}
               className="flex flex-col sm:flex-row items-center lg:justify-start justify-center gap-3 sm:gap-4 px-4 sm:px-0"
             >
-              <Button variant="hero" size="lg" onClick={onOpenContact}>
+              <Button variant="hero" size="lg" onClick={() => onOpenContact()}>
                 {hero.cta1}
               </Button>
 
