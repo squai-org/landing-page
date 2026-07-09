@@ -155,19 +155,23 @@ export async function createBooking(params: CreateBookingParams): Promise<{ succ
   )?.uri;
 
   if (meetUri) {
-    const fullDescription = buildScheduleEmail(lang, {
-      name,
-      dateTime: formatDateTime(result.parsed, lang, timezone),
-      meetLink: meetUri,
-      detail: description,
-      rescheduleLink,
-    });
-    await calendar.events.patch({
-      calendarId,
-      eventId,
-      sendUpdates: "none",
-      requestBody: { description: fullDescription },
-    });
+    try {
+      const fullDescription = buildScheduleEmail(lang, {
+        name,
+        dateTime: formatDateTime(result.parsed, lang, timezone),
+        meetLink: meetUri,
+        detail: description,
+        rescheduleLink,
+      });
+      await calendar.events.patch({
+        calendarId,
+        eventId,
+        sendUpdates: "none",
+        requestBody: { description: fullDescription },
+      });
+    } catch (err: unknown) {
+      console.error("[schedule] Failed to patch Meet link into description:", err instanceof Error ? err.message : err);
+    }
   }
 
   return { success: true };

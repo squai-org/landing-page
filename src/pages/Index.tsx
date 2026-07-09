@@ -21,20 +21,25 @@ const Index = () => {
   const navigate = useNavigate();
   const deeplinkConsumedRef = useRef(false);
   const [contactOpen, setContactOpen] = useState(false);
+  const [preselectedService, setPreselectedService] = useState<string | undefined>();
   const [showResumeReschedule, setShowResumeReschedule] = useState(false);
   const [rescheduleContext, setRescheduleContext] = useState<{
     eventId: string;
     email: string;
   } | null>(null);
 
-  const openContact = useCallback(() => {
+  const openContact = useCallback((service?: string) => {
     setShowResumeReschedule(false);
+    setPreselectedService(typeof service === "string" ? service : undefined);
     setContactOpen(true);
   }, []);
 
   const handleContactOpenChange = useCallback(
     (open: boolean) => {
       setContactOpen(open);
+      if (!open) {
+        setPreselectedService(undefined);
+      }
       if (!open && rescheduleContext) {
         setShowResumeReschedule(true);
       }
@@ -108,6 +113,7 @@ const Index = () => {
         onOpenChange={handleContactOpenChange}
         onRescheduleCompleted={handleRescheduleCompleted}
         rescheduleContext={rescheduleContext}
+        preselectedService={preselectedService}
       />
 
       {showResumeReschedule && rescheduleContext && !contactOpen && (

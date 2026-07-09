@@ -234,6 +234,7 @@
     "description": "Escríbenos o agenda una llamada gratuita. Sin formularios largos, sin esperas.",
     "tabMessage": "Enviar Mensaje",
     "tabSchedule": "Agendar Llamada",
+    "serviceLabel": "Servicio",
     "nameLabel": "Nombre",
     "namePlaceholder": "Tu nombre",
     "nameRequired": "El nombre es obligatorio",
