@@ -23,7 +23,7 @@ const CtaSection = ({ onOpenContact }: { onOpenContact: () => void }) => {
           <p className="text-muted-foreground font-body text-base sm:text-lg lg:text-xl max-w-xl mx-auto mb-8 sm:mb-10 px-2">
             {cta.sub}
           </p>
-          <Button variant="cta" size="lg" onClick={onOpenContact}>
+          <Button variant="cta" size="lg" onClick={() => onOpenContact()}>
             {cta.cta}
           </Button>
         </AnimatedSection>
