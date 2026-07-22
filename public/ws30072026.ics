@@ -1,0 +1,44 @@
+BEGIN:VCALENDAR
+PRODID:-//Google Inc//Google Calendar 70.9054//EN
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:REQUEST
+BEGIN:VTIMEZONE
+TZID:America/Bogota
+X-LIC-LOCATION:America/Bogota
+BEGIN:STANDARD
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0500
+TZNAME:GMT-5
+DTSTART:19700101T000000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTART;TZID=America/Bogota:20260730T170000
+DTEND;TZID=America/Bogota:20260730T190000
+DTSTAMP:20260723T170536Z
+ORGANIZER;CN=Eventos:mailto:c_70959f0614343339221fec7e551a924548259578766b2
+ 02314477a3a03c6f7ca@group.calendar.google.com
+UID:1uaksj605k9ff0jsuie1nsa2fa@google.com
+X-GOOGLE-CONFERENCE:https://meet.google.com/hfs-vogb-mgn
+X-MICROSOFT-CDO-OWNERAPPTID:-989158997
+CLASS:PUBLIC
+CREATED:20260723T164133Z
+DESCRIPTION:El reclutador ya tiene una IA de su lado y tú sigues enviando e
+ l mismo PDF desde el 2019.\n\nUna guía práctica para que aprendas a usar la
+  IA en tu búsqueda de empleo\, desde la creación de tu perfil profesional h
+ asta la postulación.\n\n-::~:~::~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~
+ :~:~:~:~:~:~:~:~:~:~:~:~:~:~::~:~::-\nJoin with Google Meet: https://meet.g
+ oogle.com/hfs-vogb-mgn\nOr dial: (CO) +57 601 8957332 PIN: 140229788#\nMore
+  phone numbers: https://tel.meet/hfs-vogb-mgn?pin=1674121511028&hs=7\n\nLea
+ rn more about Meet at: https://support.google.com/a/users/answer/9282720\n\
+ nPlease do not edit this section.\n-::~:~::~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:
+ ~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~::~:~::-
+LAST-MODIFIED:20260723T170536Z
+LOCATION:https://meet.google.com/hfs-vogb-mgn
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Busqueda de trabajo con IA
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR
