@@ -1,23 +1,16 @@
-/** A single chat bubble (user or assistant), with optional slot picker. */
+/** A single chat bubble (user or assistant). */
 import { memo } from "react";
 import { cn } from "@/lib/utils";
-import { AvailabilityPicker } from "./AvailabilityPicker";
 import { TypingIndicator } from "./TypingIndicator";
-import type { AvailabilitySlot, ChatMessage as ChatMessageType } from "./types";
+import type { ChatMessage as ChatMessageType } from "./types";
 
 interface ChatMessageProps {
   message: ChatMessageType;
-  onPickSlot: (slot: AvailabilitySlot) => void;
-  pickerDisabled?: boolean;
 }
 
 // Memoized: during streaming only the active assistant message changes identity
 // (see useChatAgent's `apply`), so untouched bubbles skip re-render per token.
-export const ChatMessage = memo(function ChatMessage({
-  message,
-  onPickSlot,
-  pickerDisabled,
-}: ChatMessageProps) {
+export const ChatMessage = memo(function ChatMessage({ message }: ChatMessageProps) {
   const isUser = message.role === "user";
   const showTyping = !isUser && message.pending && message.content.length === 0;
 
@@ -38,13 +31,6 @@ export const ChatMessage = memo(function ChatMessage({
             <p className="whitespace-pre-wrap break-words">{message.content}</p>
           )}
         </div>
-        {!isUser && message.slots && message.slots.length > 0 && (
-          <AvailabilityPicker
-            slots={message.slots}
-            onPick={onPickSlot}
-            disabled={pickerDisabled}
-          />
-        )}
       </div>
     </div>
   );

@@ -1,12 +1,19 @@
 /**
  * Chat agent hook. Owns the conversation state and streams responses from the
- * /api/agent SSE endpoint, accumulating tokens into the active assistant message
- * and surfacing availability slots and contextual suggestions.
+ * /api/agent SSE endpoint, accumulating tokens into the active assistant
+ * message. When the server emits a `scheduling_form` event, we dispatch a
+ * global browser event so the host page can open its ContactModal.
  */
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { AgentEvent, AvailabilitySlot, ChatMessage } from "./types";
+import type { AgentEvent, ChatMessage } from "./types";
 
 const API_BASE = (import.meta.env.VITE_API_URL as string | undefined) ?? "";
+
+/**
+ * Global event fired when the agent decides the visitor should book a call.
+ * The host page (Index.tsx) listens for this and opens its scheduling modal.
+ */
+export const OPEN_SCHEDULING_EVENT = "squai:open-scheduling";
 
 let idCounter = 0;
 function nextId(): string {
@@ -19,7 +26,6 @@ interface UseChatAgent {
   isStreaming: boolean;
   error: string | null;
   send: (text: string) => Promise<void>;
-  bookSlot: (slot: AvailabilitySlot) => Promise<void>;
 }
 
 export function useChatAgent(greeting: string, lang: "en" | "es"): UseChatAgent {
@@ -52,7 +58,7 @@ export function useChatAgent(greeting: string, lang: "en" | "es"): UseChatAgent 
   }, [greeting]);
 
   const run = useCallback(
-    async (history: ChatMessage[], selectedSlotIso?: string) => {
+    async (history: ChatMessage[]) => {
       setIsStreaming(true);
       setError(null);
       const assistantId = nextId();
@@ -72,7 +78,6 @@ export function useChatAgent(greeting: string, lang: "en" | "es"): UseChatAgent 
             messages: history.map((m) => ({ role: m.role, content: m.content })),
             sessionId: "web",
             lang,
-            selectedSlotIso,
           }),
           signal: controller.signal,
         });
@@ -86,6 +91,11 @@ export function useChatAgent(greeting: string, lang: "en" | "es"): UseChatAgent 
         let buffer = "";
 
         const apply = (event: AgentEvent) => {
+          if (event.type === "scheduling_form") {
+            // Bridge to the host page: it owns the ContactModal.
+            window.dispatchEvent(new CustomEvent(OPEN_SCHEDULING_EVENT));
+            return;
+          }
           // Note: provider "error" events are intentionally NOT surfaced to the
           // user — the server already streams a friendly, localized fallback
           // message as tokens. Raw provider errors must never reach the UI.
@@ -93,7 +103,6 @@ export function useChatAgent(greeting: string, lang: "en" | "es"): UseChatAgent 
             prev.map((m) => {
               if (m.id !== assistantId) return m;
               if (event.type === "token") return { ...m, content: m.content + event.value };
-              if (event.type === "availability") return { ...m, slots: event.slots };
               return m;
             }),
           );
@@ -137,28 +146,16 @@ export function useChatAgent(greeting: string, lang: "en" | "es"): UseChatAgent 
   );
 
   const send = useCallback(
-    async (text: string, selectedSlotIso?: string) => {
+    async (text: string) => {
       const trimmed = text.trim();
       if (!trimmed || streamingRef.current) return;
       const userMsg: ChatMessage = { id: nextId(), role: "user", content: trimmed };
       const history = [...messagesRef.current, userMsg];
       setMessages(history);
-      await run(history, selectedSlotIso);
+      await run(history);
     },
     [run],
   );
 
-  const bookSlot = useCallback(
-    async (slot: AvailabilitySlot) => {
-      // Natural, localized message for the chat; the ISO is sent out-of-band.
-      const text =
-        lang === "es"
-          ? `Me gustaría agendar el ${slot.label}.`
-          : `I'd like to book ${slot.label}.`;
-      await send(text, slot.iso);
-    },
-    [send, lang],
-  );
-
-  return { messages, isStreaming, error, send, bookSlot };
+  return { messages, isStreaming, error, send };
 }

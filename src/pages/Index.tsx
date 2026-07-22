@@ -13,6 +13,7 @@ import ServicesSection from "@/components/sections/ServicesSection";
 import HowItWorksSection from "@/components/sections/HowItWorksSection";
 import CtaSection from "@/components/sections/CtaSection";
 import ContactModal from "@/components/ContactModal";
+import { OPEN_SCHEDULING_EVENT } from "@/components/chat/useChatAgent";
 
 const Index = () => {
   const { lang } = useLang();
@@ -54,6 +55,14 @@ const Index = () => {
     setShowResumeReschedule(false);
     setRescheduleContext(null);
   }, []);
+
+  // The chat agent asks the host page to open the scheduling form via a global
+  // browser event so the widget stays decoupled from page-level modal state.
+  useEffect(() => {
+    const openHandler = () => openContact();
+    window.addEventListener(OPEN_SCHEDULING_EVENT, openHandler);
+    return () => window.removeEventListener(OPEN_SCHEDULING_EVENT, openHandler);
+  }, [openContact]);
 
   useEffect(() => {
     if (deeplinkConsumedRef.current) return;

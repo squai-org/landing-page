@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ChatMessage } from "./ChatMessage";
 import { ChatSuggestions } from "./ChatSuggestions";
-import type { AvailabilitySlot, ChatMessage as ChatMessageType } from "./types";
+import type { ChatMessage as ChatMessageType } from "./types";
 
 interface ChatWindowProps {
   title: string;
@@ -19,7 +19,6 @@ interface ChatWindowProps {
   isStreaming: boolean;
   error: string | null;
   onSend: (text: string) => void;
-  onPickSlot: (slot: AvailabilitySlot) => void;
   onClose: () => void;
 }
 
@@ -32,7 +31,6 @@ export function ChatWindow({
   isStreaming,
   error,
   onSend,
-  onPickSlot,
   onClose,
 }: ChatWindowProps) {
   const [draft, setDraft] = useState("");
@@ -81,12 +79,7 @@ export function ChatWindow({
       {/* Messages */}
       <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
         {messages.map((m) => (
-          <ChatMessage
-            key={m.id}
-            message={m}
-            onPickSlot={onPickSlot}
-            pickerDisabled={isStreaming}
-          />
+          <ChatMessage key={m.id} message={m} />
         ))}
         {error && (
           <p className="text-center text-xs text-destructive" role="alert">

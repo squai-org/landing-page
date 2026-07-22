@@ -58,7 +58,7 @@ export interface GenerateInput {
   tools: ToolSchema[];
 }
 
-/** Uniform interface every provider (google, ollama, mock) implements. */
+/** Uniform interface the provider (omniroute / mock) implements. */
 export interface ModelProvider {
   readonly name: string;
   generate(input: GenerateInput): Promise<ModelResponse>;
@@ -68,16 +68,7 @@ export interface ModelProvider {
 export type AgentEvent =
   | { type: "token"; value: string }
   | { type: "tool_call"; name: string; arguments: Record<string, unknown> }
-  | { type: "availability"; slots: AvailabilitySlot[] }
+  | { type: "scheduling_form" }
   | { type: "blocked"; reason: string }
   | { type: "done"; message: string }
   | { type: "error"; message: string };
-
-export interface AvailabilitySlot {
-  /** ISO datetime string. */
-  iso: string;
-  /** YYYY-MM-DD date key. */
-  date: string;
-  /** Localized human label, e.g. "Mon, Jul 7 · 9:30 AM". */
-  label: string;
-}

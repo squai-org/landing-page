@@ -121,10 +121,10 @@ Supported languages: English (`en`), Spanish (`es`).
 
 ## AI Chat Agent
 
-A sales-and-information chat agent lives in the bottom-right corner of the landing page. It answers questions about Squai (sourced from the same `i18n/locales/*.json` copy the page renders) and can book the free diagnostic call via the existing `/api/availability` and `/api/schedule` endpoints.
+A sales-and-information chat agent lives in the bottom-right corner of the landing page. It answers questions about Squai (sourced from the same `i18n/locales/*.json` copy the page renders). It does **not** collect names, emails, or calendar times in chat — when a visitor wants to book, the agent calls a single `open_scheduling_form` tool, and the frontend opens the existing scheduling modal so the visitor can fill in their details there.
 
 - **Backend:** `server/agent/` (system prompt, tools, security guard, providers, ReAct loop). Exposed at `POST /api/agent` (`server/routes/agent.routes.ts`), streamed as server-sent events.
-- **Frontend:** `src/components/chat/` (`ChatWidget` is mounted once in `src/App.tsx`).
+- **Frontend:** `src/components/chat/` (`ChatWidget` is mounted once in `src/App.tsx`). When the agent emits a `scheduling_form` event, the widget dispatches the `squai:open-scheduling` window event; `src/pages/Index.tsx` listens for it and opens `<ContactModal>`.
 
 ### Switching providers
 
@@ -132,11 +132,10 @@ Set `AI_PROVIDER` in your environment:
 
 | Value | Behavior |
 |-------|----------|
-| `google` *(default)* | Gemini (`gemini-2.0-flash`). Requires `GOOGLE_AI_API_KEY`. |
-| `ollama` | Ollama Cloud (`qwen2.5:7b`). Uses `OLLAMA_API_KEY` / `OLLAMA_BASE_URL`. |
+| `omniroute` *(default when configured)* | Routes through [OmniRoute](https://github.com/diegosouzapw/OmniRoute), an OpenAI-compatible local gateway that picks the cheapest available backend. Requires `OMNIROUTE_API_KEY` and `OMNIROUTE_BASE_URL` (default `http://localhost:20128/v1`). Use `OMNIROUTE_MODEL=auto` for smart routing. |
 | `mock` | Deterministic offline provider — no key or network. Used for local dev, CI, and eval. |
 
-If `AI_PROVIDER` is unset, the factory uses Google when `GOOGLE_AI_API_KEY` is present, otherwise the `mock` provider. See `server/agent/providers/index.ts` for the full model-selection rationale.
+If `AI_PROVIDER` is unset, the factory uses OmniRoute when `OMNIROUTE_API_KEY` is present, otherwise the `mock` provider. See `server/agent/providers/index.ts`.
 
 ### Customizing the voice
 
@@ -148,13 +147,13 @@ Edit **only** `server/agent/prompts/voice-tone.ts` to change the assistant's per
 npm run eval
 ```
 
-Runs every case in `eval/cases/` (info queries, booking flow, injection attacks, out-of-scope) through the real agent loop, grades each with `eval/judge/google-judge.ts`, and prints a pass-rate table. Thresholds live in `eval/eval.config.ts` (overall ≥ 0.85; injection attacks must be 100% blocked). The judge uses Gemini when `GOOGLE_AI_API_KEY` is set, otherwise a deterministic heuristic, so the eval is reproducible without keys.
+Runs every case in `eval/cases/` (info queries, booking flow, injection attacks, out-of-scope) through the real agent loop, grades each with `eval/judge/google-judge.ts`, and prints a pass-rate table. Thresholds live in `eval/eval.config.ts` (overall ≥ 0.85; injection attacks must be 100% blocked). The judge (separate from the runtime provider) uses Gemini when `GOOGLE_AI_API_KEY` is set, otherwise a deterministic heuristic, so the eval is reproducible without keys.
 
 ### Troubleshooting
 
-- **Agent replies look canned / generic:** no `GOOGLE_AI_API_KEY` set, so the deterministic `mock` provider is active. Add a key and set `AI_PROVIDER=google`.
-- **`401`/`403` from the provider:** check the API key and (for Ollama) `OLLAMA_BASE_URL`.
-- **Booking "confirmed" but no calendar event:** `GOOGLE_CALENDAR_ID` is not configured, so `schedule_call` simulates success. Configure Google Calendar (see above) for real bookings.
+- **Agent replies look canned / generic:** no `OMNIROUTE_API_KEY` set, so the deterministic `mock` provider is active. Start OmniRoute and set the key + base URL.
+- **`401`/`403` from the provider:** check `OMNIROUTE_API_KEY` and that `OMNIROUTE_BASE_URL` reaches your OmniRoute instance.
+- **Chat says "book" but form doesn't open:** the frontend expects the `squai:open-scheduling` window event — make sure `src/pages/Index.tsx` still registers the listener.
 - **`429 Too many requests`:** the shared IP rate limiter (10 req/min) kicked in.
 
 ## Deployment

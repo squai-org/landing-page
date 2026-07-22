@@ -12,7 +12,7 @@ import { createProvider } from "./providers/index.js";
 import { TOOLS, getToolSchemas } from "./tools/index.js";
 import { detectInjection, safeRefusal } from "./security/injection-guard.js";
 import type { AgentLang } from "./context/page-content-extractor.js";
-import type { AgentEvent, AvailabilitySlot, ChatMessage } from "./types.js";
+import type { AgentEvent, ChatMessage } from "./types.js";
 
 const MAX_ITERATIONS = 5;
 const MAX_HISTORY = 20;
@@ -24,14 +24,14 @@ const FALLBACKS = {
       'I hit a snag on my end. You can try again, or book your call manually right here on the page using the "Book Your Free Call" button.',
     clarify: "Happy to help — could you tell me a bit more about what you're after?",
     exhausted:
-      "Let's keep this simple — want me to book you a free 30-minute call so we can dig into your case directly?",
+      "Let's keep this simple — tap the Book Your Free Call button and I'll open the form for you.",
   },
   es: {
     error:
       'Tuve un problema por mi lado. Puedes intentarlo de nuevo, o agendar tu llamada manualmente aquí en la página con el botón "Agenda tu llamada gratis".',
     clarify: "Con gusto te ayudo. ¿Me cuentas un poco más sobre lo que buscas?",
     exhausted:
-      "Hagámoslo simple: ¿quieres que te agende una llamada gratis de 30 minutos para revisar tu caso?",
+      "Hagámoslo simple: usa el botón de Agenda tu llamada gratis y te abro el formulario.",
   },
 } as const;
 
@@ -61,21 +61,6 @@ function stripMarkdown(s: string): string {
     .replace(/^\s*[-*]\s+/gm, "• ")
     .replace(/\n{3,}/g, "\n\n")
     .trim();
-}
-
-/**
- * True only when the visitor's MOST RECENT message is a concrete slot pick (ISO).
- * Scoped to the latest turn so the picker is hidden right after a pick, but can
- * reappear later if the agent legitimately re-fetches slots (e.g. after a booking
- * failure where the chosen slot was taken).
- */
-function justPickedSlot(messages: ChatMessage[]): boolean {
-  for (let i = messages.length - 1; i >= 0; i--) {
-    if (messages[i].role === "user") {
-      return /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(messages[i].content);
-    }
-  }
-  return false;
 }
 
 function* streamText(text: string): Generator<AgentEvent> {
@@ -109,8 +94,6 @@ export async function* runAgent(
   const copy = FALLBACKS[lang] ?? FALLBACKS.en;
   const convo: ChatMessage[] = input.messages.slice(-MAX_HISTORY);
   const toolSchemas = getToolSchemas();
-  // Don't re-show the picker on the turn right after the visitor picks a time.
-  const suppressPicker = justPickedSlot(input.messages);
 
   for (let i = 0; i < MAX_ITERATIONS; i++) {
     let response;
@@ -146,11 +129,8 @@ export async function* runAgent(
           }
         }
 
-        if (call.name === "get_availability" && !suppressPicker) {
-          const slots = (result as { slots?: AvailabilitySlot[] })?.slots;
-          if (Array.isArray(slots) && slots.length) {
-            yield { type: "availability", slots };
-          }
+        if (call.name === "open_scheduling_form") {
+          yield { type: "scheduling_form" };
         }
 
         convo.push({

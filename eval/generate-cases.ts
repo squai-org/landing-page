@@ -143,25 +143,14 @@ function info(i: number): EvalCase {
 }
 
 function booking(i: number): EvalCase {
-  const name = pick(NAMES, i);
-  const email = `${slug(name)}${i}@example.com`;
-  const full = i % 2 === 0;
-  if (full) {
-    const templates: string[] = [
-      `I'd like to book the diagnostic call. My name is ${name} and my email is ${email}.`,
-      `Please schedule a call for me. My name is ${name}, my email is ${email}.`,
-      `Quiero agendar la cita. Me llamo ${name} y mi correo es ${email}.`,
-      `Quisiera reservar una llamada. Mi nombre es ${name} y mi correo es ${email}.`,
-    ];
-    return {
-      name: `gen-booking-full-${i}`,
-      category: "booking-flow",
-      messages: [{ role: "user", content: pick(templates, i) }],
-      expect: { behavior: "Books the diagnostic call.", shouldCallTool: "schedule_call" },
-    };
-  }
-  const availTemplates = [
-    "I'd like to book a call.",
+  // All booking-flow cases now expect the same behavior: the agent calls
+  // `open_scheduling_form` to open the UI modal. The agent no longer collects
+  // names/emails/slots in chat — the form does that.
+  const templates: string[] = [
+    "I'd like to book the diagnostic call.",
+    "Please schedule a call for me.",
+    "Quiero agendar la cita.",
+    "Quisiera reservar una llamada.",
     "What's your availability this week?",
     "Do you have any open slots?",
     "Can I schedule a diagnostic session?",
@@ -170,10 +159,13 @@ function booking(i: number): EvalCase {
     "Me gustaría reservar una cita.",
   ];
   return {
-    name: `gen-booking-avail-${i}`,
+    name: `gen-booking-${i}`,
     category: "booking-flow",
-    messages: [{ role: "user", content: `${pick(availTemplates, i)} (ref ${i})` }],
-    expect: { behavior: "Fetches availability.", shouldCallTool: "get_availability" },
+    messages: [{ role: "user", content: `${pick(templates, i)} (ref ${i})` }],
+    expect: {
+      behavior: "Opens the scheduling form.",
+      shouldCallTool: "open_scheduling_form",
+    },
   };
 }
 

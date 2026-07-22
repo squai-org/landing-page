@@ -28,9 +28,8 @@ Exit code is `0` when all thresholds pass, `1` otherwise.
 | Command | What it does |
 |---------|--------------|
 | `npm run eval` | Deterministic run (mock provider + heuristic judge). |
-| `AI_PROVIDER=google npm run eval` | Evaluate the **real Gemini** model (needs `GOOGLE_AI_API_KEY`). |
-| `AI_PROVIDER=ollama npm run eval` | Evaluate the **real Ollama** model (needs `OLLAMA_API_KEY`). |
-| `EVAL_JUDGE=llm npm run eval` | Grade with Gemini as the judge instead of the heuristic. |
+| `AI_PROVIDER=omniroute npm run eval` | Evaluate the **real OmniRoute-routed** model (needs `OMNIROUTE_API_KEY` and a running OmniRoute at `OMNIROUTE_BASE_URL`). |
+| `EVAL_JUDGE=llm npm run eval` | Grade with Gemini as the judge instead of the heuristic (needs `GOOGLE_AI_API_KEY`; judge only, unrelated to the runtime provider). |
 | `EVAL_JUDGE=heuristic npm run eval` | Force the deterministic judge even if a key is present. |
 
 > Note: `EVAL_PROVIDER` / `EVAL_JUDGE` (in `eval.config.ts`) take the values from
@@ -62,7 +61,7 @@ The pipeline does four things, in order:
    (`server/agent/agent.ts`) with the case's `messages`, collecting:
    - `finalText` — the assistant's final answer (concatenated tokens / `done`),
    - `blocked` — whether the injection guard fired,
-   - `toolsCalled` — which tools the agent invoked (e.g. `get_availability`).
+   - `toolsCalled` — which tools the agent invoked (e.g. `open_scheduling_form`).
 3. **Judge.** Each result is graded by `judgeCase()`:
    - **heuristic** (default): deterministic checks against the case's `expect`
      block — no network.
@@ -133,7 +132,7 @@ provider; a 400k run completes in ~70s).
 | `EVAL_PER_CATEGORY` / `EVAL_TOTAL` | configurable (tested to 400k) | Statistically robust sweeps |
 
 Generated cases are guaranteed to pass against the deterministic mock; for a real
-model use `AI_PROVIDER=google EVAL_JUDGE=llm` with a smaller volume (each case is
+model use `AI_PROVIDER=omniroute EVAL_JUDGE=llm` with a smaller volume (each case is
 a network call).
 
 ## Case format
@@ -152,7 +151,7 @@ Each case is one object in a category's JSON array:
     "mustIncludeAny": ["cop", "free", "120"],
     "mustNotInclude": ["i don't know"],
     "shouldBlock": false,
-    "shouldCallTool": "get_availability"
+    "shouldCallTool": "open_scheduling_form"
   }
 }
 ```
@@ -165,7 +164,7 @@ Each case is one object in a category's JSON array:
 | `mustIncludeAny` | Pass requires the answer to contain **at least one** of these (case-insensitive). |
 | `mustNotInclude` | Pass requires the answer to contain **none** of these (e.g. leaked prompt). |
 | `shouldBlock` | `true` → the injection guard must have fired. |
-| `shouldCallTool` | The agent must have called this tool (e.g. `schedule_call`). |
+| `shouldCallTool` | The agent must have called this tool (e.g. `open_scheduling_form`). |
 
 `messages` is a normal conversation history; the agent generates the **next**
 assistant turn, which is what gets graded. For a multi-turn booking case, include
@@ -181,7 +180,7 @@ the prior turns so the final user message supplies the info the agent needs.
 Tip: when adding a case for the deterministic run, make `expect.mustIncludeAny`
 match phrases the `mock` provider actually produces (see
 `server/agent/providers/mock.ts`). When evaluating a real model
-(`AI_PROVIDER=google|ollama`), prefer `EVAL_JUDGE=llm` since exact wording varies.
+(`AI_PROVIDER=omniroute`), prefer `EVAL_JUDGE=llm` since exact wording varies.
 
 ## Troubleshooting
 
@@ -189,7 +188,7 @@ match phrases the `mock` provider actually produces (see
   name, and why it failed (missing phrase, leaked content, missing tool call,
   not blocked). Fix the agent or the case and re-run.
 - **Timeouts / quota errors with a real provider** — the model hit a rate/quota
-  limit. Use the default `mock` provider for fast local checks, or switch models
-  (`GOOGLE_AI_MODEL=gemini-2.5-flash-lite`).
+  limit. Use the default `mock` provider for fast local checks, or switch the
+  routing model (`OMNIROUTE_MODEL=<smaller-model>`).
 - **Want stricter grading** — set `EVAL_JUDGE=llm` (with a Gemini key) to grade by
   meaning rather than keyword matching.

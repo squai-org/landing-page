@@ -9,7 +9,7 @@ export interface EvalConfig {
   overall_pass_rate: number;
   categoryThresholds: Record<string, number>;
   /** Force a specific agent provider for evaluation (deterministic by default). */
-  provider: "mock" | "google" | "ollama";
+  provider: "mock" | "omniroute";
   /** "heuristic" (deterministic) or "llm" (Gemini, requires GOOGLE_AI_API_KEY). */
   judge: "auto" | "heuristic" | "llm";
   /**

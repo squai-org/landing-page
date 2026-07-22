@@ -1,7 +1,7 @@
 /**
  * Chat agent route: POST /api/agent.
  *
- * Accepts { messages, sessionId } and streams the agent's response as
+ * Accepts { messages, sessionId, lang } and streams the agent's response as
  * server-sent events. The server is stateless (history comes in the request),
  * IP rate limiting is applied globally in app.ts, and no API keys are ever
  * returned to the client.
@@ -29,11 +29,7 @@ interface AgentRequestBody {
   messages?: IncomingMessage[];
   sessionId?: string;
   lang?: string;
-  /** ISO datetime of a slot the user picked in the UI picker (not shown in chat). */
-  selectedSlotIso?: string;
 }
-
-const ISO_PATTERN = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/;
 
 const MAX_MESSAGES = 50;
 const MAX_CONTENT = 4000;
@@ -78,20 +74,6 @@ agentRoutes.post("/agent", agentRateLimiter, async (c) => {
   }
 
   const lang = detectLang(body, messages);
-
-  // If the user picked a slot in the UI, attach its ISO to their last message
-  // server-side so the model can book it — without exposing the raw ISO in chat.
-  if (body.selectedSlotIso && ISO_PATTERN.test(body.selectedSlotIso)) {
-    for (let i = messages.length - 1; i >= 0; i--) {
-      if (messages[i].role === "user") {
-        messages[i] = {
-          ...messages[i],
-          content: `${messages[i].content}\n\n[selected slot: ${body.selectedSlotIso}]`,
-        };
-        break;
-      }
-    }
-  }
 
   return streamSSE(c, async (stream) => {
     try {
