@@ -56,6 +56,29 @@ const Index = () => {
   }, []);
 
   useEffect(() => {
+    const STORAGE_KEY = "squai-tally-popup-shown";
+    if (sessionStorage.getItem(STORAGE_KEY)) return;
+
+    let cancelled = false;
+    const tryOpen = () => {
+      if (cancelled) return;
+      if (window.Tally) {
+        window.Tally.openPopup("pbXDQy", {
+          emoji: { text: "👋", animation: "wave" },
+        });
+        sessionStorage.setItem(STORAGE_KEY, "1");
+      } else {
+        setTimeout(tryOpen, 200);
+      }
+    };
+    tryOpen();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
     if (deeplinkConsumedRef.current) return;
 
     const isReschedule = searchParams.get("reschedule") === "1";
