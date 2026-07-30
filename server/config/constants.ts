@@ -2,6 +2,7 @@
 export const HttpStatus = {
   OK: 200,
   BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
   FORBIDDEN: 403,
   NOT_FOUND: 404,
   CONFLICT: 409,
@@ -22,6 +23,7 @@ export const ErrorCode = {
   MISSING_REFRESH_TOKEN: "missing_refresh_token",
   NOT_FOUND: "not_found",
   RATE_LIMIT: "rate_limit",
+  INVALID_SIGNATURE: "invalid_signature",
 } as const;
 
 /** Rate limit window duration in milliseconds. */

@@ -7,3 +7,10 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+interface Window {
+  Tally?: {
+    openPopup: (formId: string, options?: Record<string, unknown>) => void;
+    closePopup: (formId: string) => void;
+  };
+}
