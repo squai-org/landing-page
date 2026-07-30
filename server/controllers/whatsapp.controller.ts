@@ -96,7 +96,10 @@ export async function handleWhatsAppWebhook(c: Context) {
     if (message.type !== "text" || !message.text?.body) continue;
 
     try {
-      await sendWhatsAppTextMessage(message.from, `Recibimos tu mensaje: "${message.text.body}"`);
+      await sendWhatsAppTextMessage(
+        message.from,
+        "Este es un bot para comunicaciones automáticas de los eventos de Squai. Si quieres conocer más de nosotros puedes visitar: https://www.squai.io/es o escribirnos a team@squai.io",
+      );
     } catch (err: unknown) {
       console.error("[whatsapp] Reply failed:", getErrorMessage(err));
     }
