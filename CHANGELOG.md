@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.6.0](https://github.com/squai-org/landing-page/compare/v1.5.0...v1.6.0) (2026-07-09)
+
+
+### Features
+
+* **schedule:** add service type field to contact form ([#24](https://github.com/squai-org/landing-page/issues/24)) ([4a14ea2](https://github.com/squai-org/landing-page/commit/4a14ea2ec1e3be963ea045c14dbefceed0c7a64f))
+
 ## [1.5.0](https://github.com/squai-org/landing-page/compare/v1.4.0...v1.5.0) (2026-06-26)
 
 

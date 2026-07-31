@@ -2,8 +2,8 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { getAllowedOrigins } from "./config/env.js";
 import { rateLimiter } from "./middleware/index.js";
-import { scheduleRoutes, waitlistRoutes } from "./routes/index.js";
 import { agentRoutes } from "./routes/agent.routes.js";
+import { scheduleRoutes, waitlistRoutes, whatsappRoutes } from "./routes/index.js";
 import { HttpStatus, ErrorCode } from "./config/constants.js";
 import { getErrorMessage } from "./utils/index.js";
 
@@ -22,6 +22,10 @@ if (allowedOrigins.length > 0) {
     }),
   );
 }
+
+// Registered before the rate limiter: Meta authenticates via signature, and
+// its webhook retries/bursts must never receive 429 or the subscription gets disabled.
+app.route("/api", whatsappRoutes);
 
 app.use("*", rateLimiter);
 
